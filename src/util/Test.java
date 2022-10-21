@@ -1,3 +1,6 @@
+package util;
+
+
 import java.util.List;
 import java.util.ArrayList;
 //import java.io.File;
@@ -13,7 +16,7 @@ public class Test {
 		String line = "";
 		String split = ",";
 		try {
-			BufferedReader br = new BufferedReader(new FileReader("D:\\Test.csv"));
+			BufferedReader br = new BufferedReader(new FileReader("C:\\Test.csv"));
 			// File Reader(*Where you have installed the CSV file)
 			while((line = br.readLine()) != null) {
 				String[] user = line.split(split);

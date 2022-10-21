@@ -1,64 +1,87 @@
+
+import Util.*;
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.io.IOException;
 
 public class MainMenu {
 
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
 
-        System.out.println("Choose admin/customer");
-        Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 
-        String username = "Admin";
-        String password = "123";
+		String username = "admin";
+		String password = "admin";
 
-        boolean a = true;
-        while (a) {
-            System.out.println("1) Admin");
-            System.out.println("2) Customer");
-            System.out.println("3) Quit");
-            int choice = sc.nextInt();
+		boolean doNotQuit = true;
+		
+		do {
+			
+			try {
+				
+				System.out.println("-----Login-----");
+				System.out.println("| 1) Admin    |");
+				System.out.println("| 2) Customer |");
+				System.out.println("| 3) Quit     |");
+				System.out.println("---------------");
+				
+				
+				int choice = sc.nextInt();
+				
+				switch (choice) {
 
-            switch (choice) {
+				case 1:
 
-                case 1: {
+					// go to admin app
+					System.out.println("--------------");
+					System.out.println("Enter username");
+					String inputUsername = sc.next();
+					System.out.println("Enter password");
+					String inputPassword = sc.next();
 
-                    // go to admin app
+					if (inputUsername.equals(username) && inputPassword.equals(password)) {
+						System.out.println("--------------");
+						System.out.println("Welcome!");
 
-                    System.out.println("Enter username");
-                    String inputUsername = sc.next();
-                    System.out.println("Enter password");
-                    String inputPassword = sc.next();
+					} else {
+						System.out.println("--------------");
+						System.out.println("Wrong username or password, please try again");
 
-                    if (inputUsername.equals(username) && inputPassword.equals(password)) {
+					}
 
-                        System.out.println("Welcome!");
+					break;
 
-                    } else {
-                        System.out.println("Wrong username or password, please try again");
+				case 2:
+					// go to customer app
+					break;
 
-                    }
+				case 3:
+					System.out.println("Thanks for using the app!");
+					doNotQuit = false;
+					break;
 
-                    break;
+				default:
+					System.out.println("----------------");
+					System.out.println("Enter a correct option");
+					break;
+				}
 
-                }
-                case 2: {
-                    // go to customer app
-                }
+			} 
+			catch (InputMismatchException e) {
+				System.out.println("----------------");
+				System.out.println("Enter a correct option");
+				sc.next();
+				continue;
 
-                case 3: {
-                    System.out.println("Thanks for using the app!");
-                    a = false;
-                    break;
-                }
-                default: {
-                    System.out.println("Please enter an option");
-                    break;
-                }
+			}
+	
+			
+		}
+		while(doNotQuit);
 
-            }
 
-        }
-
-    }
+	}
 
 }

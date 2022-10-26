@@ -8,6 +8,8 @@ import Util.Serializer;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,10 +17,13 @@ public class MovieListingApp {
     Scanner sc = new Scanner(System.in);
     ArrayList<Movie> movieList;
 
+    Path currentRelativePath = Paths.get("");
+    String root = currentRelativePath.toAbsolutePath().toString();
+
     public MovieListingApp() {
         try {
             // If file exists, deserialize
-            movieList = (ArrayList) Serializer.deSerialize("movies.dat");
+            movieList = (ArrayList) Serializer.deSerialize(root+"\\data\\Movies.dat");
         } catch (FileNotFoundException e) {
             // Else create new ArrayList
             movieList = new ArrayList<Movie>();
@@ -54,6 +59,7 @@ public class MovieListingApp {
                 break;
             case 4:
                 // Delete Listing
+                deleteMovie();
                 break;
             default:
                 break;
@@ -186,7 +192,7 @@ public class MovieListingApp {
         try {
             movieList.add(newMovie);
 
-            Serializer.serialize("movies.dat", movieList);
+            Serializer.serialize(root+"\\data\\Movies.dat", movieList);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -198,7 +204,7 @@ public class MovieListingApp {
         System.out.println("------- VIEW MOVIE LISTING -------\n");
 
         try {
-            ArrayList<Movie> movies = (ArrayList) Serializer.deSerialize("movies.dat");
+            ArrayList<Movie> movies = (ArrayList) Serializer.deSerialize(root+"\\data\\Movies.dat");
 
             for(int i=0; i < movies.size(); i++) {
                 System.out.println("Movie " + (i+1) + ": " + movies.get(i).getTitle());
@@ -209,5 +215,46 @@ public class MovieListingApp {
         }
 
         runMovieListing();
+    }
+
+    public void deleteMovie() {
+        System.out.println("------- DELETE MOVIE LISTING -------\n");
+        System.out.println("1) Delete by Title");
+        System.out.println("2) Delete from Listing");
+
+        switch(sc.nextInt()) {
+            case 1:
+                System.out.print("Enter Movie Title: ");
+                break;
+            case 2:
+                try {
+                    ArrayList<Movie> movies = (ArrayList) Serializer.deSerialize(root+"\\data\\Movies.dat");
+
+                    for(int i=0; i < movies.size(); i++) {
+                        System.out.println("Movie " + (i+1) + ": " + movies.get(i).getTitle());
+                    }
+
+                    System.out.print("Enter Movie Index to Delete: ");
+                    int indexToRemove = sc.nextInt()-1;
+                    movies.remove(indexToRemove);
+
+                    try {
+                        System.out.println("------- SUCCESSFULLY DELETED MOVIE LISTING -------\n");
+                        Serializer.serialize(root+"\\data\\Movies.dat", movies);
+
+                        runMovieListing();      // go back to menu
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+
+                break;
+            default:
+                break;
+        }
     }
 }

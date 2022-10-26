@@ -1,5 +1,7 @@
 package Entities;
 
-public class ShowTime {
+import java.io.Serializable;
+
+public class ShowTime implements Serializable {
     //to-do
 }

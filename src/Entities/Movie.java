@@ -1,13 +1,15 @@
 package Entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Movie {
+public class Movie implements Serializable {
     private String movieId;
     private String title, synopsis, director;
     private MovieGenre genre;
     private ShowingStatus showingStatus;
     private int runtime;
+    private ContentRating contentRating;
     private double overallRating;
 
     private ArrayList<String> cast;
@@ -17,18 +19,21 @@ public class Movie {
     private int ticketsSold;
     private double totalSales;
 
-    public Movie(String title, String synopsis, String director, MovieGenre genre, ShowingStatus showingStatus, int runtime, double overallRating, ArrayList<String> cast) {
+    public Movie() {}
+
+    public Movie(String title, String synopsis, String director, MovieGenre genre, ShowingStatus showingStatus, int runtime, ContentRating rating, ArrayList<String> cast) {
         this.title = title;
         this.synopsis = synopsis;
         this.director = director;
         this.genre = genre;
         this.showingStatus = showingStatus;
         this.runtime = runtime;
-        this.overallRating = overallRating;
+        this.contentRating = rating;
         this.cast = cast;
 
 
         // Initialise to Empty and/or 0
+        this.overallRating = 0;
         this.reviews = new ArrayList<Review>();
         this.showTimes = new ArrayList<ShowTime>();
         this.ticketsSold = 0;
@@ -100,6 +105,15 @@ public class Movie {
         this.runtime = runtime;
     }
 
+    // Content Rating - Getter and Setter
+    public ContentRating getContentRating() {
+        return contentRating;
+    }
+
+    public void setContentRating(ContentRating contentRating) {
+        this.contentRating = contentRating;
+    }
+
     // OverallRating - Getter and Setter
     public double getOverallRating() {
         return overallRating;
@@ -143,5 +157,25 @@ public class Movie {
 
     public void setTotalSales(double totalSales) {
         this.totalSales = totalSales;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "movieId='" + movieId + '\'' +
+                ", title='" + title + '\'' +
+                ", synopsis='" + synopsis + '\'' +
+                ", director='" + director + '\'' +
+                ", genre=" + genre +
+                ", showingStatus=" + showingStatus +
+                ", runtime=" + runtime +
+                ", contentRating=" + contentRating +
+                ", overallRating=" + overallRating +
+                ", cast=" + cast +
+                ", reviews=" + reviews +
+                ", showTimes=" + showTimes +
+                ", ticketsSold=" + ticketsSold +
+                ", totalSales=" + totalSales +
+                '}';
     }
 }

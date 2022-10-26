@@ -1,6 +1,8 @@
 package Entities;
 
-public class Review {
+import java.io.Serializable;
+
+public class Review implements Serializable {
     String reviewId;
 
     //String movieId;           // foreign key, linked to which movie?

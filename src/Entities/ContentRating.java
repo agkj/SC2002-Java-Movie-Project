@@ -1,6 +1,8 @@
 package Entities;
 
-public enum ContentRating {
+import java.io.Serializable;
+
+public enum ContentRating implements Serializable {
     G,          // General Audiences
     PG,         // Parental Guidance
     PG13,       // Parents Strongly Cautioned

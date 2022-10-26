@@ -1,4 +1,5 @@
 
+import Admin.AdminApp;
 import Util.*;
 
 import java.util.InputMismatchException;
@@ -44,6 +45,10 @@ public class MainMenu {
 					if (inputUsername.equals(username) && inputPassword.equals(password)) {
 						System.out.println("--------------");
 						System.out.println("Welcome!");
+
+						// Go to AdminApp
+						AdminApp adminApp = new AdminApp();
+						adminApp.startAdminApp();
 
 					} else {
 						System.out.println("--------------");

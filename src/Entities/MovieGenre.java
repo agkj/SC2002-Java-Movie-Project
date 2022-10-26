@@ -1,6 +1,8 @@
 package Entities;
 
-public enum MovieGenre {
+import java.io.Serializable;
+
+public enum MovieGenre implements Serializable {
     Action,
     Comedy,
     Drama,

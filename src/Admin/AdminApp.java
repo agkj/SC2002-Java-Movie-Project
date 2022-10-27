@@ -4,10 +4,11 @@ import java.util.Scanner;
 
 public class AdminApp {
 
+    Scanner sc = new Scanner(System.in);
+
     public AdminApp() {}
 
     public void startAdminApp() {
-        Scanner sc = new Scanner(System.in);
         System.out.println("------------------");
         System.out.println("Welcome to Admin Module");
 
@@ -31,7 +32,7 @@ public class AdminApp {
             case 1:
                 // Manage Movie Listing
                 MovieListingApp ml = new MovieListingApp();
-                ml.runMovieListing();
+                ml.runInterface();
                 //sc.close();
 
                 break;

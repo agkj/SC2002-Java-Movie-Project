@@ -2,14 +2,14 @@ package Entities;
 
 import java.io.Serializable;
 
-public enum ShowingStatus implements Serializable {
-    Coming_Soon("Coming Soon"),
-    Preview("Preview"),
-    Now_Showing("Now Showing");
+public enum ShowTimeStatus implements Serializable {
+    Available("Available"),
+    Sold_Out("Sold Out"),
+    Selling_Fast("Selling Fast");
 
     private final String status;
 
-    private ShowingStatus(String statusName) {
+    private ShowTimeStatus(String statusName) {
         this.status = statusName;
     }
 

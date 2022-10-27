@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MovieListingApp {
+public class MovieListingApp implements AppInterface {
     Scanner sc = new Scanner(System.in);
     ArrayList<Movie> movieList;
 
@@ -32,7 +32,8 @@ public class MovieListingApp {
         }
     }
 
-    public void runMovieListing() {
+    @Override
+    public void runInterface() {
         System.out.println("------- MANAGE MOVIE LISTINGS -------\n");
 
         System.out.println("1) Create Movie Listing");
@@ -56,6 +57,7 @@ public class MovieListingApp {
                 break;
             case 3:
                 // Update Listing
+                updateMovie(); // to do
                 break;
             case 4:
                 // Delete Listing
@@ -66,10 +68,11 @@ public class MovieListingApp {
         }
     }
 
+    //// (1) CREATE LISTING
     public void createMovie() {
-        Movie newMovie = new Movie();
-
         System.out.println("------- CREATE MOVIE LISTING -------\n");
+
+        Movie newMovie = new Movie();
 
         //// TITLE
         System.out.print("Enter Movie Title: ");
@@ -197,9 +200,10 @@ public class MovieListingApp {
             e.printStackTrace();
         }
 
-        runMovieListing();
+        runInterface();
     }
 
+    //// (2) VIEW LISTINGS
     public void viewMovies() {
         System.out.println("------- VIEW MOVIE LISTING -------\n");
 
@@ -214,9 +218,15 @@ public class MovieListingApp {
             e.printStackTrace();
         }
 
-        runMovieListing();
+        runInterface();
     }
 
+    //// (3) UPDATE LISTING
+    public void updateMovie() {
+        runInterface();
+    }
+
+    //// (4) DELETE LISTING
     public void deleteMovie() {
         System.out.println("------- DELETE MOVIE LISTING -------\n");
         System.out.println("1) Delete by Title");
@@ -242,7 +252,7 @@ public class MovieListingApp {
                         System.out.println("------- SUCCESSFULLY DELETED MOVIE LISTING -------\n");
                         Serializer.serialize(root+"\\data\\Movies.dat", movies);
 
-                        runMovieListing();      // go back to menu
+                        runInterface();      // go back to menu
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -251,9 +261,9 @@ public class MovieListingApp {
                     e.printStackTrace();
                 }
 
-
                 break;
             default:
+                runInterface();
                 break;
         }
     }

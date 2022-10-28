@@ -1,11 +1,9 @@
 package Admin;
 
-import Entities.ContentRating;
-import Entities.Movie;
-import Entities.MovieGenre;
-import Entities.ShowingStatus;
+import Entities.*;
 import Util.Serializer;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -15,23 +13,24 @@ import java.util.Scanner;
 
 public class MovieListingApp extends AppInterface {
     Scanner sc = new Scanner(System.in);
-    ArrayList<Movie> movieList;
 
-    Path currentRelativePath = Paths.get("");
-    String root = currentRelativePath.toAbsolutePath().toString();
+    String root = System.getProperty("user.dir");
+
+    File path;
+    File[] movieFiles;
 
     public MovieListingApp(AppInterface prevApp) {
         super(prevApp);
 
-        try {
-            // If file exists, deserialize
-            movieList = (ArrayList) Serializer.deSerialize(root+"\\data\\Movies.dat");
-        } catch (FileNotFoundException e) {
-            // Else create new ArrayList
-            movieList = new ArrayList<Movie>();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        this.load();
+    }
+
+    public void load() {
+        // Try to read all movie .dat files in movie directory
+        path = new File(System.getProperty("user.dir") + "\\data\\movies");
+
+        // Store all movie .dat files
+        movieFiles = path.listFiles();
     }
 
     @Override
@@ -82,6 +81,17 @@ public class MovieListingApp extends AppInterface {
         System.out.println("------- CREATE MOVIE LISTING -------\n");
 
         Movie newMovie = new Movie();
+
+        //// MOVIE ID
+        System.out.print("Enter Movie ID: ");
+        String id = sc.nextLine();
+
+        while(id.isEmpty()) {
+            id = sc.nextLine();
+
+            if(id.isEmpty())
+                System.out.println("Please enter an ID.");
+        }
 
         //// TITLE
         System.out.print("Enter Movie Title: ");
@@ -199,12 +209,13 @@ public class MovieListingApp extends AppInterface {
         //// FIN, Show listing created
 
         try {
-            movieList.add(newMovie);
+            Serializer.serialize(root + "\\data\\movies\\" + id + ".dat", newMovie);
 
-            Serializer.serialize(root+"\\data\\Movies.dat", movieList);
+            // Reload Movies
+            this.load();
 
             System.out.println("\n------- SUCCESS: CREATED NEW MOVIE LISTING -------\n");
-            System.out.println(newMovie.toString());
+            System.out.println(newMovie);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -217,10 +228,12 @@ public class MovieListingApp extends AppInterface {
         System.out.println("------- VIEW MOVIE LISTING -------\n");
 
         try {
-            ArrayList<Movie> movies = (ArrayList) Serializer.deSerialize(root+"\\data\\Movies.dat");
-
-            for(int i=0; i < movies.size(); i++) {
-                System.out.println("Movie " + (i+1) + ": " + movies.get(i).getTitle());
+            // Read all available Movies
+            if(movieFiles != null) {
+                for(int i=0; i < movieFiles.length; i++) {
+                    Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
+                    System.out.println((i+1) + ") " + curr.getTitle());
+                }
             }
 
         } catch (IOException | ClassNotFoundException e) {
@@ -232,6 +245,7 @@ public class MovieListingApp extends AppInterface {
 
     //// (3) UPDATE LISTING
     public void updateMovie() {
+
         runInterface();
     }
 
@@ -246,24 +260,25 @@ public class MovieListingApp extends AppInterface {
                 System.out.print("Enter Movie Title: ");
                 break;
             case 2:
+                // Delete from Listing (by index)
                 try {
-                    ArrayList<Movie> movies = (ArrayList) Serializer.deSerialize(root+"\\data\\Movies.dat");
-
-                    for(int i=0; i < movies.size(); i++) {
-                        System.out.println("Movie " + (i+1) + ": " + movies.get(i).getTitle());
+                    for(int i=0; i < movieFiles.length; i++) {
+                        Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
+                        System.out.println((i+1) + ") " + curr.getTitle());
                     }
 
                     System.out.print("Enter Movie Index to Delete: ");
                     int indexToRemove = sc.nextInt()-1;
-                    movies.remove(indexToRemove);
 
-                    try {
+                    if(movieFiles[indexToRemove].delete()) {
                         System.out.println("------- SUCCESSFULLY DELETED MOVIE LISTING -------\n");
-                        Serializer.serialize(root+"\\data\\Movies.dat", movies);
 
-                        runInterface();      // go back to menu
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        // Reload movies
+                        this.load();
+
+                        runInterface();
+                    } else {
+                        System.out.println("------- FAILED TO DELETE MOVIE LISTING -------\n");
                     }
 
                 } catch (IOException | ClassNotFoundException e) {

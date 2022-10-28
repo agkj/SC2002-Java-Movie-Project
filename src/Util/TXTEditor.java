@@ -19,7 +19,6 @@ public class TXTEditor {
 		Scanner sc = new Scanner(System.in);
 
 		while (true) {
-			aysdgajsdja
 			// !!!!!!!! filepath edit your txt file location !!!!!!!!
 			String filePath = "C:\\Users\\alger\\Desktop\\TestTXT.txt";
 			System.out.println("1: Enter inputs");

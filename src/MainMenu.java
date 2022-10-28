@@ -1,4 +1,10 @@
 
+<<<<<<< Updated upstream
+=======
+import Admin.AdminApp;
+import Admin.AppInterface;
+import MovieGoer.MovieGoerApp;
+>>>>>>> Stashed changes
 import Util.*;
 
 import java.util.InputMismatchException;
@@ -17,20 +23,19 @@ public class MainMenu {
 		TXTEditor adminDB = new TXTEditor();
 
 		boolean doNotQuit = true;
-		
+
 		do {
-			
+
 			try {
-				
+
 				System.out.println("-----Login-----");
 				System.out.println("| 1) Admin    |");
 				System.out.println("| 2) Customer |");
 				System.out.println("| 3) Quit     |");
 				System.out.println("---------------");
-				
-				
+
 				int choice = sc.nextInt();
-				
+
 				switch (choice) {
 
 				case 1:
@@ -55,7 +60,11 @@ public class MainMenu {
 					break;
 
 				case 2:
-					// go to customer app
+					// go to customer appq
+
+					MovieGoerApp movieGoerApp = new MovieGoerApp();
+					movieGoerApp.runInterface();
+
 					break;
 
 				case 3:
@@ -69,19 +78,15 @@ public class MainMenu {
 					break;
 				}
 
-			} 
-			catch (InputMismatchException e) {
+			} catch (InputMismatchException e) {
 				System.out.println("----------------");
 				System.out.println("Enter a correct option");
 				sc.next();
 				continue;
 
 			}
-	
-			
-		}
-		while(doNotQuit);
 
+		} while (doNotQuit);
 
 	}
 

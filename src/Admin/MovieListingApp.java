@@ -197,14 +197,14 @@ public class MovieListingApp extends AppInterface {
         newMovie.setCast(cast);
 
         //// FIN, Show listing created
-        System.out.println("Successfully created movie listing!");
-        System.out.println(newMovie.toString());
-
 
         try {
             movieList.add(newMovie);
 
             Serializer.serialize(root+"\\data\\Movies.dat", movieList);
+
+            System.out.println("\n------- SUCCESS: CREATED NEW MOVIE LISTING -------\n");
+            System.out.println(newMovie.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }

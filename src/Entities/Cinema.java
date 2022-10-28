@@ -1,6 +1,8 @@
 package Entities;
 
-public class Cinema {
+import java.io.Serializable;
+
+public class Cinema implements Serializable {
     private String cinemaID;
     private CinemaClass cinemaClass;
     private int numOfSeats;

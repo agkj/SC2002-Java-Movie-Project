@@ -1,8 +1,9 @@
 package Entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Cineplex {
+public class Cineplex implements Serializable {
     private String cineplexID;
     private String venue;
     private String address;
@@ -49,5 +50,10 @@ public class Cineplex {
 
     public void setListOfCinemas(ArrayList<Cinema> listOfCinemas) {
         this.listOfCinemas = listOfCinemas;
+    }
+
+    @Override
+    public String toString() {
+        return "Cineplex ID: " + this.cineplexID + "\nVenue: " + this.venue + "\nAddress: " + this.address;
     }
 }

@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -73,7 +74,20 @@ public class ShowtimeApp extends AppInterface {
         //// Showtime (ps my whole program just crash and burn)
         System.out.println("Enter a showtime: in 2018-05-05T11:50:55 format");
         String showtime = sc.nextLine(); //enter in this format "2018-05-05T11:50:55"
-        LocalDateTime dateTime = LocalDateTime.parse(showtime);
+
+        boolean showtimeValid = false;
+
+        while(!showtimeValid) {
+            showtime = sc.nextLine();
+
+            try {
+                LocalDateTime dateTime = LocalDateTime.parse(showtime);
+                showtimeValid = true;
+            } catch (DateTimeParseException e) {
+                System.out.println("Please enter a valid showtime.");
+            }
+
+        }
 
         //View all the movies
         MovieListingApp app = new MovieListingApp(this);

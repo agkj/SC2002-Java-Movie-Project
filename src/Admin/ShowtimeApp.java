@@ -6,6 +6,9 @@ import Util.Serializer;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -68,8 +71,10 @@ public class ShowtimeApp extends AppInterface {
         ShowTime newShowTime = new ShowTime();
 
         //// Showtime
-        System.out.print("Enter a showtime: in xx/xx/xx format");
-        String showtime = sc.nextLine();
+        System.out.print("Enter a showtime: in 2018-05-05T11:50:55 format");
+        String showtime = sc.nextLine(); //enter in this format "2018-05-05T11:50:55"
+        LocalDateTime dateTime = LocalDateTime.parse(showtime);
+
 
         //movieList =
 

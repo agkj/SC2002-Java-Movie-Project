@@ -1,8 +1,9 @@
 package Admin;
 
-import Entities.Movie;
-import Entities.ShowTime;
+import Entities.*;
+import Util.Serializer;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -64,8 +65,16 @@ public class ShowtimeApp extends AppInterface {
     //// (1) CREATE LISTING
     public void createShowtime() {
         System.out.println("------- CREATE SHOWTIME LISTING -------\n");
-
         ShowTime newShowTime = new ShowTime();
+
+        //// Showtime
+        System.out.print("Enter a showtime: in xx/xx/xx format");
+        String showtime = sc.nextLine();
+
+        //movieList =
+
+
+        runInterface();
     }
 
     //// (2) VIEW LISTING

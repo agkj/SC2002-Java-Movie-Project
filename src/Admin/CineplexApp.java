@@ -12,6 +12,9 @@ import java.util.Scanner;
 public class CineplexApp extends AppInterface {
     Scanner sc = new Scanner(System.in);
 
+    Path currentRelativePath = Paths.get("");
+    String root = currentRelativePath.toAbsolutePath().toString();
+
     public CineplexApp(AppInterface prevApp) {
         super(prevApp);
     }
@@ -81,7 +84,7 @@ public class CineplexApp extends AppInterface {
 
                 //// FIN, Show Cineplex Created
                 try {
-                    Serializer.serialize(System.getProperty("user.dir") + "\\data\\cineplex\\" + outlet.getCineplexID()+".dat", outlet);
+                    Serializer.serialize(root+"\\data\\cineplex\\"+outlet.getCineplexID()+".dat", outlet);
 
                     System.out.println("\n------- SUCCESS: CREATED NEW OUTLET -------\n");
                     System.out.println(outlet);
@@ -110,10 +113,8 @@ public class CineplexApp extends AppInterface {
                     }
 
                     // Select Cineplex
-                    System.out.print("Select Cineplex Index (to add cinema to): ");
+                    System.out.print("Select Cineplex (to add cinema to): ");
                     int selectedCineplex = sc.nextInt();
-
-
 
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -8,14 +8,16 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ShowtimeApp implements AppInterface {
+public class ShowtimeApp extends AppInterface {
     Scanner sc = new Scanner(System.in);
     ArrayList<Movie> movieList;
 
     Path currentRelativePath = Paths.get("");
     String root = currentRelativePath.toAbsolutePath().toString();
 
-    public ShowtimeApp() {}
+    public ShowtimeApp(AppInterface prevApp) {
+        super(prevApp);
+    }
 
     @Override
     public void runInterface() {
@@ -25,6 +27,7 @@ public class ShowtimeApp implements AppInterface {
         System.out.println("2) View Showtime Listings");
         System.out.println("3) Update Showtime Listening");
         System.out.println("4) Delete Showtime Listening");
+        System.out.println("\n0) Return to Previous Menu");
 
         while(!sc.hasNextInt())
             System.out.println("Please enter a valid input");
@@ -32,6 +35,9 @@ public class ShowtimeApp implements AppInterface {
         int input = sc.nextInt();
 
         switch(input) {
+            case 0:
+                goBack().runInterface();
+                break;
             case 1:
                 // Create Listing
 

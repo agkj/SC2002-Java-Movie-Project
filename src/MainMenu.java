@@ -1,12 +1,17 @@
 
 import Admin.AdminApp;
+import Admin.AppInterface;
 import Util.*;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.IOException;
 
-public class MainMenu {
+public class MainMenu extends AppInterface {
+
+	public MainMenu(AppInterface prevApp) {
+		super(null);
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -47,8 +52,8 @@ public class MainMenu {
 						System.out.println("Welcome!");
 
 						// Go to AdminApp
-						AdminApp adminApp = new AdminApp();
-						adminApp.startAdminApp();
+						AdminApp adminApp = new AdminApp(new MainMenu(null));
+						adminApp.runInterface();
 
 					} else {
 						System.out.println("--------------");

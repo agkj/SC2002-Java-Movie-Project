@@ -2,10 +2,10 @@ package Admin;
 
 import java.util.Scanner;
 
-public class SettingApp extends AppInterface {
+public class CineplexApp extends AppInterface {
     Scanner sc = new Scanner(System.in);
 
-    public SettingApp(AppInterface prevApp) {
+    public CineplexApp(AppInterface prevApp) {
         super(prevApp);
     }
 
@@ -29,9 +29,7 @@ public class SettingApp extends AppInterface {
                 break;
             case 1:
                 // Configure Cineplex Outlets
-                CineplexApp cineplexApp = new CineplexApp(this);
-                cineplexApp.runInterface();
-                
+
                 break;
             case 2:
                 // Configure Ticket Price

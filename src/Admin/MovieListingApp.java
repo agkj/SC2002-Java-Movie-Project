@@ -13,14 +13,16 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MovieListingApp implements AppInterface {
+public class MovieListingApp extends AppInterface {
     Scanner sc = new Scanner(System.in);
     ArrayList<Movie> movieList;
 
     Path currentRelativePath = Paths.get("");
     String root = currentRelativePath.toAbsolutePath().toString();
 
-    public MovieListingApp() {
+    public MovieListingApp(AppInterface prevApp) {
+        super(prevApp);
+
         try {
             // If file exists, deserialize
             movieList = (ArrayList) Serializer.deSerialize(root+"\\data\\Movies.dat");
@@ -40,6 +42,7 @@ public class MovieListingApp implements AppInterface {
         System.out.println("2) View Movie Listings");
         System.out.println("3) Update Movie Listening");
         System.out.println("4) Delete Movie Listening");
+        System.out.println("\n0) Return to Previous Menu");
 
         while(!sc.hasNextInt())
             System.out.println("Please enter a valid input");
@@ -47,6 +50,12 @@ public class MovieListingApp implements AppInterface {
         int input = sc.nextInt();
 
         switch(input) {
+            case 0:
+                // Return to Previous
+                AppInterface prevApp = goBack();
+                prevApp.runInterface();
+
+                break;
             case 1:
                 // Create Listing
                 createMovie();

@@ -40,20 +40,21 @@ public class ShowtimeApp extends AppInterface {
                 break;
             case 1:
                 // Create Listing
-
+                createShowtime();
 
                 break;
             case 2:
                 // View Listings
-
+                viewShowtime();
                 break;
+
             case 3:
                 // Update Listing
-
+                updateShowtime();
                 break;
             case 4:
                 // Delete Listing
-
+                deleteShowtime();
                 break;
             default:
                 break;

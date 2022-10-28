@@ -14,6 +14,7 @@ public class MainMenu {
 
 		String username = "admin";
 		String password = "admin";
+		TXTEditor adminDB = new TXTEditor();
 
 		boolean doNotQuit = true;
 		

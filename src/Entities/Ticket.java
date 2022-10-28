@@ -1,21 +1,20 @@
 package Entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 
 public class Ticket implements Serializable{
     //Attributes:
     private double price;
     private Enum ticketType; // this is our age
-    private MovieGenre movietype;
+    private MovieGenre moviegenre;
     private CinemaClass cinemaclass;
     private int holiday;
     //constructor
 
-    public Ticket(double price, Enum ticketType, MovieGenre movietype, CinemaClass cinemaclass, int holiday) {
+    public Ticket(double price, Enum ticketType, MovieGenre moviegenre, CinemaClass cinemaclass, int holiday) {
         this.price = price;
         this.ticketType = ticketType;
-        this.movietype = movietype;
+        this.moviegenre = moviegenre;
         this.cinemaclass = cinemaclass;
         this.holiday = holiday;
     }
@@ -27,8 +26,8 @@ public class Ticket implements Serializable{
         return ticketType;
     }
 
-    public MovieGenre getMovietype() {
-        return movietype;
+    public MovieGenre getMoviegenre() {
+        return moviegenre;
     }
 
     public CinemaClass getCinemaclass() {
@@ -47,8 +46,8 @@ public class Ticket implements Serializable{
         this.ticketType = ticketType;
     }
 
-    public void setMovietype(MovieGenre movietype) {
-        this.movietype = movietype;
+    public void setMoviegenre(MovieGenre moviegenre) {
+        this.moviegenre = moviegenre;
     }
 
     public void setCinemaclass(CinemaClass cinemaclass) {

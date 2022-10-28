@@ -10,7 +10,6 @@ public class Ticket implements Serializable{
     private CinemaClass cinemaclass;
     private int holiday;
     //constructor
-
     public Ticket(double price, Enum ticketType, MovieGenre moviegenre, CinemaClass cinemaclass, int holiday) {
         this.price = price;
         this.ticketType = ticketType;

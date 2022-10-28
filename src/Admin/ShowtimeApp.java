@@ -70,11 +70,14 @@ public class ShowtimeApp extends AppInterface {
         System.out.println("------- CREATE SHOWTIME LISTING -------\n");
         ShowTime newShowTime = new ShowTime();
 
-        //// Showtime
-        System.out.print("Enter a showtime: in 2018-05-05T11:50:55 format");
+        //// Showtime (ps my whole program just crash and burn)
+        System.out.println("Enter a showtime: in 2018-05-05T11:50:55 format");
         String showtime = sc.nextLine(); //enter in this format "2018-05-05T11:50:55"
         LocalDateTime dateTime = LocalDateTime.parse(showtime);
 
+        //View all the movies
+        MovieListingApp app = new MovieListingApp(this);
+        app.viewMovies();
 
         //movieList =
 

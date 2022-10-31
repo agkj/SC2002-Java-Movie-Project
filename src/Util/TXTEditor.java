@@ -11,44 +11,24 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class TXTEditor {
-
-	public static void main(String[] args) {
-
-		// Path that CSV File is saved at (can be passed to respective user/admin
-		// functions)
-		Scanner sc = new Scanner(System.in);
-
-		while (true) {
-			aysdgajsdja
-			// !!!!!!!! filepath edit your txt file location !!!!!!!!
-			String filePath = "C:\\Users\\alger\\Desktop\\TestTXT.txt";
-			System.out.println("1: Enter inputs");
-			System.out.println("2: View inputs");
-			int choice = sc.nextInt();
-
-			switch (choice) {
-			case 1:
-				System.out.println("starting write user.csv file: " + filePath);
-				writeTXT(filePath);
-				break;
-			case 2:
-				System.out.println("starting read user.csv file");
-				readTXT(filePath);
-				break;
-
-			}
-		}
-
+	
+	private Scanner sc = new Scanner(System.in);
+	
+	public Scanner scan() {
+		return sc;
 	}
 
-	public static void writeTXT(String filePath) {
+	public void writeTXT(String filePath) {
 
 		FileWriter fw = null;
-		Scanner sc = new Scanner(System.in);
-
+		//Scanner sc = new Scanner(System.in);
+		Scanner sc = scan();
+		String buffer;
+		
 		try {
 			fw = new FileWriter(filePath, true); // true is used so that previous data is not overwritten
 			BufferedWriter out = new BufferedWriter(fw);
+			buffer = sc.nextLine();	// require buffer to be able to read correctly
 
 			System.out.println("Enter username");
 			String user = sc.nextLine();
@@ -60,13 +40,12 @@ public class TXTEditor {
 			// get username and password, ',' is used to separate the username and password,
 			// '\n' is for end of entry
 			out.close(); // close BufferedWriter
-			sc.close(); // close scanner
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 
-	public static void readTXT(String filePath) {
+	public void readTXT(String filePath) {
 
 		String line = "";
 		String split = ", ";

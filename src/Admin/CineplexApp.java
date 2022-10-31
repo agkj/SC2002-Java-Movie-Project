@@ -1,12 +1,14 @@
 package Admin;
 
-import Entities.Cineplex;
+import Entities.*;
 import Util.Serializer;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class CineplexApp extends AppInterface {
@@ -99,6 +101,8 @@ public class CineplexApp extends AppInterface {
                 // Create new Cinema
                 System.out.println("------- CREATE NEW CINEMA -------\n");
 
+                Cineplex selectedCineplex;
+
                 try {
                     File path = new File(System.getProperty("user.dir") + "\\data\\cineplex");
 
@@ -110,11 +114,124 @@ public class CineplexApp extends AppInterface {
                             Cineplex curr = (Cineplex) Serializer.deSerialize(path + "\\" + files[i].getName());
                             System.out.println((i+1) + ") " + curr.getVenue());
                         }
-                    }
 
-                    // Select Cineplex
-                    System.out.print("Select Cineplex (to add cinema to): ");
-                    int selectedCineplex = sc.nextInt();
+                        System.out.print("\nSelect Cineplex (to add cinema to): ");
+
+                        // Get selected Cineplex file and object
+                        int selected = sc.nextInt();
+                        selectedCineplex = (Cineplex) Serializer.deSerialize(path + "\\" + files[selected-1].getName());
+
+                        System.out.println("------- " + selectedCineplex.getVenue().toUpperCase() + ": ADD CINEMA -------\n");
+
+                        // Create Cinema object
+                        Cinema newCinema = new Cinema();
+
+                        //// SET CINEMA CLASS
+                        for(int i = 0; i < CinemaClass.values().length; i++)
+                            System.out.println(i+1 + ") " + CinemaClass.values()[i]);
+
+                        int cinemaClass = sc.nextInt();
+
+                        while(cinemaClass < 1 || cinemaClass > CinemaClass.values().length) {
+                            System.out.println("Please enter a valid cinema class option.");
+                        }
+
+                        newCinema.setCinemaClass(CinemaClass.values()[cinemaClass-1]);
+
+                        //// SET NUM OF SEATS
+                        /*
+                        System.out.print("Enter Total (Max) Seats Available: ");
+                        while(!sc.hasNextInt())
+                            System.out.println("Please enter a valid number of seats.");
+                        newCinema.setNumOfSeats(sc.nextInt());
+                         */
+
+                        //// SET LAYOUT
+                        System.out.print("Enter number of rows: ");
+                        while(!sc.hasNextInt())
+                            System.out.println("Please enter a valid number of rows.");
+                        int rows = sc.nextInt();
+
+                        System.out.print("Enter number of columns: ");
+                        while(!sc.hasNextInt())
+                            System.out.println("Please enter a valid number of columns.");
+                        int cols = sc.nextInt();
+
+                        Seat[][] seats = new Seat[rows][cols];
+
+                        // Initialise entire cinema to be vacant seats first
+                        char seatAlpha = 65;
+                        for(int i=0; i < rows; i++) {
+                            for(int j=0; j < cols; j++) {
+                                StringBuilder sb = new StringBuilder();
+                                sb.append(seatAlpha);
+                                sb.append(j+1);
+
+                                String seatNum = sb.toString();                     // output e.g, A1
+                                seats[i][j] = new Seat(seatNum, 0);
+                            }
+
+                            seatAlpha++;
+                        }
+
+                        boolean runArrangement = false;
+
+                        int seatInput = 0;
+
+                        while(runArrangement); {
+                            runArrangement = true;
+                            char rowNum = 65;   // start at A (65), ends at Z (90)
+
+                            // Print Layout
+                            for(int i=0; i < rows; i++) {
+                                System.out.print(rowNum++ + " | ");
+
+                                for(int j=0; j < cols; j++) {
+                                    // Print seat status
+                                    System.out.print(" ["+ seats[i][j].getSeatStatus() +"] ");
+                                }
+
+                                System.out.print("\n");
+                            }
+
+                            System.out.print("Enter seat number followed by arrangement (-1: Aisle, 0: Vacant): ");
+
+                            String seatNum = sc.next();
+                            seatInput = sc.nextInt();
+
+                            if(seatInput != -2) {
+
+
+                                break;
+                            } else {
+                                // Modify Seating
+                                for(int i=0; i < rows; i++) {
+                                    for(int j=0; j < cols; j++) {
+                                        if(seats[i][j].getSeatNum().equals(seatNum)) {
+                                            seats[i][j].setSeatStatus(seatInput);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        newCinema.setLayout(seats);
+
+                        // Update Cinema list for selected Cineplex
+                        selectedCineplex.addCinema(newCinema);
+
+                        try {
+                            Serializer.serialize(root + "\\data\\cineplex\\" + files[selected-1].getName(), selectedCineplex); // files[selected-1].getName() is the selected cineplex
+
+                            System.out.println("\n------- SUCCESS: CREATED NEW CINEMA -------\n");
+                            newCinema.showLayout();
+                        } catch (IOException e) {
+                            System.out.println("\n------- ERROR: PLEASE TRY AGAIN -------\n");
+                            e.printStackTrace();
+                        }
+
+                    } // end if files != null
+
 
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -21,7 +21,7 @@ public class Cineplex implements Serializable {
     }
 
     public String getCineplexID() {
-        return cineplexID;
+        return this.cineplexID;
     }
 
     public void setCineplexID(String cineplexID) {
@@ -29,7 +29,7 @@ public class Cineplex implements Serializable {
     }
 
     public String getVenue() {
-        return venue;
+        return this.venue;
     }
 
     public void setVenue(String venue) {
@@ -37,7 +37,7 @@ public class Cineplex implements Serializable {
     }
 
     public String getAddress() {
-        return address;
+        return this.address;
     }
 
     public void setAddress(String address) {
@@ -45,11 +45,15 @@ public class Cineplex implements Serializable {
     }
 
     public ArrayList<Cinema> getListOfCinemas() {
-        return listOfCinemas;
+        return this.listOfCinemas;
     }
 
     public void setListOfCinemas(ArrayList<Cinema> listOfCinemas) {
         this.listOfCinemas = listOfCinemas;
+    }
+
+    public void addCinema(Cinema cinema) {
+        this.listOfCinemas.add(cinema);
     }
 
     @Override

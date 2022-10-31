@@ -1,22 +1,25 @@
 package Entities;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Cinema implements Serializable {
-    private String cinemaID;
+    //private String cinemaID;
     private CinemaClass cinemaClass;
     private int numOfSeats;
-    private int[][] layout;
+    private Seat[][] layout;
 
     public Cinema() {}
 
-    public Cinema(String cinemaID, CinemaClass cinemaClass, int seats, int[][] layout) {
-        this.cinemaID = cinemaID;
+    //public Cinema(String cinemaID, CinemaClass cinemaClass, int seats, int[][] layout) {
+    public Cinema(CinemaClass cinemaClass, int seats, Seat[][] layout) {
+        //this.cinemaID = cinemaID;
         this.cinemaClass = cinemaClass;
         this.numOfSeats = seats;
         this.layout = layout;
     }
 
+    /*
     public String getCinemaID() {
         return cinemaID;
     }
@@ -24,6 +27,7 @@ public class Cinema implements Serializable {
     public void setCinemaID(String cinemaID) {
         this.cinemaID = cinemaID;
     }
+     */
 
     public CinemaClass getCinemaClass() {
         return cinemaClass;
@@ -41,11 +45,35 @@ public class Cinema implements Serializable {
         this.numOfSeats = numOfSeats;
     }
 
-    public int[][] getLayout() {
+    public Seat[][] getLayout() {
         return layout;
     }
 
-    public void setLayout(int[][] layout) {
+    public void setLayout(Seat[][] layout) {
         this.layout = layout;
+    }
+
+    public void showLayout() {
+        char rowNum = 65;   // start at A (65), ends at Z (90)
+
+        for(int i=0; i < layout.length; i++) {
+            System.out.print(rowNum++ + " | ");
+
+            for(int j=0; j < layout[0].length; j++) {       // layout[0] can be any index, just need to get the number of cols
+                // Print seat status
+                System.out.print(" ["+ layout[i][j].getSeatStatus() +"] ");
+            }
+
+            System.out.print("\n");
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Cinema{" +
+                "cinemaClass=" + cinemaClass +
+                ", numOfSeats=" + numOfSeats +
+                ", layout=" + Arrays.toString(layout) +
+                '}';
     }
 }

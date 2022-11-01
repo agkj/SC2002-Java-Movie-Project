@@ -1,6 +1,8 @@
 package Entities;
 
-public class Seat {
+import java.io.Serializable;
+
+public class Seat implements Serializable {
     private String seatNum;
     private int seatStatus;
 

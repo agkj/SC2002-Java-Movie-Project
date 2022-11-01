@@ -9,7 +9,10 @@ public class Cineplex implements Serializable {
     private String address;
     private ArrayList<Cinema> listOfCinemas;
 
-    public Cineplex() {}
+    public Cineplex() {
+        // Initialise List of Cinemas as empty
+        this.listOfCinemas = new ArrayList<Cinema>();
+    }
 
     public Cineplex(String id, String venue, String address) {
         this.cineplexID = id;

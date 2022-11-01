@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 public class Cinema implements Serializable {
-    //private String cinemaID;
+    private String cinemaID;
     private CinemaClass cinemaClass;
     private int numOfSeats;
     private Seat[][] layout;
@@ -12,14 +12,13 @@ public class Cinema implements Serializable {
     public Cinema() {}
 
     //public Cinema(String cinemaID, CinemaClass cinemaClass, int seats, int[][] layout) {
-    public Cinema(CinemaClass cinemaClass, int seats, Seat[][] layout) {
-        //this.cinemaID = cinemaID;
+    public Cinema(String cinemaID, CinemaClass cinemaClass, int seats, Seat[][] layout) {
+        this.cinemaID = cinemaID;
         this.cinemaClass = cinemaClass;
         this.numOfSeats = seats;
         this.layout = layout;
     }
 
-    /*
     public String getCinemaID() {
         return cinemaID;
     }
@@ -27,7 +26,6 @@ public class Cinema implements Serializable {
     public void setCinemaID(String cinemaID) {
         this.cinemaID = cinemaID;
     }
-     */
 
     public CinemaClass getCinemaClass() {
         return cinemaClass;

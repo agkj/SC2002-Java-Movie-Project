@@ -17,6 +17,8 @@ public class CineplexApp extends AppInterface {
     Path currentRelativePath = Paths.get("");
     String root = currentRelativePath.toAbsolutePath().toString();
 
+    boolean runArrangement;
+
     public CineplexApp(AppInterface prevApp) {
         super(prevApp);
     }
@@ -126,6 +128,19 @@ public class CineplexApp extends AppInterface {
                         // Create Cinema object
                         Cinema newCinema = new Cinema();
 
+                        //// SET CINEMA ID
+                        System.out.print("Enter Cinema Hall ID: ");
+                        String hallId = sc.nextLine();
+
+                        while(hallId.isEmpty()) {
+                            hallId = sc.nextLine();
+
+                            if(hallId.isEmpty())
+                                System.out.println("Please enter a hall ID.");
+                        }
+
+                        newCinema.setCinemaID(hallId);
+
                         //// SET CINEMA CLASS
                         for(int i = 0; i < CinemaClass.values().length; i++)
                             System.out.println(i+1 + ") " + CinemaClass.values()[i]);
@@ -174,12 +189,10 @@ public class CineplexApp extends AppInterface {
                             seatAlpha++;
                         }
 
-                        boolean runArrangement = false;
-
+                        runArrangement = true;
                         int seatInput = 0;
 
-                        while(runArrangement); {
-                            runArrangement = true;
+                        do {
                             char rowNum = 65;   // start at A (65), ends at Z (90)
 
                             // Print Layout
@@ -194,16 +207,16 @@ public class CineplexApp extends AppInterface {
                                 System.out.print("\n");
                             }
 
-                            System.out.print("Enter seat number followed by arrangement (-1: Aisle, 0: Vacant): ");
+                            System.out.print("Enter seat number followed by arrangement (0: Vacant, -1: Aisle, ,-2: Save): ");
 
                             String seatNum = sc.next();
-                            seatInput = sc.nextInt();
 
-                            if(seatInput != -2) {
-
-
+                            if(seatNum.equals("-2")) {
+                                runArrangement = false;
                                 break;
                             } else {
+                                seatInput = sc.nextInt();
+
                                 // Modify Seating
                                 for(int i=0; i < rows; i++) {
                                     for(int j=0; j < cols; j++) {
@@ -213,15 +226,22 @@ public class CineplexApp extends AppInterface {
                                     }
                                 }
                             }
-                        }
+
+                        } while(runArrangement);
 
                         newCinema.setLayout(seats);
 
                         // Update Cinema list for selected Cineplex
+                        System.out.println(selectedCineplex);
                         selectedCineplex.addCinema(newCinema);
 
                         try {
+                            // Update List of Cinemas for Cineplex
                             Serializer.serialize(root + "\\data\\cineplex\\" + files[selected-1].getName(), selectedCineplex); // files[selected-1].getName() is the selected cineplex
+
+                            // Create new Cinema data file
+                            String cinemaFileName = selectedCineplex.getCineplexID() + "_" + newCinema.getCinemaID();        // e.g. CC_JEM_A
+                            Serializer.serialize(root + "\\data\\cinema\\" + cinemaFileName + ".dat", newCinema);
 
                             System.out.println("\n------- SUCCESS: CREATED NEW CINEMA -------\n");
                             newCinema.showLayout();

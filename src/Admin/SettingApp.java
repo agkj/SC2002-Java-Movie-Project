@@ -16,8 +16,8 @@ public class SettingApp extends AppInterface {
         System.out.println("------- CONFIGURE SYSTEM SETTINGS -------\n");
 
         System.out.println("1) Configure Cineplex Outlets");
-        System.out.println("3) Configure Ticket Pricing");
-        System.out.println("4) Configure Holidays");
+        System.out.println("2) Configure Ticket Pricing");
+        System.out.println("3) Configure Holidays");
         System.out.println("\n0) Return to Previous Menu");
 
         while(!sc.hasNextInt())
@@ -41,6 +41,8 @@ public class SettingApp extends AppInterface {
                 break;
             case 3:
                 // Configure Holidays
+                HolidayApp holidayApp = new HolidayApp(this);
+                holidayApp.runInterface();
 
                 break;
             default:

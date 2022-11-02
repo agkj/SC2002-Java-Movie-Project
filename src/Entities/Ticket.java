@@ -4,24 +4,25 @@ import java.io.Serializable;
 
 public class Ticket implements Serializable{
     //Attributes:
-    private double price;
-    private Enum ticketType; // this is our age
+    private double ticketPrice;
+    private TicketType ticketType; // this is our age
     private MovieGenre moviegenre;
     private CinemaClass cinemaclass;
     private int holiday;
     //constructor
-    public Ticket(double price, Enum ticketType, MovieGenre moviegenre, CinemaClass cinemaclass, int holiday) {
-        this.price = price;
+    public Ticket(double price, TicketType ticketType, MovieGenre moviegenre, CinemaClass cinemaclass, int holiday) {
+        this.ticketPrice = price;
         this.ticketType = ticketType;
         this.moviegenre = moviegenre;
         this.cinemaclass = cinemaclass;
         this.holiday = holiday;
     }
     public double getPrice() {
-        return price;
+        return ticketPrice;
     }
 
-    public Enum getTicketType() {
+    //Getters
+    public TicketType getTicketType() {
         return ticketType;
     }
 
@@ -37,11 +38,13 @@ public class Ticket implements Serializable{
         return holiday;
     }
 
+    //Setters
+
     public void setPrice(double price) {
-        this.price = price;
+        this.ticketPrice = price;
     }
 
-    public void setTicketType(Enum ticketType) {
+    public void setTicketType(TicketType ticketType) {
         this.ticketType = ticketType;
     }
 

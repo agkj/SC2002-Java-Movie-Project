@@ -1,0 +1,3 @@
+Adult,0
+Child,-3
+Senior,-5

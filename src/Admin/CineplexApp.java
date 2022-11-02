@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Scanner;
@@ -14,13 +15,21 @@ import java.util.Scanner;
 public class CineplexApp extends AppInterface {
     Scanner sc = new Scanner(System.in);
 
-    Path currentRelativePath = Paths.get("");
-    String root = currentRelativePath.toAbsolutePath().toString();
+    String root = System.getProperty("user.dir");
 
+    File path;
+    File[] files;
     boolean runArrangement;
 
     public CineplexApp(AppInterface prevApp) {
         super(prevApp);
+
+        this.load();
+    }
+
+    public void load() {
+        path = new File(root + "\\data\\cineplex");
+        files = path.listFiles();
     }
 
     @Override
@@ -29,6 +38,7 @@ public class CineplexApp extends AppInterface {
 
         System.out.println("1) Create New Outlet");
         System.out.println("2) Create New Cinema");
+        System.out.println("3) Delete Cinema");
 
         System.out.println("\n0) Return to Previous Menu");
 
@@ -36,6 +46,8 @@ public class CineplexApp extends AppInterface {
             System.out.println("Please enter a valid input");
 
         int input = sc.nextInt();
+
+        Cineplex selectedCineplex;
 
         switch(input) {
             case 0:
@@ -103,13 +115,7 @@ public class CineplexApp extends AppInterface {
                 // Create new Cinema
                 System.out.println("------- CREATE NEW CINEMA -------\n");
 
-                Cineplex selectedCineplex;
-
                 try {
-                    File path = new File(System.getProperty("user.dir") + "\\data\\cineplex");
-
-                    File[] files = path.listFiles();
-
                     // Read all available Cineplex created
                     if(files != null) {
                         for(int i=0; i < files.length; i++) {
@@ -139,7 +145,8 @@ public class CineplexApp extends AppInterface {
                                 System.out.println("Please enter a hall ID.");
                         }
 
-                        newCinema.setCinemaID(hallId);
+                        String cinemaID = selectedCineplex.getCineplexID() + "_" + hallId;        // e.g. CC_JEM_A
+                        newCinema.setCinemaID(cinemaID);
 
                         //// SET CINEMA CLASS
                         for(int i = 0; i < CinemaClass.values().length; i++)
@@ -240,8 +247,7 @@ public class CineplexApp extends AppInterface {
                             Serializer.serialize(root + "\\data\\cineplex\\" + files[selected-1].getName(), selectedCineplex); // files[selected-1].getName() is the selected cineplex
 
                             // Create new Cinema data file
-                            String cinemaFileName = selectedCineplex.getCineplexID() + "_" + newCinema.getCinemaID();        // e.g. CC_JEM_A
-                            Serializer.serialize(root + "\\data\\cinema\\" + cinemaFileName + ".dat", newCinema);
+                            Serializer.serialize(root + "\\data\\cinema\\" + newCinema.getCinemaID() + ".dat", newCinema);
 
                             System.out.println("\n------- SUCCESS: CREATED NEW CINEMA -------\n");
                             newCinema.showLayout();
@@ -258,6 +264,76 @@ public class CineplexApp extends AppInterface {
                 }
 
                 runInterface();
+                break;
+
+            case 3:
+                // Delete Cinema
+                System.out.println("------- DELETE CINEMA -------\n");
+
+                try {
+                    // Read all available Cineplex created
+                    if (files != null) {
+                        for (int i = 0; i < files.length; i++) {
+                            Cineplex curr = (Cineplex) Serializer.deSerialize(path + "\\" + files[i].getName());
+                            System.out.println((i + 1) + ") " + curr.getVenue());
+                        }
+
+                        System.out.print("\nSelect Cineplex (to delete cinema): ");
+
+                        // Get selected Cineplex file and object
+                        int selected = sc.nextInt();
+                        selectedCineplex = (Cineplex) Serializer.deSerialize(path + "\\" + files[selected - 1].getName());
+
+                        System.out.println("------- " + selectedCineplex.getVenue().toUpperCase() + ": DELETE CINEMA -------\n");
+
+                        ArrayList<Cinema> cinemas = selectedCineplex.getListOfCinemas();
+
+                        for(int i=0; i < cinemas.size(); i++) {
+                            Cinema curr = cinemas.get(i);
+
+                            System.out.println((i+1) + ") " + curr.getCinemaID() + " (" + curr.getCinemaClass() + ")");
+                        }
+
+                        System.out.print("\nEnter Cinema ID to delete: ");
+
+                        while(!sc.hasNextInt())
+                            System.out.println("Please enter a cinema ID.");
+
+                        int idToDelete = sc.nextInt()-1;
+                        Cinema cinemaToDelete = cinemas.get(idToDelete);
+
+                        // Remove from ArrayList
+                        cinemas.remove(idToDelete);
+
+                        // Try to save respective Cineplex and Cinema files
+                        try {
+                            // Delete Cinema data file
+                            File fileToDelete = new File(root + "\\data\\cinema\\" + cinemaToDelete.getCinemaID() + ".dat");
+                            if(fileToDelete.delete()) {
+                                // Update List of Cinemas for Cineplex
+                                Serializer.serialize(root + "\\data\\cineplex\\" + files[selected-1].getName(), selectedCineplex); // files[selected-1].getName() is the selected cineplex
+
+                                System.out.println("\n------- SUCCESSFULLY DELETED CINEMA -------\n");
+
+                                // Reload
+                                this.load();
+                            } else {
+                                System.out.println("\n------- FAILED TO DELETE CINEMA -------\n");
+                            }
+
+                            runInterface();
+
+                        } catch (IOException e) {
+                            System.out.println("\n------- ERROR: PLEASE TRY AGAIN -------\n");
+                            runInterface();
+
+                            e.printStackTrace();
+                        }
+                    }
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+
                 break;
             default:
                 runInterface();

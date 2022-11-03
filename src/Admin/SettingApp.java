@@ -35,7 +35,7 @@ public class SettingApp extends AppInterface {
                 break;
             case 2:
                 // Configure Ticket Price
-                TicketApp ticketApp = new TicketApp(this);
+                TicketPricingApp ticketApp = new TicketPricingApp(this);
                 ticketApp.runInterface();
 
                 break;

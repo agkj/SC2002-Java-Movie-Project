@@ -19,7 +19,7 @@ public class MovieGoerApp {
 		System.out.println("Welcome to customer module");
 		//call list movie functions
 		
-		System.out.println("1) Search movies"); // ->select movies -> booking ->check seat availability
+		System.out.println("1) View movies"); // ->select movies -> booking ->check seat availability
 		System.out.println("2) Rate movies");
 		System.out.println("3) List top 5 movies");
 		System.out.println("4) Check booking history"); //based on booking id/movie code
@@ -27,15 +27,18 @@ public class MovieGoerApp {
 		
 		
 		int choice = sc.nextInt();	
-		
+		MovieGoerReview2 movieReview = new MovieGoerReview2(null);
 		switch(choice) {
 		
 		case 1:
 			//search movies
+			;
+			movieReview.viewMovie();
+			
 			break;
 		case 2:
-			MovieGoerReview review = new MovieGoerReview();
-			review.MovieGoerReview();
+			
+			movieReview.setReview();
 			
 			//rate movies
 			

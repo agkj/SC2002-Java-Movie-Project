@@ -1,5 +1,5 @@
 package MovieGoer;
-
+import Util.TXTEditor;
 
 import java.util.List;
 import java.util.Scanner;
@@ -12,7 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 
-public class MovieGoerReview {
+public class MovieGoerReview extends TXTEditor{
 
 	public MovieGoerReview() {
 		
@@ -20,15 +20,22 @@ public class MovieGoerReview {
 	
 	public void MovieGoerReview() {
 		
-		Scanner sc = new Scanner(System.in);
-
-		while (true) {
+		Scanner sc = scan();
+		
+		System.out.println("Enter Movie to Review: ");
+		String filePath = "C:\\\\Users\\\\alger\\\\Desktop\\\\" + sc.nextLine() + ".txt";
+		int choice = 1;
+		while (choice != 0) {
 			
 			// !!!!!!!! filepath edit your txt file location !!!!!!!!
-			String filePath = "C:\\Users\\alger\\Desktop\\TestTXT.txt";
-			System.out.println("1: Enter inputs");
-			System.out.println("2: View inputs");
-			int choice = sc.nextInt();
+		System.out.println();
+		System.out.println("------------------");
+		System.out.println("Movie Reviews");
+		System.out.println("1: Enter inputs");
+		System.out.println("2: View inputs");
+		System.out.println("0: Exit");
+		System.out.print("Choice: ");
+		choice = sc.nextInt();
 
 			switch (choice) {
 			case 1:
@@ -39,17 +46,18 @@ public class MovieGoerReview {
 				System.out.println("starting read user.csv file");
 				readTXT(filePath);
 				break;
+			case 0: break;
+			default: break;
 
 			}
 		}
-
 	}
+}
 	
-	
-	public static void writeTXT(String filePath) {
+/*	public void writeTXT(String filePath) {
 
 		FileWriter fw = null;
-		Scanner sc = new Scanner(System.in);
+		Scanner sc = scan();
 
 		try {
 			fw = new FileWriter(filePath, true); // true is used so that previous data is not overwritten
@@ -71,7 +79,7 @@ public class MovieGoerReview {
 		}
 	}
 
-	public static void readTXT(String filePath) {
+	public void readTXT(String filePath) {
 
 		String line = "";
 		String split = ", ";
@@ -100,3 +108,4 @@ public class MovieGoerReview {
 	
 	
 }
+*/

@@ -2,7 +2,7 @@ package Admin;
 
 import Entities.Holiday;
 import Util.Serializer;
-import Util.TXTEditor;
+import Util.FileReader;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -23,11 +23,6 @@ public class HolidayApp extends AppInterface {
     public HolidayApp(AppInterface prevApp) {
         super(prevApp);
 
-        try {
-            this.load();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -142,7 +137,7 @@ public class HolidayApp extends AppInterface {
         System.out.println("------- DELETE HOLIDAY -------\n");
 
         // Read and display existing holidays
-        readTXT(root + "\\data\\holiday\\holidays.txt");
+        FileReader.readFile(root + "\\data\\holiday\\holidays.txt");
 
         System.out.println("Enter Holiday Name to Delete");
         String holidayName = sc.nextLine();
@@ -154,38 +149,14 @@ public class HolidayApp extends AppInterface {
                 System.out.println("Please enter a holiday name to delete.");
         }
 
-        removeLine(root + "\\data\\holiday\\holidays.txt", holidayName, true);
+        //removeLine(root + "\\data\\holiday\\holidays.txt", holidayName, true);
 
         System.out.println("\n------- SUCCESS: DELETE HOLIDAY -------\n");
 
         runInterface();
     }
 
-    public static void readTXT(String filePath) {
-
-        String line = "";
-        String split = ", ";
-
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(filePath));
-            // File Reader(*Where you have installed the CSV file)
-            while ((line = br.readLine()) != null) { // Read till end of data
-                String[] content = line.split(split);
-
-                for(int i=0; i < content.length; i++) {
-                    System.out.print(content[i] + ", ");
-
-                    if(i == content.length-1)
-                        System.out.print("\n");
-                }
-            }
-            br.close(); // close BufferedReader
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
+    /*
     public static void removeLine(String filePath, String lineToRemove, boolean containsFlag) {
         // containsFlag checks if the string passed in lineToRemove is a substring
 
@@ -226,10 +197,6 @@ public class HolidayApp extends AppInterface {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
-    public void load() {
-        TXTEditor.readTXT(root + "\\data\\holiday\\holiday.txt");
-    }
+    */
 }

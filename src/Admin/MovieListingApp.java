@@ -252,11 +252,8 @@ public class MovieListingApp extends AppInterface {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        System.out.println("Press 0 to go back");
-        int back = sc.nextInt();
-        if(back == 0) {
-            runInterface();
-        }
+        runInterface();
+
     }
 
     //// (3) UPDATE LISTING

@@ -1,5 +1,6 @@
 package Admin;
 
+import Entities.CinemaClass;
 import Util.FileReader;
 
 import java.util.Scanner;
@@ -42,6 +43,8 @@ public class TicketPricingApp extends AppInterface{
                 configureMovieType();
                 break;
             case 3:
+                // Cinema Class
+                configueCinemaClass();
                 break;
             case 4:
                 break;
@@ -87,7 +90,6 @@ public class TicketPricingApp extends AppInterface{
                 break;
             case 2:
                 // Booking Fee
-                // Base Ticket Price
                 System.out.print("Enter Booking Fee: ");
 
                 while(!sc.hasNextInt())
@@ -128,5 +130,34 @@ public class TicketPricingApp extends AppInterface{
             System.out.println("Please enter a valid price modifier.");
 
         int newPrice = sc.nextInt();
+    }
+
+    // (3) Cinema Class
+    public void configueCinemaClass() {
+        System.out.println("------- CONFIGURE CINEMA CLASS PRICING -------\n");
+
+        // Print out all cinema classes
+        for(int i=0; i < CinemaClass.values().length; i++) {
+            System.out.println((i+1) + ") " + CinemaClass.values()[i]);
+        }
+
+        System.out.print("Select Cinema Class to Configure: ");
+        while(!sc.hasNextInt())
+            System.out.println("Please enter a valid option.");
+
+        int classOption = sc.nextInt();
+        String selectedClass = CinemaClass.values()[classOption-1].toString();
+
+        System.out.print("Enter New Price: ");
+        while(!sc.hasNextInt())
+            System.out.println("Please enter a valid option.");
+
+        int classPrice = sc.nextInt();
+
+        //FileReader.replaceLine(root + "cinema_class_ticket.txt", "Booking", "Booking," + bookingFee, false);
+
+        FileReader.writeFile(root + "cinema_class_ticket.txt", selectedClass + ", " + classPrice, true);
+
+        runInterface();
     }
 }

@@ -5,11 +5,14 @@ import java.time.LocalDateTime;
 
 public class ShowTime implements Serializable {
     private LocalDateTime showDateTime;
-
     private Cinema cinema;
     private ShowTimeStatus showTimeStatus;
 
-    public ShowTime() { }
+
+    public ShowTime() {
+        //is this needed here?
+        this.showTimeStatus = ShowTimeStatus.Available;
+    }
 
     public ShowTime(LocalDateTime date, Cinema cinema, ShowTimeStatus status) {
         this.showDateTime = date;

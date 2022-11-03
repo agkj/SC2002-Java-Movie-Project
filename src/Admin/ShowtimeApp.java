@@ -92,7 +92,7 @@ public class ShowtimeApp extends AppInterface {
         ShowTime showtime = new ShowTime();
         //check the movie ID
         // Read all available Movies
-        int index;
+        int index, cine_index;
         try {
             // Read all available Movies
             System.out.println("Displaying all movies available.");
@@ -130,32 +130,59 @@ public class ShowtimeApp extends AppInterface {
                 }
             }
             System.out.println("\n");
+
+            //got error here
             try {
                 // Read all available Cineplex
                 System.out.println("Displaying all Cineplex available.");
                 //get the Cinema
                 if(cineplexFiles != null) {
                     for(int i=0; i < cineplexFiles.length; i++) {
-                        Cineplex curr_cineplex = (Cineplex) Serializer.deSerialize(path + "\\" + cineplexFiles[index - 1].getName());
+                        Cineplex curr_cineplex = (Cineplex) Serializer.deSerialize(path_cineplex + "\\" + cineplexFiles[i].getName());
                         System.out.println((i+1) + ") " + curr_cineplex.getVenue());
                         System.out.println("CineplexID : " + curr_cineplex.getCineplexID());
                     }
-
                 }
+                System.out.println("Enter the Cineplex Type: ");
+                cine_index = sc.nextInt();
+                System.out.println("You have selected :\n");
+                Cineplex current = (Cineplex) Serializer.deSerialize(path_cineplex + "\\" + cineplexFiles[cine_index - 1].getName());
+                System.out.println("You have selected "+ current.getVenue() + "Cineplex Type: ");
+
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
+
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-
         runInterface();
     }
 
     //// (2) VIEW LISTING
     public void viewShowtime() {
         System.out.println("------- VIEW SHOWTIME LISTING -------\n");
+
+        try {
+            // Read all available Movies
+            if(movieFiles != null) {
+                for(int i=0; i < movieFiles.length; i++) {
+                    Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
+                    System.out.println((i+1) + ") " + curr.getTitle());
+                    System.out.println( "  Showing Status: " + curr.getShowingStatus());
+                    System.out.println("  Synopsis: " + curr.getSynopsis());
+                    System.out.println("  Director: " + curr.getDirector());
+                    System.out.println("  Cast: " + curr.getCast());
+                    System.out.println("  Overall Ratings: " + curr.getOverallRating());
+                    System.out.println("  Past and Present Reviews: " + curr.getReviews());
+                }
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        runInterface();
+
 
     }
 

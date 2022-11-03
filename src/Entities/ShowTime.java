@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 public class ShowTime implements Serializable {
     private LocalDateTime showDateTime;
-    private Cinema cinema;
+    private Cineplex cineplex;
     private ShowTimeStatus showTimeStatus;
 
 
@@ -14,9 +14,9 @@ public class ShowTime implements Serializable {
         this.showTimeStatus = ShowTimeStatus.Available;
     }
 
-    public ShowTime(LocalDateTime date, Cinema cinema, ShowTimeStatus status) {
+    public ShowTime(LocalDateTime date, Cineplex cineplex, ShowTimeStatus status) {
         this.showDateTime = date;
-        this.cinema = cinema;
+        this.cineplex = cineplex;
         this.showTimeStatus = ShowTimeStatus.Available;
     }
 
@@ -28,12 +28,12 @@ public class ShowTime implements Serializable {
         this.showDateTime = showDateTime;
     }
 
-    public Cinema getCinema() {
-        return cinema;
+    public Cineplex getCineplex() {
+        return cineplex;
     }
 
-    public void setCinema(Cinema cinema) {
-        this.cinema = cinema;
+    public void setCineplex(Cineplex cineplex) {
+        this.cineplex = cineplex;
     }
 
     public ShowTimeStatus getShowTimeStatus() {

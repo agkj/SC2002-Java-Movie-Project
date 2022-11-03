@@ -146,8 +146,10 @@ public class ShowtimeApp extends AppInterface {
                 cine_index = sc.nextInt();
                 Cineplex current = (Cineplex) Serializer.deSerialize(path_cineplex + "\\" + cineplexFiles[cine_index - 1].getName());
                 System.out.println("You have selected "+ current.getVenue());
+                showtime.setCineplex(current);
 
-                //add the c
+                System.out.println("This is the Cineplex : " + showtime.getCineplex());
+
 
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();

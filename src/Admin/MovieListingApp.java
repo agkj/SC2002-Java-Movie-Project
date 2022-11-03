@@ -39,12 +39,12 @@ public class MovieListingApp extends AppInterface {
 
         System.out.println("1) Create Movie Listing");
         System.out.println("2) View Movie Listings");
-        System.out.println("3) Update Movie Listening");
-        System.out.println("4) Delete Movie Listening");
+        System.out.println("3) Update Movie Listings");
+        System.out.println("4) Delete Movie Listings");
         System.out.println("\n0) Return to Previous Menu");
 
         while(!sc.hasNextInt())
-            System.out.println("Please enter a valid input");
+            System.out.println("Please enter your choice");
 
         int input = sc.nextInt();
 
@@ -159,7 +159,7 @@ public class MovieListingApp extends AppInterface {
 
         // Loop through all ShowingStatus options
         for(int i=0; i < ShowingStatus.values().length; i++) {
-            System.out.println(i+1 + ") " + ShowingStatus.values()[i]);
+            System.out.println( i + 1 + ") " + ShowingStatus.values()[i]);
         }
 
         int status = sc.nextInt();
@@ -235,14 +235,23 @@ public class MovieListingApp extends AppInterface {
                 for(int i=0; i < movieFiles.length; i++) {
                     Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
                     System.out.println((i+1) + ") " + curr.getTitle());
+                    System.out.println( "  " + curr.getShowingStatus());
+                    System.out.println("  " + curr.getSynopsis());
+                    System.out.println("  " + curr.getDirector());
+                    System.out.println("  " + curr.getCast());
+                    System.out.println("  " + curr.getOverallRating());
+                    System.out.println("  " + curr.getReviews());
                 }
             }
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-        runInterface();
+        System.out.println("Press 0 to go back");
+        int back = sc.nextInt();
+        if(back == 0) {
+            runInterface();
+        }
     }
 
     //// (3) UPDATE LISTING
@@ -278,6 +287,7 @@ public class MovieListingApp extends AppInterface {
                 System.out.println("\n0) Save and Return");
                 System.out.println("-1) Discard and Return");
 
+                System.out.println("\nEnter your choice: ");
                 input = sc.nextInt();
 
                 switch(input) {
@@ -462,10 +472,12 @@ public class MovieListingApp extends AppInterface {
         System.out.println("------- DELETE MOVIE LISTING -------\n");
         System.out.println("1) Delete by Title");
         System.out.println("2) Delete from Listing");
+        System.out.println("\nEnter your choice: ");
 
         switch(sc.nextInt()) {
             case 1:
                 System.out.print("Enter Movie Title: ");
+                //TODO
                 break;
             case 2:
                 // Delete from Listing (by index)
@@ -498,5 +510,29 @@ public class MovieListingApp extends AppInterface {
                 runInterface();
                 break;
         }
+    }
+    //view the top five by ranking movies by TicketSales and Overall reviewers' rating
+    //TicketSales (Display the movie title and total sales)
+    //Overall reviewers' rating (Display the movie title and overall rating)
+    public void viewTopFive(){
+        System.out.println("------- VIEW TOP 5 MOVIES -------\n");
+        System.out.println("1) View by TicketSales");
+        System.out.println("2) View by Overall Reviewers' Rating");
+        
+        int choice;
+        System.out.println("Enter your choice: ");
+        choice = sc.nextInt();
+
+        switch(choice){
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+
+            default:
+                break;
+        };
     }
 }

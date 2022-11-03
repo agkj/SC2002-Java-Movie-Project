@@ -46,8 +46,8 @@ public class ShowtimeApp extends AppInterface {
             case 1:
                 // Create Listing
                 createShowtime();
-
                 break;
+
             case 2:
                 // View Listings
                 viewShowtime();
@@ -61,6 +61,7 @@ public class ShowtimeApp extends AppInterface {
                 // Delete Listing
                 deleteShowtime();
                 break;
+
             default:
                 break;
         }
@@ -69,6 +70,7 @@ public class ShowtimeApp extends AppInterface {
     //// (1) CREATE LISTING
     public void createShowtime() {
         System.out.println("------- CREATE SHOWTIME LISTING -------\n");
+        //need to get the id of the movie?
         ShowTime newShowTime = new ShowTime();
 
         //// Showtime (ps my whole program just crash and burn)
@@ -102,15 +104,18 @@ public class ShowtimeApp extends AppInterface {
     //// (2) VIEW LISTING
     public void viewShowtime() {
         System.out.println("------- VIEW SHOWTIME LISTING -------\n");
+
     }
 
     //// (3) UPDATE LISTING
     public void updateShowtime() {
         System.out.println("------- UPDATE SHOWTIME LISTING -------\n");
+
     }
 
     //// (4) DELETE LISTING
     public void deleteShowtime() {
         System.out.println("------- DELETE SHOWTIME LISTING -------\n");
+
     }
 }

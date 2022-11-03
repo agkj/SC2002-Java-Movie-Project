@@ -19,6 +19,4 @@ public class TicketApp extends AppInterface{
     public TicketApp(AppInterface prevApp) {
         super(prevApp);
     }
-
-
 }

@@ -41,6 +41,7 @@ public class MovieListingApp extends AppInterface {
         System.out.println("2) View Movie Listings");
         System.out.println("3) Update Movie Listings");
         System.out.println("4) Delete Movie Listings");
+        System.out.println("5) View Top Five Movies");
         System.out.println("\n0) Return to Previous Menu");
 
         while(!sc.hasNextInt())
@@ -70,6 +71,10 @@ public class MovieListingApp extends AppInterface {
             case 4:
                 // Delete Listing
                 deleteMovie();
+                break;
+            case 5:
+                // View Top 5
+                viewTopFive();
                 break;
             default:
                 break;
@@ -235,12 +240,12 @@ public class MovieListingApp extends AppInterface {
                 for(int i=0; i < movieFiles.length; i++) {
                     Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
                     System.out.println((i+1) + ") " + curr.getTitle());
-                    System.out.println( "  " + curr.getShowingStatus());
-                    System.out.println("  " + curr.getSynopsis());
-                    System.out.println("  " + curr.getDirector());
-                    System.out.println("  " + curr.getCast());
-                    System.out.println("  " + curr.getOverallRating());
-                    System.out.println("  " + curr.getReviews());
+                    System.out.println( "  Showing Status: " + curr.getShowingStatus());
+                    System.out.println("  Synopsis: " + curr.getSynopsis());
+                    System.out.println("  Director: " + curr.getDirector());
+                    System.out.println("  Cast: " + curr.getCast());
+                    System.out.println("  Overall Ratings: " + curr.getOverallRating());
+                    System.out.println("  Past and Present Reviews: " + curr.getReviews());
                 }
             }
 
@@ -521,7 +526,7 @@ public class MovieListingApp extends AppInterface {
         System.out.println("2) View by Overall Reviewers' Rating");
 
         int choice;
-        System.out.println("Enter your choice: ");
+        System.out.println("\nEnter your choice: ");
         choice = sc.nextInt();
 
         switch(choice){
@@ -533,6 +538,7 @@ public class MovieListingApp extends AppInterface {
                 break;
 
             default:
+                runInterface();
                 break;
         };
     }

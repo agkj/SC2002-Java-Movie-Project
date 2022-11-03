@@ -16,8 +16,8 @@ public class MovieListingApp extends AppInterface {
 
     String root = System.getProperty("user.dir");
 
-    File path;
-    File[] movieFiles;
+    protected File path;
+    protected File[] movieFiles;
 
     public MovieListingApp(AppInterface prevApp) {
         super(prevApp);

@@ -21,7 +21,14 @@ public class Movie implements Serializable {
 
     private double totalSales;
 
-    public Movie() {}
+    public Movie() {
+        // Initialise to Empty and/or 0
+        this.overallRating = 0;
+        this.reviews = new ArrayList<Review>();
+        this.showTimes = new ArrayList<ShowTime>();
+        this.ticketsSold = 0;
+        this.totalSales = 0;
+    }
 
     public Movie(String title, String synopsis, String director, MovieGenre genre, ShowingStatus showingStatus, int runtime, ContentRating rating, ArrayList<String> cast) {
         this.title = title;

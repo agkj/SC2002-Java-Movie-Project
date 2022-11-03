@@ -90,14 +90,21 @@ public class TicketApp extends AppInterface{
             System.out.println("You have selected :\n");
                     Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[index - 1].getName());
                     System.out.println((index+1) + ") " + curr.getTitle());
-                    System.out.println("Title : " + curr.getMovieId());
+                    System.out.println("MovieID : " + curr.getMovieId());
                     System.out.println("\n");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         Ticket ticket = new Ticket();
-        System.out.println("What is the ticket type: (STANDARD, SENIOR, STUDENT)");
+        System.out.println("Enter the ticket type: (STANDARD, SENIOR, STUDENT)");
         String tickettype = sc.nextLine();
+
+        System.out.println("Enter");
+//        this.ticketPrice = price;
+//        this.ticketType = ticketType;
+//        this.moviegenre = moviegenre;
+//        this.cinemaclass = cinemaclass;
+//        this.holiday = holiday;
 
     }
 

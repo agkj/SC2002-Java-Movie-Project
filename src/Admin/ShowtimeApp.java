@@ -18,7 +18,6 @@ import java.time.format.DateTimeFormatter;
 
 public class ShowtimeApp extends AppInterface {
     Scanner sc = new Scanner(System.in);
-    ArrayList<Movie> movieList;
 
     String root = System.getProperty("user.dir");
     File path;
@@ -49,8 +48,8 @@ public class ShowtimeApp extends AppInterface {
 
         System.out.println("1) Create Showtime Listing");
         System.out.println("2) View Showtime Listings");
-        System.out.println("3) Update Showtime Listening");
-        System.out.println("4) Delete Showtime Listening");
+        System.out.println("3) Update Showtime Listings");
+        System.out.println("4) Delete Showtime Listings");
         System.out.println("\n0) Return to Previous Menu");
 
         while(!sc.hasNextInt())
@@ -143,11 +142,12 @@ public class ShowtimeApp extends AppInterface {
                         System.out.println("CineplexID : " + curr_cineplex.getCineplexID());
                     }
                 }
-                System.out.println("Enter the Cineplex Type: ");
+                System.out.println("Enter the Cineplex Type no.: ");
                 cine_index = sc.nextInt();
-                System.out.println("You have selected :\n");
                 Cineplex current = (Cineplex) Serializer.deSerialize(path_cineplex + "\\" + cineplexFiles[cine_index - 1].getName());
-                System.out.println("You have selected "+ current.getVenue() + "Cineplex Type: ");
+                System.out.println("You have selected "+ current.getVenue());
+
+                //add the c
 
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
@@ -165,6 +165,7 @@ public class ShowtimeApp extends AppInterface {
 
         try {
             // Read all available Movies
+            //show movies and get their list of showtimes
             if(movieFiles != null) {
                 for(int i=0; i < movieFiles.length; i++) {
                     Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
@@ -177,7 +178,6 @@ public class ShowtimeApp extends AppInterface {
                     System.out.println("  Past and Present Reviews: " + curr.getReviews());
                 }
             }
-
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }

@@ -3,6 +3,8 @@ package Admin;
 import Entities.*;
 import Util.Serializer;
 
+import javax.swing.text.View;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,17 +14,34 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.format.DateTimeFormatter;
 
 public class ShowtimeApp extends AppInterface {
     Scanner sc = new Scanner(System.in);
     ArrayList<Movie> movieList;
 
-    Path currentRelativePath = Paths.get("");
-    String root = currentRelativePath.toAbsolutePath().toString();
-
+    String root = System.getProperty("user.dir");
+    File path;
+    File path_cineplex;
+    File[] movieFiles;
+    File[] cineplexFiles;
     public ShowtimeApp(AppInterface prevApp) {
         super(prevApp);
+        //load the moviefiles
+        this.load();
     }
+    public void load() {
+        // Try to read all movie .dat files in movie directory
+        path = new File(System.getProperty("user.dir") + "\\data\\movies");
+
+        // Store all movie .dat files
+        movieFiles = path.listFiles();
+
+        path_cineplex = new File(System.getProperty("user.dir") + "\\data\\cineplex");
+
+        cineplexFiles = path_cineplex.listFiles();
+    }
+
 
     @Override
     public void runInterface() {
@@ -70,73 +89,86 @@ public class ShowtimeApp extends AppInterface {
     //// (1) CREATE LISTING
     public void createShowtime() {
         System.out.println("------- CREATE SHOWTIME LISTING -------\n");
-        //need to get the id of the movie?
-        ShowTime newShowTime = new ShowTime();
+        //View all the movies
+        MovieListingApp app = new MovieListingApp(this);
+        app.viewMovies();
+        //check the movie ID
+        // Read all available Movies
+        try {
+            // Read all available Movies
+            System.out.println("Displaying all movies available.");
+            if(movieFiles != null) {
+                for(int i=0; i < movieFiles.length; i++) {
+                    Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
+                    System.out.println((i+1) + ") " + curr.getTitle());
+                    System.out.println("Title : " + curr.getMovieId());
+                }
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        System.out.println("What is the index of the movie u want to create the showtime?");
+        int index;
+        index = sc.nextInt();
+        try {
+            // Read all available Movies
+            System.out.println("You have selected :\n");
+            Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[index - 1].getName());
+            System.out.println((index+1) + ") " + curr.getTitle());
+            System.out.println("MovieID : " + curr.getMovieId());
+            System.out.println("\n");
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        ShowTime showtime = new ShowTime();
 
         //// Showtime (ps my whole program just crash and burn)
-        System.out.println("Enter a showtime: in 2018-05-05T11:50:55 format");
-        String showtime = sc.nextLine(); //enter in this format "2018-05-05T11:50:55"
-
+        System.out.println("Enter a showtime: in 2018-05-05 11:50 format");
         boolean showtimeValid = false;
-
         while(!showtimeValid) {
-            showtime = sc.nextLine();
-
+            String showtimeinput;
+            showtimeinput = sc.nextLine();
             try {
-                LocalDateTime dateTime = LocalDateTime.parse(showtime);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                LocalDateTime dateTime  = LocalDateTime.parse(showtimeinput, formatter);
+                showtime.setShowDateTime(dateTime);
                 showtimeValid = true;
             } catch (DateTimeParseException e) {
                 System.out.println("Please enter a valid showtime.");
             }
+        }
+        try {
+            // Read all available Movies
+            System.out.println("Movie" + index + "have add the showtime :\n");
+            Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[index - 1].getName());
+            curr.addShowTime(showtime);
+            System.out.println((index+1) + ") " + curr.getTitle());
+            System.out.println("MovieID : " + curr.getMovieId());
+            System.out.println("ShowTime" + showtime.getShowDateTime().toString());
+            System.out.println("\n");
 
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
 
-        //View all the movies
-//        MovieListingApp app = new MovieListingApp(this);
-//        app.viewMovies();
-//        //check the movie ID
-//        // Read all available Movies
-//        try {
-//            // Read all available Movies
-//            System.out.println("Displaying all movies available.");
-//            if(movieFiles != null) {
-//                for(int i=0; i < movieFiles.length; i++) {
-//                    Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
-//                    System.out.println((i+1) + ") " + curr.getTitle());
-//                    System.out.println("Title : " + curr.getMovieId());
-//                }
-//            }
-//
-//        } catch (IOException | ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println("What is the index of the movie u wish to create the ticket for?");
-//        int index;
-//        index = sc.nextInt();
-//        try {
-//            // Read all available Movies
-//            System.out.println("You have selected :\n");
-//            Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[index - 1].getName());
-//            System.out.println((index+1) + ") " + curr.getTitle());
-//            System.out.println("MovieID : " + curr.getMovieId());
-//            System.out.println("\n");
-//        } catch (IOException | ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//        Ticket ticket = new Ticket();
-//        System.out.println("Enter the ticket type: (STANDARD, SENIOR, STUDENT)");
-//        String tickettype = sc.nextLine();
-//
-//        System.out.println("Enter");
-////        this.ticketPrice = price;
-////        this.ticketType = ticketType;
-////        this.moviegenre = moviegenre;
-////        this.cinemaclass = cinemaclass;
-////        this.holiday = holiday;
+        try {
+            // Read all available Movies
+            System.out.println("Displaying all Cineplex available.");
+            //get the Cinema
 
 
-        //movieList =
+            if(cineplexFiles != null) {
+                for(int i=0; i < cineplexFiles.length; i++) {
+                    Cineplex curr_cineplex = (Cineplex) Serializer.deSerialize(path + "\\" + cineplexFiles[index - 1].getName());
+                    System.out.println((i+1) + ") " + curr_cineplex.getVenue());
+                    System.out.println("CineplexID : " + curr_cineplex.getCineplexID());
+                }
 
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            }
 
         runInterface();
     }

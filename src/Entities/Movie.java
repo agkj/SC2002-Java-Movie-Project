@@ -17,6 +17,8 @@ public class Movie implements Serializable {
     private ArrayList<ShowTime> showTimes;
 
     private int ticketsSold;
+
+
     private double totalSales;
 
     public Movie() {}
@@ -157,6 +159,13 @@ public class Movie implements Serializable {
 
     public void setTotalSales(double totalSales) {
         this.totalSales = totalSales;
+    }
+    public void setShowTimes(ArrayList<ShowTime> showTimes) {
+        this.showTimes = showTimes;
+    }
+
+    public void addShowTime(ShowTime showtime) {
+        this.showTimes.add(showtime);
     }
 
     @Override

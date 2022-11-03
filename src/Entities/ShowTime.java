@@ -2,44 +2,36 @@ package Entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ShowTime implements Serializable {
-    private LocalDate showDateTime;
-    private String cinemaLocation;
-    private CinemaClass cinemaType;
+    private LocalDateTime showDateTime;
+
+    private Cinema cinema;
     private ShowTimeStatus showTimeStatus;
 
     public ShowTime() { }
 
-    public ShowTime(LocalDate date, String location, CinemaClass type, ShowTimeStatus status) {
+    public ShowTime(LocalDateTime date, Cinema cinema, ShowTimeStatus status) {
         this.showDateTime = date;
-        this.cinemaLocation = location;
-        this.cinemaType = type;
-        this.showTimeStatus = status;
+        this.cinema = cinema;
+        this.showTimeStatus = ShowTimeStatus.Available;
     }
 
-    public LocalDate getShowDateTime() {
+    public LocalDateTime getShowDateTime() {
         return showDateTime;
     }
 
-    public void setShowDateTime(LocalDate showDateTime) {
+    public void setShowDateTime(LocalDateTime showDateTime) {
         this.showDateTime = showDateTime;
     }
 
-    public String getCinemaLocation() {
-        return cinemaLocation;
+    public Cinema getCinema() {
+        return cinema;
     }
 
-    public void setCinemaLocation(String cinemaLocation) {
-        this.cinemaLocation = cinemaLocation;
-    }
-
-    public CinemaClass getCinemaType() {
-        return cinemaType;
-    }
-
-    public void setCinemaType(CinemaClass cinemaType) {
-        this.cinemaType = cinemaType;
+    public void setCinema(Cinema cinema) {
+        this.cinema = cinema;
     }
 
     public ShowTimeStatus getShowTimeStatus() {

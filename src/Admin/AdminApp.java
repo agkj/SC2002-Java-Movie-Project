@@ -19,6 +19,7 @@ public class AdminApp extends AppInterface {
         System.out.println("2) Manage Cinema Showtimes");
         System.out.println("3) Configure System Settings");
         System.out.println("0) Logout");
+        System.out.println("------------------");
 
         int input = sc.nextInt();
 

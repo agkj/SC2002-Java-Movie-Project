@@ -1,6 +1,7 @@
 package Admin;
 
 import Entities.CinemaClass;
+import Entities.TicketType;
 import Util.FileReader;
 
 import java.util.Scanner;
@@ -44,9 +45,14 @@ public class TicketPricingApp extends AppInterface{
                 break;
             case 3:
                 // Cinema Class
-                configueCinemaClass();
+                configureCinemaClass();
                 break;
             case 4:
+                // Ticket Type
+                configureTicketType();
+                break;
+            case 5:
+                // Day of the Week
                 break;
             default:
                 break;
@@ -113,6 +119,8 @@ public class TicketPricingApp extends AppInterface{
 
         FileReader.readFile(root + "\\data\\ticket_settings\\ticket_type.txt");
 
+        // Display all movie types
+
         //// Get Movie Type to Change
         System.out.print("Enter Movie Type to Configure: ");
         String movieType = sc.nextLine();
@@ -133,7 +141,7 @@ public class TicketPricingApp extends AppInterface{
     }
 
     // (3) Cinema Class
-    public void configueCinemaClass() {
+    public void configureCinemaClass() {
         System.out.println("------- CONFIGURE CINEMA CLASS PRICING -------\n");
 
         // Print out all cinema classes
@@ -159,5 +167,28 @@ public class TicketPricingApp extends AppInterface{
         FileReader.writeFile(root + "cinema_class_ticket.txt", selectedClass + ", " + classPrice, true);
 
         runInterface();
+    }
+
+    // (4) Configure Ticket Type
+    public void configureTicketType() {
+        System.out.println("------- CONFIGURE TICKET TYPE PRICING -------\n");
+
+        // Display all ticket types
+        for(int i=0; i < TicketType.values().length; i++) {
+            System.out.println((i+1) + ") " + TicketType.values()[i]);
+        }
+
+        // Get Ticket Type
+        System.out.println("\nSelect Ticket Type to Configure: ");
+        while(!sc.hasNextInt())
+            System.out.println("Please enter a valid option.");
+
+
+
+    }
+
+    // (5) Configure Day of Week
+    public void configureDays() {
+        System.out.println("------- CONFIGURE DAY PRICING -------\n");
     }
 }

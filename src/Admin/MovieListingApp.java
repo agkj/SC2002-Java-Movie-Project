@@ -469,6 +469,7 @@ public class MovieListingApp extends AppInterface {
 
     //// (4) DELETE LISTING
     public void deleteMovie() {
+        //delete movie is changing the status to END OF SHOWING
         System.out.println("------- DELETE MOVIE LISTING -------\n");
         System.out.println("1) Delete by Title");
         System.out.println("2) Delete from Listing");
@@ -518,7 +519,7 @@ public class MovieListingApp extends AppInterface {
         System.out.println("------- VIEW TOP 5 MOVIES -------\n");
         System.out.println("1) View by TicketSales");
         System.out.println("2) View by Overall Reviewers' Rating");
-        
+
         int choice;
         System.out.println("Enter your choice: ");
         choice = sc.nextInt();

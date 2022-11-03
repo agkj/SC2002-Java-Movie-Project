@@ -5,7 +5,8 @@ import java.io.Serializable;
 public enum ShowingStatus implements Serializable {
     Coming_Soon("Coming Soon"),
     Preview("Preview"),
-    Now_Showing("Now Showing");
+    Now_Showing("Now Showing"),
+    End_Of_Showing ("End of Showing");
 
     private final String status;
 

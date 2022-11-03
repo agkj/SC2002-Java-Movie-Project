@@ -1,0 +1,2 @@
+Standard,12
+Booking,2

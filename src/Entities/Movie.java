@@ -179,6 +179,10 @@ public class Movie implements Serializable {
         //this.showTimes.remove(); use this rmeove by index
     }
 
+    public ArrayList<ShowTime> getShowTimes() {
+        return showTimes;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +

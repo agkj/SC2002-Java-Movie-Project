@@ -123,6 +123,9 @@ public class ShowtimeApp extends AppInterface {
                     //curr.setShowTimes(new ArrayList<ShowTime>());
                     curr.addShowTime(showtime);
                     System.out.println("The showtime added is : " + showtime.getShowDateTime().toString());
+                    //check the size of arraylist (it is 1 here leh)
+                    System.out.println("Size of arrayList : " + curr.getShowTimes().size());
+
 
                 } catch (DateTimeParseException e) {
                     System.out.println("Please enter a valid showtime.");
@@ -130,7 +133,6 @@ public class ShowtimeApp extends AppInterface {
             }
             System.out.println("\n");
 
-            //got error here
             try {
                 // Read all available Cineplex
                 System.out.println("Displaying all Cineplex available.");
@@ -146,10 +148,9 @@ public class ShowtimeApp extends AppInterface {
                 cine_index = sc.nextInt();
                 Cineplex current = (Cineplex) Serializer.deSerialize(path_cineplex + "\\" + cineplexFiles[cine_index - 1].getName());
                 System.out.println("You have selected "+ current.getVenue());
-                showtime.setCineplex(current);
-
-                System.out.println("This is the Cineplex : " + showtime.getCineplex());
-
+                //set the showtime cineplex and link to the movie?? done
+                curr.getShowTimes().get(index-1).setCineplex(current);
+                System.out.println("This is the Cineplex : \n" + curr.getShowTimes().get(index - 1).getCineplex().toString());
 
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
@@ -172,20 +173,49 @@ public class ShowtimeApp extends AppInterface {
                 for(int i=0; i < movieFiles.length; i++) {
                     Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
                     System.out.println((i+1) + ") " + curr.getTitle());
-                    System.out.println( "  Showing Status: " + curr.getShowingStatus());
-                    System.out.println("  Synopsis: " + curr.getSynopsis());
-                    System.out.println("  Director: " + curr.getDirector());
-                    System.out.println("  Cast: " + curr.getCast());
-                    System.out.println("  Overall Ratings: " + curr.getOverallRating());
-                    System.out.println("  Past and Present Reviews: " + curr.getReviews());
                 }
             }
+            //next tell them to select the movie index then we get the movieID
+            System.out.println("Select the movie index you wish to see.\n");
+            System.out.println("Enter your option : ");
+            int index = sc.nextInt();
+            Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[index - 1].getName());
+            System.out.println("You have selected : " + curr.getTitle() + "\n");
+            //why is this arraylist 0???  cos of the initialisation when curr object is created, the arraylist is reset... i think
+            System.out.println("Size of arrayList : " + curr.getShowTimes().size());
+            Cineplex cineplexChoose = curr.getShowTimes().get(index - 1).getCineplex();
+            System.out.println("What is the Cineplex you wish to select?");
+
+            try {
+                // Read all available Cineplex
+                System.out.println("Displaying all Cineplex available.");
+                //get the Cinema
+                if(cineplexFiles != null) {
+                    for(int i = 0; i < cineplexFiles.length; i++) {
+                        Cineplex curr_cineplex = (Cineplex) Serializer.deSerialize(path_cineplex + "\\" + cineplexFiles[i].getName());
+                        System.out.println((i+1) + ") " + curr_cineplex.getVenue());
+                    }
+                }
+                System.out.println("Enter the Cineplex Type no. : ");
+                int cine_index = sc.nextInt();
+                Cineplex current = (Cineplex) Serializer.deSerialize(path_cineplex + "\\" + cineplexFiles[cine_index - 1].getName());
+                String cineplexID = current.getCineplexID();
+                //if the choosen ID is the same as the CinplexID
+                if(cineplexID == cineplexChoose.getCineplexID()){
+                    System.out.println("These are all the ShowTimes: ");
+                    for(int i = 0; i <  curr.getShowTimes().size(); i++){
+                        System.out.println("Time: " + curr.getShowTimes().get(i));
+                    }
+                }
+
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         runInterface();
-
-
     }
 
     //// (3) UPDATE LISTING

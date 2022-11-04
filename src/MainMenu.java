@@ -1,10 +1,10 @@
 
-<<<<<<< Updated upstream
-=======
+//<<<<<<< Updated upstream
+//=======
 import Admin.AdminApp;
 import Admin.AppInterface;
 import MovieGoer.MovieGoerApp;
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
 import Util.*;
 
 import java.util.InputMismatchException;

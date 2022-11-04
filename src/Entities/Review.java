@@ -49,11 +49,10 @@ public class Review implements Serializable {
     }
     @Override
     public String toString() {
-        return "Movie{" +
-                "reviewId='" + reviewId + '\'' +
-                ", rating='" + reviewRating + '\'' +
-                ", review='" + reviewContent + 
-                '}';
+        return  "\n" +
+        		"  Review [" + reviewId + "]:" +
+                " rating= " + reviewRating +
+                ", review=" + reviewContent + " ";
     }
 
 }

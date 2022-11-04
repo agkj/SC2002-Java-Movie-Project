@@ -39,15 +39,14 @@ public class MovieGoerReview2 extends MovieListingApp {
 
 		        System.out.print("Enter Movie Index to Update: ");
 		        int index = sc.nextInt()-1;
-		        //File selected = movieFiles[index];
 		        File selected = movieFiles[index];
 		        Movie movieToUpdate = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[index].getName());
 		        ArrayList<Review> review = movieToUpdate.getReviews();
-		        //ArrayList<Review> review = new ArrayList<Review>();
-		        //review = movieToUpdate.getReviews();
+		        double overallRating = movieToUpdate.getOverallRating();
+		        
                 System.out.print("Enter Ratings (1 to 5): ");
                 double userRating = sc.nextInt();
-                String userReviewId = String.valueOf(review.size());
+                String userReviewId = String.valueOf(review.size()); //get latest ID
 
                 while(userRating < 1 || userRating > 5) {
                 	userRating = sc.nextInt();
@@ -55,24 +54,10 @@ public class MovieGoerReview2 extends MovieListingApp {
                 }
                 System.out.println("Enter Review: ");
 
-                //int j = review.size();
-                //userReviewId = String.valueOf(j);
-                String buffer = sc.nextLine();
+                String buffer = sc.nextLine();	//required for previous sc's "\n"
                 String userTextReview = sc.nextLine();
-
-                //while(!userTextReview.equals("\n")) {
-                //    System.out.print("Review " + (j++));
-
-                //}
-                //Review newUserReview = new Review("1", userRating, userTextReview);
-                //newUserReview.setReviewId("1");
-                //newUserReview.setReviewRating(userRating);
-                //newUserReview.setReviewContent(userTextReview);
-                //review.add(newUserReview);
-                //review.add(newUserReview);
-                //movieToUpdate.setReviews(review);
+                
                 review.add(new Review(userReviewId, userRating, userTextReview));
-                //System.out.println("Review: "+ review);
                 movieToUpdate.setReviews(review);
                 try {
                     Serializer.serialize(path + "\\" + selected.getName(), movieToUpdate);
@@ -87,36 +72,8 @@ public class MovieGoerReview2 extends MovieListingApp {
                     e.printStackTrace();
                 }
                 
-				/*if (movieFiles != null) {
-					int i;
-					for (i = 0; i < movieFiles.length; i++) {
-		
-			
-			try {
-				// Read all available Movies
-				if (movieFiles != null) {
-					for (int i = 0; i < movieFiles.length; i++) {
-						Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
-						System.out.println((i + 1) + ") " + curr.getTitle());
-
-					}
-					
-					System.out.println("Enter the movie you want to review");
-					int choice = sc.nextInt();
-					movieFiles[i].setOverallRating(choice); 
-				*/
-
-
-			} catch (IOException | ClassNotFoundException e) {
-				e.printStackTrace();
+                
+                
 			}
 			
-			
-			
-			
-			
-		
-
-	}
-
 }

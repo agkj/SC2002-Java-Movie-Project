@@ -1,9 +1,13 @@
 package Entities;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class ShowTime implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 2002;
+
     private LocalDateTime showDateTime;
     private Cineplex cineplex;
     private ShowTimeStatus showTimeStatus;

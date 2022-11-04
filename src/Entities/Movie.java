@@ -1,11 +1,16 @@
 package Entities;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Movie implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 2002;
+
     private String movieId;
     private String title, synopsis, director;
+    private MovieType movieType;
     private MovieGenre genre;
     private ShowingStatus showingStatus;
     private int runtime;
@@ -17,8 +22,6 @@ public class Movie implements Serializable {
     private ArrayList<ShowTime> showTimes;
 
     private int ticketsSold;
-
-
     private double totalSales;
 
     public Movie() {
@@ -30,10 +33,11 @@ public class Movie implements Serializable {
         this.totalSales = 0;
     }
 
-    public Movie(String title, String synopsis, String director, MovieGenre genre, ShowingStatus showingStatus, int runtime, ContentRating rating, ArrayList<String> cast) {
+    public Movie(String title, String synopsis, String director, MovieType movieType, MovieGenre genre, ShowingStatus showingStatus, int runtime, ContentRating rating, ArrayList<String> cast) {
         this.title = title;
         this.synopsis = synopsis;
         this.director = director;
+        this.movieType = movieType;
         this.genre = genre;
         this.showingStatus = showingStatus;
         this.runtime = runtime;
@@ -94,6 +98,15 @@ public class Movie implements Serializable {
 
     public void setGenre(MovieGenre genre) {
         this.genre = genre;
+    }
+
+    // Movie Type - Getter and Setter
+    public MovieType getMovieType() {
+        return movieType;
+    }
+
+    public void setMovieType(MovieType movieType) {
+        this.movieType = movieType;
     }
 
     // Showing Status - Getter and Setter

@@ -1,8 +1,12 @@
 package Entities;
+import java.io.Serial;
 import java.util.*;
 import java.io.Serializable;
 
 public class Transaction implements Serializable{
+    @Serial
+    private static final long serialVersionUID = 2002;
+
     //Attributes
     private String transactionID;
     private String creditCardNo;

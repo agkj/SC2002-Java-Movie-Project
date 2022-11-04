@@ -11,14 +11,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class TXTEditor {
+	
+	private Scanner sc = new Scanner(System.in);
+	
+	public Scanner scan() {
+		return sc;
+	}
 
-
-		// Path that CSV File is saved at (can be passed to respective user/admin
-		// functions)
-		private Scanner sc = new Scanner(System.in);
-		public Scanner scan() {
-			return sc;
-		}
 
 
 	public void writeTXT(String filePath) {
@@ -47,34 +46,6 @@ public class TXTEditor {
 			ex.printStackTrace();
 		}
 	}
-
-	/*
-	public static void writeTXT(String filePath) {
-
-		FileWriter fw = null;
-		Scanner sc = new Scanner(System.in);
-
-		try {
-			fw = new FileWriter(filePath, true); // true is used so that previous data is not overwritten
-			BufferedWriter out = new BufferedWriter(fw);
-
-			System.out.println("Enter username");
-			String user = sc.nextLine();
-
-			System.out.println("Enter password");
-			String pass = sc.nextLine();
-
-			out.write(user + ", " + pass + "\n");
-			// get username and password, ',' is used to separate the username and password,
-			// '\n' is for end of entry
-			out.close(); // close BufferedWriter
-			sc.close(); // close scanner
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
-
-	 */
 
 	public void readTXT(String filePath) {
 

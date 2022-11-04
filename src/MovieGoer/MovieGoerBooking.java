@@ -67,18 +67,4 @@ public class MovieGoerBooking implements Serializable {
 	     
 	    return this.cinemaCode + formatter.format(date) ;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }

@@ -1,8 +1,12 @@
 package Entities;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class Ticket implements Serializable{
+    @Serial
+    private static final long serialVersionUID = 2002;
+
     //Attributes:
     private double ticketPrice;
     private TicketType ticketType; // this is our age

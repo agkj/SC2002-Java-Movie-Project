@@ -1,11 +1,17 @@
 package Entities;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
+import Entities.MovieType;
 
 public class Movie implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 2002;
+
     private String movieId;
     private String title, synopsis, director;
+    private MovieType movieType;
     private MovieGenre genre;
     private ShowingStatus showingStatus;
     private int runtime;
@@ -19,12 +25,22 @@ public class Movie implements Serializable {
     private int ticketsSold;
     private double totalSales;
 
-    public Movie() {}
+    public Movie() {
+        // Initialise to Empty and/or 0
 
-    public Movie(String title, String synopsis, String director, MovieGenre genre, ShowingStatus showingStatus, int runtime, ContentRating rating, ArrayList<String> cast) {
+        this.overallRating = 0;
+        this.reviews = new ArrayList<Review>();
+        this.showTimes = new ArrayList<ShowTime>();
+        this.ticketsSold = 0;
+        this.totalSales = 0;
+    }
+
+    public Movie(String title, String synopsis, String director, MovieType movieType, MovieGenre genre, ShowingStatus showingStatus, int runtime, ContentRating rating, ArrayList<String> cast) {
+
         this.title = title;
         this.synopsis = synopsis;
         this.director = director;
+        this.movieType = movieType;
         this.genre = genre;
         this.showingStatus = showingStatus;
         this.runtime = runtime;
@@ -37,6 +53,7 @@ public class Movie implements Serializable {
         this.showTimes = new ArrayList<ShowTime>();
         this.ticketsSold = 0;
         this.totalSales = 0;
+
     }
 
     //// Getter and Setters
@@ -84,6 +101,15 @@ public class Movie implements Serializable {
 
     public void setGenre(MovieGenre genre) {
         this.genre = genre;
+    }
+
+    // Movie Type - Getter and Setter
+    public MovieType getMovieType() {
+        return movieType;
+    }
+
+    public void setMovieType(MovieType movieType) {
+        this.movieType = movieType;
     }
 
     // Showing Status - Getter and Setter
@@ -156,6 +182,21 @@ public class Movie implements Serializable {
 
     public void setTotalSales(double totalSales) {
         this.totalSales = totalSales;
+    }
+    public void setShowTimes(ArrayList<ShowTime> showTimes) {
+        this.showTimes = showTimes;
+    }
+
+    public void addShowTime(ShowTime showtime) {
+        this.showTimes.add(showtime);
+    }
+    public void RemoveShowTime(ShowTime showtime) {
+        this.showTimes.remove(showtime);
+        //this.showTimes.remove(); use this rmeove by index
+    }
+
+    public ArrayList<ShowTime> getShowTimes() {
+        return showTimes;
     }
 
     @Override

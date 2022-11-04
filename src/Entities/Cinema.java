@@ -1,9 +1,13 @@
 package Entities;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Arrays;
 
 public class Cinema implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 2002;
+
     private String cinemaID;
     private CinemaClass cinemaClass;
     private int numOfSeats;

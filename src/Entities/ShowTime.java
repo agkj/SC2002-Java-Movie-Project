@@ -8,10 +8,8 @@ public class ShowTime implements Serializable {
     @Serial
     private static final long serialVersionUID = 2002;
 
-    private String cinemaID;
-
     private String showtimeID;
-
+    private String cinemaID;
     private String cineplexID;
     private LocalDateTime showDateTime;
     private ShowTimeStatus showTimeStatus;

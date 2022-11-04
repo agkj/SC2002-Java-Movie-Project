@@ -88,8 +88,8 @@ public class ShowtimeApp extends AppInterface {
     //// (1) CREATE LISTING
     public void createShowtime() {
         System.out.println("------- CREATE SHOWTIME LISTING -------\n");
-        ShowTime showtime = new ShowTime();
-        // check the movie ID
+        ShowTime newShowtime = new ShowTime();
+
         // Read all available Movies
         int index, cine_index;
         try {
@@ -99,17 +99,20 @@ public class ShowtimeApp extends AppInterface {
                 for(int i=0; i < movieFiles.length; i++) {
                     Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
                     System.out.println((i + 1) + ") " + curr.getTitle());
-                    System.out.println("Title : " + curr.getMovieId());
-
                 }
             }
-            System.out.println("\nWhat is the index of the movie u want to create the showtime?");
+            System.out.print("\nSelect Movie to create Showtime for: ");
             index = sc.nextInt();
+
+            // Show Selected Movie
             System.out.println("You have selected :\n");
-            Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[index - 1].getName());
-            System.out.println((index) + ") " + curr.getTitle());
-            System.out.println("MovieID : " + curr.getMovieId());
-            System.out.println("Enter a showtime: in 2018-05-05 11:50 format");
+            Movie selectedMovie = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[index - 1].getName());
+            System.out.println((index) + ") " + selectedMovie.getTitle());
+
+            // Get Showtime Date and Time
+            System.out.println("Enter a showtime: in 2022-05-05 11:50 format");
+
+            // Validation for DateTime Input
             boolean showtimeValid = false;
             while(!showtimeValid) {
                 String showtimeinput;
@@ -117,12 +120,12 @@ public class ShowtimeApp extends AppInterface {
                 try {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                     LocalDateTime dateTime  = LocalDateTime.parse(showtimeinput, formatter);
-                    showtime.setShowDateTime(dateTime);
+
+                    newShowtime.setShowDateTime(dateTime);
                     showtimeValid = true;
-                    System.out.println("Movie" + index + "have add the showtime :\n"+ showtime.getShowDateTime().toString());
-                    //curr.setShowTimes(new ArrayList<ShowTime>());
-                    curr.addShowTime(showtime);
-                    System.out.println("The showtime added is : " + showtime.getShowDateTime().toString());
+
+                    //selectedMovie.addShowTime(newShowtime);
+                    //System.out.println("The showtime added is : " + newShowtime.getShowDateTime().toString());
 
                 } catch (DateTimeParseException e) {
                     System.out.println("Please enter a valid showtime.");
@@ -130,30 +133,48 @@ public class ShowtimeApp extends AppInterface {
             }
             System.out.println("\n");
 
+            // Assign Cineplex to Showtime
             try {
                 // Read all available Cineplex
-                System.out.println("Displaying all Cineplex available.");
-                //get the Cinema
+                System.out.println("Displaying all Cineplex available: ");
+
                 if(cineplexFiles != null) {
                     for(int i=0; i < cineplexFiles.length; i++) {
                         Cineplex curr_cineplex = (Cineplex) Serializer.deSerialize(path_cineplex + "\\" + cineplexFiles[i].getName());
                         System.out.println((i+1) + ") " + curr_cineplex.getVenue());
-                        System.out.println("CineplexID : " + curr_cineplex.getCineplexID());
                     }
                 }
-                System.out.println("Enter the Cineplex Type no.: ");
+
+                // Select Cineplex to assign
+                System.out.print("Select Cineplex: ");
                 cine_index = sc.nextInt();
-                Cineplex current = (Cineplex) Serializer.deSerialize(path_cineplex + "\\" + cineplexFiles[cine_index - 1].getName());
-                System.out.println("You have selected "+ current.getVenue());
-                curr.getShowTimes().get(index-1).setCineplex(current);
-                System.out.println("This is the Cineplex : \n" + curr.getShowTimes().get(index - 1).getCineplex().toString());
+                Cineplex selectedCineplex = (Cineplex) Serializer.deSerialize(path_cineplex + "\\" + cineplexFiles[cine_index - 1].getName());
+                System.out.println("You have selected "+ selectedCineplex.getVenue());
+
+                newShowtime.setCineplexID(selectedCineplex.getCineplexID());
+
+                // Select Cinema to assign
+
+                // Display available cinemas of selected Cineplex
+                ArrayList<Cinema> cinemaList = selectedCineplex.getListOfCinemas();
+                for(int i=0; i < cinemaList.size(); i++) {
+                    System.out.println((i+1) + ") " + cinemaList.get(i).getCinemaID());
+                }
+
+                System.out.print("Select Cinema: ");
+                int cinema_index = sc.nextInt();
+                Cinema selectedCinema = cinemaList.get(cinema_index-1);
+
+                newShowtime.setCinemaID(selectedCinema.getCinemaID());
+
+                selectedMovie.addShowTime(newShowtime);
 
                 // Try to save file
                 try {
-                    Serializer.serialize(root + "\\data\\movies\\" + curr.getMovieId() + ".dat", curr);
+                    // Update Movie File with updated showtime arraylist
+                    Serializer.serialize(root + "\\data\\movies\\" + selectedMovie.getMovieId() + ".dat", selectedMovie);
 
-                    System.out.println("\n------- SUCCESS: UPDATED MOVIE LISTING -------\n");
-                    System.out.println(curr);
+                    System.out.println("\n------- SUCCESS: CREATED SHOWTIME -------\n");
                 } catch (IOException e) {
                     System.out.println("\n------- ERROR: PLEASE TRY AGAIN -------\n");
                     e.printStackTrace();
@@ -176,7 +197,7 @@ public class ShowtimeApp extends AppInterface {
         try {
             // Read all available Movies
             //show movies and get their list of showtimes
-            System.out.println("These are the movies available.\n");
+            System.out.println("Available Movies: ");
             if(movieFiles != null) {
                 for(int i=0; i < movieFiles.length; i++) {
                     Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
@@ -184,17 +205,15 @@ public class ShowtimeApp extends AppInterface {
                 }
             }
             //next tell them to select the movie index then we get the movieID
-            System.out.println("\nSelect the movie index you wish to see.");
-            System.out.println("Enter your option : ");
+            System.out.println("\nSelect a Movie: ");
             int index = sc.nextInt();
-            Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[index - 1].getName());
-            System.out.println("You have selected : " + curr.getTitle() + "\n");
-            Cineplex cineplexChoose = curr.getShowTimes().get(index - 1).getCineplex();
-            System.out.println("What is the Cineplex you wish to select?\n");
+            Movie selectedMovie = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[index - 1].getName());
+            System.out.println("You have selected: " + selectedMovie.getTitle() + "\n");
 
+            // Get Cineplex
             try {
                 // Read all available Cineplex
-                System.out.println("Displaying all Cineplex available.");
+                System.out.println("Displaying all Cineplex: ");
                 //get the Cinema
                 if(cineplexFiles != null) {
                     for(int i = 0; i < cineplexFiles.length; i++) {
@@ -202,18 +221,26 @@ public class ShowtimeApp extends AppInterface {
                         System.out.println((i+1) + ") " + curr_cineplex.getVenue());
                     }
                 }
-                System.out.println("Enter the Cineplex Type no. : ");
+                System.out.println("Select your Cineplex: ");
                 int cine_index = sc.nextInt();
-                Cineplex current = (Cineplex) Serializer.deSerialize(path_cineplex + "\\" + cineplexFiles[cine_index - 1].getName());
-                String cineplexID = current.getCineplexID();
-                //if the choosen ID is the same as the CinplexID
-                if(cineplexID.equals(cineplexChoose.getCineplexID())){
-                    System.out.println("These are all the ShowTimes for MOVIES:" + curr.getTitle( ));
-                    for(int i = 0; i <  curr.getShowTimes().size(); i++){
-                        System.out.println("Time: " + curr.getShowTimes().get(i).getShowDateTime());
-                        System.out.println("Time: " + curr.getShowTimes().get(i).getShowTimeStatus());
+
+                Cineplex selectedCineplex = (Cineplex) Serializer.deSerialize(path_cineplex + "\\" + cineplexFiles[cine_index-1].getName());
+                String selectedCineplexId = selectedCineplex.getCineplexID();
+
+                //if the choosen ID is the same as the CineplexID
+                System.out.println("Available Showtimes for: " + selectedMovie.getTitle());
+                System.out.println(selectedMovie.getShowTimes().size());
+                for(int i = 0; i <  selectedMovie.getShowTimes().size(); i++){
+                    ShowTime currShowTime = selectedMovie.getShowTimes().get(i);
+
+                    if(currShowTime.getCineplexID().equals(selectedCineplexId)) {
+                        System.out.println("Cinema Hall: " + currShowTime.getCinemaID());
+                        System.out.println("Time: " + currShowTime.getShowDateTime() + " (" + currShowTime.getShowTimeStatus() + ")");
+
+                        System.out.print("\n");
                     }
                 }
+
                 System.out.println("");
 
             } catch (IOException | ClassNotFoundException e) {

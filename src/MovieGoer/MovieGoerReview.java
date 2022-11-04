@@ -1,111 +1,87 @@
 package MovieGoer;
-import Util.TXTEditor;
 
-import java.util.List;
-import java.util.Scanner;
-import java.util.ArrayList;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.File;
 import java.io.IOException;
 
+import Admin.AppInterface;
+import Admin.MovieListingApp;
+import Entities.ContentRating;
+import Entities.Movie;
+import Entities.MovieGenre;
+import Entities.Review;
+import Entities.ShowingStatus;
+import Util.Serializer;
 
-public class MovieGoerReview extends TXTEditor{
+import java.util.ArrayList;
+import java.util.Scanner;
 
-	public MovieGoerReview() {
-		
+public class MovieGoerReview extends MovieListingApp {
+
+	Scanner sc = new Scanner(System.in);
+
+	public MovieGoerReview(AppInterface prevApp) {
+		super(prevApp);
+		// TODO Auto-generated constructor stub
 	}
-	
-	public void MovieGoerReview() {
-		
-		Scanner sc = scan();
-		
-		System.out.println("Enter Movie to Review: ");
-		String filePath = "C:\\\\Users\\\\alger\\\\Desktop\\\\" + sc.nextLine() + ".txt";
-		int choice = 1;
-		while (choice != 0) {
-			
-			// !!!!!!!! filepath edit your txt file location !!!!!!!!
-		System.out.println();
-		System.out.println("------------------");
-		System.out.println("Movie Reviews");
-		System.out.println("1: Enter inputs");
-		System.out.println("2: View inputs");
-		System.out.println("0: Exit");
-		System.out.print("Choice: ");
-		choice = sc.nextInt();
 
-			switch (choice) {
-			case 1:
-				System.out.println("*********REVIEWING*********" + filePath);
-				writeTXT(filePath);
-				break;
-			case 2:
-				System.out.println("starting read user.csv file");
-				readTXT(filePath);
-				break;
-			case 0: break;
-			default: break;
-
-			}
-		}
-	}
-}
-	
-/*	public void writeTXT(String filePath) {
-
-		FileWriter fw = null;
-		Scanner sc = scan();
-
+	public void viewMovie() {
 		try {
-			fw = new FileWriter(filePath, true); // true is used so that previous data is not overwritten
-			BufferedWriter out = new BufferedWriter(fw);
+			// Read all available Movies
+			if (movieFiles != null) {
+				for (int i = 0; i < movieFiles.length; i++) {
+					Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
+					System.out.println((i + 1) + ") " + curr.getTitle());
+					System.out.println("  Showing Status: " + curr.getShowingStatus());
+					System.out.println("  Synopsis: " + curr.getSynopsis());
+					System.out.println("  Director: " + curr.getDirector());
+					System.out.println("  Cast: " + curr.getCast());
+					System.out.println("  Overall Ratings: " + curr.getOverallRating());
+					System.out.println("  Past and Present Reviews: " + curr.getReviews());
+				}
+			}
 
-			System.out.println("Enter username");
-			String user = sc.nextLine();
-
-			System.out.println("Enter password");
-			String pass = sc.nextLine();
-
-			out.write(user + ", " + pass + "\n");
-			// get username and password, ',' is used to separate the username and password,
-			// '\n' is for end of entry
-			out.close(); // close BufferedWriter
-			sc.close(); // close scanner
-		} catch (Exception ex) {
-			ex.printStackTrace();
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
 		}
 	}
 
-	public void readTXT(String filePath) {
+	public void setReview() {
 
-		String line = "";
-		String split = ", ";
-
+		System.out.println("****REVIEW MODULE****");
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(filePath));
-			// File Reader(*Where you have installed the CSV file)
-			while ((line = br.readLine()) != null) { // Read till end of data
-				String[] user = line.split(split);
-				// System.out.println("User= " + user[0] + " " + "Pass= " + user[1]);
-				System.out.println("User[" + user[0] + "]" + "\t" + "Review[" + user[1] + "]");
-				// user[0] is username and user[1] is password
+
+			for (int i = 0; i < movieFiles.length; i++) {
+				Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
+				System.out.println((i + 1) + ") " + curr.getTitle());
 			}
-			br.close(); // close BufferedReader
-		} catch (IOException e) {
+			System.out.println("*********************");
+
+			System.out.print("Enter movie index: ");
+			int index = sc.nextInt() - 1;
+
+			File selected = movieFiles[index];
+			Movie movieToUpdate = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[index].getName());
+
+			ArrayList<Review> review = movieToUpdate.getReviews();
+
+			Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[index].getName());
+
+			System.out.println("Now creating a new review for: " + curr.getTitle());
+			System.out.println("Enter a rating from 1 to 5 stars");
+
+			double movieOverallRating = sc.nextDouble();
+			movieToUpdate.setOverallRating(movieOverallRating);
+
+			// To save
+
+			Serializer.serialize(root + "\\data\\movies\\" + selected.getName(), movieToUpdate);
+
+			// Reload Movies
+			this.load();
+
+		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 }
-*/

@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class MovieListingApp extends AppInterface {
     Scanner sc = new Scanner(System.in);
 
-    String root = System.getProperty("user.dir");
+    protected String root = System.getProperty("user.dir");
 
     protected File path;
     protected File[] movieFiles;
@@ -364,6 +364,7 @@ public class MovieListingApp extends AppInterface {
 
                         MovieGenre movieGenre = MovieGenre.values()[genre-1];
                         movieToUpdate.setGenre(movieGenre);
+                        
 
                         break;
                     case 4:
@@ -402,9 +403,9 @@ public class MovieListingApp extends AppInterface {
                         // Loop through all Content Rating options
                         for(int i=0; i < ContentRating.values().length; i++)
                             System.out.println(i+1 + ") " + ContentRating.values()[i]);
-
+                        
                         int contentRating = sc.nextInt();
-
+                        	
                         while(contentRating < 1 || contentRating > ContentRating.values().length) {
                             System.out.println("Please enter a valid content rating option.");
                         }
@@ -436,6 +437,7 @@ public class MovieListingApp extends AppInterface {
                         }
 
                         movieToUpdate.setCast(cast);    // Update Cast ArrayList for Movie Instance
+                        
 
                         break;
                     case 8:

@@ -31,7 +31,6 @@ public class Movie implements Serializable {
         this.contentRating = rating;
         this.cast = cast;
 
-
         // Initialise to Empty and/or 0
         this.overallRating = 0;
         this.reviews = new ArrayList<Review>();

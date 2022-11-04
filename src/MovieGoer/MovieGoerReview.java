@@ -42,22 +42,23 @@ public class MovieGoerReview extends MovieListingApp {
 			Movie movieToUpdate = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[index].getName());
 			ArrayList<Review> review = movieToUpdate.getReviews();
 			double overallRating = movieToUpdate.getOverallRating();
-
+			overallRating = overallRating * review.size();
 			System.out.print("Enter Ratings (1 to 5): ");
 			double userRating = sc.nextInt();
-			String userReviewId = String.valueOf(review.size()); // get latest ID
+			String userReviewId = String.valueOf(review.size() - 1); // get latest ID
 
 			while (userRating < 1 || userRating > 5) {
 				userRating = sc.nextInt();
 				System.out.println("Please Enter Ratings (1 to 5): ");
 			}
 			System.out.println("Enter Review: ");
-
+			overallRating = (overallRating + userRating) / (review.size()); 
 			String buffer = sc.nextLine(); // required for previous sc's "\n"
 			String userTextReview = sc.nextLine();
 
 			review.add(new Review(userReviewId, userRating, userTextReview));
 			movieToUpdate.setReviews(review);
+			movieToUpdate.setOverallRating(overallRating);
 
 			try {
 				Serializer.serialize(path + "\\" + selected.getName(), movieToUpdate);

@@ -28,6 +28,7 @@ public class MovieGoerApp {
 		
 		int choice = sc.nextInt();	
 		MovieGoerReview movieReview = new MovieGoerReview(null);
+		MovieGoerTop5 movieTop5 = new MovieGoerTop5(null);
 		switch(choice) {
 		
 		case 1:
@@ -45,6 +46,7 @@ public class MovieGoerApp {
 			break;
 		case 3:
 			//list top 5 movies
+			movieTop5.movieSort();
 			break;
 		case 4:
 			//check booking history

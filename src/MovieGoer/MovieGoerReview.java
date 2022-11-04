@@ -1,59 +1,81 @@
 package MovieGoer;
-import Util.TXTEditor;
 
-import java.util.List;
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.io.File;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileNotFoundException;
 
-public class MovieGoerReview extends TXTEditor{
+import Admin.AppInterface;
+import Admin.MovieListingApp;
+import Entities.Movie;
+import Entities.Review;
+import Util.Serializer;
 
+import java.util.ArrayList;
+import Util.Serializer;
+import java.util.Scanner;
 
+public class MovieGoerReview extends MovieListingApp {
 
-	
-	public void MovieGoerReview() {
-		
-		Scanner sc = scan();
-		
-		System.out.println("Enter Movie to Review: ");
-		String filePath = "C:\\\\Users\\\\alger\\\\Desktop\\\\" + sc.nextLine() + ".txt";
-		int choice = 1;
-		while (choice != 0) {
-			
-			// !!!!!!!! filepath edit your txt file location !!!!!!!!
-		System.out.println();
-		System.out.println("------------------");
-		System.out.println("Movie Reviews");
-		System.out.println("1: Enter inputs");
-		System.out.println("2: View inputs");
-		System.out.println("0: Exit");
-		System.out.print("Choice: ");
-		choice = sc.nextInt();
+	Scanner sc = new Scanner(System.in);
 
-			switch (choice) {
-			case 1:
-				System.out.println("*********REVIEWING*********" + filePath);
-				writeTXT(filePath);
-				break;
-			case 2:
-				System.out.println("starting read txt file");
-				readTXT(filePath);
-				break;
-			case 0:
-				default: break;
-
-
-			
-			
-		
+	public MovieGoerReview(AppInterface prevApp) {
+		super(prevApp);
+		// TODO Auto-generated constructor stub
 	}
-}
-	
-}
+
+	public void viewMovie() {
+		super.viewMovies();
+	}
+
+	public void setReview() {
+
+		try {
+			// Read all available Movies
+			for (int i = 0; i < movieFiles.length; i++) {
+				Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
+				System.out.println((i + 1) + ") " + curr.getTitle());
+			}
+
+			System.out.print("Enter Movie Index to Update: ");
+			int index = sc.nextInt() - 1;
+			File selected = movieFiles[index];
+			Movie movieToUpdate = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[index].getName());
+			ArrayList<Review> review = movieToUpdate.getReviews();
+			double overallRating = movieToUpdate.getOverallRating();
+
+			System.out.print("Enter Ratings (1 to 5): ");
+			double userRating = sc.nextInt();
+			String userReviewId = String.valueOf(review.size()); // get latest ID
+
+			while (userRating < 1 || userRating > 5) {
+				userRating = sc.nextInt();
+				System.out.println("Please Enter Ratings (1 to 5): ");
+			}
+			System.out.println("Enter Review: ");
+
+			String buffer = sc.nextLine(); // required for previous sc's "\n"
+			String userTextReview = sc.nextLine();
+
+			review.add(new Review(userReviewId, userRating, userTextReview));
+			movieToUpdate.setReviews(review);
+
+			try {
+				Serializer.serialize(path + "\\" + selected.getName(), movieToUpdate);
+
+				// Reload Movies
+				this.load();
+
+				System.out.println("\n------- SUCCESS: UPDATED REVIEW -------\n");
+				System.out.println(movieToUpdate);
+			} catch (IOException e) {
+				System.out.println("\n------- ERROR: PLEASE TRY AGAIN -------\n");
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			System.out.println("\n------- ERROR: MOVIE NOT IN RANGE -------\n");
+			e.printStackTrace();
+		}
+
+	}
 }

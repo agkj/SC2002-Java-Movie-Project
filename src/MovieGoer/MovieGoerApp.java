@@ -27,7 +27,7 @@ public class MovieGoerApp {
 		
 		
 		int choice = sc.nextInt();	
-		MovieGoerReview2 movieReview = new MovieGoerReview2(null);
+		MovieGoerReview movieReview = new MovieGoerReview(null);
 		switch(choice) {
 		
 		case 1:

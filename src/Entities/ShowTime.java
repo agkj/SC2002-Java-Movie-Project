@@ -13,7 +13,7 @@ public class ShowTime implements Serializable {
     private String cineplexID;
     private LocalDateTime showDateTime;
     private ShowTimeStatus showTimeStatus;
-
+    private Seat[][] showTimeLayout;
 
     public ShowTime() {
         //is this needed here?
@@ -58,5 +58,13 @@ public class ShowTime implements Serializable {
 
     public void setShowTimeStatus(ShowTimeStatus showTimeStatus) {
         this.showTimeStatus = showTimeStatus;
+    }
+
+    public Seat[][] getShowTimeLayout() {
+        return showTimeLayout;
+    }
+
+    public void setShowTimeLayout(Seat[][] showTimeLayout) {
+        this.showTimeLayout = showTimeLayout;
     }
 }

@@ -493,45 +493,30 @@ public class MovieListingApp extends AppInterface {
     public void deleteMovie() {
         //delete movie is changing the status to END OF SHOWING
         System.out.println("------- DELETE MOVIE LISTING -------\n");
-        System.out.println("1) Delete by Title");
-        System.out.println("2) Delete from Listing");
-        System.out.println("\nEnter your choice: ");
 
-        switch(sc.nextInt()) {
-            case 1:
-                System.out.print("Enter Movie Title: ");
-                //TODO
-                break;
-            case 2:
-                // Delete from Listing (by index)
-                try {
-                    for(int i=0; i < movieFiles.length; i++) {
-                        Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
-                        System.out.println((i+1) + ") " + curr.getTitle());
-                    }
+        // Delete from Listing (by index)
+        try {
+            for(int i=0; i < movieFiles.length; i++) {
+                Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
+                System.out.println((i+1) + ") " + curr.getTitle());
+            }
 
-                    System.out.print("Enter Movie Index to Delete: ");
-                    int indexToRemove = sc.nextInt()-1;
+            System.out.print("Enter Movie Index to Delete: ");
+            int indexToRemove = sc.nextInt()-1;
 
-                    if(movieFiles[indexToRemove].delete()) {
-                        System.out.println("------- SUCCESSFULLY DELETED MOVIE LISTING -------\n");
+            if(movieFiles[indexToRemove].delete()) {
+                System.out.println("------- SUCCESSFULLY DELETED MOVIE LISTING -------\n");
 
-                        // Reload movies
-                        this.load();
+                // Reload movies
+                this.load();
 
-                        runInterface();
-                    } else {
-                        System.out.println("------- FAILED TO DELETE MOVIE LISTING -------\n");
-                    }
-
-                } catch (IOException | ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-
-                break;
-            default:
                 runInterface();
-                break;
+            } else {
+                System.out.println("------- FAILED TO DELETE MOVIE LISTING -------\n");
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
     //view the top five by ranking movies by TicketSales and Overall reviewers' rating

@@ -187,9 +187,9 @@ public class Movie implements Serializable {
     public void addShowTime(ShowTime showtime) {
         this.showTimes.add(showtime);
     }
-    public void RemoveShowTime(ShowTime showtime) {
-        this.showTimes.remove(showtime);
-        //this.showTimes.remove(); use this rmeove by index
+
+    public void removeShowTime(int indexToRemove) {
+        this.showTimes.remove(indexToRemove);
     }
 
     public ArrayList<ShowTime> getShowTimes() {

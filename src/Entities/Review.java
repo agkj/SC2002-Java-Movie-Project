@@ -41,4 +41,13 @@ public class Review {
     public void setReviewContent(String reviewContent) {
         this.reviewContent = reviewContent;
     }
+    
+    @Override
+    public String toString() {
+        return "Review{" +
+                "reviewId='" + reviewId + '\'' +
+                ", rating='" + reviewRating + '\'' +
+                ", review='" + reviewContent + 
+                '}';
+    }
 }

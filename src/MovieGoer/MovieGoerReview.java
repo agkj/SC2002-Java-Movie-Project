@@ -24,7 +24,26 @@ public class MovieGoerReview extends MovieListingApp {
 	}
 
 	public void viewMovie() {
-		super.viewMovies();
+		System.out.println("------- VIEW MOVIE LISTING -------\n");
+
+        try {
+            // Read all available Movies
+            if(movieFiles != null) {
+                for(int i=0; i < movieFiles.length; i++) {
+                    Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
+                    System.out.println((i+1) + ") " + curr.getTitle());
+                    System.out.println( "  Showing Status: " + curr.getShowingStatus());
+                    System.out.println("  Synopsis: " + curr.getSynopsis());
+                    System.out.println("  Director: " + curr.getDirector());
+                    System.out.println("  Cast: " + curr.getCast());
+                    System.out.println("  Overall Ratings: " + curr.getOverallRating());
+                    System.out.println("  Past and Present Reviews: " + curr.getReviews());
+                }
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 	}
 
 	public void setReview() {

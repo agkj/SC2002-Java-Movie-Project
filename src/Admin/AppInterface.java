@@ -1,6 +1,6 @@
 package Admin;
 
-public abstract class AppInterface {
+public abstract class AppInterface { //this is not really an interface
     private AppInterface prevApp;
 
     public AppInterface(AppInterface prevApp) {

@@ -51,7 +51,11 @@ public class ShowtimeApp extends AppInterface {
         System.out.println("3) Update Showtime Listings");
         System.out.println("4) Delete Showtime Listings");
         System.out.println("\n0) Return to Previous Menu");
+        System.out.println("------------------------------------------");
 
+        System.out.println("Select an option: ");
+
+        //TODO try catch
         while(!sc.hasNextInt())
             System.out.println("Please enter a valid input");
 
@@ -105,9 +109,9 @@ public class ShowtimeApp extends AppInterface {
             index = sc.nextInt();
 
             // Show Selected Movie
-            System.out.println("You have selected :\n");
+            System.out.println("You have selected :");
             Movie selectedMovie = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[index - 1].getName());
-            System.out.println((index) + ") " + selectedMovie.getTitle());
+            System.out.println((index) + ") " + selectedMovie.getTitle() + "\n");
 
             // Get Showtime Date and Time
             System.out.println("Enter a showtime: in 2022-05-05 11:50 format");

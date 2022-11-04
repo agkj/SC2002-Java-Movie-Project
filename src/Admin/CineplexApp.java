@@ -41,7 +41,8 @@ public class CineplexApp extends AppInterface {
         System.out.println("3) Delete Cinema");
 
         System.out.println("\n0) Return to Previous Menu");
-
+        System.out.println("-------------------------------------------");
+        System.out.println("Select an option: ");
         while(!sc.hasNextInt())
             System.out.println("Please enter a valid input");
 

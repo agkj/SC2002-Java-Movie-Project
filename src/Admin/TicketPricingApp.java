@@ -69,7 +69,8 @@ public class TicketPricingApp extends AppInterface{
         System.out.println("1) Base Ticket Price");
         System.out.println("2) Booking Fee");
         System.out.println("\n0) Return to Previous Menu");
-
+        System.out.println("-------------------------------------------");
+        System.out.println("Select an option: ");
         while(!sc.hasNextInt())
             System.out.println("Please enter a valid input");
 

@@ -34,7 +34,8 @@ public class HolidayApp extends AppInterface {
         System.out.println("2) Delete Holiday");
 
         System.out.println("\n0) Return to Previous Menu");
-
+        System.out.println("-------------------------------------------");
+        System.out.println("Select an option: ");
         int input = sc.nextInt();
 
         do {

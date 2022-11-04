@@ -43,9 +43,9 @@ public class MovieListingApp extends AppInterface {
         System.out.println("4) Delete Movie Listings");
         System.out.println("5) View Top Five Movies");
         System.out.println("\n0) Return to Previous Menu");
-
-        while(!sc.hasNextInt())
-            System.out.println("Please enter your choice");
+        System.out.println("-------------------------------------");
+        //here try catch?TODO
+        System.out.println("Select an option: ");
 
         int input = sc.nextInt();
 
@@ -242,7 +242,7 @@ public class MovieListingApp extends AppInterface {
             this.load();
 
             System.out.println("\n------- SUCCESS: CREATED NEW MOVIE LISTING -------\n");
-            System.out.println(newMovie);
+            //System.out.println(newMovie);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -272,19 +272,21 @@ public class MovieListingApp extends AppInterface {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        System.out.println("--------- END OF MOVIE LISTING ---------\n");
         runInterface();
 
     }
 
     //// (3) UPDATE LISTING
     public void updateMovie() {
+        System.out.println("------- UPDATE MOVIE LISTING -------\n");
         try {
             for(int i=0; i < movieFiles.length; i++) {
                 Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
                 System.out.println((i+1) + ") " + curr.getTitle());
             }
 
-            System.out.print("Enter Movie Index to Update: ");
+            System.out.print("\nEnter Movie Index to Update: ");
             int index = sc.nextInt()-1;
 
             File selected = movieFiles[index];
@@ -294,7 +296,7 @@ public class MovieListingApp extends AppInterface {
             int input;
 
             do {
-                System.out.println("Select Field to Update: ");
+                System.out.println("\nSelect Field to Update: ");
 
                 //System.out.println("1) ID");
                 System.out.println("1) Title");
@@ -363,13 +365,13 @@ public class MovieListingApp extends AppInterface {
                         break;
                     case 3:
                         //// GENRE
-                        System.out.print("Select Updated Genre: ");
+                        System.out.print("Select new updated genre: \n");
 
                         // Loop through all MovieGenre options
                         for(int i=0; i < MovieGenre.values().length; i++) {
                             System.out.println(i+1 + ") " + MovieGenre.values()[i]);
                         }
-
+                        System.out.println("\nEnter your choice: ");
                         int genre = sc.nextInt();
 
                         while(genre < 1 || genre > MovieGenre.values().length) {

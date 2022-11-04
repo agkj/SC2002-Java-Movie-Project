@@ -47,13 +47,13 @@ public class Review implements Serializable {
     public void setReviewContent(String reviewContent) {
         this.reviewContent = reviewContent;
     }
-    
     @Override
     public String toString() {
-        return "Review{" +
+        return "Movie{" +
                 "reviewId='" + reviewId + '\'' +
                 ", rating='" + reviewRating + '\'' +
                 ", review='" + reviewContent + 
                 '}';
     }
+
 }

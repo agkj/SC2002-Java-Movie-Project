@@ -8,8 +8,12 @@ public class ShowTime implements Serializable {
     @Serial
     private static final long serialVersionUID = 2002;
 
+    private String cinemaID;
+
+    private String showtimeID;
+
+    private String cineplexID;
     private LocalDateTime showDateTime;
-    private Cineplex cineplex;
     private ShowTimeStatus showTimeStatus;
 
 
@@ -18,10 +22,28 @@ public class ShowTime implements Serializable {
         this.showTimeStatus = ShowTimeStatus.Available;
     }
 
-    public ShowTime(LocalDateTime date, Cineplex cineplex, ShowTimeStatus status) {
-        this.showDateTime = date;
-        this.cineplex = cineplex;
-        this.showTimeStatus = ShowTimeStatus.Available;
+    public String getCinemaID() {
+        return cinemaID;
+    }
+
+    public void setCinemaID(String cinemaID) {
+        this.cinemaID = cinemaID;
+    }
+
+    public String getShowtimeID() {
+        return showtimeID;
+    }
+
+    public void setShowtimeID(String showtimeID) {
+        this.showtimeID = showtimeID;
+    }
+
+    public String getCineplexID() {
+        return cineplexID;
+    }
+
+    public void setCineplexID(String cineplexID) {
+        this.cineplexID = cineplexID;
     }
 
     public LocalDateTime getShowDateTime() {
@@ -30,14 +52,6 @@ public class ShowTime implements Serializable {
 
     public void setShowDateTime(LocalDateTime showDateTime) {
         this.showDateTime = showDateTime;
-    }
-
-    public Cineplex getCineplex() {
-        return cineplex;
-    }
-
-    public void setCineplex(Cineplex cineplex) {
-        this.cineplex = cineplex;
     }
 
     public ShowTimeStatus getShowTimeStatus() {

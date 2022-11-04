@@ -29,10 +29,11 @@ public class MovieGoerApp {
 		int choice = sc.nextInt();	
 		MovieGoerReview movieReview = new MovieGoerReview(null);
 		MovieGoerTop5 movieTop5 = new MovieGoerTop5(null);
+		
 		switch(choice) {
 		
 		case 1:
-			//search movies
+			//View movies
 			;
 			movieReview.viewMovie();
 			
@@ -49,13 +50,24 @@ public class MovieGoerApp {
 			movieTop5.movieSort();
 			break;
 		case 4:
-			//check booking history
+			//Make booking
+			MovieGoerBooking movieBooking = new MovieGoerBooking();
+			System.out.println("-------Make a Booking--------");
 			
-			System.out.println("-------Booking history--------");
+			//list available movies
+			System.out.println("Choose a movie to book");
 			
-			System.out.println("Enter your transaction ID");
-			String TID = sc.next();
+			//Choose cinema
 			
+			//Choose timing 
+			
+			//show available seats
+			System.out.println("Choose your seat");
+			
+			
+			System.out.println("Enter your name: ");
+			System.out.println("Enter your email: ");
+			System.out.println("Enter your phone number: ");
 		
 			break;
 			

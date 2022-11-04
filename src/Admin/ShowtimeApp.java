@@ -211,10 +211,10 @@ public class ShowtimeApp extends AppInterface {
                 Cineplex current = (Cineplex) Serializer.deSerialize(path_cineplex + "\\" + cineplexFiles[cine_index - 1].getName());
                 String cineplexID = current.getCineplexID();
                 //if the choosen ID is the same as the CinplexID
-                if(cineplexID == cineplexChoose.getCineplexID()){
-                    System.out.println("These are all the ShowTimes: ");
+                if(cineplexID.equals(cineplexChoose.getCineplexID())){
+                    System.out.println("These are all the ShowTimes for MOVIES:" + curr.getTitle( ));
                     for(int i = 0; i <  curr.getShowTimes().size(); i++){
-                        System.out.println("Time: " + curr.getShowTimes().get(i));
+                        System.out.println("Time: " + curr.getShowTimes().get(i).getShowDateTime());
                     }
                 }
 

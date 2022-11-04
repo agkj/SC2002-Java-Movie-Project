@@ -151,6 +151,16 @@ public class ShowtimeApp extends AppInterface {
                 //set the showtime cineplex and link to the movie?? done
                 curr.getShowTimes().get(index-1).setCineplex(current);
                 System.out.println("This is the Cineplex : \n" + curr.getShowTimes().get(index - 1).getCineplex().toString());
+                // Try to save file
+                try {
+                    Serializer.serialize(root + "\\data\\movies\\" + curr.getMovieId() + ".dat", curr);
+
+                    System.out.println("\n------- SUCCESS: UPDATED MOVIE LISTING -------\n");
+                    System.out.println(curr);
+                } catch (IOException e) {
+                    System.out.println("\n------- ERROR: PLEASE TRY AGAIN -------\n");
+                    e.printStackTrace();
+                }
 
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();

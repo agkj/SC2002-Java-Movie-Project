@@ -1,8 +1,12 @@
 package Entities;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class Review implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 2002;
+
     String reviewId;
 
     //String movieId;           // foreign key, linked to which movie?

@@ -139,6 +139,26 @@ public class MovieListingApp extends AppInterface {
 
         newMovie.setDirector(director);
 
+        //// MOVIE TYPE (i.e., 2D, 3D, etc)
+        System.out.println("Select Movie Type: ");
+
+        // Loop through all MovieGenre options
+        for(int i=0; i < MovieType.values().length; i++) {
+            System.out.println(i+1 + ") " + MovieType.values()[i]);
+        }
+
+        int type = sc.nextInt();
+
+        while(type < 1 || type > MovieType.values().length) {
+            type = sc.nextInt();
+
+            if(type < 1 || type > MovieType.values().length)
+                System.out.println("Please enter a valid movie type option.");
+        }
+
+        MovieType movieType = MovieType.values()[type-1];
+        newMovie.setMovieType(movieType);
+
         //// GENRE (Want to allow multiple?)
         System.out.println("Select Genre: ");
 
@@ -252,11 +272,8 @@ public class MovieListingApp extends AppInterface {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        System.out.println("Press 0 to go back");
-        int back = sc.nextInt();
-        if(back == 0) {
-            runInterface();
-        }
+        runInterface();
+
     }
 
     //// (3) UPDATE LISTING
@@ -478,45 +495,30 @@ public class MovieListingApp extends AppInterface {
     public void deleteMovie() {
         //delete movie is changing the status to END OF SHOWING
         System.out.println("------- DELETE MOVIE LISTING -------\n");
-        System.out.println("1) Delete by Title");
-        System.out.println("2) Delete from Listing");
-        System.out.println("\nEnter your choice: ");
 
-        switch(sc.nextInt()) {
-            case 1:
-                System.out.print("Enter Movie Title: ");
-                //TODO
-                break;
-            case 2:
-                // Delete from Listing (by index)
-                try {
-                    for(int i=0; i < movieFiles.length; i++) {
-                        Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
-                        System.out.println((i+1) + ") " + curr.getTitle());
-                    }
+        // Delete from Listing (by index)
+        try {
+            for(int i=0; i < movieFiles.length; i++) {
+                Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
+                System.out.println((i+1) + ") " + curr.getTitle());
+            }
 
-                    System.out.print("Enter Movie Index to Delete: ");
-                    int indexToRemove = sc.nextInt()-1;
+            System.out.print("Enter Movie Index to Delete: ");
+            int indexToRemove = sc.nextInt()-1;
 
-                    if(movieFiles[indexToRemove].delete()) {
-                        System.out.println("------- SUCCESSFULLY DELETED MOVIE LISTING -------\n");
+            if(movieFiles[indexToRemove].delete()) {
+                System.out.println("------- SUCCESSFULLY DELETED MOVIE LISTING -------\n");
 
-                        // Reload movies
-                        this.load();
+                // Reload movies
+                this.load();
 
-                        runInterface();
-                    } else {
-                        System.out.println("------- FAILED TO DELETE MOVIE LISTING -------\n");
-                    }
-
-                } catch (IOException | ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-
-                break;
-            default:
                 runInterface();
-                break;
+            } else {
+                System.out.println("------- FAILED TO DELETE MOVIE LISTING -------\n");
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
     //view the top five by ranking movies by TicketSales and Overall reviewers' rating

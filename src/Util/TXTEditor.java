@@ -18,17 +18,18 @@ public class TXTEditor {
 		return sc;
 	}
 
+
+
 	public void writeTXT(String filePath) {
 
 		FileWriter fw = null;
-		//Scanner sc = new Scanner(System.in);
 		Scanner sc = scan();
 		String buffer;
-		
+
 		try {
 			fw = new FileWriter(filePath, true); // true is used so that previous data is not overwritten
 			BufferedWriter out = new BufferedWriter(fw);
-			buffer = sc.nextLine();	// require buffer to be able to read correctly
+			buffer = sc.nextLine();
 
 			System.out.println("Enter username");
 			String user = sc.nextLine();
@@ -40,6 +41,7 @@ public class TXTEditor {
 			// get username and password, ',' is used to separate the username and password,
 			// '\n' is for end of entry
 			out.close(); // close BufferedWriter
+			//sc.close(); // close scanner
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

@@ -1,13 +1,21 @@
 package Entities;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
+import Entities.MovieType;
 
-public class Movie {
+public class Movie implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 2002;
+
     private String movieId;
     private String title, synopsis, director;
+    private MovieType movieType;
     private MovieGenre genre;
     private ShowingStatus showingStatus;
     private int runtime;
+    private ContentRating contentRating;
     private double overallRating;
 
     private ArrayList<String> cast;
@@ -17,11 +25,9 @@ public class Movie {
     private int ticketsSold;
     private double totalSales;
 
-<<<<<<< Updated upstream
-    public Movie(String title, String synopsis, String director, MovieGenre genre, ShowingStatus showingStatus, int runtime, double overallRating, ArrayList<String> cast) {
-=======
     public Movie() {
-    	// Initialise to Empty and/or 0
+        // Initialise to Empty and/or 0
+
         this.overallRating = 0;
         this.reviews = new ArrayList<Review>();
         this.showTimes = new ArrayList<ShowTime>();
@@ -29,27 +35,18 @@ public class Movie {
         this.totalSales = 0;
     }
 
-    public Movie(String title, String synopsis, String director, MovieGenre genre, ShowingStatus showingStatus, int runtime, ContentRating rating, ArrayList<String> cast) {
->>>>>>> Stashed changes
+    public Movie(String title, String synopsis, String director, MovieType movieType, MovieGenre genre, ShowingStatus showingStatus, int runtime, ContentRating rating, ArrayList<String> cast) {
+
         this.title = title;
         this.synopsis = synopsis;
         this.director = director;
+        this.movieType = movieType;
         this.genre = genre;
         this.showingStatus = showingStatus;
         this.runtime = runtime;
-        this.overallRating = overallRating;
+        this.contentRating = rating;
         this.cast = cast;
 
-
-<<<<<<< Updated upstream
-        // Initialise to Empty and/or 0
-        this.reviews = new ArrayList<Review>();
-        this.showTimes = new ArrayList<ShowTime>();
-        this.ticketsSold = 0;
-        this.totalSales = 0;
-=======
-        
->>>>>>> Stashed changes
     }
 
     //// Getter and Setters
@@ -99,6 +96,15 @@ public class Movie {
         this.genre = genre;
     }
 
+    // Movie Type - Getter and Setter
+    public MovieType getMovieType() {
+        return movieType;
+    }
+
+    public void setMovieType(MovieType movieType) {
+        this.movieType = movieType;
+    }
+
     // Showing Status - Getter and Setter
     public ShowingStatus getShowingStatus() {
         return showingStatus;
@@ -115,6 +121,15 @@ public class Movie {
 
     public void setRuntime(int runtime) {
         this.runtime = runtime;
+    }
+
+    // Content Rating - Getter and Setter
+    public ContentRating getContentRating() {
+        return contentRating;
+    }
+
+    public void setContentRating(ContentRating contentRating) {
+        this.contentRating = contentRating;
     }
 
     // OverallRating - Getter and Setter
@@ -160,5 +175,40 @@ public class Movie {
 
     public void setTotalSales(double totalSales) {
         this.totalSales = totalSales;
+    }
+    public void setShowTimes(ArrayList<ShowTime> showTimes) {
+        this.showTimes = showTimes;
+    }
+
+    public void addShowTime(ShowTime showtime) {
+        this.showTimes.add(showtime);
+    }
+    public void RemoveShowTime(ShowTime showtime) {
+        this.showTimes.remove(showtime);
+        //this.showTimes.remove(); use this rmeove by index
+    }
+
+    public ArrayList<ShowTime> getShowTimes() {
+        return showTimes;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "movieId='" + movieId + '\'' +
+                ", title='" + title + '\'' +
+                ", synopsis='" + synopsis + '\'' +
+                ", director='" + director + '\'' +
+                ", genre=" + genre +
+                ", showingStatus=" + showingStatus +
+                ", runtime=" + runtime +
+                ", contentRating=" + contentRating +
+                ", overallRating=" + overallRating +
+                ", cast=" + cast +
+                ", reviews=" + reviews +
+                ", showTimes=" + showTimes +
+                ", ticketsSold=" + ticketsSold +
+                ", totalSales=" + totalSales +
+                '}';
     }
 }

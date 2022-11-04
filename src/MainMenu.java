@@ -1,17 +1,25 @@
 
-//<<<<<<< Updated upstream
-//=======
 import Admin.AdminApp;
 import Admin.AppInterface;
 import MovieGoer.MovieGoerApp;
-//>>>>>>> Stashed changes
+
+import Admin.AdminApp;
+import Admin.AppInterface;
+import Admin.AdminApp;
+import Admin.AppInterface;
+import MovieGoer.MovieGoerApp;
+
 import Util.*;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.IOException;
 
-public class MainMenu {
+public class MainMenu extends AppInterface {
+
+	public MainMenu(AppInterface prevApp) {
+		super(null);
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -50,6 +58,10 @@ public class MainMenu {
 					if (inputUsername.equals(username) && inputPassword.equals(password)) {
 						System.out.println("--------------");
 						System.out.println("Welcome!");
+
+						// Go to AdminApp
+						AdminApp adminApp = new AdminApp(new MainMenu(null));
+						adminApp.runInterface();
 
 					} else {
 						System.out.println("--------------");

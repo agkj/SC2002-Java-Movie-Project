@@ -1,6 +1,7 @@
 package Admin;
 
 public abstract class AppInterface {
+
 	    private AppInterface prevApp;
 
 	    public AppInterface(AppInterface prevApp) {
@@ -12,4 +13,6 @@ public abstract class AppInterface {
 	    public AppInterface goBack() {
 	        return this.prevApp;
 	    }
+
+
 }

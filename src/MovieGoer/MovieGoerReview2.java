@@ -1,6 +1,7 @@
 package MovieGoer;
 
 import java.io.File;
+
 import java.io.IOException;
 
 import Admin.AppInterface;
@@ -10,6 +11,7 @@ import Entities.Review;
 import Util.Serializer;
 
 import java.util.ArrayList;
+import Util.Serializer;
 import java.util.Scanner;
 
 public class MovieGoerReview2 extends MovieListingApp {
@@ -88,6 +90,12 @@ public class MovieGoerReview2 extends MovieListingApp {
 				/*if (movieFiles != null) {
 					int i;
 					for (i = 0; i < movieFiles.length; i++) {
+		
+			
+			try {
+				// Read all available Movies
+				if (movieFiles != null) {
+					for (int i = 0; i < movieFiles.length; i++) {
 						Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
 						System.out.println((i + 1) + ") " + curr.getTitle());
 
@@ -97,10 +105,7 @@ public class MovieGoerReview2 extends MovieListingApp {
 					int choice = sc.nextInt();
 					movieFiles[i].setOverallRating(choice); 
 				*/
-					
-					
-					
-					
+
 
 			} catch (IOException | ClassNotFoundException e) {
 				e.printStackTrace();

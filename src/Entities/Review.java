@@ -52,4 +52,12 @@ public class Review implements Serializable {
     public void setReviewContent(String reviewContent) {
         this.reviewContent = reviewContent;
     }
+    @Override
+    public String toString() {
+        return  "\n" +
+        		"  Review [" + reviewId + "]:" +
+                " rating= " + reviewRating +
+                ", review=" + reviewContent + " ";
+    }
+
 }

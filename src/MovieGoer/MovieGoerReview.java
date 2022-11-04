@@ -1,18 +1,17 @@
 package MovieGoer;
 
 import java.io.File;
+
 import java.io.IOException;
 
 import Admin.AppInterface;
 import Admin.MovieListingApp;
-import Entities.ContentRating;
 import Entities.Movie;
-import Entities.MovieGenre;
 import Entities.Review;
-import Entities.ShowingStatus;
 import Util.Serializer;
 
 import java.util.ArrayList;
+import Util.Serializer;
 import java.util.Scanner;
 
 public class MovieGoerReview extends MovieListingApp {
@@ -25,61 +24,77 @@ public class MovieGoerReview extends MovieListingApp {
 	}
 
 	public void viewMovie() {
-		try {
-			// Read all available Movies
-			if (movieFiles != null) {
-				for (int i = 0; i < movieFiles.length; i++) {
-					Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
-					System.out.println((i + 1) + ") " + curr.getTitle());
-					System.out.println("  Showing Status: " + curr.getShowingStatus());
-					System.out.println("  Synopsis: " + curr.getSynopsis());
-					System.out.println("  Director: " + curr.getDirector());
-					System.out.println("  Cast: " + curr.getCast());
-					System.out.println("  Overall Ratings: " + curr.getOverallRating());
-					System.out.println("  Past and Present Reviews: " + curr.getReviews());
-				}
-			}
+		System.out.println("------- VIEW MOVIE LISTING -------\n");
 
-		} catch (IOException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+        try {
+            // Read all available Movies
+            if(movieFiles != null) {
+                for(int i=0; i < movieFiles.length; i++) {
+                    Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
+                    System.out.println((i+1) + ") " + curr.getTitle());
+                    System.out.println( "  Showing Status: " + curr.getShowingStatus());
+                    System.out.println("  Synopsis: " + curr.getSynopsis());
+                    System.out.println("  Director: " + curr.getDirector());
+                    System.out.println("  Cast: " + curr.getCast());
+                    System.out.println("  Overall Ratings: " + curr.getOverallRating());
+                    System.out.println("  Past and Present Reviews: " + curr.getReviews());
+                }
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 	}
 
 	public void setReview() {
 
-		System.out.println("****REVIEW MODULE****");
 		try {
-
+			// Read all available Movies
 			for (int i = 0; i < movieFiles.length; i++) {
 				Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
 				System.out.println((i + 1) + ") " + curr.getTitle());
 			}
-			System.out.println("*********************");
 
-			System.out.print("Enter movie index: ");
+			System.out.print("Enter Movie Index to Update: ");
 			int index = sc.nextInt() - 1;
-
 			File selected = movieFiles[index];
 			Movie movieToUpdate = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[index].getName());
-
 			ArrayList<Review> review = movieToUpdate.getReviews();
+			double overallRating = movieToUpdate.getOverallRating();
+			overallRating = overallRating * review.size();
+			System.out.print("Enter Ratings (1 to 5): ");
+			double userRating = sc.nextInt();
+			String userReviewId = String.valueOf(review.size()+1); // get latest ID
 
-			Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[index].getName());
+			while (userRating < 1 || userRating > 5) {
+				userRating = sc.nextInt();
+				System.out.println("Please Enter Ratings (1 to 5): ");
+			}
+			System.out.println("Enter Review: ");
+			 
+			String buffer = sc.nextLine(); // required for previous sc's "\n"
+			String userTextReview = sc.nextLine();
 
-			System.out.println("Now creating a new review for: " + curr.getTitle());
-			System.out.println("Enter a rating from 1 to 5 stars");
+			review.add(new Review(userReviewId, userRating, userTextReview));
+			movieToUpdate.setReviews(review);
+			overallRating = (overallRating + userRating) / review.size();
+			movieToUpdate.setOverallRating(overallRating);
 
-			double movieOverallRating = sc.nextDouble();
-			movieToUpdate.setOverallRating(movieOverallRating);
+			try {
+				Serializer.serialize(path + "\\" + selected.getName(), movieToUpdate);
 
-			// To save
+				// Reload Movies
+				this.load();
 
-			Serializer.serialize(root + "\\data\\movies\\" + selected.getName(), movieToUpdate);
+				System.out.println("\n------- SUCCESS: UPDATED REVIEW -------\n");
+				System.out.println(movieToUpdate);
+			} catch (IOException e) {
+				System.out.println("\n------- ERROR: PLEASE TRY AGAIN -------\n");
+				e.printStackTrace();
+			}
 
-			// Reload Movies
-			this.load();
-
-		} catch (IOException | ClassNotFoundException e) {
+		} catch (Exception e) {
+			System.out.println("\n------- ERROR: MOVIE NOT IN RANGE -------\n");
 			e.printStackTrace();
 		}
 

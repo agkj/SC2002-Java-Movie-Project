@@ -2,7 +2,7 @@ package MovieGoer;
 
 import java.util.Scanner;
 
-import Admin.AppInterface;
+import MovieGoer.AppInterface;
 
 public class MovieGoerApp {
 
@@ -82,8 +82,7 @@ public class MovieGoerApp {
 
 			}
 
+
 		}
-
 	}
-
 }

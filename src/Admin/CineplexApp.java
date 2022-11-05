@@ -1,18 +1,15 @@
 package Admin;
 
 import Entities.*;
+import Util.AppHelper;
 import Util.Serializer;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Locale;
 import java.util.Scanner;
 
-public class CineplexApp extends AppInterface {
+public class CineplexApp extends AppHelper {
     Scanner sc = new Scanner(System.in);
 
     String root = System.getProperty("user.dir");
@@ -21,7 +18,7 @@ public class CineplexApp extends AppInterface {
     File[] files;
     boolean runArrangement;
 
-    public CineplexApp(AppInterface prevApp) {
+    public CineplexApp(AppHelper prevApp) {
         super(prevApp);
 
         this.load();
@@ -37,11 +34,13 @@ public class CineplexApp extends AppInterface {
         System.out.println("------- CONFIGURE CINEPLEX OUTLETS -------\n");
 
         System.out.println("1) Create New Outlet");
-        System.out.println("2) Create New Cinema");
-        System.out.println("3) Delete Cinema");
+        System.out.println("2) Create Cinema");
+        System.out.println("3) View Cinema");
+        System.out.println("4) Delete Cinema");
 
         System.out.println("\n0) Return to Previous Menu");
-
+        System.out.println("-------------------------------------------");
+        System.out.println("Select an option: ");
         while(!sc.hasNextInt())
             System.out.println("Please enter a valid input");
 
@@ -149,8 +148,11 @@ public class CineplexApp extends AppInterface {
                         newCinema.setCinemaID(cinemaID);
 
                         //// SET CINEMA CLASS
+                        System.out.print("\n------ CINEMA CLASS -----\n");
                         for(int i = 0; i < CinemaClass.values().length; i++)
                             System.out.println(i+1 + ") " + CinemaClass.values()[i]);
+                        System.out.print("");
+                        System.out.print("Select a cinema class option: ");
 
                         int cinemaClass = sc.nextInt();
 
@@ -169,6 +171,7 @@ public class CineplexApp extends AppInterface {
                          */
 
                         //// SET LAYOUT
+                        System.out.print("\n------ SET LAYOUT OF CINEMA -----\n");
                         System.out.print("Enter number of rows: ");
                         while(!sc.hasNextInt())
                             System.out.println("Please enter a valid number of rows.");
@@ -202,7 +205,16 @@ public class CineplexApp extends AppInterface {
                         do {
                             char rowNum = 65;   // start at A (65), ends at Z (90)
 
+                            // Print how wide is the screen TODO
+
                             // Print Layout
+                            System.out.println("\nMovie Layout");
+                            System.out.print("  |  ");
+                            for(int k=1; k <= cols; k++) {
+                                // Print seat status
+                                System.out.print("  "+ k +"  ");
+                            }
+                            System.out.println("");
                             for(int i=0; i < rows; i++) {
                                 System.out.print(rowNum++ + " | ");
 
@@ -238,6 +250,17 @@ public class CineplexApp extends AppInterface {
 
                         newCinema.setLayout(seats);
 
+                        // Get number of seats
+                        int numOfSeats = 0;
+                        for(int i=0; i < seats.length; i++) {
+                            for(int j=0; j < seats[0].length; j++) {
+                                if(seats[i][j].getSeatStatus() == 0)
+                                    numOfSeats++;
+                            }
+                        }
+
+                        newCinema.setNumOfSeats(numOfSeats);
+
                         // Update Cinema list for selected Cineplex
                         System.out.println(selectedCineplex);
                         selectedCineplex.addCinema(newCinema);
@@ -265,8 +288,42 @@ public class CineplexApp extends AppInterface {
 
                 runInterface();
                 break;
-
             case 3:
+                // View cinemas
+                System.out.println("------- VIEW CINEMAS -------\n");
+
+                try {
+                    // Read all available Cineplex created
+                    if (files != null) {
+                        for (int i = 0; i < files.length; i++) {
+                            Cineplex curr = (Cineplex) Serializer.deSerialize(path + "\\" + files[i].getName());
+                            System.out.println((i + 1) + ") " + curr.getVenue());
+                        }
+
+                        System.out.print("\nSelect Cineplex: ");
+
+                        // Get selected Cineplex file and object
+                        int selected = sc.nextInt();
+                        selectedCineplex = (Cineplex) Serializer.deSerialize(path + "\\" + files[selected - 1].getName());
+
+                        ArrayList<Cinema> cinemas = selectedCineplex.getListOfCinemas();
+
+                        for(int i=0; i < cinemas.size(); i++) {
+                            System.out.print((i+1) + ") " + cinemas.get(i) + "\n");
+                            cinemas.get(i).showLayout();
+
+                            System.out.println();
+                        }
+                    }
+
+                    runInterface();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case 4:
                 // Delete Cinema
                 System.out.println("------- DELETE CINEMA -------\n");
 
@@ -278,7 +335,7 @@ public class CineplexApp extends AppInterface {
                             System.out.println((i + 1) + ") " + curr.getVenue());
                         }
 
-                        System.out.print("\nSelect Cineplex (to delete cinema): ");
+                        System.out.print("\nSelect Cineplex: ");
 
                         // Get selected Cineplex file and object
                         int selected = sc.nextInt();
@@ -286,6 +343,8 @@ public class CineplexApp extends AppInterface {
 
                         System.out.println("------- " + selectedCineplex.getVenue().toUpperCase() + ": DELETE CINEMA -------\n");
 
+
+                        // Show all available cinemas under selected cineplex
                         ArrayList<Cinema> cinemas = selectedCineplex.getListOfCinemas();
 
                         for(int i=0; i < cinemas.size(); i++) {

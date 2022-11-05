@@ -47,7 +47,15 @@ public class Movie implements Serializable {
         this.contentRating = rating;
         this.cast = cast;
 
+        // Initialise to Empty and/or 0
+        this.overallRating = 0;
+        this.reviews = new ArrayList<Review>();
+        this.showTimes = new ArrayList<ShowTime>();
+        this.ticketsSold = 0;
+        this.totalSales = 0;
+
     }
+
     //// Getter and Setters
 
     // Movie ID - Getter and Setter
@@ -182,9 +190,9 @@ public class Movie implements Serializable {
     public void addShowTime(ShowTime showtime) {
         this.showTimes.add(showtime);
     }
-    public void RemoveShowTime(ShowTime showtime) {
-        this.showTimes.remove(showtime);
-        //this.showTimes.remove(); use this rmeove by index
+
+    public void removeShowTime(int indexToRemove) {
+        this.showTimes.remove(indexToRemove);
     }
 
     public ArrayList<ShowTime> getShowTimes() {

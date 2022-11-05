@@ -1,23 +1,16 @@
 
 import Admin.AdminApp;
-import Admin.AppInterface;
-import MovieGoer.MovieGoerMenu;
-
-import Admin.AdminApp;
-import Admin.AppInterface;
-import Admin.AdminApp;
-import Admin.AppInterface;
-import MovieGoer.MovieGoerMenu;
+import Util.AppHelper;
+import MovieGoer.MovieGoerApp;
 
 import Util.*;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.io.IOException;
 
-public class MainMenu extends AppInterface {
+public class MainMenu extends AppHelper {
 
-	public MainMenu(AppInterface prevApp) {
+	public MainMenu(AppHelper prevApp) {
 		super(null);
 	}
 
@@ -41,7 +34,7 @@ public class MainMenu extends AppInterface {
 				System.out.println("| 2) Customer |");
 				System.out.println("| 3) Quit     |");
 				System.out.println("---------------");
-
+				System.out.print("Select an option: ");
 				int choice = sc.nextInt();
 
 				switch (choice) {
@@ -50,15 +43,12 @@ public class MainMenu extends AppInterface {
 
 					// go to admin app
 					System.out.println("--------------");
-					System.out.println("Enter username");
+					System.out.println("Enter username: ");
 					String inputUsername = sc.next();
-					System.out.println("Enter password");
+					System.out.println("Enter password: ");
 					String inputPassword = sc.next();
 
 					if (inputUsername.equals(username) && inputPassword.equals(password)) {
-						System.out.println("--------------");
-						System.out.println("Welcome!");
-
 						// Go to AdminApp
 						AdminApp adminApp = new AdminApp(new MainMenu(null));
 						adminApp.runInterface();
@@ -72,15 +62,17 @@ public class MainMenu extends AppInterface {
 					break;
 
 				case 2:
-					// go to customer appq
+					// go to MovieGoer application
 
-					MovieGoerMenu movieGoerApp = new MovieGoerMenu();
+					MovieGoerApp movieGoerApp = new MovieGoerApp();
 					movieGoerApp.runInterface();
 
 					break;
 
 				case 3:
+					System.out.println("------------------------");
 					System.out.println("Thanks for using the app!");
+					System.out.println("------------------------");
 					doNotQuit = false;
 					break;
 

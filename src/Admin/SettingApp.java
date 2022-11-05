@@ -1,11 +1,13 @@
 package Admin;
 
+import Util.AppHelper;
+
 import java.util.Scanner;
 
-public class SettingApp extends AppInterface {
+public class SettingApp extends AppHelper {
     Scanner sc = new Scanner(System.in);
 
-    public SettingApp(AppInterface prevApp) {
+    public SettingApp(AppHelper prevApp) {
         super(prevApp);
     }
 
@@ -17,6 +19,8 @@ public class SettingApp extends AppInterface {
         System.out.println("2) Configure Ticket Pricing");
         System.out.println("3) Configure Holidays");
         System.out.println("\n0) Return to Previous Menu");
+        System.out.println("-----------------------------------------");
+        System.out.println("Select an option: ");
 
         while(!sc.hasNextInt())
             System.out.println("Please enter a valid input");

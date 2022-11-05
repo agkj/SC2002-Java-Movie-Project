@@ -15,7 +15,6 @@ public class Cinema implements Serializable {
 
     public Cinema() {}
 
-    //public Cinema(String cinemaID, CinemaClass cinemaClass, int seats, int[][] layout) {
     public Cinema(String cinemaID, CinemaClass cinemaClass, int seats, Seat[][] layout) {
         this.cinemaID = cinemaID;
         this.cinemaClass = cinemaClass;
@@ -72,10 +71,6 @@ public class Cinema implements Serializable {
 
     @Override
     public String toString() {
-        return "Cinema{" +
-                "cinemaClass=" + cinemaClass +
-                ", numOfSeats=" + numOfSeats +
-                ", layout=" + Arrays.toString(layout) +
-                '}';
+        return this.cinemaID + "\nCinema Class: " + this.cinemaClass + "\nTotal Seats: " + this.numOfSeats;
     }
 }

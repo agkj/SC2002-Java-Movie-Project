@@ -210,7 +210,7 @@ public class CineplexApp extends AppInterface {
                             // Print how wide is the screen TODO
 
                             // Print Layout
-                            System.out.println("Movie Layout");
+                            System.out.println("\nMovie Layout");
                             System.out.print("  |  ");
                             for(int k=1; k <= cols; k++) {
                                 // Print seat status
@@ -252,6 +252,17 @@ public class CineplexApp extends AppInterface {
 
                         newCinema.setLayout(seats);
 
+                        // Get number of seats
+                        int numOfSeats = 0;
+                        for(int i=0; i < seats.length; i++) {
+                            for(int j=0; j < seats.length; j++) {
+                                if(seats[i][j].getSeatStatus() == 0)
+                                    numOfSeats++;
+                            }
+                        }
+
+                        newCinema.setNumOfSeats(numOfSeats);
+
                         // Update Cinema list for selected Cineplex
                         System.out.println(selectedCineplex);
                         selectedCineplex.addCinema(newCinema);
@@ -292,7 +303,7 @@ public class CineplexApp extends AppInterface {
                             System.out.println((i + 1) + ") " + curr.getVenue());
                         }
 
-                        System.out.print("\nSelect Cineplex (to delete cinema): ");
+                        System.out.print("\nSelect Cineplex: ");
 
                         // Get selected Cineplex file and object
                         int selected = sc.nextInt();
@@ -300,6 +311,8 @@ public class CineplexApp extends AppInterface {
 
                         System.out.println("------- " + selectedCineplex.getVenue().toUpperCase() + ": DELETE CINEMA -------\n");
 
+
+                        // Show all available cinemas under selected cineplex
                         ArrayList<Cinema> cinemas = selectedCineplex.getListOfCinemas();
 
                         for(int i=0; i < cinemas.size(); i++) {

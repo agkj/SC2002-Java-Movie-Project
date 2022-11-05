@@ -238,7 +238,7 @@ public class ShowtimeApp extends AppInterface {
 
                 //if the choosen ID is the same as the CineplexID
                 System.out.println("Available Showtimes for: " + selectedMovie.getTitle()); //TODO i think here can add the location also and showtime status and seat availability
-                //System.out.println(selectedMovie.getShowTimes().size()); TODO can delete this alr
+
                 for(int i = 0; i <  selectedMovie.getShowTimes().size(); i++){
                     ShowTime currShowTime = selectedMovie.getShowTimes().get(i);
 

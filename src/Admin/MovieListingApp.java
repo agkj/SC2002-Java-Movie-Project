@@ -40,7 +40,7 @@ public class MovieListingApp extends AppInterface {
         System.out.println("1) Create Movie Listing");
         System.out.println("2) View Movie Listings");
         System.out.println("3) Update Movie Listings");
-        System.out.println("4) Delete Movie Listings");
+        System.out.println("4) Remove Movie Listings");
         System.out.println("5) View Top Five Movies");
         System.out.println("\n0) Return to Previous Menu");
         System.out.println("-------------------------------------");
@@ -70,7 +70,7 @@ public class MovieListingApp extends AppInterface {
                 break;
             case 4:
                 // Delete Listing
-                deleteMovie();
+                removeMovie();
                 break;
             case 5:
                 // View Top 5
@@ -300,13 +300,14 @@ public class MovieListingApp extends AppInterface {
 
                 //System.out.println("1) ID");
                 System.out.println("1) Title");
-                System.out.println("2) Director");
-                System.out.println("3) Genre");
-                System.out.println("4) Showing Status");
-                System.out.println("5) Runtime");
-                System.out.println("6) Content Rating");
-                System.out.println("7) Add Cast");
-                System.out.println("8) Remove Cast");
+                System.out.println("2) Synopsis");
+                System.out.println("3) Director");
+                System.out.println("4) Genre");
+                System.out.println("5) Showing Status");
+                System.out.println("6) Runtime");
+                System.out.println("7) Content Rating");
+                System.out.println("8) Add Cast");
+                System.out.println("9) Remove Cast");
 
                 System.out.println("\n0) Save and Return");
                 System.out.println("-1) Discard and Return");
@@ -349,6 +350,20 @@ public class MovieListingApp extends AppInterface {
 
                         break;
                     case 2:
+                        //// SYNOPSIS
+                        System.out.print("Enter Updated Movie Synopsis: ");
+                        String synopsis = sc.nextLine();
+
+                        while(synopsis.isEmpty()) {
+                            synopsis = sc.nextLine();
+
+                            if(synopsis.isEmpty())
+                                System.out.println("Please enter a synopsis.");
+                        }
+
+                        movieToUpdate.setSynopsis(synopsis);
+                        break;
+                    case 3:
                         //// DIRECTOR
                         System.out.print("Enter Updated Director: ");
                         String director = sc.nextLine();
@@ -363,7 +378,7 @@ public class MovieListingApp extends AppInterface {
                         movieToUpdate.setDirector(director);
 
                         break;
-                    case 3:
+                    case 4:
                         //// GENRE
                         System.out.print("Select new updated genre: \n");
 
@@ -385,7 +400,7 @@ public class MovieListingApp extends AppInterface {
                         movieToUpdate.setGenre(movieGenre);
 
                         break;
-                    case 4:
+                    case 5:
                         //// SHOWING STATUS
                         System.out.println("Select Updated Showing Status: ");
 
@@ -406,7 +421,7 @@ public class MovieListingApp extends AppInterface {
                         movieToUpdate.setShowingStatus(showStatus);
 
                         break;
-                    case 5:
+                    case 6:
                         //// RUNTIME
                         System.out.print("Enter Updated Runtime Duration: ");
                         while(!sc.hasNextInt())
@@ -414,7 +429,7 @@ public class MovieListingApp extends AppInterface {
                         movieToUpdate.setRuntime(sc.nextInt());
 
                         break;
-                    case 6:
+                    case 7:
                         //// CONTENT RATING (PG, etc)
                         System.out.println("Select Updated Content Rating: ");
 
@@ -432,8 +447,8 @@ public class MovieListingApp extends AppInterface {
                         movieToUpdate.setContentRating(rating);
 
                         break;
-                    case 7:
-                        ////  CAST
+                    case 8:
+                        //// ADD CAST
                         // Print out current cast saved
                         System.out.println("Current Cast: ");
                         for(int i=0; i < cast.size(); i++) {
@@ -457,7 +472,7 @@ public class MovieListingApp extends AppInterface {
                         movieToUpdate.setCast(cast);    // Update Cast ArrayList for Movie Instance
 
                         break;
-                    case 8:
+                    case 9:
                         //// REMOVE CAST
 
                         // Print out current cast saved
@@ -492,7 +507,7 @@ public class MovieListingApp extends AppInterface {
     }
 
     //// (4) DELETE LISTING
-    public void deleteMovie() {
+    public void removeMovie() {
         //delete movie is changing the status to END OF SHOWING
         System.out.println("------- DELETE MOVIE LISTING -------\n");
 
@@ -504,9 +519,31 @@ public class MovieListingApp extends AppInterface {
             }
 
             System.out.print("Enter Movie Index to Delete: ");
-            int indexToRemove = sc.nextInt()-1;
+            int indexToUpdate = sc.nextInt()-1;
 
-            if(movieFiles[indexToRemove].delete()) {
+            // Mark Movie as End_Of_Showing
+            Movie selectedMovie = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[indexToUpdate].getName());
+
+            selectedMovie.setShowingStatus(ShowingStatus.End_Of_Showing);
+
+            // Save Movie File
+            try {
+                Serializer.serialize(path + "\\" + movieFiles[indexToUpdate].getName(), selectedMovie);
+
+                System.out.println("------- SUCCESSFULLY REMOVED MOVIE LISTING -------\n");
+
+                // Reload movies
+                this.load();
+
+                runInterface();
+            } catch (IOException e) {
+                System.out.println("------- ERROR: PLEASE TRY AGAIN -------\n");
+                e.printStackTrace();
+            }
+
+            /*
+            // Delete movie .dat file
+            if(movieFiles[indexToUpdate].delete()) {
                 System.out.println("------- SUCCESSFULLY DELETED MOVIE LISTING -------\n");
 
                 // Reload movies
@@ -516,6 +553,7 @@ public class MovieListingApp extends AppInterface {
             } else {
                 System.out.println("------- FAILED TO DELETE MOVIE LISTING -------\n");
             }
+             */
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

@@ -23,6 +23,7 @@ public class Ticket implements Serializable{
         this.cinemaclass = cinemaclass;
         this.holiday = holiday;
     }
+    
     public double getPrice() {
         return ticketPrice;
     }

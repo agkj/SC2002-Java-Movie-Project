@@ -23,9 +23,10 @@ public class MovieGoerMenu {
 		
 		System.out.println("1) View movies"); // ->select movies -> booking ->check seat availability
 		System.out.println("2) Rate movies");
-		System.out.println("3) List top 5 movies");
-		System.out.println("4) Make a booking"); //based on booking id/movie code
-		System.out.println("5) Return to main menu");
+		System.out.println("3) List top 5 movies by ratings");
+		System.out.println("4) List top 5 movies by ticket sales");
+		System.out.println("5) Make a booking"); //based on booking id/movie code
+		System.out.println("6) Return to main menu");
 		
 		
 		int choice = sc.nextInt();	
@@ -54,17 +55,23 @@ public class MovieGoerMenu {
 			//list top 5 movies
 			
 			//movieTop5.movieSort();
-			movieApp.movieTop();
+			movieApp.movieTopRatings();
 			
 			
 			break;
 		case 4:
-			//Make booking
-			movieApp.movieBooking();
+			movieApp.movieTopSales();
 
 			break;
 			
-		case 5:
+		case 5: 
+			
+			//Make booking
+			movieApp.movieBooking();
+			
+			break;
+		case 6:
+			break;
 			
 			
 			

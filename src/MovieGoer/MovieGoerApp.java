@@ -15,6 +15,7 @@ import Admin.AppInterface;
 import Admin.MovieListingApp;
 import Entities.Movie;
 import Entities.Review;
+import Entities.Ticket;
 import Util.Serializer;
 
 public class MovieGoerApp extends MovieListingApp implements Serializable {
@@ -201,9 +202,12 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 
 			String movieID = movieBooked.getMovieId();
 
-			// *******FUNCTIONS TO IMPLEMET**************\\
+
+			// *******FUNCTIONS TO IMPLEMENT**************\\
 
 			// Choose cineplex -> choose cinema
+
+			// Choose ticketype
 
 			// Choose show timing -> call from admin side
 
@@ -227,7 +231,8 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			String root = System.getProperty("user.dir");
 
 			try { // movie id
-				Serializer.serialize(root + "\\data\\bookings\\" + movieID + ".dat", movieBooking);
+				String ticID = movieBooking.getTicketID();
+				Serializer.serialize(root + "\\data\\bookings\\" + ticID + ".dat", movieBooking);
 
 				// Reload Movies
 				movieBooking.load();
@@ -235,6 +240,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			
 			movieBooking.getTicketID();
 
 		}

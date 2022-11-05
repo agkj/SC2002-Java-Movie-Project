@@ -26,6 +26,7 @@ public class MovieGoerMenu {
 		System.out.println("3) List top 5 movies by ratings");
 		System.out.println("4) List top 5 movies by ticket sales");
 		System.out.println("5) Make a booking"); //based on booking id/movie code
+		System.out.println("6) View booking history");
 		System.out.println("6) Return to main menu");
 		
 		

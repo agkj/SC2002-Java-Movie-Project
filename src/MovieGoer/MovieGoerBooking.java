@@ -16,6 +16,7 @@ public class MovieGoerBooking implements Serializable {
 	protected String email;
 	protected String cinemaCode;
 	protected String ticketID;
+	protected  int totalTickets = 0;
 	
 	
 	
@@ -81,10 +82,13 @@ public class MovieGoerBooking implements Serializable {
 		this.cinemaCode = cinemaCode;
 	}
 	
-	public void getTicketID() {
+	public String getTicketID() {
 		SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyyHHmm");  
-	    Date date = new Date();  
-	    System.out.println("Your ticket id is "+ cinemaCode + formatter.format(date));
+	    Date date = new Date(); 
+	    totalTickets++;
+	    return cinemaCode + formatter.format(date);
+	    //System.out.println("Your ticket id is "+ cinemaCode + formatter.format(date));
+	    
 	    
 	   
 	}

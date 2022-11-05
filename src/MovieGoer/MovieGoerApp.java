@@ -1,8 +1,10 @@
 package MovieGoer;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import MovieGoer.AppInterface;
+import Util.Serializer;
 
 public class MovieGoerApp {
 
@@ -22,17 +24,19 @@ public class MovieGoerApp {
 		System.out.println("1) View movies"); // ->select movies -> booking ->check seat availability
 		System.out.println("2) Rate movies");
 		System.out.println("3) List top 5 movies");
-		System.out.println("4) Check booking history"); //based on booking id/movie code
+		System.out.println("4) Make a booking"); //based on booking id/movie code
 		System.out.println("5) Return to main menu");
 		
 		
 		int choice = sc.nextInt();	
 		MovieGoerReview movieReview = new MovieGoerReview(null);
+		MovieGoerTop5 movieTop5 = new MovieGoerTop5(null);
+		
 		switch(choice) {
 		
 		case 1:
-			//search movies
-			;
+			//View movies
+			
 			movieReview.viewMovie();
 			
 			break;
@@ -45,14 +49,52 @@ public class MovieGoerApp {
 			break;
 		case 3:
 			//list top 5 movies
+			movieTop5.movieSort();
 			break;
 		case 4:
-			//check booking history
+			//Make booking
 			
-			System.out.println("-------Booking history--------");
+			System.out.println("-------Make a Booking--------");
 			
-			System.out.println("Enter your transaction ID");
-			String TID = sc.next();
+			//list available movies, user select movie 
+			System.out.println("Choose a movie to book");
+			
+			
+			//Choose cineplex -> choose cinema
+			
+			//Choose timing 
+			
+			//show available seats
+			System.out.println("Choose your seat");
+			
+			
+			System.out.println("Enter your name: ");
+			String customerName = sc.next();
+			
+			System.out.println("Enter your phone number: ");
+			String customerPhone = sc.next();
+			
+			System.out.println("Enter your email: ");
+			String customerEmail = sc.next();
+			
+			
+			MovieGoerBooking movieBooking = new MovieGoerBooking(customerName, customerPhone, customerEmail, "cd");
+			String root = System.getProperty("user.dir");
+			
+			try {
+	            Serializer.serialize(root + "\\data\\bookings\\" + "cd" + ".dat", movieBooking);
+
+	            // Reload Movies
+	            movieBooking.load();
+
+	            
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+			
+			
+			
+			
 			
 		
 			break;

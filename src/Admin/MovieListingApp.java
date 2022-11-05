@@ -1,6 +1,7 @@
 package Admin;
 
 import Entities.*;
+import MovieGoer.MovieGoerTop5;
 import Util.Serializer;
 
 import java.io.File;
@@ -553,6 +554,8 @@ public class MovieListingApp extends AppInterface {
                 //movieFiles
                 break;
             case 2:
+            	MovieGoerTop5 movieGoerTop5 = new MovieGoerTop5(null);
+            	movieGoerTop5.movieSort();
 
                 break;
 

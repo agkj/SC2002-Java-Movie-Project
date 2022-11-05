@@ -23,15 +23,17 @@ public class MovieGoerApp {
 		
 		System.out.println("1) View movies"); // ->select movies -> booking ->check seat availability
 		System.out.println("2) Rate movies");
-		System.out.println("3) List top 5 movies");
-		System.out.println("4) Make a booking"); //based on booking id/movie code
-		System.out.println("5) Return to main menu");
+		System.out.println("3) List top 5 movies by rating");
+		System.out.println("4) List top 5 movies by ticket sales");
+		System.out.println("5) Make a booking"); //based on booking id/movie code
+		System.out.println("6) Return to main menu");
 		
 		
 		int choice = sc.nextInt();	
 		MovieGoerReview movieReview = new MovieGoerReview(null);
 		MovieGoerTop5 movieTop5 = new MovieGoerTop5(null);
-		
+		MovieGoerTop5Sale movieTop5Sale = new MovieGoerTop5Sale(null);
+
 		switch(choice) {
 		
 		case 1:
@@ -40,6 +42,7 @@ public class MovieGoerApp {
 			movieReview.viewMovie();
 			
 			break;
+
 		case 2:
 			
 			movieReview.setReview();
@@ -47,11 +50,18 @@ public class MovieGoerApp {
 			//rate movies
 			
 			break;
+
 		case 3:
 			//list top 5 movies
 			movieTop5.movieSort();
 			break;
-		case 4:
+
+		case 4: 
+			//list top 5 movie by ticket sales
+			movieTop5Sale.movieSort();
+			break;
+
+		case 5:
 			//Make booking
 			
 			System.out.println("-------Make a Booking--------");
@@ -99,7 +109,7 @@ public class MovieGoerApp {
 		
 			break;
 			
-		case 5:
+		case 6:
 			
 			
 			

@@ -63,7 +63,7 @@ public class MovieGoerTop5 extends MovieListingApp {
 			});
             
             
-            System.out.println("*********Here are the top 5 movies!*********");
+            System.out.println("*********Here are the top 5 movies by ratings!*********");
             for(Map.Entry<String, Double> e:list) {
             	System.out.println(e.getKey() +" Rating: "+ e.getValue());
             }

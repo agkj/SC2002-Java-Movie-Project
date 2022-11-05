@@ -68,19 +68,7 @@ public class MovieGoerTop5Sale extends MovieListingApp{
             }
             System.out.println("*********************************************");
             
-            try {
-                //            // Read all available Movies
-                            if(movieFiles != null) {
-                //            	
-                                for(int i=0; i < movieFiles.length; i++) {
-                                    Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
-                                    System.out.println((i+1) + ") " + curr.getTitle());
-                                    System.out.println("  Overall Ratings: " + curr.getTicketsSold());
-                //                   
-                //                    
-                                }
-                            }
-                //   
+           
             
             
 

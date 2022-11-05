@@ -34,8 +34,9 @@ public class CineplexApp extends AppHelper {
         System.out.println("------- CONFIGURE CINEPLEX OUTLETS -------\n");
 
         System.out.println("1) Create New Outlet");
-        System.out.println("2) Create New Cinema");
-        System.out.println("3) Delete Cinema");
+        System.out.println("2) Create Cinema");
+        System.out.println("3) View Cinema");
+        System.out.println("4) Delete Cinema");
 
         System.out.println("\n0) Return to Previous Menu");
         System.out.println("-------------------------------------------");
@@ -250,6 +251,7 @@ public class CineplexApp extends AppHelper {
                         newCinema.setLayout(seats);
 
                         // Get number of seats
+                        // TODO not calculating correctly
                         int numOfSeats = 0;
                         for(int i=0; i < seats.length; i++) {
                             for(int j=0; j < seats.length; j++) {
@@ -287,8 +289,42 @@ public class CineplexApp extends AppHelper {
 
                 runInterface();
                 break;
-
             case 3:
+                // View cinemas
+                System.out.println("------- VIEW CINEMAS -------\n");
+
+                try {
+                    // Read all available Cineplex created
+                    if (files != null) {
+                        for (int i = 0; i < files.length; i++) {
+                            Cineplex curr = (Cineplex) Serializer.deSerialize(path + "\\" + files[i].getName());
+                            System.out.println((i + 1) + ") " + curr.getVenue());
+                        }
+
+                        System.out.print("\nSelect Cineplex: ");
+
+                        // Get selected Cineplex file and object
+                        int selected = sc.nextInt();
+                        selectedCineplex = (Cineplex) Serializer.deSerialize(path + "\\" + files[selected - 1].getName());
+
+                        ArrayList<Cinema> cinemas = selectedCineplex.getListOfCinemas();
+
+                        for(int i=0; i < cinemas.size(); i++) {
+                            System.out.print((i+1) + ") " + cinemas.get(i) + "\n");
+                            cinemas.get(i).showLayout();
+
+                            System.out.println();
+                        }
+                    }
+
+                    runInterface();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case 4:
                 // Delete Cinema
                 System.out.println("------- DELETE CINEMA -------\n");
 

@@ -45,9 +45,9 @@ public class MainMenu extends AppInterface {
 
 					// go to admin app
 					System.out.println("--------------");
-					System.out.println("Enter username");
+					System.out.println("Enter username: ");
 					String inputUsername = sc.next();
-					System.out.println("Enter password");
+					System.out.println("Enter password: ");
 					String inputPassword = sc.next();
 
 					if (inputUsername.equals(username) && inputPassword.equals(password)) {

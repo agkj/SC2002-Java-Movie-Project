@@ -237,7 +237,7 @@ public class ShowtimeApp extends AppInterface {
                 String selectedCineplexId = selectedCineplex.getCineplexID();
 
                 //if the choosen ID is the same as the CineplexID
-                System.out.println("Available Showtimes for: " + selectedMovie.getTitle());
+                System.out.println("Available Showtimes for: " + selectedMovie.getTitle()); //TODO i think here can add the location also and showtime status and seat availability
                 //System.out.println(selectedMovie.getShowTimes().size()); TODO can delete this alr
                 for(int i = 0; i <  selectedMovie.getShowTimes().size(); i++){
                     ShowTime currShowTime = selectedMovie.getShowTimes().get(i);
@@ -281,12 +281,14 @@ public class ShowtimeApp extends AppInterface {
             // Show Selected Movie
             Movie selectedMovie = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[movieIndex-1].getName());
 
-            System.out.println("You have selected :\n");
+            System.out.println("------------------");
+            System.out.println("You have selected :");
             System.out.println(selectedMovie.getTitle());
 
             // Select Showtime to update
             ArrayList<ShowTime> showtimeList = selectedMovie.getShowTimes();
-
+            //
+            System.out.println("These are all the showtimes:");
             if(showtimeList.size() > 0) {
                 // Display all available showtimes
                 for(int i=0; i < showtimeList.size(); i++) {
@@ -307,9 +309,11 @@ public class ShowtimeApp extends AppInterface {
                 int input;
 
                 do {
-                    System.out.println("\nSelect Action: ");
+                    System.out.println("\nSelect action to update for: " + selectedMovie.getTitle() + " Showtime");
                     System.out.println("1) Update Date and Time");
                     System.out.println("2) Update Showing Status");
+
+                    System.out.println("0) Return to Previous Menu");
 
                     input = sc.nextInt();
 
@@ -341,17 +345,16 @@ public class ShowtimeApp extends AppInterface {
                             // Update Showing Status
 
                             // Display all available showing status
+                            System.out.print("Select Updated Showing Status: ");
                             for(int i=0; i < ShowTimeStatus.values().length; i++) {
                                 System.out.println((i+1) + ") " + ShowTimeStatus.values()[i]);
                             }
-
                             // Get updated showing status
-                            System.out.print("Select Updated Showing Status: ");
                             int statusUpdate = sc.nextInt();
 
                             showtime.setShowTimeStatus(ShowTimeStatus.values()[statusUpdate-1]);
 
-                            System.out.print("Saved Showing Status.");
+                            System.out.print("Saved Showing Status.\n");
 
                             break;
                         default:

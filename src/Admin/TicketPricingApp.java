@@ -25,7 +25,8 @@ public class TicketPricingApp extends AppInterface{
         System.out.println("4) Ticket Type (e.g., Adult)");
         System.out.println("5) Day of the Week/Holiday");
         System.out.println("\n0) Return to Previous Menu");
-
+        System.out.println("----------------------------------------");
+        System.out.println("Select an option: ");
         while(!sc.hasNextInt())
             System.out.println("Please enter a valid input");
 
@@ -154,7 +155,7 @@ public class TicketPricingApp extends AppInterface{
         for(int i=0; i < CinemaClass.values().length; i++) {
             System.out.println((i+1) + ") " + CinemaClass.values()[i]);
         }
-
+        System.out.println("----------------------------------------------");
         System.out.print("Select Cinema Class to Configure: ");
         while(!sc.hasNextInt())
             System.out.println("Please enter a valid option.");

@@ -27,14 +27,14 @@ public class HolidayApp extends AppInterface {
 
     @Override
     public void runInterface() {
-        System.out.println("------- CONFIGURE CINEPLEX OUTLETS -------\n");
+        System.out.println("-------- CONFIGURE HOLIDAY SETTING -------\n");
 
         System.out.println("1) Create New Holiday");
         //System.out.println("2) Update Holiday");
         System.out.println("2) Delete Holiday");
 
         System.out.println("\n0) Return to Previous Menu");
-        System.out.println("-------------------------------------------");
+        System.out.println("------------------------------------------");
         System.out.println("Select an option: ");
         int input = sc.nextInt();
 

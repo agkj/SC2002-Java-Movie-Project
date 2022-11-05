@@ -150,8 +150,11 @@ public class CineplexApp extends AppInterface {
                         newCinema.setCinemaID(cinemaID);
 
                         //// SET CINEMA CLASS
+                        System.out.print("\n------ CINEMA CLASS -----\n");
                         for(int i = 0; i < CinemaClass.values().length; i++)
                             System.out.println(i+1 + ") " + CinemaClass.values()[i]);
+                        System.out.print("");
+                        System.out.print("Select a cinema class option: ");
 
                         int cinemaClass = sc.nextInt();
 
@@ -170,6 +173,7 @@ public class CineplexApp extends AppInterface {
                          */
 
                         //// SET LAYOUT
+                        System.out.print("\n------ SET LAYOUT OF CINEMA -----\n");
                         System.out.print("Enter number of rows: ");
                         while(!sc.hasNextInt())
                             System.out.println("Please enter a valid number of rows.");
@@ -203,7 +207,16 @@ public class CineplexApp extends AppInterface {
                         do {
                             char rowNum = 65;   // start at A (65), ends at Z (90)
 
+                            // Print how wide is the screen TODO
+
                             // Print Layout
+                            System.out.println("Movie Layout");
+                            System.out.print("  |  ");
+                            for(int k=1; k <= cols; k++) {
+                                // Print seat status
+                                System.out.print("  "+ k +"  ");
+                            }
+                            System.out.println("");
                             for(int i=0; i < rows; i++) {
                                 System.out.print(rowNum++ + " | ");
 

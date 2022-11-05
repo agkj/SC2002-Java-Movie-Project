@@ -1,22 +1,18 @@
 package Admin;
 
 import Entities.*;
+import Util.AppHelper;
 import Util.Serializer;
 
-import javax.swing.text.View;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.time.format.DateTimeFormatter;
 
-public class ShowtimeApp extends AppInterface {
+public class ShowtimeApp extends AppHelper {
     Scanner sc = new Scanner(System.in);
 
     String root = System.getProperty("user.dir");
@@ -24,7 +20,7 @@ public class ShowtimeApp extends AppInterface {
     File path_cineplex;
     File[] movieFiles;
     File[] cineplexFiles;
-    public ShowtimeApp(AppInterface prevApp) {
+    public ShowtimeApp(AppHelper prevApp) {
         super(prevApp);
         //load the moviefiles
         this.load();

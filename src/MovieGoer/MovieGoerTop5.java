@@ -3,14 +3,13 @@ package MovieGoer;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import Admin.AppInterface;
+import Util.AppHelper;
 import Admin.MovieListingApp;
 import Entities.Movie;
 import Util.Serializer;
@@ -18,7 +17,7 @@ import Util.Serializer;
 public class MovieGoerTop5 extends MovieListingApp {
 	
 	
-	public MovieGoerTop5(AppInterface prevApp) {
+	public MovieGoerTop5(AppHelper prevApp) {
 		super(prevApp);
 		// TODO Auto-generated constructor stub
 	}

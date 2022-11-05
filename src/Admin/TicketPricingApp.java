@@ -4,14 +4,15 @@ import Entities.CinemaClass;
 import Entities.DayType;
 import Entities.MovieType;
 import Entities.TicketType;
+import Util.AppHelper;
 import Util.FileReader;
 
 import java.util.Scanner;
-public class TicketPricingApp extends AppInterface{
+public class TicketPricingApp extends AppHelper {
     Scanner sc = new Scanner(System.in);
 
     String root = System.getProperty("user.dir") + "\\data\\ticket_pricing\\";
-    public TicketPricingApp(AppInterface prevApp) {
+    public TicketPricingApp(AppHelper prevApp) {
         super(prevApp);
     }
 

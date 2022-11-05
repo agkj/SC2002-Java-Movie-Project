@@ -1,17 +1,15 @@
 package Admin;
 
 import Entities.*;
+import Util.AppHelper;
 import Util.Serializer;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MovieListingApp extends AppInterface {
+public class MovieListingApp extends AppHelper {
     Scanner sc = new Scanner(System.in);
 
     protected String root = System.getProperty("user.dir");
@@ -19,7 +17,7 @@ public class MovieListingApp extends AppInterface {
     protected File path;
     protected File[] movieFiles;
 
-    public MovieListingApp(AppInterface prevApp) {
+    public MovieListingApp(AppHelper prevApp) {
         super(prevApp);
 
         this.load();
@@ -52,7 +50,7 @@ public class MovieListingApp extends AppInterface {
         switch(input) {
             case 0:
                 // Return to Previous
-                AppInterface prevApp = goBack();
+                AppHelper prevApp = goBack();
                 prevApp.runInterface();
 
                 break;

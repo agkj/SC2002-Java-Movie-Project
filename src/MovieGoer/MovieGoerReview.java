@@ -4,21 +4,20 @@ import java.io.File;
 
 import java.io.IOException;
 
-import Admin.AppInterface;
+import Util.AppHelper;
 import Admin.MovieListingApp;
 import Entities.Movie;
 import Entities.Review;
 import Util.Serializer;
 
 import java.util.ArrayList;
-import Util.Serializer;
 import java.util.Scanner;
 
 public class MovieGoerReview extends MovieListingApp {
 
 	Scanner sc = new Scanner(System.in);
 
-	public MovieGoerReview(AppInterface prevApp) {
+	public MovieGoerReview(AppHelper prevApp) {
 		super(prevApp);
 		// TODO Auto-generated constructor stub
 	}

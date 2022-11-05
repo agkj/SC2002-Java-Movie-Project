@@ -1,18 +1,15 @@
 package Admin;
 
 import Entities.*;
+import Util.AppHelper;
 import Util.Serializer;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Locale;
 import java.util.Scanner;
 
-public class CineplexApp extends AppInterface {
+public class CineplexApp extends AppHelper {
     Scanner sc = new Scanner(System.in);
 
     String root = System.getProperty("user.dir");
@@ -21,7 +18,7 @@ public class CineplexApp extends AppInterface {
     File[] files;
     boolean runArrangement;
 
-    public CineplexApp(AppInterface prevApp) {
+    public CineplexApp(AppHelper prevApp) {
         super(prevApp);
 
         this.load();

@@ -1,11 +1,13 @@
 package Admin;
 
+import Util.AppHelper;
+
 import java.util.Scanner;
 
-public class SettingApp extends AppInterface {
+public class SettingApp extends AppHelper {
     Scanner sc = new Scanner(System.in);
 
-    public SettingApp(AppInterface prevApp) {
+    public SettingApp(AppHelper prevApp) {
         super(prevApp);
     }
 

@@ -1,26 +1,22 @@
 package Admin;
 
 import Entities.Holiday;
-import Util.Serializer;
+import Util.AppHelper;
 import Util.FileReader;
 
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-import java.util.Locale;
 import java.util.Scanner;
 
-public class HolidayApp extends AppInterface {
+public class HolidayApp extends AppHelper {
     Scanner sc = new Scanner(System.in);
 
     String root = System.getProperty("user.dir");
 
     //**** Let Holiday data be stored in a .txt file
 
-    public HolidayApp(AppInterface prevApp) {
+    public HolidayApp(AppHelper prevApp) {
         super(prevApp);
 
     }

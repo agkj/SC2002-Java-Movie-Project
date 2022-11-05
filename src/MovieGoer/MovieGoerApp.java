@@ -15,6 +15,7 @@ import java.util.Scanner;
 import Util.AppHelper;
 import Admin.MovieListingApp;
 import Entities.Cinema;
+import Entities.Cineplex;
 import Entities.Movie;
 import Entities.MovieGoerBooking;
 import Entities.Review;
@@ -204,11 +205,53 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			System.out.println("You are booking " + movieBooked);
 
 			String movieID = movieBooked.getMovieId();
-			
-			
-
 
 			// *******FUNCTIONS TO IMPLEMENT**************\\
+			
+			System.out.println("------- VIEW CINEMAS -------\n");
+			Cineplex selectedCineplex;
+            try {
+            	
+            	File path;
+                File[] files;
+                path = new File(root + "\\data\\cineplex");
+                files = path.listFiles();
+            	
+                // Read all available Cineplex created
+                if (files != null) {
+                    for (int i = 0; i < files.length; i++) {
+                        Cineplex curr = (Cineplex) Serializer.deSerialize(path + "\\" + files[i].getName());
+                        System.out.println((i + 1) + ") " + curr.getVenue());
+                    }
+
+                    System.out.print("\nSelect Cineplex: ");
+
+                    // Get selected Cineplex file and object
+                    int selectedcine = sc.nextInt();
+                    selectedCineplex = (Cineplex) Serializer.deSerialize(path + "\\" + files[selectedcine - 1].getName());
+
+                    ArrayList<Cinema> cinemas = selectedCineplex.getListOfCinemas();
+
+                    for(int i=0; i < cinemas.size(); i++) {
+                        System.out.print((i+1) + ") " + cinemas.get(i) + "\n");
+                        cinemas.get(i).showLayout();
+
+                        System.out.println();
+                    }
+                }
+
+                
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
+			
+			
+			
+			
+			
 
 			// Choose cineplex -> choose cinema
 

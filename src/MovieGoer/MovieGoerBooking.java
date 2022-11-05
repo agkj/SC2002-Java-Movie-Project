@@ -32,10 +32,7 @@ public class MovieGoerBooking implements Serializable {
           // Store all movie .dat files
           movieBookings = path.listFiles();
       }
-    
-    
-    
-	
+
 	//cinema code: yy/mm/dd, hr hr min min
 
 	public MovieGoerBooking() {
@@ -87,7 +84,8 @@ public class MovieGoerBooking implements Serializable {
 	public void getTicketID() {
 		SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyyHHmm");  
 	    Date date = new Date();  
-	    System.out.println("Here is your ticket ID: "+ cinemaCode + formatter.format(date) );
+	    System.out.println("Your ticket id is "+ cinemaCode + formatter.format(date));
+	    
 	   
 	}
 	

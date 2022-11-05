@@ -1,13 +1,13 @@
 
 import Admin.AdminApp;
 import Admin.AppInterface;
-import MovieGoer.MovieGoerApp;
+import MovieGoer.MovieGoerMenu;
 
 import Admin.AdminApp;
 import Admin.AppInterface;
 import Admin.AdminApp;
 import Admin.AppInterface;
-import MovieGoer.MovieGoerApp;
+import MovieGoer.MovieGoerMenu;
 
 import Util.*;
 
@@ -74,7 +74,7 @@ public class MainMenu extends AppInterface {
 				case 2:
 					// go to customer appq
 
-					MovieGoerApp movieGoerApp = new MovieGoerApp();
+					MovieGoerMenu movieGoerApp = new MovieGoerMenu();
 					movieGoerApp.runInterface();
 
 					break;

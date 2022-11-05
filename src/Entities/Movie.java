@@ -47,7 +47,6 @@ public class Movie implements Serializable {
         this.contentRating = rating;
         this.cast = cast;
 
-    }
 
     //// Getter and Setters
 

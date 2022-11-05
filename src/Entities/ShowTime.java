@@ -15,8 +15,9 @@ public class ShowTime implements Serializable {
     private ShowTimeStatus showTimeStatus;
     private Seat[][] showTimeLayout;
 
+    private int numOfAvailSeats;
+
     public ShowTime() {
-        //is this needed here?
         this.showTimeStatus = ShowTimeStatus.Available;
     }
 
@@ -66,5 +67,13 @@ public class ShowTime implements Serializable {
 
     public void setShowTimeLayout(Seat[][] showTimeLayout) {
         this.showTimeLayout = showTimeLayout;
+    }
+
+    public int getNumOfAvailSeats() {
+        return numOfAvailSeats;
+    }
+
+    public void setNumOfAvailSeats(int numOfAvailSeats) {
+        this.numOfAvailSeats = numOfAvailSeats;
     }
 }

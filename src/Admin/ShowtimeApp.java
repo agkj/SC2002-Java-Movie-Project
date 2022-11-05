@@ -52,10 +52,12 @@ public class ShowtimeApp extends AppHelper {
         System.out.println("Select an option: ");
 
         //TODO try catch
-        while(!sc.hasNextInt())
-            System.out.println("Please enter a valid input");
-
         int input = sc.nextInt();
+        boolean check = false;
+        while(!check) {
+            System.out.println("Please enter a valid input");
+            input = sc.nextInt();
+        }
 
         switch(input) {
             case 0:
@@ -110,27 +112,29 @@ public class ShowtimeApp extends AppHelper {
             System.out.println((index) + ") " + selectedMovie.getTitle() + "\n");
 
             // Get Showtime Date and Time
-            System.out.println("Enter a showtime: in 2022-05-05 11:50 format");
+            System.out.print("Enter a showtime in 2022-05-05 11:50 format: ");
 
-            // Validation for DateTime Input
-            boolean showtimeValid = false;
-            while(!showtimeValid) {
-                String showtimeinput;
-                showtimeinput = sc.nextLine();
-                try {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                    LocalDateTime dateTime  = LocalDateTime.parse(showtimeinput, formatter);
+            // Todo Validation for DateTime Input
+            while(sc.hasNextLine()) {
+                String showtimeinput = sc.nextLine();
 
-                    newShowtime.setShowDateTime(dateTime);
-                    showtimeValid = true;
+                boolean showtimeValid = false;
 
-                    //selectedMovie.addShowTime(newShowtime);
-                    //System.out.println("The showtime added is : " + newShowtime.getShowDateTime().toString());
+                while(!showtimeValid) {
+                    try {
 
-                } catch (DateTimeParseException e) {
-                    System.out.println("Please enter a valid showtime.");
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                        LocalDateTime dateTime  = LocalDateTime.parse(showtimeinput, formatter);
+
+                        newShowtime.setShowDateTime(dateTime);
+                        showtimeValid = true;
+
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Please enter a valid showtime.");
+                    }
                 }
             }
+
             System.out.println("\n");
 
             // Assign Cineplex to Showtime
@@ -171,6 +175,9 @@ public class ShowtimeApp extends AppHelper {
 
                 // Initialise Showtime layout to follow Cinema layout
                 newShowtime.setShowTimeLayout(selectedCinema.getLayout());
+
+                // Initialise Num Of Available Seats to follow Cinema
+                newShowtime.setNumOfAvailSeats(selectedCinema.getNumOfSeats());
 
                 selectedMovie.addShowTime(newShowtime);
 

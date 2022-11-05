@@ -2,6 +2,7 @@ package Admin;
 
 import Entities.*;
 import Util.AppHelper;
+import Util.MovieHelper;
 import Util.Serializer;
 
 import java.io.File;
@@ -564,23 +565,28 @@ public class MovieListingApp extends AppHelper {
     //view the top five by ranking movies by TicketSales and Overall reviewers' rating
     //TicketSales (Display the movie title and total sales)
     //Overall reviewers' rating (Display the movie title and overall rating)
-    public void viewTopFive(){ //TODO havent complete the top 5 yet
+    public void viewTopFive() {
         System.out.println("------- VIEW TOP 5 MOVIES -------\n");
-        System.out.println("1) View by TicketSales");
+        System.out.println("1) View by Ticket Sales");
         System.out.println("2) View by Overall Reviewers' Rating");
 
         int choice;
         System.out.println("\nEnter your choice: ");
         choice = sc.nextInt();
 
+        MovieHelper movieHelper = new MovieHelper();
+
         switch(choice){
             case 1:
-                //movieFiles
+                // Show Top 5 by Ticket Sales
+                movieHelper.getTopListings(1);
+                runInterface();
                 break;
             case 2:
-
+                // Show Top 5 by Ratings
+                movieHelper.getTopListings(2);
+                runInterface();
                 break;
-
             default:
                 runInterface();
                 break;

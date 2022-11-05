@@ -41,24 +41,15 @@ public class MovieGoerTop5 extends MovieListingApp {
                 for(int i=0; i < movieFiles.length; i++) {
                     Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
                     mapOfMovies.put(curr.getTitle(), curr.getOverallRating());
-                    
-
-                    
                 }
             }
             List<Map.Entry<String, Double>> list = new ArrayList<>(mapOfMovies.entrySet());
-            
-            
+
             Collections.sort(list,new Comparator<Map.Entry<String, Double>>() {
-            	
-            	
-            	
             	public int compare (Map.Entry<String, Double> e1, Map.Entry<String,Double> e2) {
             		
             		return Double.compare(e1.getValue(), e2.getValue());
             	}
-            	
-            	
 			});
             
             

@@ -1,29 +1,52 @@
 package MovieGoer;
 
+import java.io.File;
+import java.io.Serial;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;  
 import java.util.Date;  
 
 public class MovieGoerBooking implements Serializable {
 	
+	@Serial
+    private static final long serialVersionUID = 2002;
+	
 	protected String name;
-	protected int mobileNumber;
+	protected String mobileNumber;
 	protected String email;
 	protected String cinemaCode;
 	protected String ticketID;
 	
 	
+	
+	String root = System.getProperty("user.dir");
+
+    protected File path;
+    protected File[] movieBookings;
+    
+  //find a way to store all this into a separate dat.file
+  	public void load() {
+          // Try to read all movie .dat files in movie directory
+          path = new File(System.getProperty("user.dir") + "\\data\\bookings");
+
+          // Store all movie .dat files
+          movieBookings = path.listFiles();
+      }
+    
+    
+    
+	
 	//cinema code: yy/mm/dd, hr hr min min
 
 	public MovieGoerBooking() {
 		this.name = null;
-		this.mobileNumber = 0;
+		this.mobileNumber = null;
 		this.email = null;
 		this.cinemaCode = null;
 	}
 	
 	
-	public void MovieGoerBooking(String name, int mobileNumber, String email, String cinemaCode) {
+	public MovieGoerBooking(String name, String mobileNumber, String email, String cinemaCode) {
 		this.name = name;
 		this.mobileNumber = mobileNumber;
 		this.email = email;
@@ -38,7 +61,7 @@ public class MovieGoerBooking implements Serializable {
 		return this.name;
 	}
 	
-	public int getMobileNumber() {
+	public String getMobileNumber() {
 		return this.mobileNumber;
 	}
 	public String getEmail() {
@@ -49,7 +72,7 @@ public class MovieGoerBooking implements Serializable {
 	}
 	
 	
-	public void setMobileNumber(int mobileNumber) {
+	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
 	
@@ -61,10 +84,20 @@ public class MovieGoerBooking implements Serializable {
 		this.cinemaCode = cinemaCode;
 	}
 	
-	public String setTicketID() {
+	public void getTicketID() {
 		SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyyHHmm");  
 	    Date date = new Date();  
-	     
-	    return this.cinemaCode + formatter.format(date) ;
+	    System.out.println("Here is your ticket ID: "+ cinemaCode + formatter.format(date) );
+	   
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

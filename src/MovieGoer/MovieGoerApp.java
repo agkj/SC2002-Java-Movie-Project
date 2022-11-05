@@ -1,8 +1,10 @@
 package MovieGoer;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import MovieGoer.AppInterface;
+import Util.Serializer;
 
 public class MovieGoerApp {
 
@@ -22,7 +24,7 @@ public class MovieGoerApp {
 		System.out.println("1) View movies"); // ->select movies -> booking ->check seat availability
 		System.out.println("2) Rate movies");
 		System.out.println("3) List top 5 movies");
-		System.out.println("4) Check booking history"); //based on booking id/movie code
+		System.out.println("4) Make a booking"); //based on booking id/movie code
 		System.out.println("5) Return to main menu");
 		
 		
@@ -34,7 +36,7 @@ public class MovieGoerApp {
 		
 		case 1:
 			//View movies
-			;
+			
 			movieReview.viewMovie();
 			
 			break;
@@ -51,13 +53,14 @@ public class MovieGoerApp {
 			break;
 		case 4:
 			//Make booking
-			MovieGoerBooking movieBooking = new MovieGoerBooking();
+			
 			System.out.println("-------Make a Booking--------");
 			
-			//list available movies
+			//list available movies, user select movie 
 			System.out.println("Choose a movie to book");
 			
-			//Choose cinema
+			
+			//Choose cineplex -> choose cinema
 			
 			//Choose timing 
 			
@@ -66,8 +69,33 @@ public class MovieGoerApp {
 			
 			
 			System.out.println("Enter your name: ");
-			System.out.println("Enter your email: ");
+			String customerName = sc.next();
+			
 			System.out.println("Enter your phone number: ");
+			String customerPhone = sc.next();
+			
+			System.out.println("Enter your email: ");
+			String customerEmail = sc.next();
+			
+			
+			MovieGoerBooking movieBooking = new MovieGoerBooking(customerName, customerPhone, customerEmail, "cd");
+			String root = System.getProperty("user.dir");
+			
+			try {
+	            Serializer.serialize(root + "\\data\\bookings\\" + "cd" + ".dat", movieBooking);
+
+	            // Reload Movies
+	            movieBooking.load();
+
+	            
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+			
+			
+			
+			
+			
 		
 			break;
 			

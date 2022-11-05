@@ -16,10 +16,9 @@ public class ShowtimeApp extends AppHelper {
     Scanner sc = new Scanner(System.in);
 
     String root = System.getProperty("user.dir");
-    File path;
-    File path_cineplex;
-    File[] movieFiles;
-    File[] cineplexFiles;
+    File path, path_cineplex, path_cinema;
+    File[] movieFiles, cineplexFiles, cinemaFiles;
+
     public ShowtimeApp(AppHelper prevApp) {
         super(prevApp);
         //load the moviefiles
@@ -33,8 +32,10 @@ public class ShowtimeApp extends AppHelper {
         movieFiles = path.listFiles();
 
         path_cineplex = new File(System.getProperty("user.dir") + "\\data\\cineplex");
-
         cineplexFiles = path_cineplex.listFiles();
+
+        path_cinema = new File(System.getProperty("user.dir") + "\\data\\cinema");
+        cinemaFiles = path_cinema.listFiles();
     }
 
 
@@ -122,29 +123,27 @@ public class ShowtimeApp extends AppHelper {
             System.out.println((index) + ") " + selectedMovie.getTitle() + "\n");
 
             // Get Showtime Date and Time
-            System.out.print("Enter a showtime in 2022-05-05 11:50 format: ");
+            System.out.println("Enter a showtime: in 2022-05-05 11:50 format");
 
-            // Todo Validation for DateTime Input
-            while(sc.hasNextLine()) {
-                String showtimeinput = sc.nextLine();
+            // Validation for DateTime Input
+            boolean showtimeValid = false;
+            while(!showtimeValid) {
+                String showtimeinput;
+                showtimeinput = sc.nextLine();
+                try {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                    LocalDateTime dateTime  = LocalDateTime.parse(showtimeinput, formatter);
 
-                boolean showtimeValid = false;
+                    newShowtime.setShowDateTime(dateTime);
+                    showtimeValid = true;
 
-                while(!showtimeValid) {
-                    try {
+                    //selectedMovie.addShowTime(newShowtime);
+                    //System.out.println("The showtime added is : " + newShowtime.getShowDateTime().toString());
 
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                        LocalDateTime dateTime  = LocalDateTime.parse(showtimeinput, formatter);
-
-                        newShowtime.setShowDateTime(dateTime);
-                        showtimeValid = true;
-
-                    } catch (DateTimeParseException e) {
-                        System.out.println("Please enter a valid showtime.");
-                    }
+                } catch (DateTimeParseException e) {
+                    System.out.println("Please enter a valid showtime.");
                 }
             }
-
             System.out.println("\n");
 
             // Assign Cineplex to Showtime
@@ -250,13 +249,16 @@ public class ShowtimeApp extends AppHelper {
                 String selectedCineplexId = selectedCineplex.getCineplexID();
 
                 //if the choosen ID is the same as the CineplexID
-                System.out.println("Available Showtimes at " + selectedCineplex.getVenue() + "for " + selectedMovie.getTitle() + ": "); //TODO i think here can add the location also and showtime status and seat availability
+                System.out.println("Available Showtimes at " + selectedCineplex.getVenue() + " for " + selectedMovie.getTitle() + ": \n");
 
                 for(int i = 0; i <  selectedMovie.getShowTimes().size(); i++){
                     ShowTime currShowTime = selectedMovie.getShowTimes().get(i);
 
                     if(currShowTime.getCineplexID().equals(selectedCineplexId)) {
-                        System.out.println("Cinema Hall: " + currShowTime.getCinemaID());
+
+                        Cinema selectedCinema = (Cinema) Serializer.deSerialize(path_cinema + "\\" + currShowTime.getCinemaID() + ".dat");
+
+                        System.out.println("Cinema Hall " + currShowTime.getCinemaID() + " (" + selectedCinema.getCinemaClass() + " Class)");
                         System.out.println("Time: " + currShowTime.getShowDateTime() + " (" + currShowTime.getShowTimeStatus() + ")");
                         System.out.println("No. of Seats Available: " + currShowTime.getNumOfAvailSeats());
                         System.out.println("Seating Layout: ");

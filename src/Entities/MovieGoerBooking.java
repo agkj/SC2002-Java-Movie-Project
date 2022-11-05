@@ -1,4 +1,4 @@
-package MovieGoer;
+package Entities;
 
 import java.io.File;
 import java.io.Serial;
@@ -88,9 +88,7 @@ public class MovieGoerBooking implements Serializable {
 	    totalTickets++;
 	    return cinemaCode + formatter.format(date);
 	    //System.out.println("Your ticket id is "+ cinemaCode + formatter.format(date));
-	    
-	    
-	   
+
 	}
 	
 	

@@ -11,9 +11,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import Admin.AppInterface;
+
+import Util.AppHelper;
 import Admin.MovieListingApp;
+import Entities.Cinema;
 import Entities.Movie;
+import Entities.MovieGoerBooking;
 import Entities.Review;
 import Entities.Ticket;
 import Util.Serializer;
@@ -22,7 +25,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 
 	Scanner sc = new Scanner(System.in);
 
-	public MovieGoerApp(AppInterface prevApp) {
+	public MovieGoerApp(AppHelper prevApp) {
 		super(prevApp);
 		// TODO Auto-generated constructor stub
 	}
@@ -201,6 +204,8 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			System.out.println("You are booking " + movieBooked);
 
 			String movieID = movieBooked.getMovieId();
+			
+			
 
 
 			// *******FUNCTIONS TO IMPLEMENT**************\\

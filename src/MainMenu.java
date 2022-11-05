@@ -2,7 +2,7 @@
 import Admin.AdminApp;
 import Util.AppHelper;
 import MovieGoer.MovieGoerApp;
-
+import MovieGoer.MovieGoerMenu;
 import Util.*;
 
 import java.util.InputMismatchException;
@@ -64,7 +64,7 @@ public class MainMenu extends AppHelper {
 				case 2:
 					// go to MovieGoer application
 
-					MovieGoerApp movieGoerApp = new MovieGoerApp();
+					MovieGoerMenu movieGoerApp = new MovieGoerMenu();
 					movieGoerApp.runInterface();
 
 					break;

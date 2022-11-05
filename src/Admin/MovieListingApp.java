@@ -526,6 +526,8 @@ public class MovieListingApp extends AppHelper {
 
             selectedMovie.setShowingStatus(ShowingStatus.End_Of_Showing);
 
+            //show the end of showing status
+            System.out.println("Showing status has been set to : " + ShowingStatus.End_Of_Showing.toString());
             // Save Movie File
             try {
                 Serializer.serialize(path + "\\" + movieFiles[indexToUpdate].getName(), selectedMovie);

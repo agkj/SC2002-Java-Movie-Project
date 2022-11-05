@@ -298,5 +298,20 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 		}
 
 	}
+	public void movieViewBooking() {
+		System.out.println("Enter your booking Id: ");
+		String movieId = sc.nextLine();
+		MovieGoerBooking movieBooking = null;
+		try { // movie id
+			movieBooking  = (MovieGoerBooking) Serializer.deSerialize(root + "\\data\\bookings\\" + movieId + ".dat");
+
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		movieBooking.getInfo();
+	}
+
 
 }

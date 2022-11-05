@@ -65,6 +65,21 @@ public class ShowTime implements Serializable {
         return showTimeLayout;
     }
 
+    public void showLayout() {
+        char rowNum = 65;   // start at A (65), ends at Z (90)
+
+        for(int i=0; i < showTimeLayout.length; i++) {
+            System.out.print(rowNum++ + " | ");
+
+            for(int j=0; j < showTimeLayout[0].length; j++) {       // showTimeLayout[0] can be any index, just need to get the number of cols
+                // Print seat status
+                System.out.print(" ["+ showTimeLayout[i][j].getSeatStatus() +"] ");
+            }
+
+            System.out.print("\n");
+        }
+    }
+
     public void setShowTimeLayout(Seat[][] showTimeLayout) {
         this.showTimeLayout = showTimeLayout;
     }

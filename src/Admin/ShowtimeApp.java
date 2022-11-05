@@ -52,12 +52,22 @@ public class ShowtimeApp extends AppHelper {
         System.out.println("Select an option: ");
 
         //TODO try catch
-        int input = sc.nextInt();
+        //int input = sc.nextInt();
+
+        /*
         boolean check = false;
         while(!check) {
             System.out.println("Please enter a valid input");
             input = sc.nextInt();
         }
+
+         */
+        while(!sc.hasNextInt()) {
+            System.out.println("Please enter a valid input");
+
+        }
+
+        int input = sc.nextInt();
 
         switch(input) {
             case 0:
@@ -240,7 +250,7 @@ public class ShowtimeApp extends AppHelper {
                 String selectedCineplexId = selectedCineplex.getCineplexID();
 
                 //if the choosen ID is the same as the CineplexID
-                System.out.println("Available Showtimes for: " + selectedMovie.getTitle()); //TODO i think here can add the location also and showtime status and seat availability
+                System.out.println("Available Showtimes at " + selectedCineplex.getVenue() + "for " + selectedMovie.getTitle() + ": "); //TODO i think here can add the location also and showtime status and seat availability
 
                 for(int i = 0; i <  selectedMovie.getShowTimes().size(); i++){
                     ShowTime currShowTime = selectedMovie.getShowTimes().get(i);
@@ -248,6 +258,9 @@ public class ShowtimeApp extends AppHelper {
                     if(currShowTime.getCineplexID().equals(selectedCineplexId)) {
                         System.out.println("Cinema Hall: " + currShowTime.getCinemaID());
                         System.out.println("Time: " + currShowTime.getShowDateTime() + " (" + currShowTime.getShowTimeStatus() + ")");
+                        System.out.println("No. of Seats Available: " + currShowTime.getNumOfAvailSeats());
+                        System.out.println("Seating Layout: ");
+                        currShowTime.showLayout();
 
                         System.out.print("\n");
                     }

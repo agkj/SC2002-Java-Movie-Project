@@ -1,9 +1,14 @@
 
 import Admin.AdminApp;
 import Admin.AppInterface;
+import MovieGoer.MovieGoerApp;
+
+import Admin.AdminApp;
+import Admin.AppInterface;
 import Admin.AdminApp;
 import Admin.AppInterface;
 import MovieGoer.MovieGoerApp;
+
 import Util.*;
 
 import java.util.InputMismatchException;

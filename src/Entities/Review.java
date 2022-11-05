@@ -14,6 +14,11 @@ public class Review implements Serializable {
 
     double reviewRating;        // rating from 1-5
     String reviewContent;        // review in text
+    
+    public Review() {
+    	this.reviewRating = 0;
+    	this.reviewContent = null;
+    }
 
     public Review(String reviewId, double reviewRating, String reviewContent) {
         this.reviewId = reviewId;
@@ -47,4 +52,12 @@ public class Review implements Serializable {
     public void setReviewContent(String reviewContent) {
         this.reviewContent = reviewContent;
     }
+    @Override
+    public String toString() {
+        return  "\n" +
+        		"  Review [" + reviewId + "]:" +
+                " rating= " + reviewRating +
+                ", review=" + reviewContent + " ";
+    }
+
 }

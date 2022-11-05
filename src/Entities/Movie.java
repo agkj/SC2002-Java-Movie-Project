@@ -3,6 +3,7 @@ package Entities;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
+import Entities.MovieType;
 
 public class Movie implements Serializable {
     @Serial
@@ -26,6 +27,7 @@ public class Movie implements Serializable {
 
     public Movie() {
         // Initialise to Empty and/or 0
+
         this.overallRating = 0;
         this.reviews = new ArrayList<Review>();
         this.showTimes = new ArrayList<ShowTime>();
@@ -34,6 +36,7 @@ public class Movie implements Serializable {
     }
 
     public Movie(String title, String synopsis, String director, MovieType movieType, MovieGenre genre, ShowingStatus showingStatus, int runtime, ContentRating rating, ArrayList<String> cast) {
+
         this.title = title;
         this.synopsis = synopsis;
         this.director = director;
@@ -44,13 +47,13 @@ public class Movie implements Serializable {
         this.contentRating = rating;
         this.cast = cast;
 
-
         // Initialise to Empty and/or 0
         this.overallRating = 0;
         this.reviews = new ArrayList<Review>();
         this.showTimes = new ArrayList<ShowTime>();
         this.ticketsSold = 0;
         this.totalSales = 0;
+
     }
 
     //// Getter and Setters

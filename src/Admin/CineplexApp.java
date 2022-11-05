@@ -251,10 +251,9 @@ public class CineplexApp extends AppHelper {
                         newCinema.setLayout(seats);
 
                         // Get number of seats
-                        // TODO not calculating correctly
                         int numOfSeats = 0;
                         for(int i=0; i < seats.length; i++) {
-                            for(int j=0; j < seats.length; j++) {
+                            for(int j=0; j < seats[0].length; j++) {
                                 if(seats[i][j].getSeatStatus() == 0)
                                     numOfSeats++;
                             }

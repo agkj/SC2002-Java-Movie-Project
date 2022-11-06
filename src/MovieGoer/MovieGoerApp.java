@@ -48,10 +48,12 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 					System.out.println("  Past and Present Reviews: " + curr.getReviews());
 				}
 			}
+			System.out.println("--------- END OF MOVIE LISTING ---------\n");
 
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		goBack().runInterface();
 	}
 
 	public void movieRate() {
@@ -104,6 +106,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			System.out.println("\n------- ERROR: MOVIE NOT IN RANGE -------\n");
 			e.printStackTrace();
 		}
+		goBack().runInterface();
 
 	}
 
@@ -148,6 +151,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		goBack().runInterface();
 
 	}
 
@@ -177,11 +181,12 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			for (Map.Entry<String, Integer> e : list) {
 				System.out.println(e.getKey() + " Tickets sold: " + e.getValue());
 			}
-			System.out.println("*********************************************");
+			System.out.println("************************************************************");
 
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		goBack().runInterface();
 	}
 
 	public void movieBooking() {
@@ -194,15 +199,26 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			// Read all available Movies
 			for (int i = 0; i < movieFiles.length; i++) {
 				Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
-				System.out.println((i + 1) + ") " + curr.getTitle());
+				System.out.println((i + 1) + ") " + curr.getTitle() + " ("+curr.getShowingStatus() + ")"); //TODO need to show the showing status to book , if End of showing this wont be here (maybe need condition check)
 			}
 			System.out.println("Choose a movie to book");
 			int movieChoice = sc.nextInt() - 1;
 
 			File selected = movieFiles[movieChoice];
+			//movieBooked is an object
 			Movie movieBooked = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[movieChoice].getName());
 
-			System.out.println("You are booking " + movieBooked);
+			System.out.println("You are booking for Movie Title:" + movieBooked.getTitle()); //TODO check again the correct layout
+			System.out.println("Movie ID: " + movieBooked.getMovieId());
+			System.out.println("Synopsis: " + movieBooked.getSynopsis());
+			System.out.println("Director: " + movieBooked.getDirector());
+			System.out.println("Genre: " + movieBooked.getGenre());
+			System.out.println("Showing Status: " + movieBooked.getShowingStatus());
+			System.out.println("Runtime: " + movieBooked.getRuntime());
+			System.out.println("ContentRating: " + movieBooked.getContentRating());
+			System.out.println("OverallRating: " + movieBooked.getOverallRating());
+			System.out.println("Cast: " + movieBooked.getCast());
+			System.out.println("Reviews: " + movieBooked.getReviews());
 
 			String movieID = movieBooked.getMovieId();
 
@@ -247,12 +263,6 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                 e.printStackTrace();
             }
 
-			
-			
-			
-			
-			
-
 			// Choose cineplex -> choose cinema
 
 			// Choose ticketype
@@ -290,12 +300,20 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			}
 			
 			movieBooking.getTicketID();
+			//TODO print out all the booking details
+			System.out.println("-------------------------------");
+			System.out.println("Thank you for using MOBLIMA App!");
+			System.out.println("-------------------------------");
+			System.out.println("These are your booking details: !");
 
 		}
 
 		catch (Exception e) {
 			System.out.println("Select an option");
 		}
+
+
+		goBack().runInterface();
 
 	}
 	public void movieViewBooking() {
@@ -311,6 +329,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 		}
 
 		movieBooking.getInfo();
+		goBack().runInterface();
 	}
 
 

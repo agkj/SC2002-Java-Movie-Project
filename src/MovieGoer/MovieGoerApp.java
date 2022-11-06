@@ -208,7 +208,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			//movieBooked is an object
 			Movie movieBooked = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[movieChoice].getName());
 
-			System.out.println("You are booking for Movie Title:" + movieBooked.getTitle()); //TODO check again the correct layout
+			System.out.println("You are booking\n Movie Title:" + movieBooked.getTitle()); //TODO check again the correct layout
 			System.out.println("Movie ID: " + movieBooked.getMovieId());
 			System.out.println("Synopsis: " + movieBooked.getSynopsis());
 			System.out.println("Director: " + movieBooked.getDirector());
@@ -254,17 +254,24 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 
                         System.out.println();
                     }
+					// Choose cineplex -> choose cinema
+					//System.out.println("Select a cinema (index): ");
+					//int cinemaIndex = sc.nextInt();
+					//cinemas.get(cinemaIndex).getCinemaID();
+
                 }
 
-                
-            } catch (IOException e) {
+
+
+			} catch (IOException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-
 			// Choose cineplex -> choose cinema
-			System.out.println("Select a cinema: ");
+			System.out.println("Select a cinema (index): ");
+			//int cinemaIndex = sc.nextInt();
+			//cinemas.get(cinemaIndex).getCinemaID();
 
 			// Choose ticketype
 			System.out.println("Select a tickettype: ");
@@ -278,7 +285,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			System.out.println("These are the available seats: ");
 
 			// choose and update seats -> call from admin side
-			System.out.println("Select the seats: ");//todo a loop to book multiple seats?
+			System.out.println("Select the seats: ");//todo a loop to book multiple seats? or should our app only allow one ticket booking at a time?
 
 			System.out.println("Enter your name: ");
 			String customerName = sc.next();
@@ -289,7 +296,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			System.out.println("Enter your email: ");
 			String customerEmail = sc.next();
 
-			System.out.println("How many tickets are you buying: ");
+			System.out.println("How many tickets are you buying: "); //TODO i not sure about this but isnt the number of seats choosen == the number of tickets?
 			int customerTickets = sc.nextInt();
 
 			MovieGoerBooking movieBooking = new MovieGoerBooking(customerName, customerPhone, customerEmail, movieID);

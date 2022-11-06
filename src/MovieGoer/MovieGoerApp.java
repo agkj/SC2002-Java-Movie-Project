@@ -264,14 +264,21 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
             }
 
 			// Choose cineplex -> choose cinema
+			System.out.println("Select a cinema: ");
 
 			// Choose ticketype
+			System.out.println("Select a tickettype: ");
 
 			// Choose show timing -> call from admin side
+			System.out.println("These are the available timings: ");
+
+			System.out.println("Select a show time: ");
 
 			// show available seats -> call from admin side
+			System.out.println("These are the available seats: ");
 
 			// choose and update seats -> call from admin side
+			System.out.println("Select the seats: ");//todo a loop to book multiple seats?
 
 			System.out.println("Enter your name: ");
 			String customerName = sc.next();
@@ -316,9 +323,13 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 		goBack().runInterface();
 
 	}
-	public void movieViewBooking() {
-		System.out.println("Enter your booking Id: ");
-		String movieId = sc.nextLine();
+	public void movieViewBooking() { //TODO should viewbook be saved under the mobile number and email?
+		System.out.println(	"---------- SEARCH BOOKING HISTORY ----------\n" +
+				"1) Check using Email Address					    		\n" +
+				"2) Check using Mobile Number 					    		\n" +
+				" \n0) Back to CustomerApp                          \n"+
+				"-------------------------------------------");
+		String movieId = sc.nextLine(); //todo shouldnt use movie id
 		MovieGoerBooking movieBooking = null;
 		try { // movie id
 			movieBooking  = (MovieGoerBooking) Serializer.deSerialize(root + "\\data\\bookings\\" + movieId + ".dat");

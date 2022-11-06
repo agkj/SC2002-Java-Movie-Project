@@ -54,7 +54,7 @@ public class MainMenu extends AppHelper {
 						adminApp.runInterface();
 
 					} else {
-						System.out.println("--------------");
+						System.out.println("------------------------");
 						System.out.println("Wrong username or password, please try again");
 
 					}

@@ -1,2 +1,2 @@
-Standard,8.50
+Standard,10.0
 Booking,2

@@ -86,9 +86,6 @@ public class MovieGoerBooking implements Serializable {
 		Date date = new Date();
 		totalTickets++;
 		return cinemaCode + formatter.format(date);
-		// System.out.println("Your ticket id is "+ cinemaCode +
-		// formatter.format(date));
-
 	}
 
 }

@@ -19,6 +19,7 @@ import Entities.Cineplex;
 import Entities.Movie;
 import Entities.MovieGoerBooking;
 import Entities.Review;
+import Entities.ShowTime;
 import Entities.Ticket;
 import Util.Serializer;
 
@@ -238,6 +239,19 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 
                         System.out.println();
                     }
+                    
+                    System.out.print("Select a cinema: ");
+                    int cinemaChoice =sc.nextInt()-1;
+                    
+                    System.out.println(cinemas.get(cinemaChoice));
+                    cinemas.get(cinemaChoice).showLayout();
+                    
+                    System.out.println("Select a seat number: ");
+                    String seatNum = sc.next();
+                    
+                    ShowTime showTime = new ShowTime();
+                    showTime.bookSeat(seatNum);
+                    
                 }
 
                 
@@ -246,16 +260,8 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
+            
 
-			
-			
-			
-			
-			
-
-			// Choose cineplex -> choose cinema
-
-			// Choose ticketype
 
 			// Choose show timing -> call from admin side
 

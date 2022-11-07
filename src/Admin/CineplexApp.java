@@ -290,7 +290,7 @@ public class CineplexApp extends AppHelper {
                 break;
             case 3:
                 // View cinemas
-                System.out.println("------- VIEW CINEMAS -------\n");
+                System.out.println("------- VIEW CINEPLEX -------\n"); //TODO this should be view cineplex or cinema?
 
                 try {
                     // Read all available Cineplex created
@@ -325,7 +325,7 @@ public class CineplexApp extends AppHelper {
                 break;
             case 4:
                 // Delete Cinema
-                System.out.println("------- DELETE CINEMA -------\n");
+                System.out.println("------- DELETE Cineplex -------\n");
 
                 try {
                     // Read all available Cineplex created

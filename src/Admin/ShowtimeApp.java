@@ -123,7 +123,8 @@ public class ShowtimeApp extends AppHelper {
             System.out.println((index) + ") " + selectedMovie.getTitle() + "\n");
 
             // Get Showtime Date and Time
-            System.out.println("Enter a showtime: in 2022-05-05 11:50 format");
+            System.out.println("Enter a showtime: in YYYY-MM-DD HH:MM format. eg: 2022-04-21 13:00");
+            
 
             // Validation for DateTime Input
             boolean showtimeValid = false;

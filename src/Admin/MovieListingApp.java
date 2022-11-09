@@ -265,6 +265,7 @@ public class MovieListingApp extends AppHelper {
                     System.out.println("  Cast: " + curr.getCast());
                     System.out.println("  Overall Ratings: " + curr.getOverallRating());
                     System.out.println("  Past and Present Reviews: " + curr.getReviews());
+                    System.out.println("-------------------------------------------------------------------");
                 }
             }
 
@@ -533,7 +534,7 @@ public class MovieListingApp extends AppHelper {
             try {
                 Serializer.serialize(path + "\\" + movieFiles[indexToUpdate].getName(), selectedMovie);
 
-                System.out.println("------- SUCCESSFULLY REMOVED MOVIE LISTING -------\n");
+                System.out.println("------- MOVIE SET TO END OF SHOWING -------\n");
 
                 // Reload movies
                 this.load();

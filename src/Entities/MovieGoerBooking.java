@@ -24,6 +24,7 @@ public class MovieGoerBooking implements Serializable {
 	protected String selectedMovie;
 	protected String cinemaCode;
 	protected LocalDateTime	showDateTime;
+	protected String seatNum;
 	protected ArrayList<Ticket> listOfTickets = new ArrayList<Ticket>();
 	
 	/*
@@ -55,7 +56,7 @@ public class MovieGoerBooking implements Serializable {
 	public MovieGoerBooking() {}
 	
 	public MovieGoerBooking(String name, String mobileNumber, String email, String selectedMovie, String cinemaCode,
-			LocalDateTime showDateTime) {
+			LocalDateTime showDateTime, String seatNum) {
 		super();
 		this.name = name;
 		this.mobileNumber = mobileNumber;
@@ -63,6 +64,7 @@ public class MovieGoerBooking implements Serializable {
 		this.selectedMovie = selectedMovie;
 		this.cinemaCode = cinemaCode;
 		this.showDateTime = showDateTime;
+		this.seatNum = seatNum;
 	}
 	
 	
@@ -115,6 +117,14 @@ public class MovieGoerBooking implements Serializable {
 		this.showDateTime = showDateTime;
 	}
 	
+	public String getSeatNum() {
+		return this.seatNum;
+	}
+	public void setSeatNum(String seatNum) {
+		this.seatNum = seatNum;
+	}
+	
+	
 	public void addTicket(Ticket ticket) {
 		this.listOfTickets.add(ticket);
 	}
@@ -130,7 +140,7 @@ public class MovieGoerBooking implements Serializable {
 	public String getTicketID() {
 		SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyyHHmm");
 		Date date = new Date();
-		totalTickets++;
+		this.totalTickets++;
 		return cinemaCode + formatter.format(date);
 		// System.out.println("Your ticket id is "+ cinemaCode +
 		// formatter.format(date));

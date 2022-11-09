@@ -42,7 +42,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 	}
 
 	public void movieView() {
-		System.out.println("------- VIEW MOVIE LISTING -------\n");
+		System.out.println("-------------- VIEW MOVIE LISTING --------------\n");
 
 		try {
 			// Read all available Movies
@@ -56,10 +56,11 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 					System.out.println("  Cast: " + curr.getCast());
 					System.out.println("  Overall Ratings: " + curr.getOverallRating());
 					System.out.println("  Past and Present Reviews: " + curr.getReviews());
+					System.out.println("-------------------------------------------------------------------");
 				}
 			}
 
-			System.out.println("--------- END OF MOVIE LISTING ---------\n");
+			
 
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
@@ -71,14 +72,15 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 		try {
 			// Read all available Movies
 			for (int i = 0; i < movieFiles.length; i++) {
-				Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
+				Movie curr = (Movie) Serializer.deSerialize(movieFiles[i].getAbsolutePath());
 				System.out.println((i + 1) + ") " + curr.getTitle());
 			}
 
 			System.out.print("Enter Movie Index to Update: ");
 			int index = sc.nextInt() - 1;
+			
 			File selected = movieFiles[index];
-			Movie movieToUpdate = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[index].getName());
+			Movie movieToUpdate = (Movie) Serializer.deSerialize(movieFiles[index].getAbsolutePath());
 			ArrayList<Review> review = movieToUpdate.getReviews();
 			double overallRating = movieToUpdate.getOverallRating();
 			overallRating = overallRating * review.size();
@@ -146,7 +148,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 
 			Collections.sort(list, new Comparator<Map.Entry<String, Double>>() {
 
-				public int compare(Map.Entry<String, Double> e1, Map.Entry<String, Double> e2) {
+				public int compare(Map.Entry<String, Double> e2, Map.Entry<String, Double> e1) {
 
 					return Double.compare(e1.getValue(), e2.getValue());
 				}
@@ -155,7 +157,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 
 			System.out.println("*********Here are the top 5 movies!*********");
 			for (Map.Entry<String, Double> e : list) {
-				System.out.println(e.getKey() + " Rating: " + e.getValue());
+				System.out.println("Movie: " + e.getKey() + "\t\t Rating: " + e.getValue() + " Stars");
 			}
 			System.out.println("*********************************************");
 
@@ -226,20 +228,21 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 
 			// Read all available Movies
 			for (int i = 0; i < movieFiles.length; i++) {
-				Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
+				Movie curr = (Movie) Serializer.deSerialize(movieFiles[i].getAbsolutePath());
 				System.out.println((i + 1) + ") " + curr.getTitle());
 			}
 			System.out.println("Choose a movie to book");
 			int movieChoice = sc.nextInt() - 1;
-
+			
 
 			File selected = movieFiles[movieChoice];
-			Movie selectedMovie = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[movieChoice].getName());
-
-			System.out.println("You are booking " + selectedMovie);
+			//Movie selectedMovie = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[movieChoice].getName());
+			Movie selectedMovie = (Movie) Serializer.deSerialize(movieFiles[movieChoice].getAbsolutePath());
+			System.out.println("You are booking " + selectedMovie.getTitle());
 
 			String movieID = selectedMovie.getMovieId();
-			
+			String movieName = selectedMovie.getTitle();
+
 			newBooking.setSelectedMovie(movieID);
 
 			// *******FUNCTIONS TO IMPLEMENT**************\\
@@ -256,7 +259,8 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                 // Read all available Cineplex created
                 if (files != null) {
                     for (int i = 0; i < files.length; i++) {
-                        Cineplex curr = (Cineplex) Serializer.deSerialize(path + "\\" + files[i].getName());
+                      //  Cineplex curr = (Cineplex) Serializer.deSerialize(path + "\\" + files[i].getName());
+                        Cineplex curr = (Cineplex) Serializer.deSerialize(files[i].getAbsolutePath());
                         System.out.println((i + 1) + ") " + curr.getVenue());
                     }
 
@@ -264,8 +268,8 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 
                     // Get selected Cineplex file and object
                     int selectedcine = sc.nextInt();
-                    selectedCineplex = (Cineplex) Serializer.deSerialize(path + "\\" + files[selectedcine - 1].getName());
-                    
+                  //  selectedCineplex = (Cineplex) Serializer.deSerialize(path + "\\" + files[selectedcine - 1].getName());
+                    selectedCineplex = (Cineplex) Serializer.deSerialize(files[selectedcine -1].getAbsolutePath());
                     // Show list of showtimes from movieBooked
                     ArrayList<ShowTime> listOfShowtimes = selectedMovie.getShowTimes();
                     ArrayList<ShowTime> filteredShowtimes = new ArrayList<ShowTime>();
@@ -314,7 +318,9 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                         System.out.println("Total Ticket Price: $" + price);
                         
                         newBooking.addTicket(newTicket);
-                    	
+                        //MovieGoerBooking userBooking = new MovieGoerBooking(customerName,customerPhone,customerEmail,movieName, movieID, null,seatNum);
+
+                        
                     	customerTickets--; //TODO increment counter total ticket sold and total sales
                     }
                     
@@ -330,11 +336,13 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
     			
     			System.out.println("Thank you for booking with us.");
     			System.out.println("Here are your booking details: ");
+
+    			
     			String root = System.getProperty("user.dir");
     			 // movie id
     			String ticID = newBooking.getTicketID();
     			Serializer.serialize(root + "\\data\\bookings\\" + ticID + ".dat", newBooking);
-
+    			
     			// Reload Movies
     			newBooking.load();
     			newBooking.getInfo(); // TODO check what the ticket saves
@@ -343,38 +351,6 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            
-
-            //Seat[][] layout = cinemas.getLayout();
-            //layout[first][second].getSeatStatus();
-            
-
-			// Choose show timing -> call from admin side
-
-			// show available seats -> call from admin side
-
-			// choose and update seats -> call from admin side
-			
-			//show all transaction details
-			//TODO serialize and save files, **update of seat**
-
-            /*
-			MovieGoerBooking movieBooking = new MovieGoerBooking(customerName, customerPhone, customerEmail, movieID);
-			String root = System.getProperty("user.dir");
-
-			try { // movie id
-				String ticID = movieBooking.getTicketID();
-				Serializer.serialize(root + "\\data\\bookings\\" + ticID + ".dat", movieBooking);
-
-				// Reload Movies
-				movieBooking.load();
-
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-			movieBooking.getTicketID();
-			*/
 
 		}
 
@@ -387,20 +363,10 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 
 
 	public void movieViewBooking() { // TODO should viewbook be saved under the mobile number and email?
-		System.out.println("---------- SEARCH BOOKING HISTORY ----------\n"
-				+ "1) Check using Email Address					    		\n"
-				+ "2) Check using Mobile Number 					    		\n"
-				+ " \n0) Back to CustomerApp                          \n"
-				+ "-------------------------------------------");
-		String movieId = sc.nextLine(); // todo shouldnt use movie id
-		MovieGoerBooking movieBooking = null;
-		try { // movie id
-			movieBooking = (MovieGoerBooking) Serializer.deSerialize(root + "\\data\\bookings\\" + movieId + ".dat");
-		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		movieBooking.getInfo();
+		System.out.println("---------- SEARCH BOOKING HISTORY ----------\n");
+		MovieGoerCheckBooking checkBooking = new MovieGoerCheckBooking();
+		checkBooking.getBookingDetails();
+		
 		goBack().runInterface();
 	}
 

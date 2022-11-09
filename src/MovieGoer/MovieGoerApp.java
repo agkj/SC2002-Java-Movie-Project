@@ -265,7 +265,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                     // Get selected Cineplex file and object
                     int selectedcine = sc.nextInt();
                     selectedCineplex = (Cineplex) Serializer.deSerialize(path + "\\" + files[selectedcine - 1].getName());
-
+                    
                     // Show list of showtimes from movieBooked
                     ArrayList<ShowTime> listOfShowtimes = selectedMovie.getShowTimes();
                     ArrayList<ShowTime> filteredShowtimes = new ArrayList<ShowTime>();
@@ -286,7 +286,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                     ShowTime selectedShowtime = filteredShowtimes.get(selectedShowTimeIndex-1);
                     Cinema selectedCinema = (Cinema) Serializer.deSerialize(pathCinema + "\\" + selectedShowtime.getCinemaID() + ".dat");
                     selectedShowtime.showLayout();
-                    
+                    newBooking.setCinemaCode(selectedShowtime.getCinemaID());
                     // Select Seat(s) based on number of tickets purchasing
                     while(customerTickets > 0) {
                     	System.out.println("\nSelect a seat number: ");

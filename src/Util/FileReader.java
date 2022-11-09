@@ -50,6 +50,50 @@ public class FileReader {
 		}
 	}
 
+	public static StringBuffer copyFile(String filePath) {
+		try {
+			String line;
+
+			BufferedReader br = new BufferedReader(new java.io.FileReader(filePath));
+			StringBuffer inputBuffer = new StringBuffer();
+
+			while ((line = br.readLine()) != null) { // Read till end of data
+				inputBuffer.append(line);
+				inputBuffer.append("\n");
+			}
+
+			br.close();
+
+			FileOutputStream out = new FileOutputStream(filePath);
+			out.write(inputBuffer.toString().getBytes());
+			out.close();
+
+			return inputBuffer;
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static String readLine(String filePath, String stringToFind) {
+		String line = "";
+		String split = ",";
+
+		try {
+			BufferedReader br = new BufferedReader(new java.io.FileReader(filePath));
+			// File Reader(*Where you have installed the CSV file)
+			while ((line = br.readLine()) != null) { // Read till end of data
+				if(line.toLowerCase().contains(stringToFind.toLowerCase())) {
+					return line;
+				}
+			}
+			br.close(); // close BufferedReader
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
 	public static void replaceLine(String filePath, String stringToReplace, String newString, boolean exactWord) {
 		try {
 			String line;

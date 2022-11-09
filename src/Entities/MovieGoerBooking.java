@@ -1,15 +1,10 @@
 package Entities;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.Serial;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-
-//import MovieGoer.MovieGoerBooking;
-import Util.Serializer;
 
 public class MovieGoerBooking implements Serializable {
 
@@ -91,16 +86,6 @@ public class MovieGoerBooking implements Serializable {
 		Date date = new Date();
 		totalTickets++;
 		return cinemaCode + formatter.format(date);
-		// System.out.println("Your ticket id is "+ cinemaCode +
-		// formatter.format(date));
-
-	} 
-	
-	public void getInfo() {
-		System.out.println( "Name: " + name +
-				", mobile: " + mobileNumber +
-				", email: " + email + 
-				", cinemaCode: " + cinemaCode);
 	}
 
 }

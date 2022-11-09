@@ -225,20 +225,23 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 		// list available movies, user select movie
 
 		try {
-
+			//Print all the available Movies
+			System.out.println("These are the MOVIES");
+			System.out.println(("------------------"));
 			// Read all available Movies
 			for (int i = 0; i < movieFiles.length; i++) {
 				Movie curr = (Movie) Serializer.deSerialize(movieFiles[i].getAbsolutePath());
-				System.out.println((i + 1) + ") " + curr.getTitle());
+				System.out.println((i + 1) + ") " + curr.getTitle() + " " + curr.getShowingStatus());//TODO should we show the EndOfStatus here?
 			}
-			System.out.println("Choose a movie to book");
+			System.out.println(("------------------"));
+			System.out.println("Select a movie to book");
 			int movieChoice = sc.nextInt() - 1;
 			
 
 			File selected = movieFiles[movieChoice];
 			//Movie selectedMovie = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[movieChoice].getName());
 			Movie selectedMovie = (Movie) Serializer.deSerialize(movieFiles[movieChoice].getAbsolutePath());
-			System.out.println("You are booking " + selectedMovie.getTitle());
+			System.out.println("You are booking :" + selectedMovie.getTitle());
 
 			String movieID = selectedMovie.getMovieId();
 			String movieName = selectedMovie.getTitle();
@@ -247,7 +250,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 
 			// *******FUNCTIONS TO IMPLEMENT**************\\
 			
-			System.out.println("------- VIEW CINEMAS -------\n");
+			System.out.println("------- VIEW CINEMAS -------\n");//TODO this should be view cineplex?
 			Cineplex selectedCineplex;
             try {
             	
@@ -273,6 +276,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                     // Show list of showtimes from movieBooked
                     ArrayList<ShowTime> listOfShowtimes = selectedMovie.getShowTimes();
                     ArrayList<ShowTime> filteredShowtimes = new ArrayList<ShowTime>();
+					System.out.println("These are the ShowTimes available:");
                     for(int i=0; i < listOfShowtimes.size(); i++) {
                     	ShowTime curr = listOfShowtimes.get(i);
                     	
@@ -283,7 +287,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                     	}
                     }
                     
-                    System.out.print("\nSelect Showtime: ");
+                    System.out.print("\nSelect Showtime: "); //TODO rmb to create all the test case for showtime before testing
 
                     // Get selected Cineplex file and object
                     int selectedShowTimeIndex = sc.nextInt();
@@ -357,7 +361,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 		catch (Exception e) {
 			System.out.println("Select an option");
 		}
-
+		goBack().runInterface();
 
 }
 

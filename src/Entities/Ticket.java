@@ -10,60 +10,84 @@ public class Ticket implements Serializable{
     //Attributes:
     private double ticketPrice;
     private TicketType ticketType; // this is our age
-    private MovieGenre moviegenre;
+    private MovieType movieType;
     private CinemaClass cinemaclass;
-    private int holiday;
+    private DayType dayType;
+    
     //constructor
     public Ticket(){};
-
-    public Ticket(double price, TicketType ticketType, MovieGenre moviegenre, CinemaClass cinemaclass, int holiday) {
-        this.ticketPrice = price;
-        this.ticketType = ticketType;
-        this.moviegenre = moviegenre;
-        this.cinemaclass = cinemaclass;
-        this.holiday = holiday;
-    }
     
-    public double getPrice() {
-        return ticketPrice;
-    }
+    
 
-    //Getters
-    public TicketType getTicketType() {
-        return ticketType;
-    }
+    public Ticket(double ticketPrice, TicketType ticketType, MovieType movieType, CinemaClass cinemaclass,
+			DayType dayType) {
+		super();
+		this.ticketPrice = ticketPrice;
+		this.ticketType = ticketType;
+		this.movieType = movieType;
+		this.cinemaclass = cinemaclass;
+		this.dayType = dayType;
+	}
 
-    public MovieGenre getMoviegenre() {
-        return moviegenre;
-    }
 
-    public CinemaClass getCinemaclass() {
-        return cinemaclass;
-    }
 
-    public int getHoliday() {
-        return holiday;
-    }
+	public double getTicketPrice() {
+		return ticketPrice;
+	}
 
-    //Setters
 
-    public void setPrice(double price) {
-        this.ticketPrice = price;
-    }
 
-    public void setTicketType(TicketType ticketType) {
-        this.ticketType = ticketType;
-    }
+	public void setTicketPrice(double ticketPrice) {
+		this.ticketPrice = ticketPrice;
+	}
 
-    public void setMoviegenre(MovieGenre moviegenre) {
-        this.moviegenre = moviegenre;
-    }
 
-    public void setCinemaclass(CinemaClass cinemaclass) {
-        this.cinemaclass = cinemaclass;
-    }
 
-    public void setHoliday(int holiday) {
-        this.holiday = holiday;
-    }
+	public TicketType getTicketType() {
+		return ticketType;
+	}
+
+
+
+	public void setTicketType(TicketType ticketType) {
+		this.ticketType = ticketType;
+	}
+
+
+
+	public MovieType getMovieType() {
+		return movieType;
+	}
+
+
+
+	public void setMovieType(MovieType movieType) {
+		this.movieType = movieType;
+	}
+
+
+
+	public CinemaClass getCinemaclass() {
+		return cinemaclass;
+	}
+
+
+
+	public void setCinemaclass(CinemaClass cinemaclass) {
+		this.cinemaclass = cinemaclass;
+	}
+
+
+
+	public DayType getDayType() {
+		return dayType;
+	}
+
+
+
+	public void setDayType(DayType dayType) {
+		this.dayType = dayType;
+	}
+    
+    
 }

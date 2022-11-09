@@ -19,16 +19,25 @@ import Entities.Movie;
 import Entities.MovieGoerBooking;
 import Entities.Review;
 import Entities.ShowTime;
+import Entities.ShowTimeStatus;
 import Entities.Ticket;
+import Entities.TicketType;
 import Util.Serializer;
 
 public class MovieGoerApp extends MovieListingApp implements Serializable {
 
 	Scanner sc = new Scanner(System.in);
+	protected File pathCinema;
+	protected File[] cinemaFiles;
 
 	public MovieGoerApp(AppHelper prevApp) {
 		super(prevApp);
-		// TODO Auto-generated constructor stub
+		
+		 // Try to read all movie .dat files in movie directory
+        pathCinema = new File(System.getProperty("user.dir") + "\\data\\cinema");
+
+        // Store all movie .dat files
+        cinemaFiles = pathCinema.listFiles();
 	}
 
 	public void movieView() {
@@ -191,6 +200,19 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 
 	public void movieBooking() {
 		System.out.println("-------Make a Booking--------");
+		
+		// Get User Details
+		System.out.println("Enter your name: ");
+		String customerName = sc.next();
+
+		System.out.println("Enter your phone number: ");
+		String customerPhone = sc.next();
+
+		System.out.println("Enter your email: ");
+		String customerEmail = sc.next();
+
+		System.out.println("How many tickets are you buying: ");
+		int customerTickets = sc.nextInt();
 
 		// list available movies, user select movie
 
@@ -205,65 +227,92 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			int movieChoice = sc.nextInt() - 1;
 
 			File selected = movieFiles[movieChoice];
-			Movie movieBooked = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[movieChoice].getName());
+			Movie selectedMovie = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[movieChoice].getName());
 
-			System.out.println("You are booking " + movieBooked);
+			System.out.println("You are booking " + selectedMovie);
 
-			String movieID = movieBooked.getMovieId();
+			String movieID = selectedMovie.getMovieId();
 
 			// *******FUNCTIONS TO IMPLEMENT**************\\
-
+			
 			System.out.println("------- VIEW CINEMAS -------\n");
 			Cineplex selectedCineplex;
-			try {
+            try {
+            	
+            	File path;
+                File[] files;
+                path = new File(root + "\\data\\cineplex");
+                files = path.listFiles();
+            	
+                // Read all available Cineplex created
+                if (files != null) {
+                    for (int i = 0; i < files.length; i++) {
+                        Cineplex curr = (Cineplex) Serializer.deSerialize(path + "\\" + files[i].getName());
+                        System.out.println((i + 1) + ") " + curr.getVenue());
+                    }
 
-				File path;
-				File[] files;
-				path = new File(root + "\\data\\cineplex");
-				files = path.listFiles();
+                    System.out.print("\nSelect Cineplex: ");
 
-				// Read all available Cineplex created
-				if (files != null) {
-					for (int i = 0; i < files.length; i++) {
-						Cineplex curr = (Cineplex) Serializer.deSerialize(path + "\\" + files[i].getName());
-						System.out.println((i + 1) + ") " + curr.getVenue());
-					}
+                    // Get selected Cineplex file and object
+                    int selectedcine = sc.nextInt();
+                    selectedCineplex = (Cineplex) Serializer.deSerialize(path + "\\" + files[selectedcine - 1].getName());
 
-					System.out.print("\nSelect Cineplex: ");
+                    // Show list of showtimes from movieBooked
+                    ArrayList<ShowTime> listOfShowtimes = selectedMovie.getShowTimes();
+                    ArrayList<ShowTime> filteredShowtimes = new ArrayList<ShowTime>();
+                    for(int i=0; i < listOfShowtimes.size(); i++) {
+                    	ShowTime curr = listOfShowtimes.get(i);
+                    	
+                    	if(curr.getCineplexID().equals(selectedCineplex.getCineplexID()) && curr.getShowTimeStatus() != ShowTimeStatus.Sold_Out) {
+                    		// Show showtime
+                    		System.out.println(curr.getShowDateTime());
+                    		filteredShowtimes.add(curr);
+                    	}
+                    }
+                    
+                    System.out.print("\nSelect Showtime: ");
 
-					// Get selected Cineplex file and object
-					int selectedcine = sc.nextInt();
-					selectedCineplex = (Cineplex) Serializer
-							.deSerialize(path + "\\" + files[selectedcine - 1].getName());
+                    // Get selected Cineplex file and object
+                    int selectedShowTimeIndex = sc.nextInt();
+                    ShowTime selectedShowtime = filteredShowtimes.get(selectedShowTimeIndex-1);
+                    Cinema selectedCinema = (Cinema) Serializer.deSerialize(pathCinema + "\\" + files[selectedcine - 1].getName());
+                    selectedShowtime.showLayout();
+                    
+                    // Select Seat(s) based on number of tickets purchasing
+                    while(customerTickets > 0) {
+                    	System.out.println("\nSelect a seat number: ");
+                        String seatNum = sc.next();
+                        
+                        selectedShowtime.bookSeat(seatNum);
+                        
+                        System.out.print("\nSelect ticket type: ");
+                        for(int i=0; i < TicketType.values().length; i++) {
+                        	System.out.println((i+1) + ") " + TicketType.values()[i]);
+                        }
+                        
+                        // Get selected Cineplex file and object
+                        TicketType ticketType = TicketType.values()[sc.nextInt()-1];
+                        
+                        // Create Ticket Object
+                        Ticket newTicket = new Ticket();
+                        newTicket.setTicketType(ticketType);
+                        newTicket.setMovieType(selectedMovie.getMovieType());
+                        newTicket.setCinemaclass(selectedCinema.getCinemaClass());
+                    	
+                    	customerTickets--;
+                    }
+                    
+                }
 
-					ArrayList<Cinema> cinemas = selectedCineplex.getListOfCinemas();
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
 
-					for (int i = 0; i < cinemas.size(); i++) {
-						System.out.print((i + 1) + ") " + cinemas.get(i) + "\n");
-						cinemas.get(i).showLayout();
-
-						System.out.println();
-					}
-
-					System.out.print("Select a cinema: ");
-					int cinemaChoice = sc.nextInt() - 1;
-
-					System.out.println(cinemas.get(cinemaChoice));
-					cinemas.get(cinemaChoice).showLayout();
-
-					System.out.println("Select a seat number: ");
-					String seatNum = sc.next();
-
-					ShowTime showTime = new ShowTime();
-					showTime.bookSeat(seatNum);
-
-				}
-
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
+            //Seat[][] layout = cinemas.getLayout();
+            //layout[first][second].getSeatStatus();
+            
 
 			// Choose show timing -> call from admin side
 
@@ -271,17 +320,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 
 			// choose and update seats -> call from admin side
 
-			System.out.println("Enter your name: ");
-			String customerName = sc.next();
-
-			System.out.println("Enter your phone number: ");
-			String customerPhone = sc.next();
-
-			System.out.println("Enter your email: ");
-			String customerEmail = sc.next();
-
-			System.out.println("How many tickets are you buying: ");
-			int customerTickets = sc.nextInt();
+			
 
 			MovieGoerBooking movieBooking = new MovieGoerBooking(customerName, customerPhone, customerEmail, movieID);
 			String root = System.getProperty("user.dir");
@@ -296,22 +335,18 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
+			
 			movieBooking.getTicketID();
-			// TODO print out all the booking details
-			System.out.println("-------------------------------");
-			System.out.println("Thank you for using MOBLIMA App!");
-			System.out.println("-------------------------------");
-			System.out.println("These are your booking details: !");
 
 		}
 
 		catch (Exception e) {
 			System.out.println("Select an option");
 		}
-		goBack().runInterface();
 
-	}
+
+}
+
 
 	public void movieViewBooking() { // TODO should viewbook be saved under the mobile number and email?
 		System.out.println("---------- SEARCH BOOKING HISTORY ----------\n"

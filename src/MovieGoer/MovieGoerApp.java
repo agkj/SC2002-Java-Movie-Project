@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-
 import Util.AppHelper;
 import Admin.MovieListingApp;
 import Entities.Cinema;
@@ -50,9 +49,12 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 				}
 			}
 
+			System.out.println("--------- END OF MOVIE LISTING ---------\n");
+
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		goBack().runInterface();
 	}
 
 	public void movieRate() {
@@ -105,6 +107,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			System.out.println("\n------- ERROR: MOVIE NOT IN RANGE -------\n");
 			e.printStackTrace();
 		}
+		goBack().runInterface();
 
 	}
 
@@ -149,7 +152,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-
+		goBack().runInterface();
 	}
 
 	public void movieTopSales() {
@@ -183,6 +186,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		goBack().runInterface();
 	}
 
 	public void movieBooking() {
@@ -208,60 +212,58 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			String movieID = movieBooked.getMovieId();
 
 			// *******FUNCTIONS TO IMPLEMENT**************\\
-			
+
 			System.out.println("------- VIEW CINEMAS -------\n");
 			Cineplex selectedCineplex;
-            try {
-            	
-            	File path;
-                File[] files;
-                path = new File(root + "\\data\\cineplex");
-                files = path.listFiles();
-            	
-                // Read all available Cineplex created
-                if (files != null) {
-                    for (int i = 0; i < files.length; i++) {
-                        Cineplex curr = (Cineplex) Serializer.deSerialize(path + "\\" + files[i].getName());
-                        System.out.println((i + 1) + ") " + curr.getVenue());
-                    }
+			try {
 
-                    System.out.print("\nSelect Cineplex: ");
+				File path;
+				File[] files;
+				path = new File(root + "\\data\\cineplex");
+				files = path.listFiles();
 
-                    // Get selected Cineplex file and object
-                    int selectedcine = sc.nextInt();
-                    selectedCineplex = (Cineplex) Serializer.deSerialize(path + "\\" + files[selectedcine - 1].getName());
+				// Read all available Cineplex created
+				if (files != null) {
+					for (int i = 0; i < files.length; i++) {
+						Cineplex curr = (Cineplex) Serializer.deSerialize(path + "\\" + files[i].getName());
+						System.out.println((i + 1) + ") " + curr.getVenue());
+					}
 
-                    ArrayList<Cinema> cinemas = selectedCineplex.getListOfCinemas();
+					System.out.print("\nSelect Cineplex: ");
 
-                    for(int i=0; i < cinemas.size(); i++) {
-                        System.out.print((i+1) + ") " + cinemas.get(i) + "\n");
-                        cinemas.get(i).showLayout();
+					// Get selected Cineplex file and object
+					int selectedcine = sc.nextInt();
+					selectedCineplex = (Cineplex) Serializer
+							.deSerialize(path + "\\" + files[selectedcine - 1].getName());
 
-                        System.out.println();
-                    }
-                    
-                    System.out.print("Select a cinema: ");
-                    int cinemaChoice =sc.nextInt()-1;
-                    
-                    System.out.println(cinemas.get(cinemaChoice));
-                    cinemas.get(cinemaChoice).showLayout();
-                    
-                    System.out.println("Select a seat number: ");
-                    String seatNum = sc.next();
-                    
-                    ShowTime showTime = new ShowTime();
-                    showTime.bookSeat(seatNum);
-                    
-                }
+					ArrayList<Cinema> cinemas = selectedCineplex.getListOfCinemas();
 
-                
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-            
+					for (int i = 0; i < cinemas.size(); i++) {
+						System.out.print((i + 1) + ") " + cinemas.get(i) + "\n");
+						cinemas.get(i).showLayout();
 
+						System.out.println();
+					}
+
+					System.out.print("Select a cinema: ");
+					int cinemaChoice = sc.nextInt() - 1;
+
+					System.out.println(cinemas.get(cinemaChoice));
+					cinemas.get(cinemaChoice).showLayout();
+
+					System.out.println("Select a seat number: ");
+					String seatNum = sc.next();
+
+					ShowTime showTime = new ShowTime();
+					showTime.bookSeat(seatNum);
+
+				}
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
 
 			// Choose show timing -> call from admin side
 
@@ -294,15 +296,39 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 			movieBooking.getTicketID();
+			// TODO print out all the booking details
+			System.out.println("-------------------------------");
+			System.out.println("Thank you for using MOBLIMA App!");
+			System.out.println("-------------------------------");
+			System.out.println("These are your booking details: !");
 
 		}
 
 		catch (Exception e) {
 			System.out.println("Select an option");
 		}
+		goBack().runInterface();
 
+	}
+
+	public void movieViewBooking() { // TODO should viewbook be saved under the mobile number and email?
+		System.out.println("---------- SEARCH BOOKING HISTORY ----------\n"
+				+ "1) Check using Email Address					    		\n"
+				+ "2) Check using Mobile Number 					    		\n"
+				+ " \n0) Back to CustomerApp                          \n"
+				+ "-------------------------------------------");
+		String movieId = sc.nextLine(); // todo shouldnt use movie id
+		MovieGoerBooking movieBooking = null;
+		try { // movie id
+			movieBooking = (MovieGoerBooking) Serializer.deSerialize(root + "\\data\\bookings\\" + movieId + ".dat");
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		movieBooking.getInfo();
+		goBack().runInterface();
 	}
 
 }

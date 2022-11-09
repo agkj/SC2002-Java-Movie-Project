@@ -64,7 +64,7 @@ public class MainMenu extends AppHelper {
 				case 2:
 					// go to MovieGoer application
 
-					MovieGoerMenu movieGoerApp = new MovieGoerMenu(new MainMenu(null));
+					MovieGoerMenu movieGoerApp = new MovieGoerMenu(null);
 					movieGoerApp.runInterface();
 
 					break;

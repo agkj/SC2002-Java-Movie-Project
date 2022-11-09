@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -19,8 +21,18 @@ public class MovieGoerBooking implements Serializable {
 	protected String name;
 	protected String mobileNumber;
 	protected String email;
+	protected String selectedMovie;
 	protected String cinemaCode;
+	protected LocalDateTime	showDateTime;
+	protected ArrayList<Ticket> listOfTickets = new ArrayList<Ticket>();
+	
+	/*
+	protected String seatNum;
+	protected String ticketType;
+	protected Double price;
 	protected String ticketID;
+	*/
+
 	
 	protected static int totalTickets = 0;
 
@@ -39,53 +51,82 @@ public class MovieGoerBooking implements Serializable {
 	}
 
 	// cinema code: yy/mm/dd, hr hr min min
-
-	public MovieGoerBooking() {
-		this.name = null;
-		this.mobileNumber = null;
-		this.email = null;
-		this.cinemaCode = null;
-	}
-
-	public MovieGoerBooking(String name, String mobileNumber, String email, String cinemaCode) {
+	
+	public MovieGoerBooking() {}
+	
+	public MovieGoerBooking(String name, String mobileNumber, String email, String selectedMovie, String cinemaCode,
+			LocalDateTime showDateTime) {
+		super();
 		this.name = name;
 		this.mobileNumber = mobileNumber;
 		this.email = email;
+		this.selectedMovie = selectedMovie;
 		this.cinemaCode = cinemaCode;
+		this.showDateTime = showDateTime;
+	}
+	
+	
+
+	public String getName() {
+		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public String getName() {
-		return this.name;
-	}
-
 	public String getMobileNumber() {
-		return this.mobileNumber;
-	}
-
-	public String getEmail() {
-		return this.email;
-	}
-
-	public String getCinemaCode() {
-		return this.cinemaCode;
+		return mobileNumber;
 	}
 
 	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getSelectedMovie() {
+		return selectedMovie;
+	}
+
+	public void setSelectedMovie(String selectedMovie) {
+		this.selectedMovie = selectedMovie;
+	}
+
+	public String getCinemaCode() {
+		return cinemaCode;
 	}
 
 	public void setCinemaCode(String cinemaCode) {
 		this.cinemaCode = cinemaCode;
 	}
 
+	public LocalDateTime getShowDateTime() {
+		return showDateTime;
+	}
+
+	public void setShowDateTime(LocalDateTime showDateTime) {
+		this.showDateTime = showDateTime;
+	}
+	
+	public void addTicket(Ticket ticket) {
+		this.listOfTickets.add(ticket);
+	}
+
+	public static int getTotalTickets() {
+		return totalTickets;
+	}
+
+	public static void setTotalTickets(int totalTickets) {
+		MovieGoerBooking.totalTickets = totalTickets;
+	}
+	
 	public String getTicketID() {
 		SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyyHHmm");
 		Date date = new Date();
@@ -95,7 +136,7 @@ public class MovieGoerBooking implements Serializable {
 		// formatter.format(date));
 
 	} 
-	
+
 	public void getInfo() {
 		System.out.println( "Name: " + name +
 				", mobile: " + mobileNumber +

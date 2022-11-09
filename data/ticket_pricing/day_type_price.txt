@@ -1,4 +1,4 @@
-Mon, Tue, Wed, -2.5
+Mon_Wed, -2.5
 Thu, -0.5
 Fri (before 6PM), -0.5
 Fri (after 6PM),1.0

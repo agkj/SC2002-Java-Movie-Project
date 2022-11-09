@@ -315,7 +315,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                         
                         newBooking.addTicket(newTicket);
                     	
-                    	customerTickets--;
+                    	customerTickets--; //TODO increment counter total ticket sold and total sales
                     }
                     
                 }

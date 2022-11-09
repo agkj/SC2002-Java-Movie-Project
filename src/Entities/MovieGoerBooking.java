@@ -141,7 +141,9 @@ public class MovieGoerBooking implements Serializable {
 		System.out.println( "Name: " + name +
 				", mobile: " + mobileNumber +
 				", email: " + email + 
-				", cinemaCode: " + cinemaCode);
+				", cinemaCode: " + cinemaCode+
+				", DateTime: "+ showDateTime +
+				", ticket: "+ listOfTickets);
 	}
 
 }

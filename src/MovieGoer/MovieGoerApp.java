@@ -274,7 +274,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                     	
                     	if(curr.getCineplexID().equals(selectedCineplex.getCineplexID()) && curr.getShowTimeStatus() != ShowTimeStatus.Sold_Out) {
                     		// Show showtime
-                    		System.out.println(i+1 + ") " + curr.getShowDateTime() + curr.getCineplexID());
+                    		System.out.println(i+1 + ") " + curr.getShowDateTime() + curr.getCinemaID()); //TODO show cinema location
                     		filteredShowtimes.add(curr);
                     	}
                     }
@@ -320,7 +320,26 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                     
                 }
                 
-                
+                System.out.print("\nPlease select 1 to continue with payment: ");
+    			int cont = sc.nextInt();
+    			while(cont != 1) {
+    				System.out.print("\nPlease select 1 to continue with payment: ");
+    				cont = sc.nextInt();
+    			}
+    			// TODO Try catch maybe?
+    			
+    			System.out.println("Thank you for booking with us.");
+    			System.out.println("Here are your booking details: ");
+    			String root = System.getProperty("user.dir");
+    			 // movie id
+    			String ticID = newBooking.getTicketID();
+    			Serializer.serialize(root + "\\data\\bookings\\" + ticID + ".dat", newBooking);
+
+    			// Reload Movies
+    			newBooking.load();
+    			newBooking.getInfo(); // TODO check what the ticket saves
+    			
+    			
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -335,12 +354,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			// show available seats -> call from admin side
 
 			// choose and update seats -> call from admin side
-
-			System.out.println("Please select 1 to continue with payment.");
-			int cont = sc.nextInt();
-			// TODO Try catch maybe?
 			
-			System.out.println("Thank you for booking with us.");
 			//show all transaction details
 			//TODO serialize and save files, **update of seat**
 

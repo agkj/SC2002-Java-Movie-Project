@@ -278,9 +278,6 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			System.out.println("Enter your email: ");
 			String customerEmail = sc.next();
 
-			System.out.println("How many tickets are you buying: ");
-			int customerTickets = sc.nextInt();
-
 			MovieGoerBooking movieBooking = new MovieGoerBooking(customerName, customerPhone, customerEmail, movieID);
 			String root = System.getProperty("user.dir");
 
@@ -304,5 +301,13 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 		}
 
 	}
-
+	
+	
+	
+	public void moviePastBooking() {
+		
+	}
+	
+	
+	
 }

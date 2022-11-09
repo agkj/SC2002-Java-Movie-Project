@@ -207,15 +207,12 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 		// Get User Details
 		System.out.println("Enter your name: ");
 		String customerName = sc.next();
-		newBooking.setName(customerName);
-		
+
 		System.out.println("Enter your phone number: ");
 		String customerPhone = sc.next();
-		newBooking.setMobileNumber(customerPhone);
-		
+
 		System.out.println("Enter your email: ");
 		String customerEmail = sc.next();
-		newBooking.setEmail(customerEmail);
 
 		System.out.println("How many tickets are you buying: ");
 		int customerTickets = sc.nextInt();
@@ -232,15 +229,12 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			System.out.println("Choose a movie to book");
 			int movieChoice = sc.nextInt() - 1;
 
-
 			File selected = movieFiles[movieChoice];
 			Movie selectedMovie = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[movieChoice].getName());
 
 			System.out.println("You are booking " + selectedMovie);
 
 			String movieID = selectedMovie.getMovieId();
-			
-			newBooking.setSelectedMovie(movieID);
 
 			// *******FUNCTIONS TO IMPLEMENT**************\\
 			
@@ -274,7 +268,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                     	
                     	if(curr.getCineplexID().equals(selectedCineplex.getCineplexID()) && curr.getShowTimeStatus() != ShowTimeStatus.Sold_Out) {
                     		// Show showtime
-                    		System.out.println(i+1 + ") " + curr.getShowDateTime() + curr.getCineplexID());
+                    		System.out.println(i+1 + ") " + curr.getShowDateTime() + curr.);
                     		filteredShowtimes.add(curr);
                     	}
                     }
@@ -292,7 +286,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                     	System.out.println("\nSelect a seat number: ");
                         String seatNum = sc.next();
                         
-                        selectedShowtime.bookSeat(seatNum);		// TODO maybe book seat only after payment complete
+                        selectedShowtime.bookSeat(seatNum);		// To-do maybe book seat only after payment complete
                         
                         System.out.println("\nSelect ticket type: ");
                         for(int i=0; i < TicketType.values().length; i++) {
@@ -307,7 +301,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                         newTicket.setTicketType(ticketType);
                         newTicket.setMovieType(selectedMovie.getMovieType());
                         newTicket.setCinemaclass(selectedCinema.getCinemaClass());
-                        newTicket.setDayType(DayType.MON_WED);	// TODO need to check for day type
+                        newTicket.setDayType(DayType.MON_WED);	// To-do need to check for day type
                         
                         double price = newTicket.calculateTicketPrice();
                         newTicket.setTicketPrice(price);
@@ -336,13 +330,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 
 			// choose and update seats -> call from admin side
 
-			System.out.println("Please select 1 to continue with payment.");
-			int cont = sc.nextInt();
-			// TODO Try catch maybe?
 			
-			System.out.println("Thank you for booking with us.");
-			//show all transaction details
-			//TODO serialize and save files, **update of seat**
 
             /*
 			MovieGoerBooking movieBooking = new MovieGoerBooking(customerName, customerPhone, customerEmail, movieID);

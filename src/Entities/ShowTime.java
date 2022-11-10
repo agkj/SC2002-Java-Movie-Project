@@ -68,13 +68,25 @@ public class ShowTime implements Serializable {
     // Print Seating Layout
     public void showLayout() {
         char rowNum = 65;   // start at A (65), ends at Z (90)
-
+        
+        System.out.println("\nMovie Layout");
+        System.out.print("  |  ");
+        for(int k=0; k < showTimeLayout[0].length; ++k) {
+            // Print seat status
+            System.out.print("  "+ (k+1) +"  ");
+        }
+        System.out.println("");
+        
         for(int i=0; i < showTimeLayout.length; i++) {
             System.out.print(rowNum++ + " | ");
 
             for(int j=0; j < showTimeLayout[0].length; j++) {       // showTimeLayout[0] can be any index, just need to get the number of cols
                 // Print seat status
-                System.out.print(" ["+ showTimeLayout[i][j].getSeatStatus() +"] ");
+            	if(showTimeLayout[i][j].getSeatStatus() != -1) {
+            		System.out.print(" ["+ showTimeLayout[i][j].getSeatStatus() +"] ");
+            	} else {
+            		System.out.print("  |  ");
+            	}
             }
 
             System.out.print("\n");

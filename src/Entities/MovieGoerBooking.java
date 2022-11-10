@@ -146,7 +146,19 @@ public class MovieGoerBooking implements Serializable {
 		// formatter.format(date));
 
 	} 
+	 @Override
+	    public String toString() {
+	        return  "Name= " + name +
+	                "\nMobile Number= " + mobileNumber +
+	                "\nEmail= " + email +
+	                "\nMovie= " + selectedMovie +
+	                "\nCinema= " + cinemaCode +
+	                "\nTime= " + showDateTime +
+	                "\nSeat= " + seatNum +
+	                "\nTicket= " + listOfTickets;
+	 }
 
+	/*
 	public void getInfo() {
 		System.out.println( "Name: " + name +
 				", mobile: " + mobileNumber +
@@ -155,5 +167,5 @@ public class MovieGoerBooking implements Serializable {
 				", DateTime: "+ showDateTime +
 				", ticket: "+ listOfTickets);
 	}
-
+	*/
 }

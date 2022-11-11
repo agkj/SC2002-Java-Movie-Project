@@ -245,16 +245,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 					System.out.println((i + 1) + ") " + curr.getTitle() + " [" + curr.getContentRating().toString() + "] - " + curr.getShowingStatus());
 			}
 
-			System.out.println(("------------------"));
-			System.out.println("Select a movie to book: ");
-
-			// Read all available Movies
-			for (int i = 0; i < movieFiles.length; i++) {
-				Movie curr = (Movie) Serializer.deSerialize(movieFiles[i].getAbsolutePath());
-				if(curr.getShowingStatus() != ShowingStatus.End_Of_Showing)
-					System.out.println((i + 1) + ") " + curr.getTitle());
-				
-			}
+			
 			System.out.println("Choose a movie to book");
 			int movieChoice = sc.nextInt() - 1;
 

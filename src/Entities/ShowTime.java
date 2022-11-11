@@ -2,6 +2,7 @@ package Entities;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 
 public class ShowTime implements Serializable {
@@ -51,6 +52,28 @@ public class ShowTime implements Serializable {
 
     public void setShowDateTime(LocalDateTime showDateTime) {
         this.showDateTime = showDateTime;
+    }
+
+    // Determine Day Type based on ShowDateTime
+    public void checkDayType() {
+        DayOfWeek day = showDateTime.getDayOfWeek();
+        int hour = showDateTime.getHour();
+        DayType dayType;
+
+        // Check if public holiday
+
+
+        if(day.equals(DayOfWeek.MONDAY) || day.equals(DayOfWeek.TUESDAY) || day.equals(DayOfWeek.WEDNESDAY))
+            dayType = DayType.MON_WED;
+        else if(day.equals(DayOfWeek.THURSDAY))
+            dayType = DayType.THU;
+        else if(day.equals(DayOfWeek.FRIDAY)) {
+            if(hour >= 18)
+                dayType = DayType.FRI_AFTER_6;
+            else
+                dayType = DayType.FRI_BEFORE_6;
+        } else if (day.equals(DayOfWeek.SATURDAY) || day.equals(DayOfWeek.SUNDAY))
+            dayType = DayType.WEEKEND;
     }
 
     public ShowTimeStatus getShowTimeStatus() {

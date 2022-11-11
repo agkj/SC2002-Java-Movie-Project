@@ -323,7 +323,7 @@ public class ShowtimeApp extends AppHelper {
                 System.out.print("\nSelect which showtime to update: ");
                 int showtime_index = sc.nextInt();
 
-                ShowTime showtime = showtimeList.get(showtime_index-1);
+                ShowTime selectedShowTime = showtimeList.get(showtime_index-1);
 
                 int input;
 
@@ -349,7 +349,7 @@ public class ShowtimeApp extends AppHelper {
                                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                                     LocalDateTime dateTime  = LocalDateTime.parse(showtimeinput, formatter);
 
-                                    showtime.setShowDateTime(dateTime);
+                                    selectedShowTime.setShowDateTime(dateTime);
                                     showtimeValid = true;
 
                                     System.out.print("Saved Showing Date and Time.");
@@ -363,15 +363,15 @@ public class ShowtimeApp extends AppHelper {
                         case 2:
                             // Update Showing Status
 
-                            // Display all available showing status
-                            System.out.print("Select Updated Showing Status: ");
+                            // Display all available showtime status
+                            System.out.print("Select Updated Show Time Status: ");
                             for(int i=0; i < ShowTimeStatus.values().length; i++) {
                                 System.out.println((i+1) + ") " + ShowTimeStatus.values()[i]);
                             }
-                            // Get updated showing status
+                            // Get updated showtime status
                             int statusUpdate = sc.nextInt();
 
-                            showtime.setShowTimeStatus(ShowTimeStatus.values()[statusUpdate-1]);
+                            selectedShowTime.setShowTimeStatus(ShowTimeStatus.values()[statusUpdate-1]);
 
                             System.out.print("Saved Showing Status.\n");
 
@@ -382,6 +382,19 @@ public class ShowtimeApp extends AppHelper {
                     }
                 } while(input > 0);
 
+                // Try to save file
+                try {
+                    // Update Movie Object
+                    selectedMovie.updateShowTime(showtime_index, selectedShowTime);
+
+                    // Update Movie File with updated showtime arraylist
+                    Serializer.serialize(root + "\\data\\movies\\" + selectedMovie.getMovieId() + ".dat", selectedMovie);
+
+                    System.out.println("\n------- SUCCESS: CREATED SHOWTIME -------\n");
+                } catch (IOException e) {
+                    System.out.println("\n------- ERROR: PLEASE TRY AGAIN -------\n");
+                    e.printStackTrace();
+                }
 
             } else {
                 // No showtimes available

@@ -3,6 +3,7 @@ package MovieGoer;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -233,6 +234,19 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 		// list available movies, user select movie
 
 		try {
+			//Print all the available Movies
+			System.out.println(("\n------------------"));
+			System.out.println("List of Movies: ");
+			// Read all available Movies if not End_of_Showing
+			for (int i = 0; i < movieFiles.length; i++) {
+				Movie curr = (Movie) Serializer.deSerialize(movieFiles[i].getAbsolutePath());
+
+				if(!curr.isEndOfShowing())
+					System.out.println((i + 1) + ") " + curr.getTitle() + " [" + curr.getContentRating().toString() + "] - " + curr.getShowingStatus());
+			}
+
+			System.out.println(("------------------"));
+			System.out.println("Select a movie to book: ");
 
 			// Read all available Movies
 			for (int i = 0; i < movieFiles.length; i++) {
@@ -243,7 +257,6 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			}
 			System.out.println("Choose a movie to book");
 			int movieChoice = sc.nextInt() - 1;
-			
 
 			File selected = movieFiles[movieChoice];
 			//Movie selectedMovie = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[movieChoice].getName());
@@ -256,9 +269,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			newBooking.setSelectedMovie(movieID);
 
 			// *******FUNCTIONS TO IMPLEMENT**************\\
-			
-			System.out.println("------- VIEW CINEMAS -------\n");
-			
+			System.out.println("------- VIEW CINEPLEX -------\n");
             try {
             	
             	File path;
@@ -286,10 +297,15 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                     ArrayList<ShowTime> filteredShowtimes = new ArrayList<ShowTime>();
                     for(int i=0; i < listOfShowtimes.size(); i++) {
                     	ShowTime curr = listOfShowtimes.get(i);
+						Cinema currCinema = (Cinema) Serializer.deSerialize(pathCinema + "\\" + curr.getCinemaID() + ".dat");
                     	
                     	if(curr.getCineplexID().equals(selectedCineplex.getCineplexID()) && curr.getShowTimeStatus() != ShowTimeStatus.Sold_Out) {
                     		// Show showtime
-                    		System.out.println(i+1 + ") " + curr.getShowDateTime() + curr.getCinemaID()); //TODO show cinema location
+							LocalDateTime showtimeDate = curr.getShowDateTime();
+							String day = showtimeDate.getDayOfWeek().toString();
+							int hour = showtimeDate.getHour();
+							System.out.println("Hour: " + hour);
+                    		System.out.println(i+1 + ") " +  day + " - " + curr.getShowDateTime() + " (" + currCinema.getCinemaClass().toString() + " Class)");
                     		filteredShowtimes.add(curr);
                     	}
                     }
@@ -329,6 +345,8 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                         newTicket.setTicketType(ticketType);
                         newTicket.setMovieType(selectedMovie.getMovieType());
                         newTicket.setCinemaclass(selectedCinema.getCinemaClass());
+
+
                         newTicket.setDayType(DayType.MON_WED);	// TODO need to check for day type
                         
                        // price = newTicket.calculateTicketPrice();

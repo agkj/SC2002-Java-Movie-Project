@@ -24,7 +24,6 @@ public class MovieGoerBooking implements Serializable {
 	protected String selectedMovie;
 	protected String cinemaCode;
 	protected LocalDateTime	showDateTime;
-	protected String seatNum;
 	protected ArrayList<Ticket> listOfTickets = new ArrayList<Ticket>();
 	
 	/*
@@ -56,7 +55,7 @@ public class MovieGoerBooking implements Serializable {
 	public MovieGoerBooking() {}
 	
 	public MovieGoerBooking(String name, String mobileNumber, String email, String selectedMovie, String cinemaCode,
-			LocalDateTime showDateTime, String seatNum) {
+			LocalDateTime showDateTime) {
 		super();
 		this.name = name;
 		this.mobileNumber = mobileNumber;
@@ -64,7 +63,6 @@ public class MovieGoerBooking implements Serializable {
 		this.selectedMovie = selectedMovie;
 		this.cinemaCode = cinemaCode;
 		this.showDateTime = showDateTime;
-		this.seatNum = seatNum;
 	}
 	
 	
@@ -115,15 +113,7 @@ public class MovieGoerBooking implements Serializable {
 
 	public void setShowDateTime(LocalDateTime showDateTime) {
 		this.showDateTime = showDateTime;
-	}
-	
-	public String getSeatNum() {
-		return this.seatNum;
-	}
-	public void setSeatNum(String seatNum) {
-		this.seatNum = seatNum;
-	}
-	
+	}	
 	
 	public void addTicket(Ticket ticket) {
 		this.listOfTickets.add(ticket);
@@ -150,15 +140,19 @@ public class MovieGoerBooking implements Serializable {
 
 	} 
 	    public void getInfo() {
-
 	        
 	        System.out.println("Name: " + name);
 	        System.out.println("Mobile number: " + mobileNumber);
 	        System.out.println("Email: "+ email);
 	        System.out.println("Movie booked: " + selectedMovie);
 	        System.out.println("Cinema code: " + cinemaCode);
-	        System.out.println("Seat number: " + seatNum);
 	        System.out.println("Movie time: " + showDateTime);
+	        System.out.println();
+	        for(int i = 0; i < listOfTickets.size(); i++) {
+	        	System.out.print("----- Ticket " + (i+1) + " Details -----");
+	        	System.out.println(listOfTickets.get(i));
+	        }
+	        
 	       
 
 	 }

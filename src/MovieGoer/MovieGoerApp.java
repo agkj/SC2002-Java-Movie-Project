@@ -257,7 +257,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			String movieID = selectedMovie.getMovieId();
 			String movieName = selectedMovie.getTitle();
 
-			newBooking.setSelectedMovie(movieID);
+			newBooking.setSelectedMovie(movieName);
 
 			// *******FUNCTIONS TO IMPLEMENT**************\\
 			System.out.println("------- VIEW CINEPLEX -------\n");
@@ -268,6 +268,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                 path = new File(root + "\\data\\cineplex");
                 files = path.listFiles();
                 double price =0;
+                double newPrice = 0;
             	
                 // Read all available Cineplex created
                 if (files != null) {
@@ -321,7 +322,6 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                             seatNum = sc.next();
                         }
                         // TODO maybe book seat only after payment complete
-                       newBooking.setSeatNum(seatNum);
                         System.out.println("\nSelect ticket type: ");
                         for(int i=0; i < TicketType.values().length; i++) {
                         	System.out.println((i+1) + ") " + TicketType.values()[i]);
@@ -329,20 +329,21 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                         
                         // Get selected Cineplex file and object
                         TicketType ticketType = TicketType.values()[sc.nextInt()-1];
-                        
+                        newBooking.setShowDateTime(selectedShowtime.getShowDateTime());
                         // Create Ticket Object
                         Ticket newTicket = new Ticket();
    
                         newTicket.setTicketType(ticketType);
+                        newTicket.setSeat(seatNum);
                         newTicket.setMovieType(selectedMovie.getMovieType());
                         newTicket.setCinemaclass(selectedCinema.getCinemaClass());
 
 
                         newTicket.setDayType(DayType.MON_WED);	// TODO need to check for day type
                         
-                       // price = newTicket.calculateTicketPrice();
-                        newTicket.setTicketPrice(price);
-                        price = price + newTicket.calculateTicketPrice();
+                        newPrice = newTicket.calculateTicketPrice();
+                        newTicket.setTicketPrice(newPrice);
+                        price = price + newPrice;
                         System.out.println("Total Ticket Price: $" + price);
                         
                         newBooking.addTicket(newTicket);
@@ -375,7 +376,6 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
     			 // movie id
     			String ticID = newBooking.getTicketID();
     			Serializer.serialize(root + "\\data\\bookings\\" + ticID + ".dat", newBooking);
-    			
     			// Reload Movies
     			newBooking.load();
     			newBooking.getInfo(); // TODO check what the ticket saves

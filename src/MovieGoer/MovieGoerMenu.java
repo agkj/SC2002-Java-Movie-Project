@@ -95,7 +95,7 @@ public class MovieGoerMenu extends AppHelper {
 					movieHelper.getTopListings(1);
 				}
 				else{
-					System.out.println("THIS FEATURE IS DISABLED");
+					System.out.println("THIS FEATURE IS DISABLED\n");
 				}
 				runInterface();
 				break;
@@ -105,7 +105,7 @@ public class MovieGoerMenu extends AppHelper {
 
 				}
 				else{
-					System.out.println("THIS FEATURE IS DISABLED");
+					System.out.println("THIS FEATURE IS DISABLED\n");
 				}
 				runInterface();
 				break;

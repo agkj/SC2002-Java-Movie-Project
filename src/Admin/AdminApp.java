@@ -28,7 +28,7 @@ public class AdminApp extends AppHelper {
 
         switch(input) {
             case 0:
-                goBack().runInterface();
+                //goBack().runInterface();
                 break;
             case 1:
                 // Manage Movie Listing

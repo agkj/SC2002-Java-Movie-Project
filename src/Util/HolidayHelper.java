@@ -26,8 +26,8 @@ public class HolidayHelper {
 
             String[] currLine = holidayStrings[i].split(",");
 
-            String name = currLine[0];
-            String date = currLine[1];
+            String name = currLine[0].trim();
+            String date = currLine[1].trim();
 
             try {
                 // Set Name

@@ -50,14 +50,18 @@ public class MovieHelper {
 
             switch(type) {
                 case 1:
-                    System.out.println("------- TOP 5 MOVIES BY TICKET SALES -------\n");
+                	System.out.println("|--------------------------------------------------------|");
+                    System.out.println("| \t\t TOP 5 MOVIES BY TICKET SALES \t\t |");
+                    System.out.println("|--------------------------------------------------------|");
                     for(Map.Entry<String, Double> e:list) {
                         System.out.println(e.getKey() + " - Total Sales: $" + e.getValue());     // Movie Title - Total Sales: $xx
                     }
 
                     break;
                 case 2:
-                    System.out.println("------- TOP 5 MOVIES BY REVIEW RATINGS -------\n");
+                	System.out.println("|--------------------------------------------------------|");
+                    System.out.println("|\t\t TOP 5 MOVIES BY REVIEW RATINGS \t\t\t |");
+                    System.out.println("|--------------------------------------------------------|");
                     for(Map.Entry<String, Double> e:list) {
                         System.out.println(e.getKey() + " - Rating: " + e.getValue());
                     }

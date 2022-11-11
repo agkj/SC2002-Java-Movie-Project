@@ -34,15 +34,16 @@ public class MovieListingApp extends AppHelper {
 
     @Override
     public void runInterface() {
-        System.out.println("------- MANAGE MOVIE LISTINGS -------\n");
-
-        System.out.println("1) Create Movie Listing");
-        System.out.println("2) View Movie Listings");
-        System.out.println("3) Update Movie Listings");
-        System.out.println("4) Remove Movie Listings");
-        System.out.println("5) View Top Five Movies");
-        System.out.println("\n0) Return to Previous Menu");
-        System.out.println("-------------------------------------");
+    	System.out.println("|--------------------------------------------------------|");
+        System.out.println("| \t\t MANAGE MOVIE LISTINGS \t\t\t |");
+        System.out.println("|--------------------------------------------------------|");
+        System.out.println("| 1) Create Movie Listing \t\t\t\t |");
+        System.out.println("| 2) View Movie Listings \t\t\t\t |");
+        System.out.println("| 3) Update Movie Listings \t\t\t\t |");
+        System.out.println("| 4) Remove Movie Listings \t\t\t\t |");
+        System.out.println("| 5) View Top Five Movies \t\t\t\t |");
+        System.out.println("| 0) Return to Previous Menu \t\t\t\t |");
+        System.out.println("|--------------------------------------------------------|");
         //here try catch?TODO
         System.out.println("Select an option: ");
 
@@ -82,7 +83,9 @@ public class MovieListingApp extends AppHelper {
 
     //// (1) CREATE LISTING
     public void createMovie() {
-        System.out.println("------- CREATE MOVIE LISTING -------\n");
+    	System.out.println("|--------------------------------------------------------|");
+        System.out.println("| \t\t CREATE MOVIE LISTING \t\t\t |");
+        System.out.println("|--------------------------------------------------------|");
 
         Movie newMovie = new Movie();
 
@@ -251,7 +254,9 @@ public class MovieListingApp extends AppHelper {
 
     //// (2) VIEW LISTINGS
     public void viewMovies() {
-        System.out.println("------- VIEW MOVIE LISTING -------\n");
+    	System.out.println("|--------------------------------------------------------|");
+        System.out.println("| \t\t VIEW MOVIE LISTING \t\t\t |");
+        System.out.println("|--------------------------------------------------------|");
 
         try {
             // Read all available Movies
@@ -265,21 +270,24 @@ public class MovieListingApp extends AppHelper {
                     System.out.println("  Cast: " + curr.getCast());
                     System.out.println("  Overall Ratings: " + curr.getOverallRating());
                     System.out.println("  Past and Present Reviews: " + curr.getReviews());
-                    System.out.println("-------------------------------------------------------------------");
+                    System.out.println("|--------------------------------------------------------|");
                 }
             }
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        System.out.println("--------- END OF MOVIE LISTING ---------\n");
+        System.out.println("| \t\t END OF MOVIE LISTING \t\t\t |");
+        System.out.println("|--------------------------------------------------------|");
         runInterface();
 
     }
 
     //// (3) UPDATE LISTING
     public void updateMovie() {
-        System.out.println("------- UPDATE MOVIE LISTING -------\n");
+    	System.out.println("|--------------------------------------------------------|");
+        System.out.println("| \t\t UPDATE MOVIE LISTING \t\t\t |");
+        System.out.println("|--------------------------------------------------------|");
         try {
             for(int i=0; i < movieFiles.length; i++) {
                 Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
@@ -326,10 +334,12 @@ public class MovieListingApp extends AppHelper {
                             // Reload Movies
                             this.load();
 
-                            System.out.println("\n------- SUCCESS: UPDATED MOVIE LISTING -------\n");
+                            System.out.println("| \t\t SUCCESS: UPDATED MOVIE LISTING \t\t\t |");
+                            System.out.println("|--------------------------------------------------------|");
                             System.out.println(movieToUpdate);
                         } catch (IOException e) {
-                            System.out.println("\n------- ERROR: PLEASE TRY AGAIN -------\n");
+                            System.out.println("|\t\t ERROR: PLEASE TRY AGAIN \t\t\t |");
+                            System.out.println("|--------------------------------------------------------|");
                             e.printStackTrace();
                         }
 
@@ -511,7 +521,9 @@ public class MovieListingApp extends AppHelper {
     //// (4) DELETE LISTING
     public void removeMovie() {
         //delete movie is changing the status to END OF SHOWING
-        System.out.println("------- DELETE MOVIE LISTING -------\n");
+    	System.out.println("|--------------------------------------------------------|");
+        System.out.println("| \t\t DELETE MOVIE LISTING \t\t\t |");
+        System.out.println("|--------------------------------------------------------|");
 
         // Delete from Listing (by index)
         try {
@@ -567,7 +579,9 @@ public class MovieListingApp extends AppHelper {
     //TicketSales (Display the movie title and total sales)
     //Overall reviewers' rating (Display the movie title and overall rating)
     public void viewTopFive() {
-        System.out.println("------- VIEW TOP 5 MOVIES -------\n");
+    	System.out.println("|--------------------------------------------------------|");
+        System.out.println("| \t\t VIEW TOP 5 MOVIES \t\t\t |");
+        System.out.println("|--------------------------------------------------------|");
         System.out.println("1) View by Ticket Sales");
         System.out.println("2) View by Overall Reviewers' Rating");
 

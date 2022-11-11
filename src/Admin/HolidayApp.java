@@ -14,11 +14,8 @@ public class HolidayApp extends AppHelper {
 
     String root = System.getProperty("user.dir");
 
-    //**** Let Holiday data be stored in a .txt file
-
     public HolidayApp(AppHelper prevApp) {
         super(prevApp);
-
     }
 
     @Override
@@ -26,7 +23,6 @@ public class HolidayApp extends AppHelper {
         System.out.println("-------- CONFIGURE HOLIDAY SETTING -------\n");
 
         System.out.println("1) Create New Holiday");
-        //System.out.println("2) Update Holiday");
         System.out.println("2) Delete Holiday");
 
         System.out.println("\n0) Return to Previous Menu");
@@ -43,12 +39,6 @@ public class HolidayApp extends AppHelper {
                     // Create new holiday
                     createHoliday();
                     break;
-                    /*
-                case 2:
-                    // Update existing holidays
-                    break;
-
-                     */
                 case 2:
                     // Delete existing holidays
                     deleteHoliday();
@@ -100,33 +90,13 @@ public class HolidayApp extends AppHelper {
         }
 
         //// SAVE HOLIDAY
-        writeTXT(root + "\\data\\holiday\\holidays.txt", newHoliday.getHolidayName(), false);
-        writeTXT(root + "\\data\\holiday\\holidays.txt", newHoliday.getHolidayDate().toString(), true);
+        FileReader.writeFile(root + "\\data\\holiday\\holidays.txt", newHoliday.getHolidayName(), false);
+        FileReader.writeFile(root + "\\data\\holiday\\holidays.txt", newHoliday.getHolidayDate().toString(), true);
 
         System.out.println("\n------- SUCCESS: CREATED NEW HOLIDAY -------\n");
 
         // Go back to holiday menu
         runInterface();
-    }
-
-    public static void writeTXT(String filePath, String data, boolean endLine) {
-        FileWriter fw = null;
-
-        try {
-            fw = new FileWriter(filePath, true); // true is used so that previous data is not overwritten
-            BufferedWriter out = new BufferedWriter(fw);
-
-            out.append(data);
-
-            if(endLine)
-                out.append("\n");
-            else
-                out.append(",");
-
-            out.close(); // close BufferedWriter
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 
     //// (2) DELETE HOLIDAY
@@ -146,7 +116,7 @@ public class HolidayApp extends AppHelper {
                 System.out.println("Please enter a holiday name to delete.");
         }
 
-        //removeLine(root + "\\data\\holiday\\holidays.txt", holidayName, true);
+        FileReader.deleteLine(root + "\\data\\holiday\\holidays.txt", holidayName, true);
 
         System.out.println("\n------- SUCCESS: DELETE HOLIDAY -------\n");
 

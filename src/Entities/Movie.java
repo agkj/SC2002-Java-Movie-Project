@@ -121,6 +121,11 @@ public class Movie implements Serializable {
         this.showingStatus = showingStatus;
     }
 
+    // Check if End of Showing
+    public boolean isEndOfShowing() {
+        return this.showingStatus.equals(ShowingStatus.End_Of_Showing);
+    }
+
     // Runtime - Getter and Setter
     public int getRuntime() {
         return runtime;
@@ -175,6 +180,12 @@ public class Movie implements Serializable {
         this.ticketsSold = ticketsSold;
     }
 
+    // Update Both Tickets Sold and Total Sales
+    public void updateSales(int ticketsSold, int ticketSales) {
+        this.ticketsSold += ticketsSold;
+        this.totalSales += ticketSales;
+    }
+
     // Total Sales ($)
     public double getTotalSales() {
         return totalSales;
@@ -199,6 +210,14 @@ public class Movie implements Serializable {
         return showTimes;
     }
 
+    public void updateShowTime(int index, ShowTime newShowtime) {
+        // Update DateTime
+        this.showTimes.get(index).setShowDateTime(newShowtime.getShowDateTime());
+
+        // Update Status
+        this.showTimes.get(index).setShowTimeStatus(newShowtime.getShowTimeStatus());
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
@@ -218,4 +237,5 @@ public class Movie implements Serializable {
                 ", totalSales=" + totalSales +
                 '}';
     }
+
 }

@@ -27,13 +27,13 @@ import Entities.Ticket;
 import Entities.TicketType;
 import Util.Serializer;
 
-public class MovieGoerApp extends MovieListingApp implements Serializable {
+public class MovieBooking extends MovieListingApp implements Serializable {
 
 	Scanner sc = new Scanner(System.in);
 	protected File pathCinema;
 	protected File[] cinemaFiles;
 
-	public MovieGoerApp(AppHelper prevApp) {
+	public MovieBooking(AppHelper prevApp) {
 		super(prevApp);
 
 		// Try to read all cinema .dat files in movie directory
@@ -43,123 +43,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 		cinemaFiles = pathCinema.listFiles();
 	}
 
-
-	public void movieView() {
-
-		System.out.println("|------------------------------VIEW MOVIE LISTING-------------------------------|");
-
-
-		try {
-			// Read all available Movies
-			ArrayList<Movie> filteredMovie = new ArrayList<Movie>();
-			for (int i = 0; i < movieFiles.length; i++) {
-				Movie curr = (Movie) Serializer.deSerialize(movieFiles[i].getAbsolutePath());
-
-				if (!curr.isEndOfShowing())
-					filteredMovie.add(curr);
-			}
-
-			if (filteredMovie != null) {
-				for (int i = 0; i < filteredMovie.size(); i++) {
-					System.out.println("|" + (i + 1) + ")Movie: " + filteredMovie.get(i).getTitle());
-					System.out.println("|  Showing Status: " + filteredMovie.get(i).getShowingStatus());
-					System.out.println("|  Synopsis: " + filteredMovie.get(i).getSynopsis());
-					System.out.println("|  Director: " + filteredMovie.get(i).getDirector());
-					System.out.println("|  Cast: " + filteredMovie.get(i).getCast());
-					System.out.printf("|  Overall Ratings: %.2f\n",filteredMovie.get(i).getOverallRating());
-					if(filteredMovie.get(i).getReviews().size() != 0)
-						System.out.println("|  Past and Present Reviews: " + filteredMovie.get(i).getReviews());
-					else
-						System.out.println("|  Past and Present Reviews: NA");
-					System.out.println(
-							"|-------------------------------------------------------------------------------|");				}
-				System.out.println();
-			}
-
-		} catch (IOException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		goBack().runInterface();
-	}
-	public void movieRate() {
-		try {
-			// Read all available Movies
-
-			System.out.println("|---------------------------------RATE A MOVIE----------------------------------|");
-
-			ArrayList<Movie> filteredMovie = new ArrayList<Movie>();
-			for (int i = 0; i < movieFiles.length; i++) {
-				Movie curr = (Movie) Serializer.deSerialize(movieFiles[i].getAbsolutePath());
-
-				if (curr.getShowingStatus() != ShowingStatus.Coming_Soon) // TODO Coming soon to filter
-					filteredMovie.add(curr);
-			}
-			for (int i = 0; i < filteredMovie.size(); i++) {
-				System.out.println((i + 1) + ") " + filteredMovie.get(i).getTitle());
-			}
-
-			System.out.println("0) Go back");
-			System.out.print("Enter a movie index to rate: ");
-			int index = sc.nextInt() - 1;
-			if (index == -1) {
-				AppHelper prevApp = goBack();
-				prevApp.runInterface();
-			}
-
-			//File selected = movieFiles[index];
-			//Movie movieToUpdate = (Movie) Serializer.deSerialize(movieFiles[index].getAbsolutePath());
-			Movie movieToUpdate = filteredMovie.get(index);
-
-			ArrayList<Review> review = movieToUpdate.getReviews();
-			double overallRating = movieToUpdate.getOverallRating();
-			overallRating = overallRating * review.size();
-			System.out.print("Enter Ratings (1 to 5): ");
-			double userRating = sc.nextDouble();
-			String userReviewId = String.valueOf(review.size() + 1); // get latest ID
-
-			while (userRating < 1 || userRating > 5) {
-				userRating = sc.nextDouble();
-				System.out.println("Please Enter Ratings (1 to 5): ");
-			}
-			System.out.println("Enter Review: ");
-
-			String buffer = sc.nextLine(); // required for previous sc's "\n"
-			String userTextReview = sc.nextLine();
-
-			review.add(new Review(userReviewId, userRating, userTextReview));
-			movieToUpdate.setReviews(review);
-			overallRating = (overallRating + userRating) / review.size();
-			movieToUpdate.setOverallRating(overallRating);
-
-			try {
-				Serializer.serialize(path + "\\" + movieToUpdate.getMovieId() + ".dat", movieToUpdate);
-
-				// Reload Movies
-				this.load();
-
-				System.out.println("\n------- SUCCESS: UPDATED REVIEW -------\n");
-
-			} catch (IOException e) {
-				System.out.println("\n------- ERROR: PLEASE TRY AGAIN -------\n");
-				e.printStackTrace();
-			}
-
-		} catch (Exception e) {
-			System.out.println("\n------- ERROR: MOVIE NOT IN RANGE -------\n");
-			e.printStackTrace();
-		}
-		goBack().runInterface();
-
-	}
-
-	public void movieLoad() {
-		// Try to read all movie .dat files in movie directory
-		path = new File(System.getProperty("user.dir") + "\\data\\movies");
-
-		// Store all movie .dat files
-		movieFiles = path.listFiles();
-	}
-
+/*
 	public void movieTopRatings() {
 
 		try {
@@ -230,8 +114,8 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 		}
 		goBack().runInterface();
 	}
-
-	public void movieBooking() {
+*/
+	public void movieBookings() {
 		System.out.println("|------------------------------------------------|");
 		System.out.println("|-----------------Make a Booking-----------------|");
 
@@ -460,12 +344,5 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 
 	}
 
-	public void movieViewBooking() { // TODO should viewbook be saved under the mobile number and email?
-		System.out.println("---------- SEARCH BOOKING HISTORY ----------\n");
-		MovieGoerCheckBooking checkBooking = new MovieGoerCheckBooking();
-		checkBooking.getBookingDetails();
-
-		goBack().runInterface();
-	}
 
 }

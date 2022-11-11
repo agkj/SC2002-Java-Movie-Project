@@ -76,18 +76,20 @@ public class MovieGoerMenu extends AppHelper {
 
 		int choice = sc.nextInt();
 
-		MovieGoerApp movieApp = new MovieGoerApp(this);
+		
 		MovieHelper movieHelper = new MovieHelper();
 		switch(choice) {
 			case 0:
 				break;
 			case 1:
 				//View movies
-				movieApp.movieView();
+				MovieView movieViewApp = new MovieView(this);
+				movieViewApp.movieViews();
 				break;
 			case 2:
 				// Rate Movies
-				movieApp.movieRate();
+				MovieRate movieRateApp = new MovieRate(this);
+				movieRateApp.movieRates();
 				break;
 			case 3:
 				//list top 5 movies
@@ -111,10 +113,13 @@ public class MovieGoerMenu extends AppHelper {
 				break;
 			case 5:
 				//Make booking
-				movieApp.movieBooking();
+				MovieBooking movieBookingApp = new MovieBooking(this);
+				movieBookingApp.movieBookings();
 				break;
 			case 6:
-				movieApp.movieViewBooking();
+				//View booking
+				MovieViewBooking movieViewBookingApp = new MovieViewBooking(this);
+				movieViewBookingApp.movieViewBookings();
 				break;
 			default: 
 				break;

@@ -23,6 +23,7 @@ public class MovieGoerMenu extends AppHelper {
 
 	public void runInterface() {
 		Scanner sc = new Scanner(System.in);
+		Boolean stay = true;
 		System.out.println("|------------------------------------------------|");
 		System.out.println("| \t Welcome to Customer Module \t\t |");
 		System.out.println("|------------------------------------------------|");
@@ -52,21 +53,23 @@ public class MovieGoerMenu extends AppHelper {
 			}
 		}
 		//look at the admin control
-		System.out.print("| 3) List top 5 movies by ticket sales \t\t\t\t |");
 		if(set_control_ticket == 0){
-			System.out.print(" (DISABLED)");
+			System.out.print("| 3) List top 5 movies by ticket sales (DISABLED) \t |");
+		}else {
+			System.out.print("| 3) List top 5 movies by ticket sales \t\t |");
 		}
 		System.out.println();
-		System.out.print("| 4) List top 5 movies by ratings  \t\t\t\t |");
 		if(set_control_rating == 0){
-			System.out.print(" (DISABLED)");
+			System.out.print("| 4) List top 5 movies by ratings (DISABLED) \t |");
+		}else {
+			System.out.print("| 4) List top 5 movies by ratings  \t\t |");
 		}
-
+		System.out.println();
 		System.out.println("| 5) Make a booking \t\t\t\t |"); //based on booking id/movie code
 		System.out.println("| 6) View booking history \t\t\t |");
 
-		System.out.println('\n');
-		System.out.println("0) Return to main menu");
+		System.out.println("| \t\t\t\t\t\t |");
+		System.out.println("| 0) Return to main menu \t\t\t |");
 		System.out.println("|------------------------------------------------|");
 
 		System.out.println("Select an option :");
@@ -75,7 +78,6 @@ public class MovieGoerMenu extends AppHelper {
 
 		MovieGoerApp movieApp = new MovieGoerApp(this);
 		MovieHelper movieHelper = new MovieHelper();
-		
 		switch(choice) {
 			case 0:
 				break;
@@ -114,10 +116,10 @@ public class MovieGoerMenu extends AppHelper {
 			case 6:
 				movieApp.movieViewBooking();
 				break;
-
-			default: break;
+			default: 
+				break;
 
 			}
 	}
-
+	
 }

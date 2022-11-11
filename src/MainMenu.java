@@ -77,13 +77,13 @@ public class MainMenu extends AppHelper {
 					break;
 
 				default:
-					System.out.println("----------------");
+					System.out.println("----------------------");
 					System.out.println("Enter a correct option");
 					break;
 				}
 
 			} catch (InputMismatchException e) {
-				System.out.println("----------------");
+				System.out.println("----------------------");
 				System.out.println("Enter a correct option");
 				sc.next();
 				continue;

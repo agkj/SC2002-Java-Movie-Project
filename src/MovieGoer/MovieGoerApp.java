@@ -44,20 +44,19 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 	}
 
 	public void movieView() {
-		
+
 		System.out.println("|------------------------------VIEW MOVIE LISTING-------------------------------|");
-		
 
 		try {
 			// Read all available Movies
 			ArrayList<Movie> filteredMovie = new ArrayList<Movie>();
 			for (int i = 0; i < movieFiles.length; i++) {
 				Movie curr = (Movie) Serializer.deSerialize(movieFiles[i].getAbsolutePath());
-				
+
 				if (!curr.isEndOfShowing())
 					filteredMovie.add(curr);
 			}
-			
+
 			if (filteredMovie != null) {
 				for (int i = 0; i < filteredMovie.size(); i++) {
 					System.out.println((i + 1) + ")Movie: " + filteredMovie.get(i).getTitle());
@@ -67,8 +66,9 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 					System.out.println("  Cast: " + filteredMovie.get(i).getCast());
 					System.out.println("  Overall Ratings: " + filteredMovie.get(i).getOverallRating());
 					System.out.println("  Past and Present Reviews: " + filteredMovie.get(i).getReviews());
-					
-					System.out.println("|-------------------------------------------------------------------------------|");
+
+					System.out.println(
+							"|-------------------------------------------------------------------------------|");
 				}
 				System.out.println();
 			}
@@ -82,28 +82,27 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 	public void movieRate() {
 		try {
 			// Read all available Movies
-			
+
 			System.out.println("|---------------------------------RATE A MOVIE----------------------------------|");
-			
+
 			ArrayList<Movie> filteredMovie = new ArrayList<Movie>();
 			for (int i = 0; i < movieFiles.length; i++) {
 				Movie curr = (Movie) Serializer.deSerialize(movieFiles[i].getAbsolutePath());
-				
+
 				if (curr.getShowingStatus() != ShowingStatus.Coming_Soon) // TODO Coming soon to filter
 					filteredMovie.add(curr);
 			}
-			for(int i = 0; i < filteredMovie.size(); i++) {
+			for (int i = 0; i < filteredMovie.size(); i++) {
 				System.out.println((i + 1) + ") " + filteredMovie.get(i).getTitle());
 			}
-			
+
 			System.out.println("0) Go back");
 			System.out.print("Enter a movie index to rate: ");
 			int index = sc.nextInt() - 1;
-			if(index==-1) {
+			if (index == -1) {
 				AppHelper prevApp = goBack();
-                prevApp.runInterface();
+				prevApp.runInterface();
 			}
-			
 
 			File selected = movieFiles[index];
 			Movie movieToUpdate = (Movie) Serializer.deSerialize(movieFiles[index].getAbsolutePath());
@@ -216,9 +215,9 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			});
 			System.out.println("|------------------------------------------------|");
 			System.out.println("|\t Here are the top 5 movies by sale! \t |");
-			
+
 			for (Map.Entry<String, Integer> e : list) {
-				System.out.println(e.getKey() + "\t Tickets sold: " + e.getValue()+"\t\t |");
+				System.out.println(e.getKey() + "\t Tickets sold: " + e.getValue() + "\t\t |");
 			}
 			System.out.println("|------------------------------------------------|");
 
@@ -231,7 +230,6 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 	public void movieBooking() {
 		System.out.println("|------------------------------------------------|");
 		System.out.println("|-----------------Make a Booking-----------------|");
-		
 
 		MovieGoerBooking newBooking = new MovieGoerBooking();
 
@@ -251,8 +249,6 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 		String customerEmail = sc.next();
 		newBooking.setEmail(customerEmail);
 
-		
-
 		// list available movies, user select movie
 
 		try {
@@ -260,39 +256,46 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			System.out.println("|------------------------------------------------|");
 			System.out.println("|\t\tList of Movies: \t\t |");
 			// Read all available Movies if not End_of_Showing
-			
+
 			ArrayList<Movie> filteredMovie = new ArrayList<Movie>();
 			for (int i = 0; i < movieFiles.length; i++) {
 				Movie curr = (Movie) Serializer.deSerialize(movieFiles[i].getAbsolutePath());
-				
-				if (!curr.isEndOfShowing() & curr.getShowingStatus() != ShowingStatus.Coming_Soon) // TODO Coming soon to filter
+
+				if (!curr.isEndOfShowing() & curr.getShowingStatus() != ShowingStatus.Coming_Soon) // TODO Coming soon
+																									// to filter
 					filteredMovie.add(curr);
 			}
-			for(int i = 0; i < filteredMovie.size(); i++) {
-				System.out.println("| "+(i + 1) + ") " + filteredMovie.get(i).getTitle() + "[" + filteredMovie.get(i).getContentRating().toString()
-						+ "] - " + (filteredMovie).get(i).getShowingStatus());
+			for (int i = 0; i < filteredMovie.size(); i++) {
+				System.out.println("| " + (i + 1) + ") " + filteredMovie.get(i).getTitle() + "["
+						+ filteredMovie.get(i).getContentRating().toString() + "] - "
+						+ (filteredMovie).get(i).getShowingStatus());
 			}
+
+			System.out.println("| 0) Go back to main menu \t\t\t |");
+
 			System.out.println(("|------------------------------------------------|"));
-			
-			
 
 			System.out.println("Choose a movie to book");
 			int movieChoice = sc.nextInt() - 1;
+			if (movieChoice == -1) {
+				AppHelper prevApp = goBack();
+				prevApp.runInterface();
+
+			}
+
 			System.out.println("How many tickets are you buying: ");
 			int customerTickets = sc.nextInt();
 			int totalTicket = customerTickets;
-			
-			
-			
 
-			//File selected = movieFiles[movieChoice];
+			// File selected = movieFiles[movieChoice];
 			// Movie selectedMovie = (Movie) Serializer.deSerialize(path + "\\" +
 			// movieFiles[movieChoice].getName());
-			//Movie selectedMovie = (Movie) Serializer.deSerialize(movieFiles[movieChoice].getAbsolutePath());
+			// Movie selectedMovie = (Movie)
+			// Serializer.deSerialize(movieFiles[movieChoice].getAbsolutePath());
 			Movie selectedMovie = (Movie) filteredMovie.get(movieChoice);
 			System.out.println("You are booking " + selectedMovie.getTitle());
 
-			//String movieID = selectedMovie.getMovieId();
+			// String movieID = selectedMovie.getMovieId();
 			String movieName = selectedMovie.getTitle();
 
 			newBooking.setSelectedMovie(movieName);
@@ -300,7 +303,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			// *******FUNCTIONS TO IMPLEMENT**************\\
 			System.out.println(("|------------------------------------------------|"));
 			System.out.println(("|\t\tChoose a cineplex\t\t |"));
-			
+
 			try {
 
 				File path;
@@ -316,7 +319,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 						// Cineplex curr = (Cineplex) Serializer.deSerialize(path + "\\" +
 						// files[i].getName());
 						Cineplex curr = (Cineplex) Serializer.deSerialize(files[i].getAbsolutePath());
-						System.out.println("| "+(i + 1) + ") " + curr.getVenue() );
+						System.out.println("| " + (i + 1) + ") " + curr.getVenue());
 					}
 					System.out.println("|------------------------------------------------|");
 					System.out.print("\nSelect Cineplex: ");
@@ -397,14 +400,27 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 					}
 
 				}
+				
+						System.out.print("1) Confirm payment\n");
+						System.out.println("0) Cancel payment");
+						int cont = sc.nextInt();
 
-				System.out.print("\nPlease select 1 to continue with payment: ");
-				int cont = sc.nextInt();
-				while (cont != 1) {
-					System.out.print("\nPlease select 1 to continue with payment: ");
-					cont = sc.nextInt();
+						if (cont == 0) {
+							AppHelper prevApp = goBack();
+							prevApp.runInterface();
+						}
+						while (cont != 1) {
+							System.out.print("\nPlease select 1 to continue with payment: ");
+							System.out.println("Select 0 to cancel payment");
+							cont = sc.nextInt();
+						
 
-				}
+						}
+
+					
+
+				
+
 				// TODO Try catch maybe?
 
 				System.out.println("Thank you for booking with us.");

@@ -61,16 +61,16 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 
 			if (filteredMovie != null) {
 				for (int i = 0; i < filteredMovie.size(); i++) {
-					System.out.println((i + 1) + ")Movie: " + filteredMovie.get(i).getTitle());
-					System.out.println("  Showing Status: " + filteredMovie.get(i).getShowingStatus());
-					System.out.println("  Synopsis: " + filteredMovie.get(i).getSynopsis());
-					System.out.println("  Director: " + filteredMovie.get(i).getDirector());
-					System.out.println("  Cast: " + filteredMovie.get(i).getCast());
-					System.out.printf("  Overall Ratings: %.2f\n",filteredMovie.get(i).getOverallRating());
+					System.out.println("|" + (i + 1) + ")Movie: " + filteredMovie.get(i).getTitle());
+					System.out.println("|  Showing Status: " + filteredMovie.get(i).getShowingStatus());
+					System.out.println("|  Synopsis: " + filteredMovie.get(i).getSynopsis());
+					System.out.println("|  Director: " + filteredMovie.get(i).getDirector());
+					System.out.println("|  Cast: " + filteredMovie.get(i).getCast());
+					System.out.printf("|  Overall Ratings: %.2f\n",filteredMovie.get(i).getOverallRating());
 					if(filteredMovie.get(i).getReviews().size() != 0)
-						System.out.println("  Past and Present Reviews: " + filteredMovie.get(i).getReviews());
+						System.out.println("|  Past and Present Reviews: " + filteredMovie.get(i).getReviews());
 					else
-						System.out.println("  Past and Present Reviews: NA");
+						System.out.println("|  Past and Present Reviews: NA");
 					System.out.println(
 							"|-------------------------------------------------------------------------------|");				}
 				System.out.println();

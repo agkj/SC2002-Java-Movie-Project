@@ -346,9 +346,15 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 							// Show showtime
 							LocalDateTime showtimeDate = curr.getShowDateTime();
 							String day = showtimeDate.getDayOfWeek().toString();
-
-							if(curr.checkDayType().equals(DayType.HOLIDAY))
-								day += " (PH)";
+							
+							//TODO Check error
+							try {
+								if(curr.checkDayType().equals(DayType.HOLIDAY))
+									day += " (PH)";
+							}catch(Exception e) {
+								
+							}
+							
 
 							System.out.println(i+1 + ") " +  day + " - " + curr.getShowDateTime() + " (" + currCinema.getCinemaClass().toString() + " Class)");
 							filteredShowtimes.add(curr);

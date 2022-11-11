@@ -40,6 +40,7 @@ public class MovieGoerCheckBooking extends MovieGoerBooking{
 					//movieBooking.getInfo();
 					//maybe show date and time where movie is booked
 					System.out.println("|----------------------------------------|");
+					movieBooking.getInfo();
 					setter ++;
 				}
 				

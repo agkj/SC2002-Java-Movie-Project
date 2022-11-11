@@ -100,6 +100,7 @@ public class CineplexApp extends AppHelper {
                 //// FIN, Show Cineplex Created
                 try {
                     Serializer.serialize(root+"\\data\\cineplex\\"+outlet.getCineplexID()+".dat", outlet);
+                    this.load();
 
                     System.out.println("\n------- SUCCESS: CREATED NEW OUTLET -------\n");
                     System.out.println(outlet);

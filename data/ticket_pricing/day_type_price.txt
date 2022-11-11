@@ -1,6 +1,6 @@
-Mon to Wed,-1.0
-Thu,-0.5
-Fri (before 6PM),-0.5
-Fri (after 6PM),1.0
-Weekend, 1.0
-Public Holiday, 1.0
+Mon to Wed,0.0
+Thu,1.0
+Fri (before 6PM),1.0
+Fri (after 6PM),2.5
+Weekend, 2.5
+Public Holiday, 3.0

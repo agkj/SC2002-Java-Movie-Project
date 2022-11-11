@@ -34,9 +34,9 @@ public class MovieGoerCheckBooking extends MovieGoerBooking implements Serializa
 				
 				if(userEmail.equals(movieBooking.getEmail())) {
 					
-					System.out.println("| Cinema code: " + movieBooking.getCinemaCode()+ "\t\t\t |");
-					System.out.println("| Movie code: "+movieBooking.getSelectedMovie()+ "\t\t\t |");
-					System.out.println("| TransactionID:"+movieBooking.getTicketID()+"\t |");
+					System.out.println("| Cinema code: " + movieBooking.getCinemaCode()+ "\t\t\t ");
+					System.out.println("| Movie code: "+movieBooking.getSelectedMovie()+ "\t\t\t ");
+					System.out.println("| TransactionID:"+movieBooking.getTicketID()+"\t ");
 					//movieBooking.getInfo();
 					//maybe show date and time where movie is booked
 					System.out.println("|----------------------------------------|");

@@ -349,7 +349,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
     			
     			// Reload Movies
     			newBooking.load();
-    			newBooking.getInfo(); // TODO check what the ticket saves
+    			//newBooking.getInfo(); // TODO check what the ticket saves
     			
     			
             } catch (Exception e) {
@@ -366,7 +366,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 }
 
 
-	public void movieViewBooking() { // TODO should viewbook be saved under the mobile number and email?
+	public void movieViewBooking() { // TODO should viewbook be saved and email?
 		System.out.println("---------- SEARCH BOOKING HISTORY ----------\n");
 		MovieGoerCheckBooking checkBooking = new MovieGoerCheckBooking();
 		checkBooking.getBookingDetails();

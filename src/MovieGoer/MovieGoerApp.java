@@ -368,7 +368,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
     			
     			// Reload Movies
     			newBooking.load();
-    			newBooking.toString(); // TODO check what the ticket saves
+    			System.out.println(newBooking.toString()); // TODO check what the ticket saves
     			
     			
             } catch (Exception e) {

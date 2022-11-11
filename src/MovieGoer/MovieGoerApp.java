@@ -36,27 +36,29 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 	public MovieGoerApp(AppHelper prevApp) {
 		super(prevApp);
 
-		// Try to read all movie .dat files in movie directory
+		// Try to read all cinema .dat files in movie directory
 		pathCinema = new File(System.getProperty("user.dir") + "\\data\\cinema");
 
 		// Store all movie .dat files
 		cinemaFiles = pathCinema.listFiles();
 	}
 
-	public void movieView() {
 
+	public void movieView() {
+		
 		System.out.println("|------------------------------VIEW MOVIE LISTING-------------------------------|");
+		
 
 		try {
 			// Read all available Movies
 			ArrayList<Movie> filteredMovie = new ArrayList<Movie>();
 			for (int i = 0; i < movieFiles.length; i++) {
 				Movie curr = (Movie) Serializer.deSerialize(movieFiles[i].getAbsolutePath());
-
+				
 				if (!curr.isEndOfShowing())
 					filteredMovie.add(curr);
 			}
-
+			
 			if (filteredMovie != null) {
 				for (int i = 0; i < filteredMovie.size(); i++) {
 					System.out.println((i + 1) + ")Movie: " + filteredMovie.get(i).getTitle());
@@ -64,12 +66,13 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 					System.out.println("  Synopsis: " + filteredMovie.get(i).getSynopsis());
 					System.out.println("  Director: " + filteredMovie.get(i).getDirector());
 					System.out.println("  Cast: " + filteredMovie.get(i).getCast());
-					System.out.println("  Overall Ratings: " + filteredMovie.get(i).getOverallRating());
-					System.out.println("  Past and Present Reviews: " + filteredMovie.get(i).getReviews());
-
+					System.out.printf("  Overall Ratings: %.2f\n",filteredMovie.get(i).getOverallRating());
+					if(filteredMovie.get(i).getReviews().size() != 0)
+						System.out.println("  Past and Present Reviews: " + filteredMovie.get(i).getReviews());
+					else
+						System.out.println("  Past and Present Reviews: NA");
 					System.out.println(
-							"|-------------------------------------------------------------------------------|");
-				}
+							"|-------------------------------------------------------------------------------|");				}
 				System.out.println();
 			}
 
@@ -78,7 +81,6 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 		}
 		goBack().runInterface();
 	}
-
 	public void movieRate() {
 		try {
 			// Read all available Movies
@@ -104,8 +106,10 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 				prevApp.runInterface();
 			}
 
-			File selected = movieFiles[index];
-			Movie movieToUpdate = (Movie) Serializer.deSerialize(movieFiles[index].getAbsolutePath());
+			//File selected = movieFiles[index];
+			//Movie movieToUpdate = (Movie) Serializer.deSerialize(movieFiles[index].getAbsolutePath());
+			Movie movieToUpdate = filteredMovie.get(index);
+			
 			ArrayList<Review> review = movieToUpdate.getReviews();
 			double overallRating = movieToUpdate.getOverallRating();
 			overallRating = overallRating * review.size();
@@ -128,13 +132,13 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			movieToUpdate.setOverallRating(overallRating);
 
 			try {
-				Serializer.serialize(path + "\\" + selected.getName(), movieToUpdate);
+				Serializer.serialize(path + "\\" + movieToUpdate.getMovieId() + ".dat", movieToUpdate);
 
 				// Reload Movies
 				this.load();
 
 				System.out.println("\n------- SUCCESS: UPDATED REVIEW -------\n");
-				System.out.println(movieToUpdate);
+				
 			} catch (IOException e) {
 				System.out.println("\n------- ERROR: PLEASE TRY AGAIN -------\n");
 				e.printStackTrace();

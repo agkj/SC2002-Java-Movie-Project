@@ -2,6 +2,7 @@ package Admin;
 
 import Util.AppHelper;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AdminApp extends AppHelper {
@@ -22,13 +23,21 @@ public class AdminApp extends AppHelper {
         System.out.println("2) Manage Cinema Showtimes");
         System.out.println("3) Configure System Settings");
         System.out.println("\n0) Logout");
-        System.out.println("-----------------------");
-        System.out.println("Select an option :");
+
+        boolean doNotQuit = true;
+
+        while(!sc.hasNextInt()) {
+            System.out.println("-----------------------");
+            System.out.println("Select an option :");
+            sc.next();
+        }
+
         int input = sc.nextInt();
 
         switch(input) {
             case 0:
                 //goBack().runInterface();
+                doNotQuit = false;
                 break;
             case 1:
                 // Manage Movie Listing

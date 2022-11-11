@@ -143,7 +143,7 @@ public class TicketPricingApp extends AppHelper {
 
         float typeModifier = sc.nextFloat();
 
-        FileReader.replaceLine(root + "cinema_class_ticket.txt", selectedType, selectedType + "," + typeModifier, false);
+        FileReader.replaceLine(root + "movie_type_price.txt", selectedType, selectedType + "," + typeModifier, false);
 
         runInterface();
     }
@@ -171,7 +171,6 @@ public class TicketPricingApp extends AppHelper {
         float classPrice = sc.nextFloat();
 
         FileReader.replaceLine(root + "cinema_class_price.txt", selectedClass, selectedClass + "," + classPrice, false);
-        //FileReader.writeFile(root + "cinema_class_ticket.txt", selectedClass + ", " + classPrice, true);
 
         runInterface();
     }

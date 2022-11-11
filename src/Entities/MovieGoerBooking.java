@@ -149,16 +149,18 @@ public class MovieGoerBooking implements Serializable {
 		// formatter.format(date));
 
 	} 
-	 @Override
-	    public String toString() {
-	        return  "Name= " + name +
+	    public void getInfo() {
+	        System.out.println("Name= " + name +
 	                "\nMobile Number= " + mobileNumber +
 	                "\nEmail= " + email +
 	                "\nMovie= " + selectedMovie +
 	                "\nCinema= " + cinemaCode +
-	                "\nTime= " + showDateTime +
-	                "\nSeat= " + seatNum +
-	                "\nTicket= " + listOfTickets;
+	                "\nSeat= " + seatNum);
+	                //"\nTime= " + showDateTime +
+	                //"\nSeat= " + seatNum);
+	        for(int i =0; i < (listOfTickets).size() ; i++) {
+	        	System.out.println(listOfTickets.get(i));
+	        }
 	 }
 
 	/*

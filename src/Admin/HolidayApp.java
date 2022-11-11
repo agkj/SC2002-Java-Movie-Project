@@ -122,48 +122,4 @@ public class HolidayApp extends AppHelper {
 
         runInterface();
     }
-
-    /*
-    public static void removeLine(String filePath, String lineToRemove, boolean containsFlag) {
-        // containsFlag checks if the string passed in lineToRemove is a substring
-
-        String line;
-        lineToRemove = lineToRemove.toLowerCase();
-
-        File file = new File(filePath);
-        File tempFile = new File("tempFile.txt");
-
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            BufferedWriter out = new BufferedWriter(new FileWriter(tempFile));
-
-            System.out.println("trying to delete " + lineToRemove);
-
-            // File Reader(*Where you have installed the CSV file)
-            while ((line = br.readLine()) != null) { // Read till end of data
-                String trimmedLine = line.trim();   // Line in file to compare
-
-                if(containsFlag) {
-                    System.out.println("comparing with " + trimmedLine.toLowerCase());
-
-                    if(trimmedLine.toLowerCase().contains(lineToRemove)) {
-                        System.out.println("detected");
-                        continue;
-                    }
-
-                    out.write(line + System.getProperty("line.separator"));
-
-                }
-            }
-            br.close(); // close BufferedReader
-            out.close();
-
-            // Replace old file with new temp file (with removed value)
-            file.delete();
-            tempFile.renameTo(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    */
 }

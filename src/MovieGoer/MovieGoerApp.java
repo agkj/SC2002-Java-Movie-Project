@@ -91,11 +91,11 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			double overallRating = movieToUpdate.getOverallRating();
 			overallRating = overallRating * review.size();
 			System.out.print("Enter Ratings (1 to 5): ");
-			double userRating = sc.nextInt();
+			double userRating = sc.nextDouble();
 			String userReviewId = String.valueOf(review.size() + 1); // get latest ID
 
 			while (userRating < 1 || userRating > 5) {
-				userRating = sc.nextInt();
+				userRating = sc.nextDouble();
 				System.out.println("Please Enter Ratings (1 to 5): ");
 			}
 			System.out.println("Enter Review: ");
@@ -330,7 +330,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                             seatNum = sc.next();
                         }
                         // TODO maybe book seat only after payment complete
-                        
+                       newBooking.setSeatNum(seatNum);
                         System.out.println("\nSelect ticket type: ");
                         for(int i=0; i < TicketType.values().length; i++) {
                         	System.out.println((i+1) + ") " + TicketType.values()[i]);
@@ -341,6 +341,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                         
                         // Create Ticket Object
                         Ticket newTicket = new Ticket();
+   
                         newTicket.setTicketType(ticketType);
                         newTicket.setMovieType(selectedMovie.getMovieType());
                         newTicket.setCinemaclass(selectedCinema.getCinemaClass());
@@ -386,7 +387,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
     			
     			// Reload Movies
     			newBooking.load();
-    			newBooking.toString(); // TODO check what the ticket saves
+    			newBooking.getInfo(); // TODO check what the ticket saves
     			
     			
             } catch (Exception e) {

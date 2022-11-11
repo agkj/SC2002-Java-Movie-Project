@@ -348,7 +348,7 @@ public class ShowtimeApp extends AppHelper {
                             // Try to save file
                             try {
                                 // Update Movie Object
-                                selectedMovie.updateShowTime(showtime_index, selectedShowTime);
+                                selectedMovie.updateShowTime(showtime_index-1, selectedShowTime);
 
                                 // Update Movie File with updated showtime arraylist
                                 Serializer.serialize(root + "\\data\\movies\\" + selectedMovie.getMovieId() + ".dat", selectedMovie);

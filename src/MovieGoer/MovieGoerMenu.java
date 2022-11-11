@@ -24,17 +24,16 @@ public class MovieGoerMenu extends AppHelper {
 
 	public void runInterface() {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("-----------------------");
-		System.out.println("Welcome to Customer Module");
-		System.out.println("-----------------------");
+		System.out.println("|------------------------------------------------|");
+		System.out.println("| \t Welcome to Customer Module \t\t |");
+		System.out.println("|------------------------------------------------|");
 		//call list movie functions
-		
-		System.out.println("1) View movies"); // ->select movies -> booking ->check seat availability
-		System.out.println("2) Rate movies");
+
+		System.out.println("| 1) View movies \t\t\t\t |"); // ->select movies -> booking ->check seat availability
+		System.out.println("| 2) Rate movies \t\t\t\t |");
+
 		StringBuffer optionView = FileReader.copyFile(root + "\\data\\admin_control\\control.txt");
 		String[] optionStrings = optionView.toString().split("\n");
-		System.out.println("3) Make a booking"); //based on booking id/movie code
-		System.out.println("4) View booking history");
 
 		//look at the admin control
 		int set_control_ticket = 0;
@@ -48,25 +47,28 @@ public class MovieGoerMenu extends AppHelper {
 			if(option.equals("Ticket Sales") && optionBoolean.equals("true")){
 				set_control_ticket = 1;
 
-
 			}else if(option.equals("Reviewers' Rating") && optionBoolean.equals("true")){
 				set_control_rating = 1;
-
 			}
 		}
 		//look at the admin control
-		System.out.print("5) List top 5 movies by ticket sales");
+		System.out.print("| 3) List top 5 movies by ticket sales \t\t\t\t |");
 		if(set_control_ticket == 0){
 			System.out.print(" (DISABLED)");
 		}
 		System.out.println();
-		System.out.print("6) List top 5 movies by ratings");
+		System.out.print("| 4) List top 5 movies by ratings  \t\t\t\t |");
 		if(set_control_rating == 0){
 			System.out.print(" (DISABLED)");
 		}
+
+		System.out.println("| 5) Make a booking \t\t\t\t |"); //based on booking id/movie code
+		System.out.println("| 6) View booking history \t\t\t |");
+
 		System.out.println('\n');
 		System.out.println("0) Return to main menu");
-		System.out.println("-----------------------");
+		System.out.println("|------------------------------------------------|");
+
 		System.out.println("Select an option :");
 		int choice = sc.nextInt();	
 		
@@ -76,61 +78,45 @@ public class MovieGoerMenu extends AppHelper {
 		switch(choice) {
 			case 0:
 				break;
-		case 1:
-			//View movies
-			//movieReview.viewMovie();
-			movieApp.movieView();
-			break;
-		case 2:
-			
-			//movieReview.setReview();
-			movieApp.movieRate();
-			//rate movies
-			
-			break;
+			case 1:
+				//View movies
+				movieApp.movieView();
+				break;
+			case 2:
+				// Rate Movies
+				movieApp.movieRate();
+				break;
 			case 3:
+				//list top 5 movies
+				if(set_control_ticket == 1) {
+					movieHelper.getTopListings(1);
+				}
+				else{
+					System.out.println("THIS FEATURE IS DISABLED");
+				}
+				runInterface();
+				break;
+			case 4:
+				if(set_control_rating == 1){
+					movieHelper.getTopListings(2);
 
+				}
+				else{
+					System.out.println("THIS FEATURE IS DISABLED");
+				}
+				runInterface();
+				break;
+			case 5:
 				//Make booking
 				movieApp.movieBooking();
 				break;
-			case 4:
+			case 6:
 				movieApp.movieViewBooking();
 				break;
 
-			case 5:
-			//list top 5 movies
-			if(set_control_ticket == 1) {
-				movieHelper.getTopListings(1);
-			}
-			else{
-				System.out.println("THIS FEATURE IS DISABLED");
-			}
-			runInterface();
-			break;
-
-			//movieTop5.movieSort();
-			//movieApp.movieTopRatings();
-			case 6:
-			if(set_control_rating == 1){
-				movieHelper.getTopListings(2);
+			default: break;
 
 			}
-			else{
-				System.out.println("THIS FEATURE IS DISABLED");
-			}
-			runInterface();
-			break;
-//		case 4:
-//			movieApp.movieTopSales();
-//			break;
-			
-
-			
-			
-			
-		default: break;
-		
-		}
 	}
 
 }

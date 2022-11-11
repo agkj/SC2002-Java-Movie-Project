@@ -6,9 +6,9 @@ import java.io.File;
 import java.io.Serial;
 import java.io.Serializable;
 
-public class Ticket implements Serializable{
-    @Serial
-    private static final long serialVersionUID = 2002;
+public class Ticket implements Serializable {
+	@Serial
+	private static final long serialVersionUID = 2002;
 
     //Attributes:
     private double ticketPrice;
@@ -21,7 +21,7 @@ public class Ticket implements Serializable{
     //constructor
     public Ticket(){};
 
-    public Ticket(double ticketPrice, TicketType ticketType, MovieType movieType, CinemaClass cinemaclass,
+	public Ticket(double ticketPrice, TicketType ticketType, MovieType movieType, CinemaClass cinemaclass,
 			DayType dayType, String seatNum) {
 		super();
 		this.ticketPrice = ticketPrice;
@@ -32,7 +32,7 @@ public class Ticket implements Serializable{
 		this.seatNum = seatNum;
 	}
 
-    // Getter and Setters
+	// Getter and Setters
 	public double getTicketPrice() {
 		return ticketPrice;
 	}
@@ -78,7 +78,7 @@ public class Ticket implements Serializable{
 		return Double.parseDouble(price);
 	}
 
-    public double calculateTicketPrice() {
+	public double calculateTicketPrice() {
 		double totalPrice = 0;
 
 		double standardPrice, bookingFee;
@@ -87,42 +87,42 @@ public class Ticket implements Serializable{
 		File path = new File(System.getProperty("user.dir") + "\\data\\ticket_pricing\\");
 
 		// Get Standard/Base Ticket Price
-        String standardPriceString = FileReader.readLine(path + "\\standard_ticket.txt", "Standard");
-		if(standardPriceString != null) {
+		String standardPriceString = FileReader.readLine(path + "\\standard_ticket.txt", "Standard");
+		if (standardPriceString != null) {
 			standardPrice = extractPrice(standardPriceString);
 			totalPrice += standardPrice;
 		}
 
 		String bookingFeeString = FileReader.readLine(path + "\\standard_ticket.txt", "Booking");
-		if(bookingFeeString != null) {
+		if (bookingFeeString != null) {
 			bookingFee = extractPrice(bookingFeeString);
 			totalPrice += bookingFee;
 		}
 
 		//// Get Ticket Type Modifier
 		String ticketTypeString = FileReader.readLine(path + "\\ticket_type_price.txt", this.ticketType.toString());
-		if(ticketTypeString != null) {
+		if (ticketTypeString != null) {
 			ticketTypeMod = extractPrice(ticketTypeString);
 			totalPrice += ticketTypeMod;
 		}
 
 		// Get Cinema Class Modifier
 		String cinemaClassString = FileReader.readLine(path + "\\cinema_class_price.txt", this.cinemaclass.toString());
-		if(cinemaClassString != null) {
+		if (cinemaClassString != null) {
 			cinemaClassMod = extractPrice(cinemaClassString);
 			totalPrice += cinemaClassMod;
 		}
 
 		// Get Day Type Modifier
 		String dayTypeString = FileReader.readLine(path + "\\day_type_price.txt", this.dayType.toString());
-		if(dayTypeString != null) {
+		if (dayTypeString != null) {
 			dayTypeMod = extractPrice(dayTypeString);
 			totalPrice += dayTypeMod;
 		}
 
 		// Get Movie Type Modifier (do last because it's a multiplier)
 		String movieTypeString = FileReader.readLine(path + "\\movie_type_price.txt", this.movieType.toString());
-		if(movieTypeString != null) {
+		if (movieTypeString != null) {
 			movieTypeMod = extractPrice(movieTypeString);
 			totalPrice *= movieTypeMod;
 		}
@@ -148,5 +148,19 @@ public class Ticket implements Serializable{
         		"\nPrice: " + ticketPrice +"\n";
         		
     }
+	
+	public void getTicketInfo() {
+		System.out.println();
+		System.out.println("| Day type: " + dayType + "\t\t\t\t |");
+		System.out.println("| Ticket type:" + ticketType + "\t\t\t\t |");
+		System.out.println("| Cinema class: " + cinemaclass + "\t\t\t\t |");
+		System.out.println("| Movie type: " + movieType + "\t\t\t\t |");
+		System.out.println("| Seat number: " + seatNum + "\t\t\t\t |");
+		System.out.println("| Ticket price: " + ticketPrice + "\t\t\t\t |\n");
+
+//		return "\nDay Type: " + dayType + "\nType: " + ticketType + "\nCinema: " + cinemaclass + "\nMovie Type: "
+//				+ movieType + "\nSeat: " + seatNum + "\nPrice: " + ticketPrice + "\n";
+
+	}
 
 }

@@ -33,7 +33,7 @@ public class MainMenu extends AppHelper {
 				System.out.println("| 2) Customer \t\t\t\t\t\t |");
 				System.out.println("| 3) Quit   \t\t\t\t\t\t |");
 				System.out.println("|--------------------------------------------------------|");
-				System.out.print("| Select an option: ");
+				System.out.print(" Select an option: ");
 				int choice = sc.nextInt();
 
 				switch (choice) {

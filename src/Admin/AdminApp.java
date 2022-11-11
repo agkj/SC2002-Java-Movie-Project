@@ -15,22 +15,23 @@ public class AdminApp extends AppHelper {
 
     @Override
     public void runInterface() {
-        System.out.println("-----------------------");
-        System.out.println("Welcome to Admin Module");
-        System.out.println("-----------------------");
+        System.out.println("|--------------------------------------------------------|");
+        System.out.println("| \t\tWelcome to Admin Module \t\t |");
+        System.out.println("|--------------------------------------------------------|");
 
-        System.out.println("1) Manage Movie Listing");
-        System.out.println("2) Manage Cinema Showtimes");
-        System.out.println("3) Configure System Settings");
-        System.out.println("\n0) Logout");
+        System.out.println("| 1) Manage Movie Listing \t\t\t\t |");
+        System.out.println("| 2) Manage Cinema Showtimes \t\t\t\t |");
+        System.out.println("| 3) Configure System Settings \t\t\t\t |");
+        System.out.println("| 0) Logout \t\t\t\t\t\t |");
+        
 
         boolean doNotQuit = true;
 
-        while(!sc.hasNextInt()) {
-            System.out.println("-----------------------");
+    //    while(!sc.hasNextInt()) {
+        	System.out.println("|--------------------------------------------------------|");
             System.out.println("Select an option :");
-            sc.next();
-        }
+     //       sc.next();
+    //    }
 
         int input = sc.nextInt();
 

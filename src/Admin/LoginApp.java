@@ -18,7 +18,7 @@ public class LoginApp extends AppHelper {
 
     @Override
     public void runInterface() {
-        System.out.println("--------------");
+      //  System.out.println("--------------");
         System.out.println("Enter Username: ");
         String inputUsername = sc.next();
         System.out.println("Enter Password: ");
@@ -39,7 +39,7 @@ public class LoginApp extends AppHelper {
             }
         }
 
-        System.out.println("------------------------");
+       // System.out.println("------------------------");
 
         if(usernameFlag && passwordFlag){
             AdminApp adminApp = new AdminApp(null);

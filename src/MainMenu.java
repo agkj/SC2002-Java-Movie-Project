@@ -1,23 +1,17 @@
 
 import Admin.AdminApp;
-import Admin.AppInterface;
+import Admin.LoginApp;
+import Util.AppHelper;
 import MovieGoer.MovieGoerApp;
-
-import Admin.AdminApp;
-import Admin.AppInterface;
-import Admin.AdminApp;
-import Admin.AppInterface;
-import MovieGoer.MovieGoerApp;
-
+import MovieGoer.MovieGoerMenu;
 import Util.*;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.io.IOException;
 
-public class MainMenu extends AppInterface {
+public class MainMenu extends AppHelper {
 
-	public MainMenu(AppInterface prevApp) {
+	public MainMenu(AppHelper prevApp) {
 		super(null);
 	}
 
@@ -26,73 +20,56 @@ public class MainMenu extends AppInterface {
 
 		Scanner sc = new Scanner(System.in);
 
-		String username = "admin";
-		String password = "admin";
-		TXTEditor adminDB = new TXTEditor();
-
 		boolean doNotQuit = true;
 
 		do {
 
 			try {
-
-				System.out.println("-----Login-----");
-				System.out.println("| 1) Admin    |");
-				System.out.println("| 2) Customer |");
-				System.out.println("| 3) Quit     |");
-				System.out.println("---------------");
-
+				System.out.println("|--------------------------------------------------------|");
+				System.out.println("| \t\t\tMOBLIMA LOGIN \t\t\t |");
+				System.out.println("|--------------------------------------------------------|");
+				
+				System.out.println("| 1) Admin   \t\t\t\t\t\t |");
+				System.out.println("| 2) Customer \t\t\t\t\t\t |");
+				System.out.println("| 3) Quit   \t\t\t\t\t\t |");
+				System.out.println("|--------------------------------------------------------|");
+				System.out.print("| Select an option: ");
 				int choice = sc.nextInt();
 
 				switch (choice) {
 
 				case 1:
-
-					// go to admin app
-					System.out.println("--------------");
-					System.out.println("Enter username");
-					String inputUsername = sc.next();
-					System.out.println("Enter password");
-					String inputPassword = sc.next();
-
-					if (inputUsername.equals(username) && inputPassword.equals(password)) {
-						System.out.println("--------------");
-						System.out.println("Welcome!");
-
-						// Go to AdminApp
-						AdminApp adminApp = new AdminApp(new MainMenu(null));
-						adminApp.runInterface();
-
-					} else {
-						System.out.println("--------------");
-						System.out.println("Wrong username or password, please try again");
-
-					}
+					LoginApp loginApp = new LoginApp(null);
+					loginApp.runInterface();
 
 					break;
 
 				case 2:
-					// go to customer appq
+					// go to MovieGoer application
 
-					MovieGoerApp movieGoerApp = new MovieGoerApp();
+					MovieGoerMenu movieGoerApp = new MovieGoerMenu(null);
 					movieGoerApp.runInterface();
 
 					break;
 
 				case 3:
-					System.out.println("Thanks for using the app!");
+					System.out.println("|--------------------------------------------------------|");
+					System.out.println("| \t\tThanks for using the app! \t\t |");
+					System.out.println("|--------------------------------------------------------|");
 					doNotQuit = false;
 					break;
 
 				default:
-					System.out.println("----------------");
-					System.out.println("Enter a correct option");
+					System.out.println("|--------------------------------------------------------|");
+					System.out.println("| \t\t Enter a correct option \t\t |");
+					System.out.println("|--------------------------------------------------------|");
 					break;
 				}
 
 			} catch (InputMismatchException e) {
-				System.out.println("----------------");
-				System.out.println("Enter a correct option");
+				System.out.println("|--------------------------------------------------------|");
+				System.out.println("| \t\t Enter a correct option \t\t |");
+				System.out.println("|--------------------------------------------------------|");
 				sc.next();
 				continue;
 

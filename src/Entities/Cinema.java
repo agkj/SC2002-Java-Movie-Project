@@ -15,7 +15,6 @@ public class Cinema implements Serializable {
 
     public Cinema() {}
 
-    //public Cinema(String cinemaID, CinemaClass cinemaClass, int seats, int[][] layout) {
     public Cinema(String cinemaID, CinemaClass cinemaClass, int seats, Seat[][] layout) {
         this.cinemaID = cinemaID;
         this.cinemaClass = cinemaClass;
@@ -57,13 +56,21 @@ public class Cinema implements Serializable {
 
     public void showLayout() {
         char rowNum = 65;   // start at A (65), ends at Z (90)
-
+        System.out.println("\nMovie Layout");
+        System.out.print("  |  ");
+        for(int k=1; k <= layout[0].length; k++) {
+            // Print seat status
+            System.out.print("  "+ k +"  ");
+        }
+        System.out.println("");
         for(int i=0; i < layout.length; i++) {
             System.out.print(rowNum++ + " | ");
 
             for(int j=0; j < layout[0].length; j++) {       // layout[0] can be any index, just need to get the number of cols
                 // Print seat status
-                System.out.print(" ["+ layout[i][j].getSeatStatus() +"] ");
+            	if(layout[i][j].getSeatStatus() != -1)
+            		System.out.print(" ["+ layout[i][j].getSeatStatus() +"] ");
+            	else System.out.print("  ||  ");
             }
 
             System.out.print("\n");
@@ -72,10 +79,6 @@ public class Cinema implements Serializable {
 
     @Override
     public String toString() {
-        return "Cinema{" +
-                "cinemaClass=" + cinemaClass +
-                ", numOfSeats=" + numOfSeats +
-                ", layout=" + Arrays.toString(layout) +
-                '}';
+        return this.cinemaID + "\nCinema Class: " + this.cinemaClass + "\nTotal Seats: " + this.numOfSeats;
     }
 }

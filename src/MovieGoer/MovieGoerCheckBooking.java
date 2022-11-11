@@ -24,7 +24,7 @@ public class MovieGoerCheckBooking extends MovieGoerBooking{
 		
 		int setter = 0;
 		
-		System.out.println("|-------------Your bookings--------------|");
+		System.out.println("|------------------Your bookings-----------------|");
 		try {
 			for(int i =0;i<movieBookings.length;i++) {
 				//System.out.println(movieBookings[i].getAbsolutePath());
@@ -33,13 +33,8 @@ public class MovieGoerCheckBooking extends MovieGoerBooking{
 				//System.out.println(movieBooking.getEmail());
 				
 				if(userEmail.equals(movieBooking.getEmail())) {
-					
-					System.out.println("| Cinema code: " + movieBooking.getCinemaCode()+ "\t\t\t ");
-					System.out.println("| Movie code: "+movieBooking.getSelectedMovie()+ "\t\t\t ");
-					System.out.println("| TransactionID:"+movieBooking.getTicketID()+"\t ");
 					movieBooking.getInfo();
-					//maybe show date and time where movie is booked
-					System.out.println("|----------------------------------------|");
+					
 					setter ++;
 				}
 				
@@ -52,12 +47,16 @@ public class MovieGoerCheckBooking extends MovieGoerBooking{
 		
 		
 		if(setter ==0) {
-			System.out.println("\t    No bookings made");
+			System.out.println("|\t\t No bookings made.\t\t |");
+		}
+		else if(setter == 1) {
+			System.out.println("|\t You have "+ setter+ " movie booking.\t\t |");
+			
 		}
 		else {
-			System.out.println("You have "+ setter+ " movie bookings.");
+			System.out.println("|\t You have "+ setter+ " movie bookings.\t\t |");
 		}
-		
+		System.out.println("|------------------------------------------------|\n");
 		
 
 	}

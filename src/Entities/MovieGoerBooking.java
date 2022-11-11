@@ -24,7 +24,7 @@ public class MovieGoerBooking implements Serializable {
 	protected String selectedMovie;
 	protected String cinemaCode;
 	protected LocalDateTime	showDateTime;
-	protected String seatNum;
+	protected String ticketID;
 	protected ArrayList<Ticket> listOfTickets = new ArrayList<Ticket>();
 	
 	/*
@@ -56,7 +56,7 @@ public class MovieGoerBooking implements Serializable {
 	public MovieGoerBooking() {}
 	
 	public MovieGoerBooking(String name, String mobileNumber, String email, String selectedMovie, String cinemaCode,
-			LocalDateTime showDateTime, String seatNum) {
+			LocalDateTime showDateTime) {
 		super();
 		this.name = name;
 		this.mobileNumber = mobileNumber;
@@ -64,7 +64,6 @@ public class MovieGoerBooking implements Serializable {
 		this.selectedMovie = selectedMovie;
 		this.cinemaCode = cinemaCode;
 		this.showDateTime = showDateTime;
-		this.seatNum = seatNum;
 	}
 	
 	
@@ -115,15 +114,7 @@ public class MovieGoerBooking implements Serializable {
 
 	public void setShowDateTime(LocalDateTime showDateTime) {
 		this.showDateTime = showDateTime;
-	}
-	
-	public String getSeatNum() {
-		return this.seatNum;
-	}
-	public void setSeatNum(String seatNum) {
-		this.seatNum = seatNum;
-	}
-	
+	}	
 	
 	public void addTicket(Ticket ticket) {
 		this.listOfTickets.add(ticket);
@@ -138,40 +129,41 @@ public class MovieGoerBooking implements Serializable {
 	}
 	
 	public String getTicketID() {
+		return ticketID;
+	}
+	
+	
+	public void setTicketID() {
 		SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyyHHmm");
 		Date date = new Date();
-		this.totalTickets++;
-		Movie movie = new Movie();
-		movie.setTicketsSold(totalTickets);
-		System.out.println(movie.getTicketsSold());
-		return cinemaCode + formatter.format(date);
-		// System.out.println("Your ticket id is "+ cinemaCode +
-		// formatter.format(date));
+
+		this.ticketID= this.cinemaCode + formatter.format(date);
+
 
 	} 
 
 	    public void getInfo() {
-	        System.out.println("Name= " + name +
-	                "\nMobile Number= " + mobileNumber +
-	                "\nEmail= " + email +
-	                "\nMovie= " + selectedMovie +
-	                "\nCinema= " + cinemaCode +
-	                "\nTime= " + showDateTime +
-	                "\nSeat= " + seatNum);
-	        for(int i =0; i < listOfTickets.size(); i++) {
-	        	System.out.println("\n Ticket: " + listOfTickets.get(i));
+	    	System.out.println("| Transaction ID:"+ ticketID+ "\t\t |");
+	    	System.out.println("|----------------Booking Details-----------------|");
+	        System.out.println("| Name: " + name + "\t\t\t\t\t |");
+	        System.out.println("| Mobile number: " + mobileNumber+ "\t\t\t |");
+	        System.out.println("| Email:" + email+ "\t\t\t\t |");
+	        System.out.println("| Movie booked:"+selectedMovie+ "\t\t\t\t |");
+	        System.out.println("| Movie time: "+ showDateTime+"\t\t\t |");
+	        System.out.println("| Cinema code:"+ cinemaCode+ "\t\t\t\t |");
+	        
+	        System.out.println("| Movie time: " + showDateTime+ "\t\t\t |");
+	        
+	        for(int i = 0; i < listOfTickets.size(); i++) {
+	        	System.out.print("|----------------Ticket " + (i+1) + " Details----------------|");
+	        	listOfTickets.get(i).getTicketInfo();
+	        	
 	        }
-	                //"\nTicket= " + listOfTickets;
+	        
+
+	        System.out.println("|------------------------------------------------|");
+
 	 }
 
-	/*
-	public void getInfo() {
-		System.out.println( "Name: " + name +
-				", mobile: " + mobileNumber +
-				", email: " + email + 
-				", cinemaCode: " + cinemaCode+
-				", DateTime: "+ showDateTime +
-				", ticket: "+ listOfTickets);
-	}
-	*/
+
 }

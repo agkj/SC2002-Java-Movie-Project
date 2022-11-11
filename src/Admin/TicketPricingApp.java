@@ -4,14 +4,15 @@ import Entities.CinemaClass;
 import Entities.DayType;
 import Entities.MovieType;
 import Entities.TicketType;
+import Util.AppHelper;
 import Util.FileReader;
 
 import java.util.Scanner;
-public class TicketPricingApp extends AppInterface{
+public class TicketPricingApp extends AppHelper {
     Scanner sc = new Scanner(System.in);
 
     String root = System.getProperty("user.dir") + "\\data\\ticket_pricing\\";
-    public TicketPricingApp(AppInterface prevApp) {
+    public TicketPricingApp(AppHelper prevApp) {
         super(prevApp);
     }
 
@@ -25,7 +26,8 @@ public class TicketPricingApp extends AppInterface{
         System.out.println("4) Ticket Type (e.g., Adult)");
         System.out.println("5) Day of the Week/Holiday");
         System.out.println("\n0) Return to Previous Menu");
-
+        System.out.println("----------------------------------------");
+        System.out.println("Select an option: ");
         while(!sc.hasNextInt())
             System.out.println("Please enter a valid input");
 
@@ -69,7 +71,8 @@ public class TicketPricingApp extends AppInterface{
         System.out.println("1) Base Ticket Price");
         System.out.println("2) Booking Fee");
         System.out.println("\n0) Return to Previous Menu");
-
+        System.out.println("-------------------------------------------");
+        System.out.println("Select an option: ");
         while(!sc.hasNextInt())
             System.out.println("Please enter a valid input");
 
@@ -140,7 +143,7 @@ public class TicketPricingApp extends AppInterface{
 
         float typeModifier = sc.nextFloat();
 
-        FileReader.replaceLine(root + "cinema_class_ticket.txt", selectedType, selectedType + "," + typeModifier, false);
+        FileReader.replaceLine(root + "movie_type_price.txt", selectedType, selectedType + "," + typeModifier, false);
 
         runInterface();
     }
@@ -153,7 +156,7 @@ public class TicketPricingApp extends AppInterface{
         for(int i=0; i < CinemaClass.values().length; i++) {
             System.out.println((i+1) + ") " + CinemaClass.values()[i]);
         }
-
+        System.out.println("----------------------------------------------");
         System.out.print("Select Cinema Class to Configure: ");
         while(!sc.hasNextInt())
             System.out.println("Please enter a valid option.");
@@ -168,7 +171,6 @@ public class TicketPricingApp extends AppInterface{
         float classPrice = sc.nextFloat();
 
         FileReader.replaceLine(root + "cinema_class_price.txt", selectedClass, selectedClass + "," + classPrice, false);
-        //FileReader.writeFile(root + "cinema_class_ticket.txt", selectedClass + ", " + classPrice, true);
 
         runInterface();
     }

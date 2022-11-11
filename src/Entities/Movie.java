@@ -47,7 +47,19 @@ public class Movie implements Serializable {
         this.contentRating = rating;
         this.cast = cast;
 
+        // Initialise to Empty and/or 0
+        this.overallRating = 0;
+        this.reviews = new ArrayList<Review>();
+        this.showTimes = new ArrayList<ShowTime>();
+        this.ticketsSold = 0;
+        this.totalSales = 0;
+
     }
+    
+    public Movie(int ticketsSold) {
+    	ticketsSold++;
+    }
+
     //// Getter and Setters
 
     // Movie ID - Getter and Setter
@@ -113,6 +125,11 @@ public class Movie implements Serializable {
         this.showingStatus = showingStatus;
     }
 
+    // Check if End of Showing
+    public boolean isEndOfShowing() {
+        return this.showingStatus.equals(ShowingStatus.End_Of_Showing);
+    }
+
     // Runtime - Getter and Setter
     public int getRuntime() {
         return runtime;
@@ -167,15 +184,12 @@ public class Movie implements Serializable {
         this.ticketsSold = ticketsSold;
     }
 
-<<<<<<< Updated upstream
-=======
     // Update Both Tickets Sold and Total Sales
     public void updateSales(int ticketsSold, double ticketSales) {
         this.ticketsSold += ticketsSold;
         this.totalSales += ticketSales;
     }
 
->>>>>>> Stashed changes
     // Total Sales ($)
     public double getTotalSales() {
         return totalSales;
@@ -191,13 +205,21 @@ public class Movie implements Serializable {
     public void addShowTime(ShowTime showtime) {
         this.showTimes.add(showtime);
     }
-    public void RemoveShowTime(ShowTime showtime) {
-        this.showTimes.remove(showtime);
-        //this.showTimes.remove(); use this rmeove by index
+
+    public void removeShowTime(int indexToRemove) {
+        this.showTimes.remove(indexToRemove);
     }
 
     public ArrayList<ShowTime> getShowTimes() {
         return showTimes;
+    }
+
+    public void updateShowTime(int index, ShowTime newShowtime) {
+        // Update DateTime
+        this.showTimes.get(index).setShowDateTime(newShowtime.getShowDateTime());
+
+        // Update Status
+        this.showTimes.get(index).setShowTimeStatus(newShowtime.getShowTimeStatus());
     }
 
     @Override
@@ -219,4 +241,7 @@ public class Movie implements Serializable {
                 ", totalSales=" + totalSales +
                 '}';
     }
+
+
+
 }

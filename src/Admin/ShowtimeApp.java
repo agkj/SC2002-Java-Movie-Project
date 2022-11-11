@@ -220,10 +220,11 @@ public class ShowtimeApp extends AppHelper {
             // Read all available Movies
             //show movies and get their list of showtimes
             System.out.println("Available Movies: ");
+
             if(movieFiles != null) {
                 for(int i=0; i < movieFiles.length; i++) {
                     Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
-                    System.out.println((i+1) + ") " + curr.getTitle());
+                    System.out.println((i+1) + ") " + curr.getTitle() + " [" + curr.getContentRating().toString() + "] - " + curr.getShowingStatus()) ;
                 }
             }
             //next tell them to select the movie index then we get the movieID

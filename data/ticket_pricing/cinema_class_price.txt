@@ -1,3 +1,3 @@
-Regular, 0
-Platinum Movie Suites, 4
-Elite Club,1.5
+Regular,0.0
+Platinum Movie Suites,2.0
+Elite Club,6.0

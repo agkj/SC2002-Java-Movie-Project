@@ -211,6 +211,9 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 		
 		MovieGoerBooking newBooking = new MovieGoerBooking();
 		
+		int selectedcine = 0;
+		Cineplex selectedCineplex = null;
+		
 		// Get User Details
 		System.out.println("Enter your name: ");
 		String customerName = sc.next();
@@ -255,7 +258,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			// *******FUNCTIONS TO IMPLEMENT**************\\
 			
 			System.out.println("------- VIEW CINEMAS -------\n");
-			Cineplex selectedCineplex;
+			
             try {
             	
             	File path;
@@ -275,7 +278,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                     System.out.print("\nSelect Cineplex: ");
 
                     // Get selected Cineplex file and object
-                    int selectedcine = sc.nextInt();
+                    selectedcine = sc.nextInt();
                   //  selectedCineplex = (Cineplex) Serializer.deSerialize(path + "\\" + files[selectedcine - 1].getName());
                     selectedCineplex = (Cineplex) Serializer.deSerialize(files[selectedcine -1].getAbsolutePath());
                     // Show list of showtimes from movieBooked
@@ -306,7 +309,11 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                     	System.out.println("\nSelect a seat number: ");
                         String seatNum = sc.next();
                         
-                        selectedShowtime.bookSeat(seatNum);		// TODO maybe book seat only after payment complete
+                        while(selectedShowtime.bookSeat(seatNum) != true)	{
+                        	System.out.println("\nSeat has been taken!\nPlase select another seat number: ");
+                            seatNum = sc.next();
+                        }
+                        // TODO maybe book seat only after payment complete
                         
                         System.out.println("\nSelect ticket type: ");
                         for(int i=0; i < TicketType.values().length; i++) {
@@ -329,6 +336,8 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                         System.out.println("Total Ticket Price: $" + price);
                         
                         newBooking.addTicket(newTicket);
+                        int ticketSold = selectedMovie.getTicketsSold() +1;
+                        selectedMovie.setTicketsSold(ticketSold);
                         
                         
                     	customerTickets--; //TODO increment counter total ticket sold and total sales
@@ -347,7 +356,10 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
     			
     			System.out.println("Thank you for booking with us.");
     			System.out.println("Here are your booking details: ");
-
+    			double totalSales = selectedMovie.getTotalSales() + price;
+    			selectedMovie.setTotalSales(totalSales);
+    			Serializer.serialize(root + "\\data\\movies\\" + selectedMovie.getMovieId() + ".dat", selectedMovie);
+    			Serializer.serialize(files[selectedcine -1].getAbsolutePath(), selectedCineplex);
     			
     			String root = System.getProperty("user.dir");
     			 // movie id
@@ -356,7 +368,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
     			
     			// Reload Movies
     			newBooking.load();
-    			newBooking.getInfo(); // TODO check what the ticket saves
+    			newBooking.toString(); // TODO check what the ticket saves
     			
     			
             } catch (Exception e) {

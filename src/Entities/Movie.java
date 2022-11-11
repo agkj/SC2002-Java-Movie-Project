@@ -167,6 +167,15 @@ public class Movie implements Serializable {
         this.ticketsSold = ticketsSold;
     }
 
+<<<<<<< Updated upstream
+=======
+    // Update Both Tickets Sold and Total Sales
+    public void updateSales(int ticketsSold, double ticketSales) {
+        this.ticketsSold += ticketsSold;
+        this.totalSales += ticketSales;
+    }
+
+>>>>>>> Stashed changes
     // Total Sales ($)
     public double getTotalSales() {
         return totalSales;

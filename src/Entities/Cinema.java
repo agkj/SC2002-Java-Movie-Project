@@ -57,6 +57,16 @@ public class Cinema implements Serializable {
     public void showLayout() {
         char rowNum = 65;   // start at A (65), ends at Z (90)
         System.out.println("\nMovie Layout");
+        System.out.println();
+        System.out.print("  ");
+        for(int i=0; i < layout[0].length; ++i) {
+        	System.out.print("---");
+        }
+        System.out.print("SCREEN");
+        for(int i=0; i < layout[0].length; ++i) {
+        	System.out.print("---");
+        }
+        System.out.println();
         System.out.print("  |  ");
         for(int k=1; k <= layout[0].length; k++) {
             // Print seat status

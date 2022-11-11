@@ -2,7 +2,7 @@
 import Admin.AdminApp;
 import Admin.LoginApp;
 import Util.AppHelper;
-import MovieGoer.MovieGoerApp;
+import MovieGoer.MovieBooking;
 import MovieGoer.MovieGoerMenu;
 import Util.*;
 

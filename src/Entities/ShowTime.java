@@ -69,6 +69,7 @@ public class ShowTime implements Serializable {
         ArrayList<Holiday> listOfHolidays = holidayHelper.getHolidays();
 
         for(int i=0; i < listOfHolidays.size(); i++) {
+
             LocalDate showTimeDate = this.showDateTime.toLocalDate();
             LocalDate holidayDate = listOfHolidays.get(i).getHolidayDate();
 

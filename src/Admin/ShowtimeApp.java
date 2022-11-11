@@ -142,7 +142,7 @@ public class ShowtimeApp extends AppHelper {
                     //System.out.println("The showtime added is : " + newShowtime.getShowDateTime().toString());
 
                 } catch (DateTimeParseException e) {
-                    System.out.println("Please enter a valid showtime.");
+                    System.out.println("Please enter a valid showtime."); // TODO magic
                 }
             }
             System.out.println("\n");
@@ -259,9 +259,6 @@ public class ShowtimeApp extends AppHelper {
                     if(currShowTime.getCineplexID().equals(selectedCineplexId)) {
 
                         String dateTime = currShowTime.getShowDateTime().toString();
-                        if(currShowTime.checkDayType().equals(DayType.HOLIDAY))
-                            dateTime += " (PH)";
-
 
                         Cinema selectedCinema = (Cinema) Serializer.deSerialize(path_cinema + "\\" + currShowTime.getCinemaID() + ".dat");
                         System.out.println("Cinema Hall " + currShowTime.getCinemaID() + " (" + selectedCinema.getCinemaClass() + " Class)");
@@ -379,7 +376,7 @@ public class ShowtimeApp extends AppHelper {
                                     System.out.print("Saved Showing Date and Time.");
 
                                 } catch (DateTimeParseException e) {
-                                    System.out.println("Please enter a valid showtime.");
+                                    //System.out.println("Please enter a valid showtime."); TODO magic
                                 }
                             }
 
@@ -388,7 +385,7 @@ public class ShowtimeApp extends AppHelper {
                             // Update Showing Status
 
                             // Display all available showtime status
-                            System.out.print("Select Updated Show Time Status: ");
+                            System.out.print("Select Updated Show Time Status: \n");
                             for(int i=0; i < ShowTimeStatus.values().length; i++) {
                                 System.out.println((i+1) + ") " + ShowTimeStatus.values()[i]);
                             }

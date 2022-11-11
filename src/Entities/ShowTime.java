@@ -111,9 +111,21 @@ public class ShowTime implements Serializable {
         char rowNum = 65;   // start at A (65), ends at Z (90)
         
         System.out.println("\nMovie Layout");
+        
+        System.out.println();
+        System.out.print("  ");
+        for(int i=0; i < showTimeLayout[0].length; ++i) {
+        	System.out.print("--");
+        }
+        System.out.print("SCREEN");
+        for(int i=0; i < showTimeLayout[0].length; ++i) {
+        	System.out.print("--");
+        }
+        System.out.println();
         System.out.print("  |  ");
         for(int k=0; k < showTimeLayout[0].length; ++k) {
             // Print seat status
+        	
             System.out.print("  "+ (k+1) +"  ");
         }
         System.out.println("");

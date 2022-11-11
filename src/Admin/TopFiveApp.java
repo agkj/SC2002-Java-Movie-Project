@@ -5,11 +5,11 @@ import Util.FileReader;
 
 import java.util.Scanner;
 
-public class ViewtopfiveApp extends AppHelper{
+public class TopFiveApp extends AppHelper {
     Scanner sc = new Scanner(System.in);
 
     String root = System.getProperty("user.dir") + "\\data\\admin_control\\";
-    public ViewtopfiveApp(AppHelper prevApp) {
+    public TopFiveApp(AppHelper prevApp) {
         super(prevApp);
     }
 

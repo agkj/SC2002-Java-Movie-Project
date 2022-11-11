@@ -46,19 +46,27 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 	public void movieView() {
 		
 		System.out.println("|------------------------------VIEW MOVIE LISTING-------------------------------|");
+		
 
 		try {
 			// Read all available Movies
-			if (movieFiles != null) {
-				for (int i = 0; i < movieFiles.length; i++) {
-					Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
-					System.out.println((i + 1) + ")Movie: " + curr.getTitle());
-					System.out.println("  Showing Status: " + curr.getShowingStatus());
-					System.out.println("  Synopsis: " + curr.getSynopsis());
-					System.out.println("  Director: " + curr.getDirector());
-					System.out.println("  Cast: " + curr.getCast());
-					System.out.println("  Overall Ratings: " + curr.getOverallRating());
-					System.out.println("  Past and Present Reviews: " + curr.getReviews());
+			ArrayList<Movie> filteredMovie = new ArrayList<Movie>();
+			for (int i = 0; i < movieFiles.length; i++) {
+				Movie curr = (Movie) Serializer.deSerialize(movieFiles[i].getAbsolutePath());
+				
+				if (!curr.isEndOfShowing())
+					filteredMovie.add(curr);
+			}
+			
+			if (filteredMovie != null) {
+				for (int i = 0; i < filteredMovie.size(); i++) {
+					System.out.println((i + 1) + ")Movie: " + filteredMovie.get(i).getTitle());
+					System.out.println("  Showing Status: " + filteredMovie.get(i).getShowingStatus());
+					System.out.println("  Synopsis: " + filteredMovie.get(i).getSynopsis());
+					System.out.println("  Director: " + filteredMovie.get(i).getDirector());
+					System.out.println("  Cast: " + filteredMovie.get(i).getCast());
+					System.out.println("  Overall Ratings: " + filteredMovie.get(i).getOverallRating());
+					System.out.println("  Past and Present Reviews: " + filteredMovie.get(i).getReviews());
 					
 					System.out.println("|-------------------------------------------------------------------------------|");
 				}

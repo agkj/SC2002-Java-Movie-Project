@@ -13,6 +13,7 @@ public class Ticket implements Serializable{
     //Attributes:
     private double ticketPrice;
     private TicketType ticketType;
+    private String seatNum;
     private MovieType movieType;
     private CinemaClass cinemaclass;
     private DayType dayType;
@@ -21,13 +22,14 @@ public class Ticket implements Serializable{
     public Ticket(){};
 
     public Ticket(double ticketPrice, TicketType ticketType, MovieType movieType, CinemaClass cinemaclass,
-			DayType dayType) {
+			DayType dayType, String seatNum) {
 		super();
 		this.ticketPrice = ticketPrice;
 		this.ticketType = ticketType;
 		this.movieType = movieType;
 		this.cinemaclass = cinemaclass;
 		this.dayType = dayType;
+		this.seatNum = seatNum;
 	}
 
     // Getter and Setters
@@ -127,4 +129,24 @@ public class Ticket implements Serializable{
 
         return totalPrice;
     }
+    
+    public String getSeat() {
+    	return seatNum;
+    }
+    
+    public void setSeat(String seatNum) {
+    	this.seatNum = seatNum;
+    }
+    
+    @Override
+    public String toString() {
+        return  "\nDay Type: " + dayType+ 
+        		"\nType: " + ticketType +
+        		"\nCinema: "+ cinemaclass +
+        		"\nMovie Type: " + movieType +
+        		"\nSeat: " + seatNum + 
+        		"\nPrice: " + ticketPrice +"\n";
+        		
+    }
+
 }

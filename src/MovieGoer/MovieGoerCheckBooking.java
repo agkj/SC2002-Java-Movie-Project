@@ -53,10 +53,13 @@ public class MovieGoerCheckBooking extends MovieGoerBooking{
 		
 		
 		if(setter ==0) {
-			System.out.println("\t    No bookings made");
+			System.out.println("\t    No bookings made.\n");
+		}
+		else if(setter == 1) {
+			System.out.println("You have "+ setter+ " movie booking.\n");
 		}
 		else {
-			System.out.println("You have "+ setter+ " movie bookings.");
+			System.out.println("You have "+ setter+ " movie bookings.\n");
 		}
 		
 		

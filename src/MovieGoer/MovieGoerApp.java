@@ -45,20 +45,20 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 
 
 	public void movieView() {
-		
+
 		System.out.println("|------------------------------VIEW MOVIE LISTING-------------------------------|");
-		
+
 
 		try {
 			// Read all available Movies
 			ArrayList<Movie> filteredMovie = new ArrayList<Movie>();
 			for (int i = 0; i < movieFiles.length; i++) {
 				Movie curr = (Movie) Serializer.deSerialize(movieFiles[i].getAbsolutePath());
-				
+
 				if (!curr.isEndOfShowing())
 					filteredMovie.add(curr);
 			}
-			
+
 			if (filteredMovie != null) {
 				for (int i = 0; i < filteredMovie.size(); i++) {
 					System.out.println((i + 1) + ")Movie: " + filteredMovie.get(i).getTitle());
@@ -109,7 +109,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			//File selected = movieFiles[index];
 			//Movie movieToUpdate = (Movie) Serializer.deSerialize(movieFiles[index].getAbsolutePath());
 			Movie movieToUpdate = filteredMovie.get(index);
-			
+
 			ArrayList<Review> review = movieToUpdate.getReviews();
 			double overallRating = movieToUpdate.getOverallRating();
 			overallRating = overallRating * review.size();
@@ -138,7 +138,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 				this.load();
 
 				System.out.println("\n------- SUCCESS: UPDATED REVIEW -------\n");
-				
+
 			} catch (IOException e) {
 				System.out.println("\n------- ERROR: PLEASE TRY AGAIN -------\n");
 				e.printStackTrace();
@@ -266,7 +266,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 				Movie curr = (Movie) Serializer.deSerialize(movieFiles[i].getAbsolutePath());
 
 				if (!curr.isEndOfShowing() & curr.getShowingStatus() != ShowingStatus.Coming_Soon) // TODO Coming soon
-																									// to filter
+					// to filter
 					filteredMovie.add(curr);
 			}
 			for (int i = 0; i < filteredMovie.size(); i++) {
@@ -346,10 +346,11 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 							// Show showtime
 							LocalDateTime showtimeDate = curr.getShowDateTime();
 							String day = showtimeDate.getDayOfWeek().toString();
-							int hour = showtimeDate.getHour();
-							System.out.println("Hour: " + hour);
-							System.out.println(i + 1 + ") " + day + " - " + curr.getShowDateTime() + " ("
-									+ currCinema.getCinemaClass().toString() + " Class)");
+
+							if(curr.checkDayType().equals(DayType.HOLIDAY))
+								day += " (PH)";
+
+							System.out.println(i+1 + ") " +  day + " - " + curr.getShowDateTime() + " (" + currCinema.getCinemaClass().toString() + " Class)");
 							filteredShowtimes.add(curr);
 						}
 					}
@@ -391,7 +392,8 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 						newTicket.setMovieType(selectedMovie.getMovieType());
 						newTicket.setCinemaclass(selectedCinema.getCinemaClass());
 
-						newTicket.setDayType(DayType.MON_WED); // TODO need to check for day type
+						newTicket.setDayType(selectedShowtime.checkDayType());
+						//newTicket.setDayType(DayType.MON_WED); // TODO need to check for day type
 
 						newPrice = newTicket.calculateTicketPrice();
 						newTicket.setTicketPrice(newPrice);
@@ -404,26 +406,26 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 					}
 
 				}
-				
-						System.out.print("1) Confirm payment\n");
-						System.out.println("0) Cancel payment");
-						int cont = sc.nextInt();
 
-						if (cont == 0) {
-							AppHelper prevApp = goBack();
-							prevApp.runInterface();
-						}
-						while (cont != 1) {
-							System.out.print("\nPlease select 1 to continue with payment: ");
-							System.out.println("Select 0 to cancel payment");
-							cont = sc.nextInt();
-						
+				System.out.print("1) Confirm payment\n");
+				System.out.println("0) Cancel payment");
+				int cont = sc.nextInt();
 
-						}
+				if (cont == 0) {
+					AppHelper prevApp = goBack();
+					prevApp.runInterface();
+				}
+				while (cont != 1) {
+					System.out.print("\nPlease select 1 to continue with payment: ");
+					System.out.println("Select 0 to cancel payment");
+					cont = sc.nextInt();
 
-					
 
-				
+				}
+
+
+
+
 
 				// TODO Try catch maybe?
 

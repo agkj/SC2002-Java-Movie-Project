@@ -10,17 +10,16 @@ public class Ticket implements Serializable {
 	@Serial
 	private static final long serialVersionUID = 2002;
 
-	// Attributes:
-	private double ticketPrice;
-	private String seatNum;
-	private TicketType ticketType; // this is our age
-	private MovieType movieType;
-	private CinemaClass cinemaclass;
-	private DayType dayType;
-
-	// constructor
-	public Ticket() {
-	};
+    //Attributes:
+    private double ticketPrice;
+    private TicketType ticketType;
+    private String seatNum;
+    private MovieType movieType;
+    private CinemaClass cinemaclass;
+    private DayType dayType;
+    
+    //constructor
+    public Ticket(){};
 
 	public Ticket(double ticketPrice, TicketType ticketType, MovieType movieType, CinemaClass cinemaclass,
 			DayType dayType, String seatNum) {
@@ -128,17 +127,27 @@ public class Ticket implements Serializable {
 			totalPrice *= movieTypeMod;
 		}
 
-		return totalPrice;
-	}
-
-	public String getSteat() {
-		return seatNum;
-	}
-
-	public void setSeat(String seatNum) {
-		this.seatNum = seatNum;
-	}
-
+        return totalPrice;
+    }
+    
+    public String getSeat() {
+    	return seatNum;
+    }
+    
+    public void setSeat(String seatNum) {
+    	this.seatNum = seatNum;
+    }
+    
+    @Override
+    public String toString() {
+        return  "\nDay Type: " + dayType+ 
+        		"\nType: " + ticketType +
+        		"\nCinema: "+ cinemaclass +
+        		"\nMovie Type: " + movieType +
+        		"\nSeat: " + seatNum + 
+        		"\nPrice: " + ticketPrice +"\n";
+        		
+    }
 	
 	public void getTicketInfo() {
 		System.out.println();

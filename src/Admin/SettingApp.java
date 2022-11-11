@@ -2,6 +2,7 @@ package Admin;
 
 import Util.AppHelper;
 
+import javax.swing.text.View;
 import java.util.Scanner;
 
 public class SettingApp extends AppHelper {
@@ -18,6 +19,7 @@ public class SettingApp extends AppHelper {
         System.out.println("1) Configure Cineplex Outlets");
         System.out.println("2) Configure Ticket Pricing");
         System.out.println("3) Configure Holidays");
+        System.out.println("4) Configure Top Five for Moviegoer");
         System.out.println("\n0) Return to Previous Menu");
         System.out.println("-----------------------------------------");
         System.out.println("Select an option: ");
@@ -49,6 +51,14 @@ public class SettingApp extends AppHelper {
                 holidayApp.runInterface();
 
                 break;
+
+            case 4:
+                // Configure view in Moviergoer
+                TopFiveApp topFiveStatus = new TopFiveApp(this);
+                //ViewtopfiveApp topfiveStatus = new ViewtopfiveApp(this);
+                topFiveStatus.runInterface();
+                break;
+
             default:
                 break;
         }

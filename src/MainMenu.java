@@ -1,5 +1,6 @@
 
 import Admin.AdminApp;
+import Admin.LoginApp;
 import Util.AppHelper;
 import MovieGoer.MovieGoerApp;
 import MovieGoer.MovieGoerMenu;
@@ -19,10 +20,6 @@ public class MainMenu extends AppHelper {
 
 		Scanner sc = new Scanner(System.in);
 
-		String username = "admin";
-		String password = "admin";
-		TXTEditor adminDB = new TXTEditor();
-
 		boolean doNotQuit = true;
 
 		do {
@@ -40,24 +37,8 @@ public class MainMenu extends AppHelper {
 				switch (choice) {
 
 				case 1:
-
-					// go to admin app
-					System.out.println("--------------");
-					System.out.println("Enter username: ");
-					String inputUsername = sc.next();
-					System.out.println("Enter password: ");
-					String inputPassword = sc.next();
-
-					if (inputUsername.equals(username) && inputPassword.equals(password)) {
-						// Go to AdminApp
-						AdminApp adminApp = new AdminApp(new MainMenu(null));
-						adminApp.runInterface();
-
-					} else {
-						System.out.println("------------------------");
-						System.out.println("Wrong username or password, please try again");
-
-					}
+					LoginApp loginApp = new LoginApp(null);
+					loginApp.runInterface();
 
 					break;
 

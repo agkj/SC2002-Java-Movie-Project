@@ -1,9 +1,13 @@
 package Entities;
 
+import Util.HolidayHelper;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class ShowTime implements Serializable {
     @Serial
@@ -55,13 +59,24 @@ public class ShowTime implements Serializable {
     }
 
     // Determine Day Type based on ShowDateTime
-    public void checkDayType() {
+    public DayType checkDayType() {
         DayOfWeek day = showDateTime.getDayOfWeek();
         int hour = showDateTime.getHour();
-        DayType dayType;
+        DayType dayType = null;
 
-        // Check if public holiday
+        // To-do Check if public holiday
+        HolidayHelper holidayHelper = new HolidayHelper();
+        ArrayList<Holiday> listOfHolidays = holidayHelper.getHolidays();
 
+        for(int i=0; i < listOfHolidays.size(); i++) {
+            LocalDate showTimeDate = this.showDateTime.toLocalDate();
+            LocalDate holidayDate = listOfHolidays.get(i).getHolidayDate();
+
+            if(showTimeDate.equals(holidayDate)) {
+                dayType = DayType.HOLIDAY;
+                return dayType;
+            }
+        }
 
         if(day.equals(DayOfWeek.MONDAY) || day.equals(DayOfWeek.TUESDAY) || day.equals(DayOfWeek.WEDNESDAY))
             dayType = DayType.MON_WED;
@@ -74,6 +89,8 @@ public class ShowTime implements Serializable {
                 dayType = DayType.FRI_BEFORE_6;
         } else if (day.equals(DayOfWeek.SATURDAY) || day.equals(DayOfWeek.SUNDAY))
             dayType = DayType.WEEKEND;
+
+        return dayType;
     }
 
     public ShowTimeStatus getShowTimeStatus() {

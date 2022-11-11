@@ -20,20 +20,20 @@ public class MovieGoerMenu extends AppHelper {
 	public void runInterface() {
 		
 		Scanner sc = new Scanner(System.in);
-		System.out.println("-----------------------");
-		System.out.println("Welcome to Customer Module");
-		System.out.println("-----------------------");
+		System.out.println("|------------------------------------------------|");
+		System.out.println("| \t Welcome to Customer Module \t\t |");
+		System.out.println("|------------------------------------------------|");
 		//call list movie functions
 		
-		System.out.println("1) View movies"); // ->select movies -> booking ->check seat availability
-		System.out.println("2) Rate movies");
-		System.out.println("3) List top 5 movies by ratings");
-		System.out.println("4) List top 5 movies by ticket sales");
-		System.out.println("5) Make a booking"); //based on booking id/movie code
-		System.out.println("6) View booking history\n");
+		System.out.println("| 1) View movies \t\t\t\t |"); // ->select movies -> booking ->check seat availability
+		System.out.println("| 2) Rate movies \t\t\t\t |");
+		System.out.println("| 3) List top 5 movies by ratings \t\t |");
+		System.out.println("| 4) List top 5 movies by ticket sales \t\t |");
+		System.out.println("| 5) Make a booking \t\t\t\t |"); //based on booking id/movie code
+		System.out.println("| 6) View booking history \t\t\t |");
 
-		System.out.println("7) Return to main menu");
-		System.out.println("-----------------------");
+		System.out.println("| 7) Return to main menu \t\t\t |");
+		System.out.println("|------------------------------------------------|");
 		System.out.println("Select an option :");
 		int choice = sc.nextInt();	
 		

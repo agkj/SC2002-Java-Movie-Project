@@ -185,7 +185,7 @@ public class Movie implements Serializable {
     }
 
     // Update Both Tickets Sold and Total Sales
-    public void updateSales(int ticketsSold, int ticketSales) {
+    public void updateSales(int ticketsSold, double ticketSales) {
         this.ticketsSold += ticketsSold;
         this.totalSales += ticketSales;
     }
@@ -241,5 +241,7 @@ public class Movie implements Serializable {
                 ", totalSales=" + totalSales +
                 '}';
     }
+
+
 
 }

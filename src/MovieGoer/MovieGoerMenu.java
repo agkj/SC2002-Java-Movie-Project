@@ -54,7 +54,7 @@ public class MovieGoerMenu extends AppHelper {
 		}
 		//look at the admin control
 		if(set_control_ticket == 0){
-			System.out.print("| 3) List top 5 movies by ticket sales (DISABLED) \t |");
+			System.out.print("| 3) List top 5 movies by ticket sales (DISABLED)|");
 		}else {
 			System.out.print("| 3) List top 5 movies by ticket sales \t\t |");
 		}

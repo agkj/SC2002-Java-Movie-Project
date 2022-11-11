@@ -21,6 +21,7 @@ import Entities.MovieGoerBooking;
 import Entities.Review;
 import Entities.ShowTime;
 import Entities.ShowTimeStatus;
+import Entities.ShowingStatus;
 import Entities.Ticket;
 import Entities.TicketType;
 import Util.Serializer;
@@ -73,7 +74,11 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			// Read all available Movies
 			for (int i = 0; i < movieFiles.length; i++) {
 				Movie curr = (Movie) Serializer.deSerialize(movieFiles[i].getAbsolutePath());
-				System.out.println((i + 1) + ") " + curr.getTitle());
+				
+				
+				
+				if(curr.getShowingStatus() != ShowingStatus.End_Of_Showing)
+					System.out.println((i + 1) + ") " + curr.getTitle());
 			}
 
 			System.out.print("Enter Movie Index to Update: ");
@@ -229,7 +234,9 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			// Read all available Movies
 			for (int i = 0; i < movieFiles.length; i++) {
 				Movie curr = (Movie) Serializer.deSerialize(movieFiles[i].getAbsolutePath());
-				System.out.println((i + 1) + ") " + curr.getTitle());
+				if(curr.getShowingStatus() != ShowingStatus.End_Of_Showing)
+					System.out.println((i + 1) + ") " + curr.getTitle());
+				
 			}
 			System.out.println("Choose a movie to book");
 			int movieChoice = sc.nextInt() - 1;
@@ -255,6 +262,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                 File[] files;
                 path = new File(root + "\\data\\cineplex");
                 files = path.listFiles();
+                double price =0;
             	
                 // Read all available Cineplex created
                 if (files != null) {
@@ -289,8 +297,10 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                     int selectedShowTimeIndex = sc.nextInt();
                     ShowTime selectedShowtime = filteredShowtimes.get(selectedShowTimeIndex-1);
                     Cinema selectedCinema = (Cinema) Serializer.deSerialize(pathCinema + "\\" + selectedShowtime.getCinemaID() + ".dat");
+                    
                     selectedShowtime.showLayout();
                     newBooking.setCinemaCode(selectedShowtime.getCinemaID());
+                    
                     // Select Seat(s) based on number of tickets purchasing
                     while(customerTickets > 0) {
                     	System.out.println("\nSelect a seat number: ");
@@ -313,13 +323,13 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                         newTicket.setCinemaclass(selectedCinema.getCinemaClass());
                         newTicket.setDayType(DayType.MON_WED);	// TODO need to check for day type
                         
-                        double price = newTicket.calculateTicketPrice();
+                       // price = newTicket.calculateTicketPrice();
                         newTicket.setTicketPrice(price);
+                        price = price + newTicket.calculateTicketPrice();
                         System.out.println("Total Ticket Price: $" + price);
                         
                         newBooking.addTicket(newTicket);
-                        //MovieGoerBooking userBooking = new MovieGoerBooking(customerName,customerPhone,customerEmail,movieName, movieID, null,seatNum);
-
+                        
                         
                     	customerTickets--; //TODO increment counter total ticket sold and total sales
                     }
@@ -331,6 +341,7 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
     			while(cont != 1) {
     				System.out.print("\nPlease select 1 to continue with payment: ");
     				cont = sc.nextInt();
+    				
     			}
     			// TODO Try catch maybe?
     			

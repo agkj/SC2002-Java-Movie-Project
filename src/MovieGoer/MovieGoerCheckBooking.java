@@ -6,7 +6,7 @@ import java.util.Scanner;
 import Entities.MovieGoerBooking;
 import Util.Serializer;
 
-public class MovieGoerCheckBooking extends MovieGoerBooking implements Serializable{
+public class MovieGoerCheckBooking extends MovieGoerBooking{
 	
 	Scanner sc = new Scanner(System.in);
 	public MovieGoerCheckBooking() {
@@ -52,7 +52,7 @@ public class MovieGoerCheckBooking extends MovieGoerBooking implements Serializa
 		
 		
 		if(setter ==0) {
-			System.out.println("No bookings made");
+			System.out.println("\t    No bookings made");
 		}
 		else {
 			System.out.println("You have "+ setter+ " movie bookings.");

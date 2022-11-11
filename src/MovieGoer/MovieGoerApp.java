@@ -82,15 +82,28 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 	public void movieRate() {
 		try {
 			// Read all available Movies
+			
+			System.out.println("|---------------------------------RATE A MOVIE----------------------------------|");
+			
+			ArrayList<Movie> filteredMovie = new ArrayList<Movie>();
 			for (int i = 0; i < movieFiles.length; i++) {
 				Movie curr = (Movie) Serializer.deSerialize(movieFiles[i].getAbsolutePath());
-
-				if (curr.getShowingStatus() != ShowingStatus.End_Of_Showing)
-					System.out.println((i + 1) + ") " + curr.getTitle());
+				
+				if (curr.getShowingStatus() != ShowingStatus.Coming_Soon) // TODO Coming soon to filter
+					filteredMovie.add(curr);
 			}
-
-			System.out.print("Enter Movie Index to Update: ");
+			for(int i = 0; i < filteredMovie.size(); i++) {
+				System.out.println((i + 1) + ") " + filteredMovie.get(i).getTitle());
+			}
+			
+			System.out.println("0) Go back");
+			System.out.print("Enter a movie index to rate: ");
 			int index = sc.nextInt() - 1;
+			if(index==-1) {
+				AppHelper prevApp = goBack();
+                prevApp.runInterface();
+			}
+			
 
 			File selected = movieFiles[index];
 			Movie movieToUpdate = (Movie) Serializer.deSerialize(movieFiles[index].getAbsolutePath());

@@ -336,7 +336,7 @@ public class MovieListingApp extends AppHelper {
 
                             System.out.println("| \t\t SUCCESS: UPDATED MOVIE LISTING \t\t\t |");
                             System.out.println("|--------------------------------------------------------|");
-                            System.out.println(movieToUpdate);
+                            //System.out.println(movieToUpdate); TODO i think we can comment out this
                         } catch (IOException e) {
                             System.out.println("|\t\t ERROR: PLEASE TRY AGAIN \t\t\t |");
                             System.out.println("|--------------------------------------------------------|");

@@ -258,10 +258,14 @@ public class ShowtimeApp extends AppHelper {
 
                     if(currShowTime.getCineplexID().equals(selectedCineplexId)) {
 
-                        Cinema selectedCinema = (Cinema) Serializer.deSerialize(path_cinema + "\\" + currShowTime.getCinemaID() + ".dat");
+                        String dateTime = currShowTime.getShowDateTime().toString();
+                        if(currShowTime.checkDayType().equals(DayType.HOLIDAY))
+                            dateTime += " (PH)";
 
+
+                        Cinema selectedCinema = (Cinema) Serializer.deSerialize(path_cinema + "\\" + currShowTime.getCinemaID() + ".dat");
                         System.out.println("Cinema Hall " + currShowTime.getCinemaID() + " (" + selectedCinema.getCinemaClass() + " Class)");
-                        System.out.println("Time: " + currShowTime.getShowDateTime() + " (" + currShowTime.getShowTimeStatus() + ")");
+                        System.out.println("Date and Time: " + dateTime + " (" + currShowTime.getShowTimeStatus() + ")");
                         System.out.println("No. of Seats Available: " + currShowTime.getNumOfAvailSeats());
                         System.out.println("Seating Layout: ");
                         currShowTime.showLayout();
@@ -319,6 +323,8 @@ public class ShowtimeApp extends AppHelper {
 
                     System.out.println((i+1) + ") " + cineplex.getVenue() + " (Cinema ID: " + cinemaId + ")");
                     System.out.println("Time: " + currShowTime.getShowDateTime().toString());
+
+                    System.out.print("\n");
                 }
 
                 System.out.print("\nSelect which showtime to update: ");
@@ -333,11 +339,27 @@ public class ShowtimeApp extends AppHelper {
                     System.out.println("1) Update Date and Time");
                     System.out.println("2) Update Showing Status");
 
-                    System.out.println("0) Return to Previous Menu");
+                    System.out.println("\n0) Save and Return");
 
                     input = sc.nextInt();
 
                     switch(input) {
+                        case 0:
+                            // Try to save file
+                            try {
+                                // Update Movie Object
+                                selectedMovie.updateShowTime(showtime_index, selectedShowTime);
+
+                                // Update Movie File with updated showtime arraylist
+                                Serializer.serialize(root + "\\data\\movies\\" + selectedMovie.getMovieId() + ".dat", selectedMovie);
+
+                                System.out.println("\n------- SUCCESS: UPDATED SHOWTIME -------\n");
+
+                                runInterface();
+                            } catch (IOException e) {
+                                System.out.println("\n------- ERROR: PLEASE TRY AGAIN -------\n");
+                                e.printStackTrace();
+                            }
                         case 1:
                             // Update Date and Time
                             System.out.println("Enter updated Date and Time in 2022-05-05 11:50 format");
@@ -346,6 +368,7 @@ public class ShowtimeApp extends AppHelper {
                             while(!showtimeValid) {
                                 String showtimeinput;
                                 showtimeinput = sc.nextLine();
+
                                 try {
                                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                                     LocalDateTime dateTime  = LocalDateTime.parse(showtimeinput, formatter);
@@ -382,20 +405,6 @@ public class ShowtimeApp extends AppHelper {
                             break;
                     }
                 } while(input > 0);
-
-                // Try to save file
-                try {
-                    // Update Movie Object
-                    selectedMovie.updateShowTime(showtime_index, selectedShowTime);
-
-                    // Update Movie File with updated showtime arraylist
-                    Serializer.serialize(root + "\\data\\movies\\" + selectedMovie.getMovieId() + ".dat", selectedMovie);
-
-                    System.out.println("\n------- SUCCESS: CREATED SHOWTIME -------\n");
-                } catch (IOException e) {
-                    System.out.println("\n------- ERROR: PLEASE TRY AGAIN -------\n");
-                    e.printStackTrace();
-                }
 
             } else {
                 // No showtimes available

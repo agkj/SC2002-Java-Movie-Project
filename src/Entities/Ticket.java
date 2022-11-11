@@ -12,7 +12,7 @@ public class Ticket implements Serializable{
 
     //Attributes:
     private double ticketPrice;
-    private TicketType ticketType; // this is our age
+    private TicketType ticketType;
     private MovieType movieType;
     private CinemaClass cinemaclass;
     private DayType dayType;

@@ -306,16 +306,18 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                     for(int i=0; i < listOfShowtimes.size(); i++) {
                     	ShowTime curr = listOfShowtimes.get(i);
 						Cinema currCinema = (Cinema) Serializer.deSerialize(pathCinema + "\\" + curr.getCinemaID() + ".dat");
-                    	
-                    	if(curr.getCineplexID().equals(selectedCineplex.getCineplexID()) && curr.getShowTimeStatus() != ShowTimeStatus.Sold_Out) {
-                    		// Show showtime
+
+						if(curr.getCineplexID().equals(selectedCineplex.getCineplexID()) && curr.getShowTimeStatus() != ShowTimeStatus.Sold_Out) {
+							// Show showtime
 							LocalDateTime showtimeDate = curr.getShowDateTime();
 							String day = showtimeDate.getDayOfWeek().toString();
-							int hour = showtimeDate.getHour();
-							System.out.println("Hour: " + hour);
-                    		System.out.println(i+1 + ") " +  day + " - " + curr.getShowDateTime() + " (" + currCinema.getCinemaClass().toString() + " Class)");
-                    		filteredShowtimes.add(curr);
-                    	}
+
+							if(curr.checkDayType().equals(DayType.HOLIDAY))
+								day += " (PH)";
+
+							System.out.println(i+1 + ") " +  day + " - " + curr.getShowDateTime() + " (" + currCinema.getCinemaClass().toString() + " Class)");
+							filteredShowtimes.add(curr);
+						}
                     }
                     
                     System.out.print("\nSelect Showtime: ");
@@ -354,8 +356,8 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
                         newTicket.setMovieType(selectedMovie.getMovieType());
                         newTicket.setCinemaclass(selectedCinema.getCinemaClass());
 
-
-                        newTicket.setDayType(DayType.MON_WED);	// TODO need to check for day type
+						newTicket.setDayType(selectedShowtime.checkDayType());
+                        //newTicket.setDayType(DayType.MON_WED);	// TODO need to check for day type
                         
                        // price = newTicket.calculateTicketPrice();
                         newTicket.setTicketPrice(price);

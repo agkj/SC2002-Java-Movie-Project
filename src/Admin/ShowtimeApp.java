@@ -251,7 +251,7 @@ public class ShowtimeApp extends AppHelper {
                 String selectedCineplexId = selectedCineplex.getCineplexID();
 
                 //if the choosen ID is the same as the CineplexID
-                System.out.println("Available Showtimes at " + selectedCineplex.getVenue() + " for " + selectedMovie.getTitle() + ": \n");
+                System.out.println("\nAvailable Showtimes at " + selectedCineplex.getVenue() + " for " + selectedMovie.getTitle() + ": \n");
 
                 for(int i = 0; i <  selectedMovie.getShowTimes().size(); i++){
                     ShowTime currShowTime = selectedMovie.getShowTimes().get(i);
@@ -259,6 +259,9 @@ public class ShowtimeApp extends AppHelper {
                     if(currShowTime.getCineplexID().equals(selectedCineplexId)) {
 
                         String dateTime = currShowTime.getShowDateTime().toString();
+
+                        if(currShowTime.checkDayType().equals(DayType.HOLIDAY))
+                            dateTime += " (PH)";
 
                         Cinema selectedCinema = (Cinema) Serializer.deSerialize(path_cinema + "\\" + currShowTime.getCinemaID() + ".dat");
                         System.out.println("Cinema Hall " + currShowTime.getCinemaID() + " (" + selectedCinema.getCinemaClass() + " Class)");

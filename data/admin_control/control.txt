@@ -1,2 +1,2 @@
 Ticket Sales,true
-Reviewers' Rating,true
+Reviewers' Rating,false

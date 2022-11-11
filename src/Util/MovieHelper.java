@@ -42,7 +42,7 @@ public class MovieHelper {
             List<Map.Entry<String, Double>> list = new ArrayList<>(mapOfMovies.entrySet());
 
             Collections.sort(list,new Comparator<Map.Entry<String, Double>>() {
-                public int compare (Map.Entry<String, Double> e1, Map.Entry<String,Double> e2) {
+                public int compare (Map.Entry<String, Double> e2, Map.Entry<String,Double> e1) {
 
                     return Double.compare(e1.getValue(), e2.getValue());
                 }

@@ -141,6 +141,9 @@ public class MovieGoerBooking implements Serializable {
 		SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyyHHmm");
 		Date date = new Date();
 		this.totalTickets++;
+		Movie movie = new Movie();
+		movie.setTicketsSold(totalTickets);
+		System.out.println(movie.getTicketsSold());
 		return cinemaCode + formatter.format(date);
 		// System.out.println("Your ticket id is "+ cinemaCode +
 		// formatter.format(date));

@@ -55,6 +55,10 @@ public class Movie implements Serializable {
         this.totalSales = 0;
 
     }
+    
+    public Movie(int ticketsSold) {
+    	ticketsSold++;
+    }
 
     //// Getter and Setters
 

@@ -51,14 +51,16 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 			if (movieFiles != null) {
 				for (int i = 0; i < movieFiles.length; i++) {
 					Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
-					System.out.println((i + 1) + ") " + curr.getTitle());
-					System.out.println("  Showing Status: " + curr.getShowingStatus());
-					System.out.println("  Synopsis: " + curr.getSynopsis());
-					System.out.println("  Director: " + curr.getDirector());
-					System.out.println("  Cast: " + curr.getCast());
-					System.out.println("  Overall Ratings: " + curr.getOverallRating());
-					System.out.println("  Past and Present Reviews: " + curr.getReviews());
-					System.out.println("-------------------------------------------------------------------");
+					if(curr.getShowingStatus().toString() != "End of Showing"){
+						System.out.println((i + 1) + ") " + curr.getTitle());
+						System.out.println("  Showing Status: " + curr.getShowingStatus());
+						System.out.println("  Synopsis: " + curr.getSynopsis());
+						System.out.println("  Director: " + curr.getDirector());
+						System.out.println("  Cast: " + curr.getCast());
+						System.out.println("  Overall Ratings: " + curr.getOverallRating());
+						System.out.println("  Past and Present Reviews: " + curr.getReviews());
+						System.out.println("-------------------------------------------------------------------");
+					}
 				}
 			}
 
@@ -163,7 +165,10 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 
 			System.out.println("*********Here are the top 5 movies!*********");
 			for (Map.Entry<String, Double> e : list) {
-				System.out.println("Movie: " + e.getKey() + "\t\t Rating: " + e.getValue() + " Stars");
+				String ratingValue = String.format("%5.2f", e.getValue());
+				String ratingString = String.format("%-10s", "Rating:");
+				String movieTitleString = String.format("%-15s", e.getKey());
+				System.out.println("Movie: " + movieTitleString + ratingString + ratingValue+ " Stars");
 			}
 			System.out.println("*********************************************");
 
@@ -195,11 +200,14 @@ public class MovieGoerApp extends MovieListingApp implements Serializable {
 
 			});
 
-			System.out.println("*********Here are the top 5 movies by ticket sales!*********");
+			System.out.println("**Here are the top 5 movies by ticket sales!**");
 			for (Map.Entry<String, Integer> e : list) {
-				System.out.println(e.getKey() + " Tickets sold: " + e.getValue());
+				String numofticketSold = String.format("%2d", e.getValue());
+				String ticketSoldString = String.format("%-10s", "Tickets sold:");
+				String movieTitleString = String.format("%-15s", e.getKey());
+				System.out.println("Movie: " + movieTitleString + ticketSoldString + numofticketSold);
 			}
-			System.out.println("*********************************************");
+			System.out.println("***********************************************");
 
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();

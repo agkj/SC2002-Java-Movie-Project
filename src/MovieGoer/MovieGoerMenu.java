@@ -32,7 +32,7 @@ public class MovieGoerMenu extends AppHelper {
 		System.out.println("5) Make a booking"); //based on booking id/movie code
 		System.out.println("6) View booking history\n");
 
-		System.out.println("7) Return to main menu");
+		System.out.println("0) Return to main menu");
 		System.out.println("-----------------------");
 		System.out.println("Select an option :");
 		int choice = sc.nextInt();	
@@ -41,7 +41,8 @@ public class MovieGoerMenu extends AppHelper {
 		
 		
 		switch(choice) {
-		
+			case 0:
+				break;
 		case 1:
 			//View movies
 			//movieReview.viewMovie();
@@ -73,28 +74,13 @@ public class MovieGoerMenu extends AppHelper {
 		case 6:
 			movieApp.movieViewBooking();
 			break;
-		case 7:
-			break;
+
 			
 			
 			
 		default: break;
 		
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
-	
-	
-	
-	
-	
-	
+
 }

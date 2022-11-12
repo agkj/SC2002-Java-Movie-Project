@@ -158,7 +158,7 @@ public class Booking implements Serializable {
 	
 	
 	public void setTicketID() {
-		SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyyHHmm");
+		SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyyHHmmss");
 		Date date = new Date();
 
 		this.ticketID= this.cinemaCode + formatter.format(date);

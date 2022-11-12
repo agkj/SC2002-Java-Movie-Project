@@ -126,30 +126,11 @@ public class MovieGoerMenu extends AppHelper {
 						break;
 
 					}
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+
+
 				
 			}catch(Exception e) {
-				System.out.println("Enter a correct choice");
+				System.out.println("Select a correct option\n");
 				sc.next();
 			}
 			

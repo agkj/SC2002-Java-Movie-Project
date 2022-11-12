@@ -79,11 +79,11 @@ public class Cinema implements Serializable {
         System.out.println();
         System.out.print("  ");
         for(int i=0; i < layout[0].length; ++i) {
-        	System.out.print("---");
+        	System.out.print("--");
         }
         System.out.print("SCREEN");
         for(int i=0; i < layout[0].length; ++i) {
-        	System.out.print("---");
+        	System.out.print("--");
         }
         System.out.println();
         System.out.print("  |  ");

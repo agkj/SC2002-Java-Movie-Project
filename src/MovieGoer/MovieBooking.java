@@ -1,32 +1,20 @@
 package MovieGoer;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
+import Entities.*;
 import Util.AppHelper;
 import Admin.MovieListingApp;
-import Entities.Cinema;
-import Entities.Cineplex;
-import Entities.DayType;
-import Entities.Movie;
-import Entities.MovieGoerBooking;
-import Entities.Review;
-import Entities.ShowTime;
-import Entities.ShowTimeStatus;
-import Entities.ShowingStatus;
-import Entities.Ticket;
-import Entities.TicketType;
 import Util.Serializer;
 
+/**
+ * [Movie-Goer Module] Movie Booking App to create a new booking.
+ * Allow movie-gowers to select seat(s) for a selected showtime and get ticket(s).
+ */
 public class MovieBooking extends MovieListingApp implements Serializable {
 
 	Scanner sc = new Scanner(System.in);
@@ -119,7 +107,7 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 		System.out.println("|------------------------------------------------|");
 		System.out.println("|-----------------Make a Booking-----------------|");
 
-		MovieGoerBooking newBooking = new MovieGoerBooking();
+		Booking newBooking = new Booking();
 
 		int selectedcine = 0;
 		Cineplex selectedCineplex = null;
@@ -131,10 +119,31 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 
 		System.out.println("Enter your phone number: ");
 		String customerPhone = sc.next();
+		
+		while(customerPhone.length() != 8) {
+			System.out.println("Invalid phone number");
+			System.out.println("Enter your phone number: ");
+			customerPhone = sc.next();
+		}
+		
+
+		
 		newBooking.setMobileNumber(customerPhone);
 
 		System.out.println("Enter your email: ");
 		String customerEmail = sc.next();
+		
+		String substring = "@gmail.com";
+		
+		while(!customerEmail.contains(substring)) {
+			System.out.println("Invalid email format");
+			System.out.println("Enter your email: ");
+			customerEmail = sc.next();
+		}
+		
+		
+		
+		
 		newBooking.setEmail(customerEmail);
 
 		// list available movies, user select movie
@@ -149,7 +158,7 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 			for (int i = 0; i < movieFiles.length; i++) {
 				Movie curr = (Movie) Serializer.deSerialize(movieFiles[i].getAbsolutePath());
 
-				if (!curr.isEndOfShowing() & curr.getShowingStatus() != ShowingStatus.Coming_Soon) // TODO Coming soon
+				if (!curr.isEndOfShowing() & curr.getShowingStatus() != ShowingStatus.Coming_Soon & curr.getShowTimes().size() != 0) // TODO Coming soon
 					// to filter
 					filteredMovie.add(curr);
 			}
@@ -200,13 +209,16 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 				files = path.listFiles();
 				double price = 0;
 				double newPrice = 0;
-
+				
+				//ArrayList<ShowTime> listOfShowtimes = selectedMovie.getShowTimes();
+				//ArrayList<ShowTime> filteredShowtimes = new ArrayList<ShowTime>();
+				
 				// Read all available Cineplex created
 				if (files != null) {
 					for (int i = 0; i < files.length; i++) {
-						// Cineplex curr = (Cineplex) Serializer.deSerialize(path + "\\" +
-						// files[i].getName());
 						Cineplex curr = (Cineplex) Serializer.deSerialize(files[i].getAbsolutePath());
+						//ShowTime temp = listOfShowtimes.get(i);
+						//if(temp.getCineplexID().equals(curr.getCineplexID()) & temp.getShowTimeStatus() != ShowTimeStatus.Sold_Out)
 						System.out.println("| " + (i + 1) + ") " + curr.getVenue());
 					}
 					System.out.println("|------------------------------------------------|");
@@ -239,12 +251,12 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 								
 							}
 							
-
+							
 							System.out.println(i+1 + ") " +  day + " - " + curr.getShowDateTime() + " (" + currCinema.getCinemaClass().toString() + " Class)");
 							filteredShowtimes.add(curr);
 						}
 					}
-
+					
 					System.out.print("\nSelect Showtime: ");
 
 					// Get selected Cineplex file and object

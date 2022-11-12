@@ -9,10 +9,10 @@ import Util.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class MainMenu extends AppHelper {
+public class MainMenu {
 
 	public MainMenu(AppHelper prevApp) {
-		super(null);
+
 	}
 
 	public static void main(String[] args) {

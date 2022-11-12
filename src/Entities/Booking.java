@@ -1,7 +1,6 @@
 package Entities;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -9,16 +8,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-
-//import MovieGoer.MovieGoerBooking;
-import Util.Serializer;
-
 /**
  * Represents a movie booking.
  * A booking can be made by one movie-goer.
  * A booking can contain one to many tickets.
  */
-public class MovieGoerBooking implements Serializable {
+public class Booking implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = 2002;
@@ -82,10 +77,10 @@ public class MovieGoerBooking implements Serializable {
 
 	// cinema code: yy/mm/dd, hr hr min min
 	
-	public MovieGoerBooking() {}
+	public Booking() {}
 	
-	public MovieGoerBooking(String name, String mobileNumber, String email, String selectedMovie, String cinemaCode,
-			LocalDateTime showDateTime) {
+	public Booking(String name, String mobileNumber, String email, String selectedMovie, String cinemaCode,
+				   LocalDateTime showDateTime) {
 		super();
 		this.name = name;
 		this.mobileNumber = mobileNumber;
@@ -154,7 +149,7 @@ public class MovieGoerBooking implements Serializable {
 	}
 
 	public static void setTotalTickets(int totalTickets) {
-		MovieGoerBooking.totalTickets = totalTickets;
+		Booking.totalTickets = totalTickets;
 	}
 	
 	public String getTicketID() {
@@ -163,7 +158,7 @@ public class MovieGoerBooking implements Serializable {
 	
 	
 	public void setTicketID() {
-		SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyyHHmm");
+		SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyyHHmmss");
 		Date date = new Date();
 
 		this.ticketID= this.cinemaCode + formatter.format(date);

@@ -1,32 +1,16 @@
 package MovieGoer;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 import Util.AppHelper;
 import Admin.MovieListingApp;
-import Entities.Cinema;
-import Entities.Cineplex;
-import Entities.DayType;
-import Entities.Movie;
-import Entities.MovieGoerBooking;
-import Entities.Review;
-import Entities.ShowTime;
-import Entities.ShowTimeStatus;
-import Entities.ShowingStatus;
-import Entities.Ticket;
-import Entities.TicketType;
-import Util.Serializer;
 
+/**
+ * [Movie-Goer Module] Movie Booking App to create a new booking.
+ * Allow movie-gowers to select seat(s) for a selected showtime and get ticket(s).
+ */
 public class MovieViewBooking extends MovieListingApp implements Serializable {
 
 	Scanner sc = new Scanner(System.in);

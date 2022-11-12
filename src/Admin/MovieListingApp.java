@@ -277,8 +277,15 @@ public class MovieListingApp extends AppHelper {
                     System.out.println("  Synopsis: " + curr.getSynopsis());
                     System.out.println("  Director: " + curr.getDirector());
                     System.out.println("  Cast: " + curr.getCast());
-                    System.out.println("  Overall Ratings: " + curr.getOverallRating());
-                    System.out.println("  Past and Present Reviews: " + curr.getReviews());
+                    if(curr.getReviews().size() > 1) {
+						System.out.printf("|  Overall Ratings: %.2f\n",curr.getOverallRating());
+						System.out.println("|  Past and Present Reviews: " + curr.getReviews());
+					}
+					
+				else {
+					System.out.println("|  Overall Ratings: NA");
+					System.out.println("|  Past and Present Reviews: NA");
+				}
                     System.out.println("|--------------------------------------------------------|");
                 }
             }

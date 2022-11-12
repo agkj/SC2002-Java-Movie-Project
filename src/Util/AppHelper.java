@@ -11,7 +11,7 @@ public abstract class AppHelper {
 		this.prevApp = prevApp;
 	}
 
-	public void runInterface() {}
+	public abstract void runInterface();
 
 	public AppHelper goBack() {
 		return this.prevApp;

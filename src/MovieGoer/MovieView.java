@@ -3,30 +3,19 @@ package MovieGoer;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 import Util.AppHelper;
 import Admin.MovieListingApp;
-import Entities.Cinema;
-import Entities.Cineplex;
-import Entities.DayType;
 import Entities.Movie;
-import Entities.MovieGoerBooking;
-import Entities.Review;
-import Entities.ShowTime;
-import Entities.ShowTimeStatus;
-import Entities.ShowingStatus;
-import Entities.Ticket;
-import Entities.TicketType;
 import Util.Serializer;
 
+
+/**
+ * [Movie-Goer Module] Movie App to view movie listings.
+ * Allow movie-gowers to view all available movie listings in the system (except for End_Of_Showing).
+ */
 public class MovieView extends MovieListingApp implements Serializable {
 
 	Scanner sc = new Scanner(System.in);
@@ -66,11 +55,15 @@ public class MovieView extends MovieListingApp implements Serializable {
 					System.out.println("|  Synopsis: " + filteredMovie.get(i).getSynopsis());
 					System.out.println("|  Director: " + filteredMovie.get(i).getDirector());
 					System.out.println("|  Cast: " + filteredMovie.get(i).getCast());
-					System.out.printf("|  Overall Ratings: %.2f\n",filteredMovie.get(i).getOverallRating());
-					if(filteredMovie.get(i).getReviews().size() != 0)
-						System.out.println("|  Past and Present Reviews: " + filteredMovie.get(i).getReviews());
-					else
+					if(filteredMovie.get(i).getReviews().size() > 1) {
+							System.out.printf("|  Overall Ratings: %.2f\n",filteredMovie.get(i).getOverallRating());
+							System.out.println("|  Past and Present Reviews: " + filteredMovie.get(i).getReviews());
+						}
+						
+					else {
+						System.out.println("|  Overall Ratings: NA");
 						System.out.println("|  Past and Present Reviews: NA");
+					}
 					System.out.println(
 							"|-------------------------------------------------------------------------------|");				}
 				System.out.println();

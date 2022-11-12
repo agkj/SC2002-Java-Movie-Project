@@ -1,12 +1,15 @@
 package MovieGoer;
 
-import java.io.Serializable;
 import java.util.Scanner;
 
-import Entities.MovieGoerBooking;
+import Entities.Booking;
 import Util.Serializer;
 
-public class MovieGoerCheckBooking extends MovieGoerBooking{
+/**
+ * [Movie-Goer Module] Movie Booking History App to check booking history.
+ * Allow movie-gowers to view their booking history by their email address.
+ */
+public class MovieGoerCheckBooking extends Booking {
 	
 	Scanner sc = new Scanner(System.in);
 	public MovieGoerCheckBooking() {
@@ -14,8 +17,6 @@ public class MovieGoerCheckBooking extends MovieGoerBooking{
 	}
 	
 	public void getBookingDetails() {
-		
-
 		super.load();
 		System.out.println("Enter your email address: ");
 		String userEmail = sc.nextLine();
@@ -29,7 +30,7 @@ public class MovieGoerCheckBooking extends MovieGoerBooking{
 			for(int i =0;i<movieBookings.length;i++) {
 				//System.out.println(movieBookings[i].getAbsolutePath());
 				
-				MovieGoerBooking movieBooking = (MovieGoerBooking) Serializer.deSerialize(movieBookings[i].getAbsolutePath());
+				Booking movieBooking = (Booking) Serializer.deSerialize(movieBookings[i].getAbsolutePath());
 				//System.out.println(movieBooking.getEmail());
 				
 				if(userEmail.equals(movieBooking.getEmail())) {

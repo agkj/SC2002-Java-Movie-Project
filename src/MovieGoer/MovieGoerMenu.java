@@ -1,17 +1,15 @@
 package MovieGoer;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
-import Admin.MovieListingApp;
-import Entities.Holiday;
-import MovieGoer.AppInterface;
 import Util.AppHelper;
 import Util.FileReader;
 import Util.MovieHelper;
-import Util.Serializer;
 
+/**
+ * [Movie-Goer Module] Movie-Goer Starter App containing list of Movie-Goer Functions.
+ * Allow movie-gowers to view and rate movies, list top 5 movies, and create and view bookings.
+ */
 public class MovieGoerMenu extends AppHelper {
 
 	String root = System.getProperty("user.dir");

@@ -5,7 +5,7 @@ import Util.AppHelper;
 import java.util.Scanner;
 
 /**
- * [Admin Module] Starter App containing list of Admin Functions.
+ * [Admin Module] Admin Starter App containing list of Admin Functions.
  * Allow Admin users to manage the movie listings, cinema showtimes and system settings (i.e., ticket pricing, holidays)
  */
 

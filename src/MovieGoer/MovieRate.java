@@ -93,12 +93,12 @@ public class MovieRate extends MovieListingApp implements Serializable {
 
 			} catch (IOException e) {
 				System.out.println("\n------- ERROR: PLEASE TRY AGAIN -------\n");
-				
+				e.printStackTrace();
 			}
 
 		} catch (Exception e) {
-			System.out.println("Select a correct option\n");
-			
+			System.out.println("\n------- ERROR: MOVIE NOT IN RANGE -------\n");
+			e.printStackTrace();
 		}
 		goBack().runInterface();
 

@@ -103,7 +103,7 @@ public class MovieHelper {
                     
                     int b = 1;
                     for(Map.Entry<String, Double> e:list) {//TODO the top 5 only
-                        System.out.println(e.getKey() + " - Rating: " + e.getValue());
+                        System.out.println(e.getKey() + " - Rating: " +String.format("%.1f",e.getValue()));
                         b++;
                         if(b > 5) break;
                     }

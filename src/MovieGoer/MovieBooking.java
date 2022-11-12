@@ -217,8 +217,6 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 				if (files != null) {
 					for (int i = 0; i < files.length; i++) {
 						Cineplex curr = (Cineplex) Serializer.deSerialize(files[i].getAbsolutePath());
-						ShowTime temp = listOfShowtimes.get(i);
-						if(temp.getCineplexID().equals(curr.getCineplexID()) & temp.getShowTimeStatus() != ShowTimeStatus.Sold_Out)
 							System.out.println("| " + (i + 1) + ") " + curr.getVenue());
 					}
 					System.out.println("|------------------------------------------------|");

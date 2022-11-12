@@ -4,6 +4,7 @@ import Entities.Movie;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.*;
 
 /**
@@ -103,7 +104,9 @@ public class MovieHelper {
                     
                     int b = 1;
                     for(Map.Entry<String, Double> e:list) {//TODO the top 5 only
-                        System.out.println(e.getKey() + " - Rating: " +String.format("%.1f",e.getValue()));
+                        DecimalFormat df = new DecimalFormat("#.0");
+
+                        System.out.println(e.getKey() + " - Rating: " + df.format(e.getValue()));
                         b++;
                         if(b > 5) break;
                     }

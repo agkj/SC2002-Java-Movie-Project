@@ -119,10 +119,31 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 
 		System.out.println("Enter your phone number: ");
 		String customerPhone = sc.next();
+		
+		while(customerPhone.length() != 8) {
+			System.out.println("Invalid phone number");
+			System.out.println("Enter your phone number: ");
+			customerPhone = sc.next();
+		}
+		
+
+		
 		newBooking.setMobileNumber(customerPhone);
 
 		System.out.println("Enter your email: ");
 		String customerEmail = sc.next();
+		
+		String substring = "@gmail.com";
+		
+		while(!customerEmail.contains(substring)) {
+			System.out.println("Invalid email format");
+			System.out.println("Enter your email: ");
+			customerEmail = sc.next();
+		}
+		
+		
+		
+		
 		newBooking.setEmail(customerEmail);
 
 		// list available movies, user select movie

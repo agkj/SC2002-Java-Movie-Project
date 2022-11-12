@@ -31,6 +31,8 @@ public class MovieHelper {
     public void getTopListings(int type) {
         try {
             // Read all available Movies
+
+        	int setter = 0;
             Map<String, Double> mapOfMovies = new HashMap<>();
             if(movieFiles != null) {
 
@@ -42,7 +44,15 @@ public class MovieHelper {
                         mapOfMovies.put(curr.getTitle(), curr.getTotalSales());
                     } else if (type == 2) {
                         // By review ratings
-                        mapOfMovies.put(curr.getTitle(), curr.getOverallRating());
+                    	if(curr.getReviews().size()>1) {
+                    		mapOfMovies.put(curr.getTitle(), curr.getOverallRating());
+                    		setter = 1;
+                    	}
+                    	if(curr.getReviews().size()==0) {
+                    		setter = 0;
+                    	}
+                    	
+                        
                     }
 
                 }
@@ -84,6 +94,13 @@ public class MovieHelper {
                         System.out.println(e.getKey() + " - Rating: " + e.getValue());
                     }
                     */
+                    
+                    if(setter ==0) {
+                    	//System.out.println("NA");
+                    }
+                    
+                    
+                    
                     int b = 1;
                     for(Map.Entry<String, Double> e:list) {//TODO the top 5 only
                         System.out.println(e.getKey() + " - Rating: " + e.getValue());

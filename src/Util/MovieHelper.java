@@ -53,7 +53,7 @@ public class MovieHelper {
                 	System.out.println("|--------------------------------------------------------|");
                     System.out.println("| \t\t TOP 5 MOVIES BY TICKET SALES \t\t |");
                     System.out.println("|--------------------------------------------------------|");
-                    for(Map.Entry<String, Double> e:list) {
+                    for(Map.Entry<String, Double> e:list) { //TODO the top 5 only
                         System.out.println(e.getKey() + " - Total Sales: $" + e.getValue());     // Movie Title - Total Sales: $xx
                     }
 
@@ -62,7 +62,7 @@ public class MovieHelper {
                 	System.out.println("|--------------------------------------------------------|");
                     System.out.println("|\t\t TOP 5 MOVIES BY REVIEW RATINGS \t\t\t |");
                     System.out.println("|--------------------------------------------------------|");
-                    for(Map.Entry<String, Double> e:list) {
+                    for(Map.Entry<String, Double> e:list) {//TODO the top 5 only
                         System.out.println(e.getKey() + " - Rating: " + e.getValue());
                     }
 

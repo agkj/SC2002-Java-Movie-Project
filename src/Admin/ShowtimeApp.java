@@ -142,7 +142,7 @@ public class ShowtimeApp extends AppHelper {
                     //System.out.println("The showtime added is : " + newShowtime.getShowDateTime().toString());
 
                 } catch (DateTimeParseException e) {
-                    System.out.println("Please enter a valid showtime."); // TODO magic
+                    //System.out.println("Please enter a valid showtime."); // TODO magic
                 }
             }
             System.out.println("\n");

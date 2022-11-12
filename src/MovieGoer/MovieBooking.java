@@ -137,7 +137,7 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 			for (int i = 0; i < movieFiles.length; i++) {
 				Movie curr = (Movie) Serializer.deSerialize(movieFiles[i].getAbsolutePath());
 
-				if (!curr.isEndOfShowing() & curr.getShowingStatus() != ShowingStatus.Coming_Soon) // TODO Coming soon
+				if (!curr.isEndOfShowing() & curr.getShowingStatus() != ShowingStatus.Coming_Soon & curr.getShowTimes().size() != 0) // TODO Coming soon
 					// to filter
 					filteredMovie.add(curr);
 			}
@@ -188,14 +188,17 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 				files = path.listFiles();
 				double price = 0;
 				double newPrice = 0;
-
+				
+				ArrayList<ShowTime> listOfShowtimes = selectedMovie.getShowTimes();
+				ArrayList<ShowTime> filteredShowtimes = new ArrayList<ShowTime>();
+				
 				// Read all available Cineplex created
 				if (files != null) {
 					for (int i = 0; i < files.length; i++) {
-						// Cineplex curr = (Cineplex) Serializer.deSerialize(path + "\\" +
-						// files[i].getName());
 						Cineplex curr = (Cineplex) Serializer.deSerialize(files[i].getAbsolutePath());
-						System.out.println("| " + (i + 1) + ") " + curr.getVenue());
+						ShowTime temp = listOfShowtimes.get(i);
+						if(temp.getCineplexID().equals(curr.getCineplexID()) & temp.getShowTimeStatus() != ShowTimeStatus.Sold_Out)
+							System.out.println("| " + (i + 1) + ") " + curr.getVenue());
 					}
 					System.out.println("|------------------------------------------------|");
 					System.out.print("\nSelect Cineplex: ");
@@ -206,8 +209,8 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 					// files[selectedcine - 1].getName());
 					selectedCineplex = (Cineplex) Serializer.deSerialize(files[selectedcine - 1].getAbsolutePath());
 					// Show list of showtimes from movieBooked
-					ArrayList<ShowTime> listOfShowtimes = selectedMovie.getShowTimes();
-					ArrayList<ShowTime> filteredShowtimes = new ArrayList<ShowTime>();
+					//ArrayList<ShowTime> listOfShowtimes = selectedMovie.getShowTimes();
+					//ArrayList<ShowTime> filteredShowtimes = new ArrayList<ShowTime>();
 					for (int i = 0; i < listOfShowtimes.size(); i++) {
 						ShowTime curr = listOfShowtimes.get(i);
 						Cinema currCinema = (Cinema) Serializer
@@ -227,12 +230,12 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 								
 							}
 							
-
+							
 							System.out.println(i+1 + ") " +  day + " - " + curr.getShowDateTime() + " (" + currCinema.getCinemaClass().toString() + " Class)");
 							filteredShowtimes.add(curr);
 						}
 					}
-
+					
 					System.out.print("\nSelect Showtime: ");
 
 					// Get selected Cineplex file and object

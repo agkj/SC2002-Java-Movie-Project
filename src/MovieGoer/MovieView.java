@@ -55,11 +55,15 @@ public class MovieView extends MovieListingApp implements Serializable {
 					System.out.println("|  Synopsis: " + filteredMovie.get(i).getSynopsis());
 					System.out.println("|  Director: " + filteredMovie.get(i).getDirector());
 					System.out.println("|  Cast: " + filteredMovie.get(i).getCast());
-					System.out.printf("|  Overall Ratings: %.2f\n",filteredMovie.get(i).getOverallRating());
-					if(filteredMovie.get(i).getReviews().size() > 1)
-						System.out.println("|  Past and Present Reviews: " + filteredMovie.get(i).getReviews());
-					else
+					if(filteredMovie.get(i).getReviews().size() > 1) {
+							System.out.printf("|  Overall Ratings: %.2f\n",filteredMovie.get(i).getOverallRating());
+							System.out.println("|  Past and Present Reviews: " + filteredMovie.get(i).getReviews());
+						}
+						
+					else {
+						System.out.println("|  Overall Ratings: NA");
 						System.out.println("|  Past and Present Reviews: NA");
+					}
 					System.out.println(
 							"|-------------------------------------------------------------------------------|");				}
 				System.out.println();

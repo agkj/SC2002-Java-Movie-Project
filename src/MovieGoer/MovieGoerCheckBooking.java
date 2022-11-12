@@ -27,7 +27,7 @@ public class MovieGoerCheckBooking extends Booking {
 		
 		System.out.println("|------------------Your bookings-----------------|");
 		try {
-			for(int i =0;i<movieBookings.length;i++) {
+			for(int i = 0; i <= movieBookings.length; i++) {
 				//System.out.println(movieBookings[i].getAbsolutePath());
 				
 				Booking movieBooking = (Booking) Serializer.deSerialize(movieBookings[i].getAbsolutePath());

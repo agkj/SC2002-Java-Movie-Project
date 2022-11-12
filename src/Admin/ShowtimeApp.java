@@ -485,7 +485,7 @@ public class ShowtimeApp extends AppHelper {
                     // Update Movie File with updated showtime arraylist
                     Serializer.serialize(root + "\\data\\movies\\" + selectedMovie.getMovieId() + ".dat", selectedMovie);
 
-                    System.out.println("\n------- SUCCESS: CREATED SHOWTIME -------\n");
+                    System.out.println("\n------- SUCCESS: DELETE SHOWTIME -------\n");
 
                     runInterface();
                 } catch (IOException e) {

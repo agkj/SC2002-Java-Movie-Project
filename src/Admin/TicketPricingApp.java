@@ -10,262 +10,241 @@ import Util.FileReader;
 import java.util.Scanner;
 
 /**
- * [Admin Module] Ticket Pricing App to control the modifiers affecting ticket
- * prices (i.e., movie type, cinema class, etc.).
+ * [Admin Module] Ticket Pricing App to control the modifiers affecting ticket prices (i.e., movie type, cinema class, etc.).
  */
 public class TicketPricingApp extends AppHelper {
-	Scanner sc = new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);
 
-	String root = System.getProperty("user.dir") + "\\data\\ticket_pricing\\";
+    String root = System.getProperty("user.dir") + "\\data\\ticket_pricing\\";
+    public TicketPricingApp(AppHelper prevApp) {
+        super(prevApp);
+    }
 
-	public TicketPricingApp(AppHelper prevApp) {
-		super(prevApp);
-	}
+    @Override
+    public void runInterface() {
+        System.out.println("------- CONFIGURE TICKET PRICING -------\n");
 
-	@Override
-	public void runInterface() {
+        System.out.println("1) Standard Ticket Prices");
+        System.out.println("2) Movie Type (e.g., 3D, blockbuster)");
+        System.out.println("3) Cinema Class (e.g., Platinum)");
+        System.out.println("4) Ticket Type (e.g., Adult)");
+        System.out.println("5) Day of the Week/Holiday");
+        System.out.println("\n0) Return to Previous Menu");
+        System.out.println("----------------------------------------");
+        System.out.println("Select an option: ");
+        while(!sc.hasNextInt())
+            System.out.println("Please enter a valid input");
 
-		boolean stay = true;
+        int input = sc.nextInt();
 
-		while (stay) {
-			try {
-				System.out.println("------- CONFIGURE TICKET PRICING -------\n");
+        // Let Base Ticket Price = $10
 
-				System.out.println("1) Standard Ticket Prices");
-				System.out.println("2) Movie Type (e.g., 3D, blockbuster)");
-				System.out.println("3) Cinema Class (e.g., Platinum)");
-				System.out.println("4) Ticket Type (e.g., Adult)");
-				System.out.println("5) Day of the Week/Holiday");
-				System.out.println("\n0) Return to Previous Menu");
-				System.out.println("----------------------------------------");
-				System.out.println("Select an option: ");
-				//while (!sc.hasNextInt())
-				//	System.out.println("Please enter a valid input");
+        switch(input) {
+            case 0:
+                goBack().runInterface();
+                break;
+            case 1:
+                // Standard Ticket Prices (i.e., base price, booking fee)
+                configureBase();
+                break;
+            case 2:
+                // Movie Type
+                configureMovieType();
+                break;
+            case 3:
+                // Cinema Class
+                configureCinemaClass();
+                break;
+            case 4:
+                // Ticket Type
+                configureTicketType();
+                break;
+            case 5:
+                // Day of the Week
+                configureDays();
+                break;
+            default:
+                break;
+        }
+    }
 
-				int input = sc.nextInt();
+    /**
+     * Configure the Standard Ticket prices including the Base Ticket Price (before any modifiers) and Booking Fee.
+     */
+    // (1) Standard Ticket Prices
+    public void configureBase() {
+        System.out.println("------- CONFIGURE BASE TICKET PRICING -------\n");
 
-				// Let Base Ticket Price = $10
+        System.out.println("1) Base Ticket Price");
+        System.out.println("2) Booking Fee");
+        System.out.println("\n0) Return to Previous Menu");
+        System.out.println("-------------------------------------------");
+        System.out.println("Select an option: ");
+        while(!sc.hasNextInt())
+            System.out.println("Please enter a valid input");
 
-				switch (input) {
-				case 0:
-					stay = false;
-					goBack().runInterface();
-					break;
-				case 1:
-					// Standard Ticket Prices (i.e., base price, booking fee)
-					configureBase();
-					break;
-				case 2:
-					// Movie Type
-					configureMovieType();
-					break;
-				case 3:
-					// Cinema Class
-					configureCinemaClass();
-					break;
-				case 4:
-					// Ticket Type
-					configureTicketType();
-					break;
-				case 5:
-					// Day of the Week
-					configureDays();
-					break;
-				default:
-					break;
-				}
+        int input = sc.nextInt();
 
-			} catch (Exception e) {
-				System.out.println("Select a correct option\n");
-				sc.next();
-			}
-		}
+        // Let Base Ticket Price = $10
 
-	}
+        switch(input) {
+            case 0:
+                runInterface();
+                break;
+            case 1:
+                // Base Ticket Price
+                System.out.print("Enter Standard Ticket Price: ");
 
-	/**
-	 * Configure the Standard Ticket prices including the Base Ticket Price (before
-	 * any modifiers) and Booking Fee.
-	 */
-	// (1) Standard Ticket Prices
-	public void configureBase() {
-		System.out.println("------- CONFIGURE BASE TICKET PRICING -------\n");
+                while(!sc.hasNextFloat())
+                    System.out.println("Please enter a valid price.");
 
-		System.out.println("1) Base Ticket Price");
-		System.out.println("2) Booking Fee");
-		System.out.println("\n0) Return to Previous Menu");
-		System.out.println("-------------------------------------------");
-		System.out.println("Select an option: ");
-		while (!sc.hasNextInt())
-			System.out.println("Please enter a valid input");
+                float standardPrice = sc.nextFloat();
 
-		int input = sc.nextInt();
+                String data = "Standard," + standardPrice;
 
-		// Let Base Ticket Price = $10
+                FileReader.replaceLine(root + "standard_ticket.txt", "Standard", "Standard," + standardPrice, false);
 
-		switch (input) {
-		case 0:
-			runInterface();
-			break;
-		case 1:
-			// Base Ticket Price
-			System.out.print("Enter Standard Ticket Price: ");
+                runInterface();
 
-			while (!sc.hasNextFloat())
-				System.out.println("Please enter a valid price.");
+                break;
+            case 2:
+                // Booking Fee
+                System.out.print("Enter Booking Fee: ");
 
-			float standardPrice = sc.nextFloat();
+                while(!sc.hasNextFloat())
+                    System.out.println("Please enter a valid fee.");
 
-			String data = "Standard," + standardPrice;
+                float bookingFee = sc.nextFloat();
 
-			FileReader.replaceLine(root + "standard_ticket.txt", "Standard", "Standard," + standardPrice, false);
+                FileReader.replaceLine(root + "standard_ticket.txt", "Booking", "Booking," + bookingFee, false);
 
-			runInterface();
+                runInterface();
 
-			break;
-		case 2:
-			// Booking Fee
-			System.out.print("Enter Booking Fee: ");
+                break;
+            default:
+                break;
+        }
+    }
 
-			while (!sc.hasNextFloat())
-				System.out.println("Please enter a valid fee.");
+    /**
+     * [Multiply Modifier] Configure the price modifier for different Movie Types (i.e., 2D, 3D, etc.).
+     */
+    // (2) Modify Movie Type Pricing
+    public void configureMovieType() {
+        System.out.println("------- CONFIGURE MOVIE TYPE PRICE MODIFIER -------\n");
 
-			float bookingFee = sc.nextFloat();
+        // Display all movie types
+        for(int i=0; i < MovieType.values().length; i++) {
+            System.out.println((i+1) + ") " + MovieType.values()[i]);
+        }
 
-			FileReader.replaceLine(root + "standard_ticket.txt", "Booking", "Booking," + bookingFee, false);
+        // Get Movie Type to Change
+        System.out.print("Enter Movie Type to Configure: ");
 
-			runInterface();
+        while(!sc.hasNextInt())
+            System.out.println("Please enter a valid option.");
 
-			break;
-		default:
-			break;
-		}
-	}
+        String selectedType = MovieType.values()[sc.nextInt()-1].toString();
 
-	/**
-	 * [Multiply Modifier] Configure the price modifier for different Movie Types
-	 * (i.e., 2D, 3D, etc.).
-	 */
-	// (2) Modify Movie Type Pricing
-	public void configureMovieType() {
-		System.out.println("------- CONFIGURE MOVIE TYPE PRICE MODIFIER -------\n");
+        // Get New Price
+        System.out.print("Enter New Price Modifier: ");
+        while(!sc.hasNextFloat())
+            System.out.println("Please enter a valid price modifier.");
 
-		// Display all movie types
-		for (int i = 0; i < MovieType.values().length; i++) {
-			System.out.println((i + 1) + ") " + MovieType.values()[i]);
-		}
+        float typeModifier = sc.nextFloat();
 
-		// Get Movie Type to Change
-		System.out.print("Enter Movie Type to Configure: ");
+        FileReader.replaceLine(root + "movie_type_price.txt", selectedType, selectedType + "," + typeModifier, false);
 
-		while (!sc.hasNextInt())
-			System.out.println("Please enter a valid option.");
+        runInterface();
+    }
 
-		String selectedType = MovieType.values()[sc.nextInt() - 1].toString();
+    /**
+     * [Addition/Subtract Modifier] Configure the price modifier for different Cinema Classes (i.e., Regular, Platinum).
+     */
+    // (3) Cinema Class
+    public void configureCinemaClass() {
+        System.out.println("------- CONFIGURE CINEMA CLASS PRICING -------\n");
 
-		// Get New Price
-		System.out.print("Enter New Price Modifier: ");
-		while (!sc.hasNextFloat())
-			System.out.println("Please enter a valid price modifier.");
+        // Print out all cinema classes
+        for(int i=0; i < CinemaClass.values().length; i++) {
+            System.out.println((i+1) + ") " + CinemaClass.values()[i]);
+        }
+        System.out.println("----------------------------------------------");
+        System.out.print("Select Cinema Class to Configure: ");
+        while(!sc.hasNextInt())
+            System.out.println("Please enter a valid option.");
 
-		float typeModifier = sc.nextFloat();
+        int classOption = sc.nextInt();
+        String selectedClass = CinemaClass.values()[classOption-1].toString();
 
-		FileReader.replaceLine(root + "movie_type_price.txt", selectedType, selectedType + "," + typeModifier, false);
+        System.out.print("Enter New Price Modifier: ");
+        while(!sc.hasNextFloat())
+            System.out.println("Please enter a valid price modifier.");
 
-		runInterface();
-	}
+        float classPrice = sc.nextFloat();
 
-	/**
-	 * [Addition/Subtract Modifier] Configure the price modifier for different
-	 * Cinema Classes (i.e., Regular, Platinum).
-	 */
-	// (3) Cinema Class
-	public void configureCinemaClass() {
-		System.out.println("------- CONFIGURE CINEMA CLASS PRICING -------\n");
+        FileReader.replaceLine(root + "cinema_class_price.txt", selectedClass, selectedClass + "," + classPrice, false);
 
-		// Print out all cinema classes
-		for (int i = 0; i < CinemaClass.values().length; i++) {
-			System.out.println((i + 1) + ") " + CinemaClass.values()[i]);
-		}
-		System.out.println("----------------------------------------------");
-		System.out.print("Select Cinema Class to Configure: ");
-		while (!sc.hasNextInt())
-			System.out.println("Please enter a valid option.");
+        runInterface();
+    }
 
-		int classOption = sc.nextInt();
-		String selectedClass = CinemaClass.values()[classOption - 1].toString();
+    /**
+     * [Addition/Subtract Modifier] Configure the price modifier for different Ticket Types (i.e., Adult, Senior).
+     */
+    // (4) Configure Ticket Type
+    public void configureTicketType() {
+        System.out.println("------- CONFIGURE TICKET TYPE PRICING -------\n");
 
-		System.out.print("Enter New Price Modifier: ");
-		while (!sc.hasNextFloat())
-			System.out.println("Please enter a valid price modifier.");
+        // Display all ticket types
+        for(int i=0; i < TicketType.values().length; i++) {
+            System.out.println((i+1) + ") " + TicketType.values()[i]);
+        }
 
-		float classPrice = sc.nextFloat();
+        // Get Ticket Type
+        System.out.println("\nSelect Ticket Type to Configure: ");
+        while(!sc.hasNextInt())
+            System.out.println("Please enter a valid option.");
 
-		FileReader.replaceLine(root + "cinema_class_price.txt", selectedClass, selectedClass + "," + classPrice, false);
+        String selectedTicket = TicketType.values()[sc.nextInt()-1].toString();
 
-		runInterface();
-	}
+        System.out.print("Enter New Price Modifier: ");
+        while(!sc.hasNextFloat())
+            System.out.println("Please enter a valid price modifier.");
 
-	/**
-	 * [Addition/Subtract Modifier] Configure the price modifier for different
-	 * Ticket Types (i.e., Adult, Senior).
-	 */
-	// (4) Configure Ticket Type
-	public void configureTicketType() {
-		System.out.println("------- CONFIGURE TICKET TYPE PRICING -------\n");
+        float ticketTypePrice = sc.nextFloat();
 
-		// Display all ticket types
-		for (int i = 0; i < TicketType.values().length; i++) {
-			System.out.println((i + 1) + ") " + TicketType.values()[i]);
-		}
+        FileReader.replaceLine(root + "ticket_type_price.txt", selectedTicket, selectedTicket + "," + ticketTypePrice, false);
 
-		// Get Ticket Type
-		System.out.println("\nSelect Ticket Type to Configure: ");
-		while (!sc.hasNextInt())
-			System.out.println("Please enter a valid option.");
+        runInterface();
+    }
 
-		String selectedTicket = TicketType.values()[sc.nextInt() - 1].toString();
+    /**
+     * [Addition/Subtract Modifier] Configure the price modifier for different day of the week (i.e., weekend, publid holiday).
+     */
+    // (5) Configure Day of Week
+    public void configureDays() {
+        System.out.println("------- CONFIGURE DAY PRICING -------\n");
 
-		System.out.print("Enter New Price Modifier: ");
-		while (!sc.hasNextFloat())
-			System.out.println("Please enter a valid price modifier.");
+        // Display all ticket types
+        for(int i = 0; i < DayType.values().length; i++) {
+            System.out.println((i+1) + ") " + DayType.values()[i]);
+        }
 
-		float ticketTypePrice = sc.nextFloat();
+        // Get Ticket Type
+        System.out.println("\nSelect Day Type to Configure: ");
+        while(!sc.hasNextInt())
+            System.out.println("Please enter a valid option.");
 
-		FileReader.replaceLine(root + "ticket_type_price.txt", selectedTicket, selectedTicket + "," + ticketTypePrice,
-				false);
+        String selectedDay = DayType.values()[sc.nextInt()-1].toString();
 
-		runInterface();
-	}
+        System.out.print("Enter New Price Modifier: ");
+        while(!sc.hasNextFloat())
+            System.out.println("Please enter a valid price modifier.");
 
-	/**
-	 * [Addition/Subtract Modifier] Configure the price modifier for different day
-	 * of the week (i.e., weekend, publid holiday).
-	 */
-	// (5) Configure Day of Week
-	public void configureDays() {
-		System.out.println("------- CONFIGURE DAY PRICING -------\n");
+        float dayPrice = sc.nextFloat();
 
-		// Display all ticket types
-		for (int i = 0; i < DayType.values().length; i++) {
-			System.out.println((i + 1) + ") " + DayType.values()[i]);
-		}
+        FileReader.replaceLine(root + "day_type_price.txt", selectedDay, selectedDay + "," + dayPrice, false);
 
-		// Get Ticket Type
-		System.out.println("\nSelect Day Type to Configure: ");
-		while (!sc.hasNextInt())
-			System.out.println("Please enter a valid option.");
-
-		String selectedDay = DayType.values()[sc.nextInt() - 1].toString();
-
-		System.out.print("Enter New Price Modifier: ");
-		while (!sc.hasNextFloat())
-			System.out.println("Please enter a valid price modifier.");
-
-		float dayPrice = sc.nextFloat();
-
-		FileReader.replaceLine(root + "day_type_price.txt", selectedDay, selectedDay + "," + dayPrice, false);
-
-		runInterface();
-	}
+        runInterface();
+    }
 }

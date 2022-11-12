@@ -18,25 +18,8 @@ public class MovieGoerCheckBooking extends Booking {
 	
 	public void getBookingDetails() {
 		super.load();
-
-		
 		System.out.println("Enter your email address: ");
 		String userEmail = sc.nextLine();
-		
-		
-		String substring = "@gmail.com";
-		
-		while(!userEmail.contains(substring)) {
-			System.out.println("Invalid email format");
-			System.out.println("Enter your email: ");
-			userEmail = sc.next();
-		}
-		
-		
-		
-		
-		
-		
 //		System.out.println("Enter your mobile number: ");
 //		String userMobile= sc.nextLine();
 		

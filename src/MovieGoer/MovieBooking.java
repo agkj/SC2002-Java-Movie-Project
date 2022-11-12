@@ -265,7 +265,7 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 							System.out.println("\nSeat has been taken!\nPlase select another seat number: ");
 							seatNum = sc.next();
 						}
-						// TODO maybe book seat only after payment complete
+
 						System.out.println("\nSelect ticket type: ");
 						for (int i = 0; i < TicketType.values().length; i++) {
 							System.out.println((i + 1) + ") " + TicketType.values()[i]);
@@ -283,7 +283,6 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 						newTicket.setCinemaclass(selectedCinema.getCinemaClass());
 
 						newTicket.setDayType(selectedShowtime.checkDayType());
-						//newTicket.setDayType(DayType.MON_WED); // TODO need to check for day type
 
 						newPrice = newTicket.calculateTicketPrice();
 						newTicket.setTicketPrice(newPrice);
@@ -292,7 +291,7 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 
 						newBooking.addTicket(newTicket);
 
-						customerTickets--; // TODO increment counter total ticket sold and total sales
+						customerTickets--;
 					}
 
 				}
@@ -309,13 +308,7 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 					System.out.print("\nPlease select 1 to continue with payment: ");
 					System.out.println("Select 0 to cancel payment");
 					cont = sc.nextInt();
-
-
 				}
-
-
-
-
 
 				// TODO Try catch maybe?
 

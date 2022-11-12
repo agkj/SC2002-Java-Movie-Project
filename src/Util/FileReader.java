@@ -2,8 +2,15 @@ package Util;
 
 import java.io.*;
 
+/**
+ * Helper class to perform CRUD functions on .txt files.
+ */
 
 public class FileReader {
+	/**
+	 * Read and print the content inside the specified .txt file.
+	 * @param filePath Directory path of the .txt file to read
+	 */
 	public static void readFile(String filePath) {
 		String line = "";
 		String split = ",";
@@ -29,6 +36,12 @@ public class FileReader {
 		}
 	}
 
+	/**
+	 * Write into a specified .txt file.
+	 * @param filePath Directory path of the file to write into.
+	 * @param data Data content to write into the file.
+	 * @param endLine Check if data content being written is the end of the current line. If true, insert a new line into the file.
+	 */
 	public static void writeFile(String filePath, String data, boolean endLine) {
 		FileWriter fw = null;
 
@@ -49,6 +62,11 @@ public class FileReader {
 		}
 	}
 
+	/**
+	 * Copy and retrieve content of a specified file.
+	 * @param filePath Directory path of the file to write into.
+	 * @return Returns a StringBuffer containing the content of the file.
+	 */
 	public static StringBuffer copyFile(String filePath) {
 		try {
 			String line;
@@ -73,6 +91,12 @@ public class FileReader {
 		}
 	}
 
+	/**
+	 * Find and read one line from a .txt file.
+	 * @param filePath Directory path of the file to write into.
+	 * @param stringToFind String content to find in the file.
+	 * @return Returns the entire line that contains the specified string.
+	 */
 	public static String readLine(String filePath, String stringToFind) {
 		String line = "";
 		String split = ",";
@@ -93,6 +117,12 @@ public class FileReader {
 		return null;
 	}
 
+	/**
+	 * Delete a specified line from a .txt file.
+	 * @param filePath Directory path of the file to write into.
+	 * @param lineToRemove String content to delete in the file.
+	 * @param containsFlag Indicate if trying to delete an exact line or a line that contains the string.
+	 */
 	public static void deleteLine(String filePath, String lineToRemove, boolean containsFlag) {
 		// containsFlag checks if the string passed in lineToRemove is a substring
 
@@ -129,6 +159,13 @@ public class FileReader {
 		}
 	}
 
+	/**
+	 * Rewrite and replace a line in a specified .txt file.
+	 * @param filePath Directory path of the file to write into.
+	 * @param stringToReplace Old string content to replace in the file.
+	 * @param newString New string content to replace in the file.
+	 * @param exactWord Indicate if replacing an exact line or a line that contains the string.
+	 */
 	public static void replaceLine(String filePath, String stringToReplace, String newString, boolean exactWord) {
 		try {
 			String line;

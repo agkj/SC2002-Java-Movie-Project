@@ -12,6 +12,9 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * [Admin Module] Showtime App containing CRUD functions for Movie ShowTimes.
+ */
 public class ShowtimeApp extends AppHelper {
     Scanner sc = new Scanner(System.in);
 
@@ -24,6 +27,10 @@ public class ShowtimeApp extends AppHelper {
         //load the moviefiles
         this.load();
     }
+
+    /**
+     * Load necessary data files (i.e., cineplexes, cinemas, movies).
+     */
     public void load() {
         // Try to read all movie .dat files in movie directory
         path = new File(System.getProperty("user.dir") + "\\data\\movies");
@@ -98,6 +105,9 @@ public class ShowtimeApp extends AppHelper {
         }
     }
 
+    /**
+     * Create new movie ShowTime at a particular Cineplex and Cinema
+     */
     //// (1) CREATE LISTING
     public void createShowtime() {
         System.out.println("------- CREATE SHOWTIME LISTING -------\n");
@@ -212,6 +222,9 @@ public class ShowtimeApp extends AppHelper {
         runInterface();
     }
 
+    /**
+     * View all ShowTime listings of a particular movie at a specified Cineplex.
+     */
     //// (2) VIEW LISTING
     public void viewShowtime() {
         System.out.println("------- VIEW SHOWTIME LISTING -------\n");
@@ -286,6 +299,9 @@ public class ShowtimeApp extends AppHelper {
         runInterface();
     }
 
+    /**
+     * Update details of an existing ShowTime listing such as the DateTime and Showing Status (i.e., Available, Sold_Out).
+     */
     //// (3) UPDATE LISTING
     public void updateShowtime() {
         System.out.println("------- UPDATE SHOWTIME LISTING -------\n");
@@ -417,6 +433,9 @@ public class ShowtimeApp extends AppHelper {
         }
     }
 
+    /**
+     * Delete an existing ShowTime listing.
+     */
     //// (4) DELETE LISTING
     public void deleteShowtime() {
         System.out.println("------- DELETE SHOWTIME LISTING -------\n");

@@ -6,16 +6,38 @@ import java.io.File;
 import java.io.Serial;
 import java.io.Serializable;
 
+/**
+ * Represents a movie ticket.
+ * A ticket is made under one booking.
+ * Many tickets can be made under one booking.
+ */
 public class Ticket implements Serializable {
 	@Serial
 	private static final long serialVersionUID = 2002;
 
-    //Attributes:
+	/**
+	 * Price of the ticket.
+	 */
     private double ticketPrice;
+	/**
+	 * Type of ticket bought (i.e., Standard, Senior).
+	 */
     private TicketType ticketType;
+	/**
+	 * Seat number booked under the ticket.
+	 */
     private String seatNum;
+	/**
+	 * Movie Type (i.e., 2D, 3D) that the ticket is purchased for.
+	 */
     private MovieType movieType;
+	/**
+	 * Cinema Class (i.e., Regular, Platinum) that the ticket is purchased at.
+	 */
     private CinemaClass cinemaclass;
+	/**
+	 * Day Type (i.e., WEEKEND, HOLIDAY) of the showtime that the ticket is purchased for.
+	 */
     private DayType dayType;
     
     //constructor
@@ -78,6 +100,10 @@ public class Ticket implements Serializable {
 		return Double.parseDouble(price);
 	}
 
+	/**
+	 * Calculate the price of the ticket based on movie type, cinema class, ticket type (age of movie-goer) and day of week.
+	 * @return
+	 */
 	public double calculateTicketPrice() {
 		double totalPrice = 0;
 

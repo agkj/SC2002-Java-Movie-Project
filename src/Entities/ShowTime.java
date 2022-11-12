@@ -9,15 +9,37 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Represents a movie showtime.
+ * A showtime is shown at one cinema.
+ */
 public class ShowTime implements Serializable {
     @Serial
     private static final long serialVersionUID = 2002;
 
+    /**
+     * Unique ID of the movie showtime
+     */
     private String showtimeID;
+    /**
+     * Cinema ID that the movie showtime is showing at.
+     */
     private String cinemaID;
+    /**
+     * Cineplex ID that the movie showtime is showing at.
+     */
     private String cineplexID;
+    /**
+     * Date and Time of the movie showtime.
+     */
     private LocalDateTime showDateTime;
+    /**
+     * Status of the movie showtime (i.e., Available, Sold Out).
+     */
     private ShowTimeStatus showTimeStatus;
+    /**
+     * Available seats of the movie showtime.
+     */
     private Seat[][] showTimeLayout;
 
     private int numOfAvailSeats;
@@ -58,18 +80,21 @@ public class ShowTime implements Serializable {
         this.showDateTime = showDateTime;
     }
 
+    /**
+     * Check the Day Type of the movie showtime (E.g., falls on a weekend, public holiday, etc.).
+     * @return Returns the DayType (E.g., WEEKEND, HOLIDAY).
+     */
     // Determine Day Type based on ShowDateTime
     public DayType checkDayType() {
         DayOfWeek day = showDateTime.getDayOfWeek();
         int hour = showDateTime.getHour();
         DayType dayType = null;
 
-        // To-do Check if public holiday
         HolidayHelper holidayHelper = new HolidayHelper();
         ArrayList<Holiday> listOfHolidays = holidayHelper.getHolidays();
 
+        // Check if falls on a public holiday
         for(int i=0; i < listOfHolidays.size(); i++) {
-
             LocalDate showTimeDate = this.showDateTime.toLocalDate();
             LocalDate holidayDate = listOfHolidays.get(i).getHolidayDate();
 
@@ -79,6 +104,7 @@ public class ShowTime implements Serializable {
             }
         }
 
+        // Continue to check day of the week and time
         if(day.equals(DayOfWeek.MONDAY) || day.equals(DayOfWeek.TUESDAY) || day.equals(DayOfWeek.WEDNESDAY))
             dayType = DayType.MON_WED;
         else if(day.equals(DayOfWeek.THURSDAY))
@@ -106,6 +132,9 @@ public class ShowTime implements Serializable {
         return showTimeLayout;
     }
 
+    /**
+     * Display the latest movie showtime seating layout
+     */
     // Print Seating Layout
     public void showLayout() {
         char rowNum = 65;   // start at A (65), ends at Z (90)
@@ -146,6 +175,11 @@ public class ShowTime implements Serializable {
         }
     }
 
+    /**
+     * Update/Book a seat for a movie showtime.
+     * @param seatNum Seat number to book (E.g., A3).
+     * @return Return result of update of seat (i.e., True of seat is vacant and successfully booked).
+     */
     // Mark a seat as taken
     public boolean bookSeat(String seatNum) {
         for(int i=0; i < showTimeLayout.length; i++) {

@@ -5,6 +5,10 @@ import Util.AppHelper;
 import javax.swing.text.View;
 import java.util.Scanner;
 
+/**
+ * [Admin Module] Configure Settings App.
+ * Allow admin users to configure cineplex outlets, ticket pricing, public holidays and viewing of top 5 movies for movie-goers.
+ */
 public class SettingApp extends AppHelper {
     Scanner sc = new Scanner(System.in);
 

@@ -1,5 +1,8 @@
 package Entities;
 
+/**
+ * Represents a group of constants related to the type of available cinema classes.
+ */
 public enum CinemaClass {
     Regular("Regular"),
     Platinum("Platinum Movie Suites"),

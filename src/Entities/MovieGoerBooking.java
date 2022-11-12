@@ -13,18 +13,47 @@ import java.util.Date;
 //import MovieGoer.MovieGoerBooking;
 import Util.Serializer;
 
+/**
+ * Represents a movie booking.
+ * A booking can be made by one movie-goer.
+ * A booking can contain one to many tickets.
+ */
 public class MovieGoerBooking implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = 2002;
 
+	/**
+	 * Name of the movie-goer.
+	 */
 	protected String name;
+	/**
+	 * Mobile number of the movie-goer.
+	 */
 	protected String mobileNumber;
+	/**
+	 * Email address of the movie-goer.
+	 */
 	protected String email;
+	/**
+	 * Movie that the booking is made for.
+	 */
 	protected String selectedMovie;
+	/**
+	 * Cinema that the booking is made for.
+	 */
 	protected String cinemaCode;
+	/**
+	 * Date and Time of the particular ShowTime the movie was booked for.
+	 */
 	protected LocalDateTime	showDateTime;
+	/**
+	 * Unique ID.
+	 */
 	protected String ticketID;
+	/**
+	 * List of ticket(s) that movie-goer purchased under this booking.
+	 */
 	protected ArrayList<Ticket> listOfTickets = new ArrayList<Ticket>();
 	
 	/*
@@ -138,8 +167,6 @@ public class MovieGoerBooking implements Serializable {
 		Date date = new Date();
 
 		this.ticketID= this.cinemaCode + formatter.format(date);
-
-
 	} 
 
 	    public void getInfo() {

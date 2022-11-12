@@ -2,11 +2,14 @@ package Admin;
 
 import Util.AppHelper;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class AdminApp extends AppHelper {
+/**
+ * [Admin Module] Starter App containing list of Admin Functions.
+ * Allow Admin users to manage the movie listings, cinema showtimes and system settings (i.e., ticket pricing, holidays)
+ */
 
+public class AdminApp extends AppHelper {
     Scanner sc = new Scanner(System.in);
 
     public AdminApp(AppHelper prevApp) {
@@ -19,13 +22,10 @@ public class AdminApp extends AppHelper {
         System.out.println("| \t\tWelcome to Admin Module \t\t |");
         System.out.println("|--------------------------------------------------------|");
 
-        System.out.println("| 1) Manage Movie Listing \t\t\t\t |");
-        System.out.println("| 2) Manage Cinema Showtimes \t\t\t\t |");
-        System.out.println("| 3) Configure System Settings \t\t\t\t |");
+        System.out.println("| 1) Manage Movie Listing \t\t\t\t");
+        System.out.println("| 2) Manage Cinema Showtimes \t\t\t\t");
+        System.out.println("| 3) Configure System Settings \t\t\t\t");
         System.out.println("| 0) Logout \t\t\t\t\t\t |");
-        
-
-        boolean doNotQuit = true;
 
     //    while(!sc.hasNextInt()) {
         	System.out.println("|--------------------------------------------------------|");
@@ -38,7 +38,6 @@ public class AdminApp extends AppHelper {
         switch(input) {
             case 0:
                 //goBack().runInterface();
-                doNotQuit = false;
                 break;
             case 1:
                 // Manage Movie Listing

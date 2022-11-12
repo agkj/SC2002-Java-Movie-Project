@@ -6,6 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * Helper class to display top 5 movie listings based on Ticket Sales or Review Ratings
+ */
+
 public class MovieHelper {
     File path;
     File[] movieFiles;
@@ -19,6 +23,10 @@ public class MovieHelper {
         movieFiles = path.listFiles();
     }
 
+    /**
+     * Get Top 5 Movie Listings
+     * @param type Indicates the filter type to list top 5 movies (i.e., by ticket sales, by review ratings).
+     */
     // Get Top 5 by Ticket Sales
     public void getTopListings(int type) {
         try {
@@ -30,7 +38,7 @@ public class MovieHelper {
                     Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
 
                     if(type == 1) {
-                        // By tickets sold
+                        // By ticket sales
                         mapOfMovies.put(curr.getTitle(), curr.getTotalSales());
                     } else if (type == 2) {
                         // By review ratings

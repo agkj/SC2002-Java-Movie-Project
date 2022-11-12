@@ -8,6 +8,10 @@ import Util.AppHelper;
 import Util.FileReader;
 
 import java.util.Scanner;
+
+/**
+ * [Admin Module] Ticket Pricing App to control the modifiers affecting ticket prices (i.e., movie type, cinema class, etc.).
+ */
 public class TicketPricingApp extends AppHelper {
     Scanner sc = new Scanner(System.in);
 
@@ -64,6 +68,9 @@ public class TicketPricingApp extends AppHelper {
         }
     }
 
+    /**
+     * Configure the Standard Ticket prices including the Base Ticket Price (before any modifiers) and Booking Fee.
+     */
     // (1) Standard Ticket Prices
     public void configureBase() {
         System.out.println("------- CONFIGURE BASE TICKET PRICING -------\n");
@@ -119,6 +126,9 @@ public class TicketPricingApp extends AppHelper {
         }
     }
 
+    /**
+     * [Multiply Modifier] Configure the price modifier for different Movie Types (i.e., 2D, 3D, etc.).
+     */
     // (2) Modify Movie Type Pricing
     public void configureMovieType() {
         System.out.println("------- CONFIGURE MOVIE TYPE PRICE MODIFIER -------\n");
@@ -148,6 +158,9 @@ public class TicketPricingApp extends AppHelper {
         runInterface();
     }
 
+    /**
+     * [Addition/Subtract Modifier] Configure the price modifier for different Cinema Classes (i.e., Regular, Platinum).
+     */
     // (3) Cinema Class
     public void configureCinemaClass() {
         System.out.println("------- CONFIGURE CINEMA CLASS PRICING -------\n");
@@ -175,6 +188,9 @@ public class TicketPricingApp extends AppHelper {
         runInterface();
     }
 
+    /**
+     * [Addition/Subtract Modifier] Configure the price modifier for different Ticket Types (i.e., Adult, Senior).
+     */
     // (4) Configure Ticket Type
     public void configureTicketType() {
         System.out.println("------- CONFIGURE TICKET TYPE PRICING -------\n");
@@ -202,6 +218,9 @@ public class TicketPricingApp extends AppHelper {
         runInterface();
     }
 
+    /**
+     * [Addition/Subtract Modifier] Configure the price modifier for different day of the week (i.e., weekend, publid holiday).
+     */
     // (5) Configure Day of Week
     public void configureDays() {
         System.out.println("------- CONFIGURE DAY PRICING -------\n");

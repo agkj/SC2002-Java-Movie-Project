@@ -1,6 +1,9 @@
 package Util;
 
-public abstract class AppHelper { //this is not really an interface
+/**
+ * Abstract helper class for various modules to inherit to display their UI interface and allow returning to the previous 'page' the user was on.
+ */
+public abstract class AppHelper {
 
 	private AppHelper prevApp;
 

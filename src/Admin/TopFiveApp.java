@@ -5,6 +5,9 @@ import Util.FileReader;
 
 import java.util.Scanner;
 
+/**
+ * [Admin Module] Top-Five App to list top 5 movie listings based on filter (i.e., ticket sales, review ratings).
+ */
 public class TopFiveApp extends AppHelper {
     Scanner sc = new Scanner(System.in);
 

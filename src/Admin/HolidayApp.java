@@ -9,6 +9,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * [Admin Module] Holiday App under Configure System Settings.
+ * Allow admin users to create new public holidays and delete existing ones.
+ */
+
 public class HolidayApp extends AppHelper {
     Scanner sc = new Scanner(System.in);
 
@@ -52,6 +57,10 @@ public class HolidayApp extends AppHelper {
     }
 
     //// (1) CREATE HOLIDAY
+
+    /**
+     * Create new public holiday.
+     */
     public void createHoliday() {
         System.out.println("------- CREATE HOLIDAY -------\n");
 
@@ -99,6 +108,9 @@ public class HolidayApp extends AppHelper {
         runInterface();
     }
 
+    /**
+     * Delete existing public holiday.
+     */
     //// (2) DELETE HOLIDAY
     public void deleteHoliday() {
         System.out.println("------- DELETE HOLIDAY -------\n");

@@ -2,6 +2,9 @@ package Entities;
 
 import java.io.Serializable;
 
+/**
+ * Represents a group of constants related to the showing status of a movie (i.e., Coming Soon, Now Showing).
+ */
 public enum ShowingStatus implements Serializable {
     Coming_Soon("Coming Soon"),
     Preview("Preview"),

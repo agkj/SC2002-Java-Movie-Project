@@ -1,5 +1,8 @@
 package Entities;
-// types of ticket that will affect price
+
+/**
+ * Represents a group of constants related to the age of the movie-goer purchasing a ticket (i.e., Standard/Adult, Senior, Student).
+ */
 public enum TicketType {
     STANDARD ("STANDARD"),
     SENIOR ("SENIOR"),

@@ -4,13 +4,29 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Represents a cineplex outlet.
+ * A cineplex can hold zero to many cinemas.
+ */
 public class Cineplex implements Serializable {
     @Serial
     private static final long serialVersionUID = 2002;
 
+    /**
+     * Unique ID of the cineplex.
+     */
     private String cineplexID;
+    /**
+     * Venue Name of the cineplex.
+     */
     private String venue;
+    /**
+     * Address of the cineplex.
+     */
     private String address;
+    /**
+     * List of cinema halls located at the cineplex.
+     */
     private ArrayList<Cinema> listOfCinemas;
 
     public Cineplex() {
@@ -59,6 +75,10 @@ public class Cineplex implements Serializable {
         this.listOfCinemas = listOfCinemas;
     }
 
+    /**
+     * Add a new cinema hall into the cineplex.
+     * @param cinema New cinema object.
+     */
     public void addCinema(Cinema cinema) {
         this.listOfCinemas.add(cinema);
     }

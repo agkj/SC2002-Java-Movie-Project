@@ -2,6 +2,9 @@ package Entities;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a public holiday.
+ */
 public class Holiday {
     private String holidayName;
     private LocalDate holidayDate;

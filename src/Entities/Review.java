@@ -3,16 +3,26 @@ package Entities;
 import java.io.Serial;
 import java.io.Serializable;
 
+/**
+ * Represents a movie review made by a movie-goer.
+ * A movie review is made by one movie-goer.
+ * A movie can have many movie reviews.
+ */
 public class Review implements Serializable {
     @Serial
     private static final long serialVersionUID = 2002;
 
+    /**
+     * Unique ID of the review.
+     */
     String reviewId;
-
-    //String movieId;           // foreign key, linked to which movie?
-    //String userId;            // foreign key, linked to which user wrote the review?
-
+    /**
+     * Review Rating of the movie (from 1 to 5).
+     */
     double reviewRating;        // rating from 1-5
+    /**
+     * Review Content of the movie (in text).
+     */
     String reviewContent;        // review in text
     
     public Review() {

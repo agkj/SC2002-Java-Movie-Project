@@ -2,6 +2,9 @@ package Entities;
 
 import java.io.Serializable;
 
+/**
+ * Represents a group of constants related to the status of a showtime (i.e., Available, Sold Out).
+ */
 public enum ShowTimeStatus implements Serializable {
     Available("Available"),
     Sold_Out("Sold Out"),

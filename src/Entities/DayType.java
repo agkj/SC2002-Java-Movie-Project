@@ -1,5 +1,8 @@
 package Entities;
 
+/**
+ * Represents a group of constants related to the type of days in a week.
+ */
 public enum DayType {
     MON_WED("Mon to Wed"),
     THU("Thu"),

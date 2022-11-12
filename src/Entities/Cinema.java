@@ -2,15 +2,31 @@ package Entities;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Arrays;
 
+/**
+ * Represents a cinema hall located at a particular cineplex.
+ * A cinema can be located at only one cineplex.
+ */
 public class Cinema implements Serializable {
     @Serial
     private static final long serialVersionUID = 2002;
 
+    /**
+     * Unique ID of the cinema hall.
+     */
     private String cinemaID;
+
+    /**
+     * Type of cinema class (i.e., Regular, Platinum).
+     */
     private CinemaClass cinemaClass;
+    /**
+     * Total number of seats available at the cinema hall.
+     */
     private int numOfSeats;
+    /**
+     * Seating layout of the cinema hall.
+     */
     private Seat[][] layout;
 
     public Cinema() {}
@@ -54,6 +70,9 @@ public class Cinema implements Serializable {
         this.layout = layout;
     }
 
+    /**
+     * Display the seating layout of the cinema hall.
+     */
     public void showLayout() {
         char rowNum = 65;   // start at A (65), ends at Z (90)
         System.out.println("\nMovie Layout");

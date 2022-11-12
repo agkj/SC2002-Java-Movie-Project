@@ -5,24 +5,75 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import Entities.MovieType;
 
+/**
+ * Represents a movie listing.
+ * A movie can be shown at one to many cinemas.
+ */
 public class Movie implements Serializable {
     @Serial
     private static final long serialVersionUID = 2002;
 
+    /**
+     * Unique ID of the movie.
+     */
     private String movieId;
-    private String title, synopsis, director;
+    /**
+     * Title of the movie.
+     */
+    private String title;
+    /**
+     * Synopsis of the movie.
+     */
+    private String synopsis;
+    /**
+     * Director of the movie.
+     */
+    private String director;
+    /**
+     * Type of movie (i.e., 2D, 3D).
+     */
     private MovieType movieType;
+    /**
+     * Genre of the movie (E.g., Action).
+     */
     private MovieGenre genre;
+    /**
+     * Showing Status of the movie (i.e., Coming Soon, Now Showing).
+     */
     private ShowingStatus showingStatus;
+    /**
+     * Runtime duration of the movie (in minutes).
+     */
     private int runtime;
+    /**
+     * Content rating of the movie (E.g., PG13).
+     */
     private ContentRating contentRating;
+    /**
+     * Overall review rating of the movie.
+     */
     private double overallRating;
 
+    /**
+     * List of cast members of the movie.
+     */
     private ArrayList<String> cast;
+    /**
+     * List of reviews of the movie.
+     */
     private ArrayList<Review> reviews;
+    /**
+     * List of showtimes of the movie.
+     */
     private ArrayList<ShowTime> showTimes;
 
+    /**
+     * Total number of tickets sold of the movie.
+     */
     private int ticketsSold;
+    /**
+     * Total sales of the movie.
+     */
     private double totalSales;
 
     public Movie() {

@@ -9,7 +9,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * [Admin Module] Cineplex App under Configure System Settings.
+ * Allow admin users to create a new cineplex outlet, new cinemas (under a particular outlet), view cinemas and delete existing cinemas.
+ */
+
 public class CineplexApp extends AppHelper {
+
     Scanner sc = new Scanner(System.in);
 
     String root = System.getProperty("user.dir");
@@ -24,6 +30,9 @@ public class CineplexApp extends AppHelper {
         this.load();
     }
 
+    /**
+     Load Cineplex Files
+     */
     public void load() {
         path = new File(root + "\\data\\cineplex");
         files = path.listFiles();
@@ -163,14 +172,6 @@ public class CineplexApp extends AppHelper {
 
                         newCinema.setCinemaClass(CinemaClass.values()[cinemaClass-1]);
 
-                        //// SET NUM OF SEATS
-                        /*
-                        System.out.print("Enter Total (Max) Seats Available: ");
-                        while(!sc.hasNextInt())
-                            System.out.println("Please enter a valid number of seats.");
-                        newCinema.setNumOfSeats(sc.nextInt());
-                         */
-
                         //// SET LAYOUT
                         System.out.print("\n------ SET LAYOUT OF CINEMA -----\n");
                         System.out.print("Enter number of rows: ");
@@ -206,10 +207,22 @@ public class CineplexApp extends AppHelper {
                         do {
                             char rowNum = 65;   // start at A (65), ends at Z (90)
 
-                            // Print how wide is the screen TODO
+                            // Display Layout
+                            System.out.println("\nCinema Layout: ");
+                            System.out.println();
 
-                            // Print Layout
-                            System.out.println("\nMovie Layout");
+                            // Print Screen
+                            System.out.print("  ");
+                            for(int i=0; i < cols; ++i) {
+                                System.out.print("--");
+                            }
+                            System.out.print("SCREEN");
+                            for(int i=0; i < cols; ++i) {
+                                System.out.print("--");
+                            }
+                            System.out.println();
+
+                            // Print Seat Layout
                             System.out.print("  |  ");
                             for(int k=1; k <= cols; k++) {
                                 // Print seat status
@@ -291,7 +304,7 @@ public class CineplexApp extends AppHelper {
                 break;
             case 3:
                 // View cinemas
-                System.out.println("------- VIEW CINEPLEX -------\n"); //TODO this should be view cineplex or cinema?
+                System.out.println("------- VIEW CINEMA BY CINEPLEX -------\n");
 
                 try {
                     // Read all available Cineplex created
@@ -326,7 +339,7 @@ public class CineplexApp extends AppHelper {
                 break;
             case 4:
                 // Delete Cinema
-                System.out.println("------- DELETE Cineplex -------\n");
+                System.out.println("------- DELETE CINEMA FROM CINEPLEX -------\n");
 
                 try {
                     // Read all available Cineplex created

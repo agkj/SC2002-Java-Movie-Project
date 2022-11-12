@@ -5,6 +5,9 @@ import Util.FileReader;
 
 import java.util.Scanner;
 
+/**
+ * [Admin Module] Login App for users to enter their credentials to use the admin system.
+ */
 public class LoginApp extends AppHelper {
 
     StringBuffer userStrings = FileReader.copyFile(System.getProperty("user.dir") + "\\data\\admin\\users.txt");

@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * [Admin Module] Movie Listing App containing CRUD functions for Movies.
+ */
 public class MovieListingApp extends AppHelper {
     Scanner sc = new Scanner(System.in);
 
@@ -81,6 +84,9 @@ public class MovieListingApp extends AppHelper {
         }
     }
 
+    /**
+     * Create a new Movie listing.
+     */
     //// (1) CREATE LISTING
     public void createMovie() {
     	System.out.println("|--------------------------------------------------------|");
@@ -252,6 +258,9 @@ public class MovieListingApp extends AppHelper {
         runInterface();
     }
 
+    /**
+     * View all Movie listings.
+     */
     //// (2) VIEW LISTINGS
     public void viewMovies() {
     	System.out.println("|--------------------------------------------------------|");
@@ -283,6 +292,9 @@ public class MovieListingApp extends AppHelper {
 
     }
 
+    /**
+     * Update an existing Movie listing.
+     */
     //// (3) UPDATE LISTING
     public void updateMovie() {
     	System.out.println("|--------------------------------------------------------|");
@@ -336,7 +348,6 @@ public class MovieListingApp extends AppHelper {
 
                             System.out.println("| \t\t SUCCESS: UPDATED MOVIE LISTING \t\t\t |");
                             System.out.println("|--------------------------------------------------------|");
-                            //System.out.println(movieToUpdate); TODO i think we can comment out this
                         } catch (IOException e) {
                             System.out.println("|\t\t ERROR: PLEASE TRY AGAIN \t\t\t |");
                             System.out.println("|--------------------------------------------------------|");
@@ -518,6 +529,9 @@ public class MovieListingApp extends AppHelper {
         runInterface();
     }
 
+    /**
+     * Remove an existing Movie from listing by setting its showing status to End_Of_Showing.
+     */
     //// (4) DELETE LISTING
     public void removeMovie() {
         //delete movie is changing the status to END OF SHOWING
@@ -575,6 +589,10 @@ public class MovieListingApp extends AppHelper {
             e.printStackTrace();
         }
     }
+
+    /**
+     * View the Top 5 Movies by either Ticket Sales or Review Ratings
+     */
     //view the top five by ranking movies by TicketSales and Overall reviewers' rating
     //TicketSales (Display the movie title and total sales)
     //Overall reviewers' rating (Display the movie title and overall rating)

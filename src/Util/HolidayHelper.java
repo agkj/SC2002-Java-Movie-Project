@@ -8,13 +8,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * Helper class to retrieve data in the holidays .txt file.
+ */
 public class HolidayHelper {
     String filePath = System.getProperty("user.dir") + "\\data\\holiday\\holidays.txt";
-    File path = new File(filePath);
 
     // Constructor
     public HolidayHelper() { }
 
+    /**
+     * Get the list of holidays created in the system.
+     * @return Returns an ArrayList of Holidays.
+     */
     public ArrayList<Holiday> getHolidays() {
         ArrayList<Holiday> listOfHolidays = new ArrayList<Holiday>();
 

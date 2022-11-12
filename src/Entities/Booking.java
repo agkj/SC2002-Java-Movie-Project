@@ -8,10 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-
-//import MovieGoer.MovieGoerBooking;
-
-
 /**
  * Represents a movie booking.
  * A booking can be made by one movie-goer.

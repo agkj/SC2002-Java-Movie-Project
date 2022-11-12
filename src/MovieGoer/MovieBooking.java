@@ -6,18 +6,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Entities.*;
 import Util.AppHelper;
 import Admin.MovieListingApp;
-import Entities.Cinema;
-import Entities.Cineplex;
-import Entities.DayType;
-import Entities.Movie;
-import Entities.Booking;
-import Entities.ShowTime;
-import Entities.ShowTimeStatus;
-import Entities.ShowingStatus;
-import Entities.Ticket;
-import Entities.TicketType;
 import Util.Serializer;
 
 /**

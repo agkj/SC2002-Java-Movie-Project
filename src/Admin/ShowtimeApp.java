@@ -327,7 +327,7 @@ public class ShowtimeApp extends AppHelper {
 
             // Select Showtime to update
             ArrayList<ShowTime> showtimeList = selectedMovie.getShowTimes();
-            //
+            
             System.out.println("These are all the showtimes:");
             if(showtimeList.size() > 0) {
                 // Display all available showtimes
@@ -376,6 +376,8 @@ public class ShowtimeApp extends AppHelper {
                                 System.out.println("\n------- ERROR: PLEASE TRY AGAIN -------\n");
                                 e.printStackTrace();
                             }
+
+                            break;
                         case 1:
                             // Update Date and Time
                             System.out.println("Enter updated Date and Time in 2022-05-05 11:50 format");
@@ -392,7 +394,7 @@ public class ShowtimeApp extends AppHelper {
                                     selectedShowTime.setShowDateTime(dateTime);
                                     showtimeValid = true;
 
-                                    System.out.print("Saved Showing Date and Time.");
+                                    System.out.print("Saved Showing Date and Time.\n");
 
                                 } catch (DateTimeParseException e) {
                                     //System.out.println("Please enter a valid showtime."); TODO magic

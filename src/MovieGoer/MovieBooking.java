@@ -312,7 +312,14 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 
 				}
 
-				
+				 System.out.println("Press Enter key to confirm purchase: ");
+			        try
+			        {
+			            System.in.read();
+			            sc.nextLine();
+			        }  
+			        catch(Exception e)
+			        {}  
 				
 				
 

@@ -12,11 +12,5 @@
 | Goh Qi Ming, Andy  https://github.com/Unknown0u0  | 
 | Han Yong Ting  https://github.com/Dhyt1111  | 
 
-
-
-
-![image](https://user-images.githubusercontent.com/39144132/196887669-0f7f94c3-62e3-41cf-98a0-3fbfbb459f2d.png)
-
-
 Insert flowchart
 

@@ -221,7 +221,7 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 						Cineplex curr = (Cineplex) Serializer.deSerialize(files[i].getAbsolutePath());
 						//ShowTime temp = listOfShowtimes.get(i);
 						//if(temp.getCineplexID().equals(curr.getCineplexID()) & temp.getShowTimeStatus() != ShowTimeStatus.Sold_Out)
-						System.out.println("| " + (i + 1) + ") " + curr.getVenue());
+						System.out.println((i + 1) + ") " + curr.getVenue());
 					}
 					System.out.println("==========================================================");
 					System.out.print("\nSelect Cineplex: ");
@@ -267,11 +267,12 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 					Cinema selectedCinema = (Cinema) Serializer
 							.deSerialize(pathCinema + "\\" + selectedShowtime.getCinemaID() + ".dat");
 
-					selectedShowtime.showLayout();
+					
 					newBooking.setCinemaCode(selectedShowtime.getCinemaID());
-
+					
 					// Select Seat(s) based on number of tickets purchasing
 					while (customerTickets > 0) {
+						selectedShowtime.showLayout();
 						System.out.println("\nSelect a seat number: ");
 						String seatNum = sc.next();
 
@@ -279,7 +280,8 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 							System.out.println("\nSeat has been taken!\nPlase select another seat number: ");
 							seatNum = sc.next();
 						}
-
+						selectedShowtime.showLayout();
+						
 						System.out.println("\nSelect ticket type: ");
 						for (int i = 0; i < TicketType.values().length; i++) {
 							System.out.println((i + 1) + ") " + TicketType.values()[i]);
@@ -310,19 +312,24 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 
 				}
 
-				System.out.print("1) Confirm payment\n");
-				System.out.println("0) Cancel payment");
-				int cont = sc.nextInt();
+				
+				
+				
 
-				if (cont == 0) {
-					AppHelper prevApp = goBack();
-					prevApp.runInterface();
-				}
-				while (cont != 1) {
-					System.out.print("\nPlease select 1 to continue with payment: ");
-					System.out.println("Select 0 to cancel payment");
-					cont = sc.nextInt();
-				}
+//				if (cont == 0) {
+//					MovieGoerMenu menu = 
+//				}
+//				while (cont != 1) {
+//					System.out.print("\nPlease select 1 to continue with payment: ");
+//					System.out.println("Select 0 to cancel payment");
+//					cont = sc.nextInt();
+//					
+//					if (cont == 0) {
+//						AppHelper prevApp = goBack();
+//						prevApp.runInterface();
+//					}
+//					
+//				}
 
 				// TODO Try catch maybe?
 

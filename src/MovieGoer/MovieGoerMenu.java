@@ -78,6 +78,7 @@ public class MovieGoerMenu extends AppHelper {
 		MovieHelper movieHelper = new MovieHelper();
 		switch(choice) {
 			case 0:
+				
 				break;
 			case 1:
 				//View movies

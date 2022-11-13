@@ -3,10 +3,9 @@
 -------------------------------------------------------------------
 
 # Instructions
-Ensure all folders in the .data folder has been downloaded.
-
-1) Admin username and password are both: admin
-2) Precreated movie goer email to check for bookings: "dan@gmail.com"
+1)Ensure all folders in the .data folder has been downloaded.
+2) Admin username and password are both: admin
+3) Precreated movie goer email to check for bookings: "dan@gmail.com"
 
 
 

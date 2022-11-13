@@ -11,8 +11,15 @@ public abstract class AppHelper {
 		this.prevApp = prevApp;
 	}
 
+	/**
+	 * Display UI Interface of the current application page
+	 */
 	public abstract void runInterface();
 
+	/**
+	 * Return the previous menu the user was on.
+	 * @return Return the previous app 'interface'.
+	 */
 	public AppHelper goBack() {
 		return this.prevApp;
 	}

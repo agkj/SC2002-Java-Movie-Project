@@ -3,7 +3,7 @@
 -------------------------------------------------------------------
 
 # Instructions
-Ensure you have all relevant folders and .dat files in data folder.
+Ensure all folders in the .data folder has been downloaded.
 
 
 

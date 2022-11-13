@@ -5,8 +5,7 @@
 # Instructions
 Ensure all folders in the .data folder has been downloaded.
 
-Admin username: admin
-Admin password: admin
+Admin username and password are both: admin
 
 
 

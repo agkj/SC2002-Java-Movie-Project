@@ -4,7 +4,7 @@
 # Team members:
 
 
-| Contributors                                            
+        | Contributors                                            
 | ------------------------------------------------------|
 | Chew Zhen Yi https://github.com/bchewzy          |
 | Goh Kai Jun, Alger https://github.com/agkj                  |             

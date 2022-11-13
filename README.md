@@ -6,6 +6,7 @@
 Ensure all folders in the .data folder has been downloaded.
 
 Admin username and password are both: admin
+Precreated movie goer email to check for booking: dan@gmail.com
 
 
 

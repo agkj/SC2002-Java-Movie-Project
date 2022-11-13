@@ -1,8 +1,8 @@
 
 # SC2002-Movie Booking and LIsting Management Application (MOBLIMA)
------------------------------
+-------------------------------------------------------------------
 
-#Instructions
+# Instructions
 Ensure you have all relevant folders and .dat files in data folder.
 
 

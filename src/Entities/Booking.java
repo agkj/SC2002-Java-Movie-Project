@@ -165,25 +165,25 @@ public class Booking implements Serializable {
 	} 
 
 	    public void getInfo() {
-	    	System.out.println("| Transaction ID:"+ ticketID+ "\t\t |");
-	    	System.out.println("|----------------Booking Details-----------------|");
-	        System.out.println("| Name: " + name + "\t\t\t\t\t |");
-	        System.out.println("| Mobile number: " + mobileNumber+ "\t\t\t |");
-	        System.out.println("| Email:" + email+ "\t\t\t\t |");
-	        System.out.println("| Movie booked:"+selectedMovie+ "\t\t\t\t |");
-	        System.out.println("| Movie time: "+ showDateTime+"\t\t\t |");
-	        System.out.println("| Cinema code:"+ cinemaCode+ "\t\t\t\t |");
-	        
-	        System.out.println("| Movie time: " + showDateTime+ "\t\t\t |");
+	    	System.out.println("==========================================================");
+	    	System.out.println(" Transaction ID:"+ ticketID+ "");
+	    	
+	    	System.out.println("==========================================================");
+	        System.out.println("Name: " + name + "\t\t\t\t\t ");
+	        System.out.println("Mobile number: " + mobileNumber+ "\t\t\t ");
+	        System.out.println("Email:" + email+ "\t\t\t\t ");
+	        System.out.println("Movie booked:"+selectedMovie+ "\t\t\t\t ");
+	        System.out.println("Movie time: "+ showDateTime+"\t\t\t ");
+	        System.out.println("Cinema code:"+ cinemaCode+ "\t\t\t\t ");
 	        
 	        for(int i = 0; i < listOfTickets.size(); i++) {
-	        	System.out.print("|----------------Ticket " + (i+1) + " Details----------------|");
+	        	System.out.print("===================Ticket " + (i+1) + " Details===================");
 	        	listOfTickets.get(i).getTicketInfo();
 	        	
 	        }
 	        
 
-	        System.out.println("|------------------------------------------------|");
+	        System.out.println("===================End of booking detail===================\n");
 
 	 }
 

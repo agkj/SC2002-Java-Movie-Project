@@ -25,15 +25,15 @@ public class MainMenu {
 		do {
 
 			try {
-				System.out.println("|--------------------------------------------------------|");
-				System.out.println("| \t\t\tMOBLIMA LOGIN \t\t\t |");
-				System.out.println("|--------------------------------------------------------|");
+				System.out.println("==========================================================");
+				System.out.println(" \t\t\tMOBLIMA LOGIN \t\t\t ");
+				System.out.println("==========================================================");
 				
-				System.out.println("| 1) Admin   \t\t\t\t\t\t |");
-				System.out.println("| 2) Customer \t\t\t\t\t\t |");
-				System.out.println("| 3) Quit   \t\t\t\t\t\t |");
-				System.out.println("|--------------------------------------------------------|");
-				System.out.print(" Select an option: ");
+				System.out.println("1) Admin   \t\t\t\t\t\t ");
+				System.out.println("2) Customer \t\t\t\t\t\t ");
+				System.out.println("3) Quit   \t\t\t\t\t\t ");
+				System.out.println("==========================================================");
+				System.out.print("Select an option: ");
 				int choice = sc.nextInt();
 
 				switch (choice) {
@@ -53,23 +53,23 @@ public class MainMenu {
 					break;
 
 				case 3:
-					System.out.println("|--------------------------------------------------------|");
-					System.out.println("| \t\tThanks for using the app! \t\t |");
-					System.out.println("|--------------------------------------------------------|");
+					System.out.println("==========================================================");
+					System.out.println("\t\tThanks for using the app! \t\t ");
+					System.out.println("==========================================================");
 					doNotQuit = false;
 					break;
 
 				default:
-					System.out.println("|--------------------------------------------------------|");
-					System.out.println("| \t\t Enter a correct option \t\t |");
-					System.out.println("|--------------------------------------------------------|");
+					System.out.println("==========================================================");
+					System.out.println("\t\t Enter a correct option \t\t ");
+					System.out.println("==========================================================");
 					break;
 				}
 
 			} catch (InputMismatchException e) {
-				System.out.println("|--------------------------------------------------------|");
-				System.out.println("| \t\t Enter a correct option \t\t |");
-				System.out.println("|--------------------------------------------------------|");
+				System.out.println("==========================================================");
+				System.out.println("\t\t Enter a correct option \t\t ");
+				System.out.println("==========================================================");
 				sc.next();
 				continue;
 

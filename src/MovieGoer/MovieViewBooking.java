@@ -30,7 +30,9 @@ public class MovieViewBooking extends MovieListingApp implements Serializable {
 
 	
 	public void movieViewBookings() { // TODO should viewbook be saved under the mobile number and email?
-		System.out.println("---------- SEARCH BOOKING HISTORY ----------\n");
+		System.out.println("==========================================================");
+		System.out.println("\t\tSEARCH BOOKING HISTORY");
+		System.out.println("==========================================================");
 		MovieGoerCheckBooking checkBooking = new MovieGoerCheckBooking();
 		checkBooking.getBookingDetails();
 

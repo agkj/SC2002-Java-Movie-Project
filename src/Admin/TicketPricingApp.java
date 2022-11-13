@@ -22,7 +22,9 @@ public class TicketPricingApp extends AppHelper {
 
     @Override
     public void runInterface() {
-        System.out.println("------- CONFIGURE TICKET PRICING -------\n");
+    	System.out.println("==========================================================");
+        System.out.println("\t\t CONFIGURE TICKET PRICING ");
+        System.out.println("==========================================================");
 
         System.out.println("1) Standard Ticket Prices");
         System.out.println("2) Movie Type (e.g., 3D, blockbuster)");
@@ -30,7 +32,7 @@ public class TicketPricingApp extends AppHelper {
         System.out.println("4) Ticket Type (e.g., Adult)");
         System.out.println("5) Day of the Week/Holiday");
         System.out.println("\n0) Return to Previous Menu");
-        System.out.println("----------------------------------------");
+        System.out.println("==========================================================");
         System.out.println("Select an option: ");
         while(!sc.hasNextInt())
             System.out.println("Please enter a valid input");
@@ -73,12 +75,14 @@ public class TicketPricingApp extends AppHelper {
      */
     // (1) Standard Ticket Prices
     public void configureBase() {
-        System.out.println("------- CONFIGURE BASE TICKET PRICING -------\n");
+    	System.out.println("==========================================================");
+        System.out.println("\t\t CONFIGURE BASE TICKET PRICING ");
+        System.out.println("==========================================================");
 
         System.out.println("1) Base Ticket Price");
         System.out.println("2) Booking Fee");
         System.out.println("\n0) Return to Previous Menu");
-        System.out.println("-------------------------------------------");
+        System.out.println("==========================================================");
         System.out.println("Select an option: ");
         while(!sc.hasNextInt())
             System.out.println("Please enter a valid input");
@@ -131,7 +135,9 @@ public class TicketPricingApp extends AppHelper {
      */
     // (2) Modify Movie Type Pricing
     public void configureMovieType() {
-        System.out.println("------- CONFIGURE MOVIE TYPE PRICE MODIFIER -------\n");
+    	System.out.println("==========================================================");
+        System.out.println("\t\t CONFIGURE MOVIE TYPE PRICE MODIFIER ");
+        System.out.println("==========================================================");
 
         // Display all movie types
         for(int i=0; i < MovieType.values().length; i++) {
@@ -163,13 +169,15 @@ public class TicketPricingApp extends AppHelper {
      */
     // (3) Cinema Class
     public void configureCinemaClass() {
-        System.out.println("------- CONFIGURE CINEMA CLASS PRICING -------\n");
+    	System.out.println("==========================================================");
+        System.out.println("\t\t CONFIGURE CINEMA CLASS PRICING ");
+        System.out.println("==========================================================");
 
         // Print out all cinema classes
         for(int i=0; i < CinemaClass.values().length; i++) {
             System.out.println((i+1) + ") " + CinemaClass.values()[i]);
         }
-        System.out.println("----------------------------------------------");
+        System.out.println("==========================================================");
         System.out.print("Select Cinema Class to Configure: ");
         while(!sc.hasNextInt())
             System.out.println("Please enter a valid option.");
@@ -193,7 +201,9 @@ public class TicketPricingApp extends AppHelper {
      */
     // (4) Configure Ticket Type
     public void configureTicketType() {
-        System.out.println("------- CONFIGURE TICKET TYPE PRICING -------\n");
+    	System.out.println("==========================================================");
+        System.out.println("\t\t CONFIGURE TICKET TYPE PRICING ");
+        System.out.println("==========================================================");
 
         // Display all ticket types
         for(int i=0; i < TicketType.values().length; i++) {
@@ -223,7 +233,9 @@ public class TicketPricingApp extends AppHelper {
      */
     // (5) Configure Day of Week
     public void configureDays() {
-        System.out.println("------- CONFIGURE DAY PRICING -------\n");
+    	System.out.println("==========================================================");
+        System.out.println("\t\t CONFIGURE DAY PRICING ");
+        System.out.println("==========================================================");
 
         // Display all ticket types
         for(int i = 0; i < DayType.values().length; i++) {

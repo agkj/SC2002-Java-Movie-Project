@@ -104,8 +104,8 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 	}
 */
 	public void movieBookings() {
-		System.out.println("|------------------------------------------------|");
-		System.out.println("|-----------------Make a Booking-----------------|");
+		System.out.println("==========================================================");
+		System.out.println(" \t\t Make a Booking");
 
 		Booking newBooking = new Booking();
 
@@ -150,8 +150,8 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 
 		try {
 			// Print all the available Movies
-			System.out.println("|------------------------------------------------|");
-			System.out.println("|\t\tList of Movies: \t\t |");
+			System.out.println("==========================================================");
+			System.out.println("\t\tList of Movies: \t\t ");
 			// Read all available Movies if not End_of_Showing
 
 			ArrayList<Movie> filteredMovie = new ArrayList<Movie>();
@@ -168,9 +168,9 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 						+ (filteredMovie).get(i).getShowingStatus());
 			}
 
-			System.out.println("| 0) Go back to main menu \t\t\t |");
+			System.out.println("0) Go back to main menu \t\t\t ");
 
-			System.out.println(("|------------------------------------------------|"));
+			System.out.println("==========================================================");
 
 			System.out.println("Choose a movie to book");
 			int movieChoice = sc.nextInt() - 1;
@@ -198,8 +198,8 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 			newBooking.setSelectedMovie(movieName);
 
 			// *******FUNCTIONS TO IMPLEMENT**************\\
-			System.out.println(("|------------------------------------------------|"));
-			System.out.println(("|\t\tChoose a cineplex\t\t |"));
+			System.out.println("==========================================================");
+			System.out.println(("\t\tChoose a cineplex\t\t "));
 
 			try {
 
@@ -221,7 +221,7 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 						//if(temp.getCineplexID().equals(curr.getCineplexID()) & temp.getShowTimeStatus() != ShowTimeStatus.Sold_Out)
 						System.out.println("| " + (i + 1) + ") " + curr.getVenue());
 					}
-					System.out.println("|------------------------------------------------|");
+					System.out.println("==========================================================");
 					System.out.print("\nSelect Cineplex: ");
 
 					// Get selected Cineplex file and object

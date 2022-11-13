@@ -34,8 +34,8 @@ public class MovieView extends MovieListingApp implements Serializable {
 
 
 	public void movieViews() {
-
-		System.out.println("|------------------------------VIEW MOVIE LISTING-------------------------------|");
+		System.out.println("==========================================================");
+		System.out.println("\t\t VIEW MOVIE LISTING ");
 
 
 		try {
@@ -50,27 +50,26 @@ public class MovieView extends MovieListingApp implements Serializable {
 
 			if (filteredMovie != null) {
 				for (int i = 0; i < filteredMovie.size(); i++) {
-					System.out.println("|" + (i + 1) + ")Movie: " + filteredMovie.get(i).getTitle());
-					System.out.println("|  Showing Status: " + filteredMovie.get(i).getShowingStatus());
-					System.out.println("|  Synopsis: " + filteredMovie.get(i).getSynopsis());
-					System.out.println("|  Director: " + filteredMovie.get(i).getDirector());
-					System.out.println("|  Cast: " + filteredMovie.get(i).getCast());
+					System.out.println(+ (i + 1) + ")Movie: " + filteredMovie.get(i).getTitle());
+					System.out.println("Showing Status: " + filteredMovie.get(i).getShowingStatus());
+					System.out.println("Synopsis: " + filteredMovie.get(i).getSynopsis());
+					System.out.println("Director: " + filteredMovie.get(i).getDirector());
+					System.out.println("Cast: " + filteredMovie.get(i).getCast());
 					if(filteredMovie.get(i).getReviews().size() > 1) {
-							System.out.printf("|  Overall Ratings: %.2f\n",filteredMovie.get(i).getOverallRating());
-							System.out.println("|  Past and Present Reviews: " + filteredMovie.get(i).getReviews());
+							System.out.printf("Overall Ratings: %.2f\n",filteredMovie.get(i).getOverallRating());
+							System.out.println("Past and Present Reviews: " + filteredMovie.get(i).getReviews());
 						}
 						
 					else {
-						System.out.println("|  Overall Ratings: NA");
-						System.out.println("|  Past and Present Reviews: NA");
+						System.out.println("Overall Ratings: NA");
+						System.out.println("Past and Present Reviews: NA");
 					}
-					System.out.println(
-							"|-------------------------------------------------------------------------------|");				}
+					System.out.println("==========================================================");				}
 				System.out.println();
 			}
 
 		} catch (IOException | ClassNotFoundException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		goBack().runInterface();
 	}

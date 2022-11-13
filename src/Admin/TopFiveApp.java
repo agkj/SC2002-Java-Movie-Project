@@ -18,7 +18,9 @@ public class TopFiveApp extends AppHelper {
 
     @Override
     public void runInterface() {
-        System.out.println("------- CONFIGURE MOVIE_GOER VIEWING OPTIONS -------\n");
+    	System.out.println("==========================================================");
+        System.out.println("\t\t CONFIGURE MOVIE_GOER VIEWING OPTIONS");
+        System.out.println("==========================================================");
         System.out.print("Current setting in MovieGoer: ");
         //look at the admin control
         StringBuffer optionView = FileReader.copyFile(root + "control.txt");
@@ -53,7 +55,7 @@ public class TopFiveApp extends AppHelper {
         System.out.println("3) View by Ticket Sales and Overall Reviewers' Rating");
         System.out.println("\n0) Return to Previous Menu");
 
-        System.out.println("----------------------------------------");
+        System.out.println("==========================================================");
         System.out.println("Select an option: ");
         while(!sc.hasNextInt())
             System.out.println("Please enter a valid input");

@@ -177,12 +177,12 @@ public class Ticket implements Serializable {
 	
 	public void getTicketInfo() {
 		System.out.println();
-		System.out.println("| Day type: " + dayType + "\t\t\t\t |");
-		System.out.println("| Ticket type:" + ticketType + "\t\t\t\t |");
-		System.out.println("| Cinema class: " + cinemaclass + "\t\t\t\t |");
-		System.out.println("| Movie type: " + movieType + "\t\t\t\t |");
-		System.out.println("| Seat number: " + seatNum + "\t\t\t\t |");
-		System.out.println("| Ticket price: " + ticketPrice + "\t\t\t\t |\n");
+		System.out.println("Day type: " + dayType + "\t\t\t\t ");
+		System.out.println("Ticket type:" + ticketType + "\t\t\t\t ");
+		System.out.println("Cinema class: " + cinemaclass + "\t\t\t\t ");
+		System.out.println("Movie type: " + movieType + "\t\t\t\t ");
+		System.out.println("Seat number: " + seatNum + "\t\t\t\t ");
+		System.out.println("Ticket price: " + ticketPrice + "\t\t\t\t");
 
 //		return "\nDay Type: " + dayType + "\nType: " + ticketType + "\nCinema: " + cinemaclass + "\nMovie Type: "
 //				+ movieType + "\nSeat: " + seatNum + "\nPrice: " + ticketPrice + "\n";

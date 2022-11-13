@@ -48,14 +48,16 @@ public class ShowtimeApp extends AppHelper {
 
     @Override
     public void runInterface() {
-        System.out.println("------- MANAGE SHOWTIME LISTINGS -------\n");
+    	System.out.println("==========================================================");
+        System.out.println("\t\t MANAGE SHOWTIME LISTINGS");
+        System.out.println("==========================================================");
 
         System.out.println("1) Create Showtime Listing");
         System.out.println("2) View Showtime Listings");
         System.out.println("3) Update Showtime Listings");
         System.out.println("4) Delete Showtime Listings");
         System.out.println("\n0) Return to Previous Menu");
-        System.out.println("------------------------------------------");
+        System.out.println("==========================================================");
 
         System.out.println("Select an option: ");
 
@@ -110,7 +112,9 @@ public class ShowtimeApp extends AppHelper {
      */
     //// (1) CREATE LISTING
     public void createShowtime() {
-        System.out.println("------- CREATE SHOWTIME LISTING -------\n");
+    	System.out.println("==========================================================");
+        System.out.println("\t\t CREATE SHOWTIME LISTING");
+        System.out.println("==========================================================");
         ShowTime newShowtime = new ShowTime();
 
         // Read all available Movies
@@ -206,9 +210,11 @@ public class ShowtimeApp extends AppHelper {
                     // Update Movie File with updated showtime arraylist
                     Serializer.serialize(root + "\\data\\movies\\" + selectedMovie.getMovieId() + ".dat", selectedMovie);
 
-                    System.out.println("\n------- SUCCESS: CREATED SHOWTIME -------\n");
+                    System.out.println("\t\t SUCCESS: CREATED SHOWTIME");
+                    System.out.println("==========================================================");
                 } catch (IOException e) {
-                    System.out.println("\n------- ERROR: PLEASE TRY AGAIN -------\n");
+                    System.out.println("\t\t ERROR: PLEASE TRY AGAIN ");
+                    System.out.println("==========================================================");
                     e.printStackTrace();
                 }
 
@@ -227,7 +233,9 @@ public class ShowtimeApp extends AppHelper {
      */
     //// (2) VIEW LISTING
     public void viewShowtime() {
-        System.out.println("------- VIEW SHOWTIME LISTING -------\n");
+    	System.out.println("==========================================================");
+        System.out.println("\t\t VIEW SHOWTIME LISTING ");
+        System.out.println("==========================================================");
 
         try {
             // Read all available Movies
@@ -304,7 +312,9 @@ public class ShowtimeApp extends AppHelper {
      */
     //// (3) UPDATE LISTING
     public void updateShowtime() {
-        System.out.println("------- UPDATE SHOWTIME LISTING -------\n");
+    	System.out.println("==========================================================");
+        System.out.println("\t\t UPDATE SHOWTIME LISTING ");
+        System.out.println("==========================================================");
 
         try {
             // Select Movie
@@ -321,7 +331,7 @@ public class ShowtimeApp extends AppHelper {
             // Show Selected Movie
             Movie selectedMovie = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[movieIndex-1].getName());
 
-            System.out.println("------------------");
+            System.out.println("==========================================================");
             System.out.println("You have selected :");
             System.out.println(selectedMovie.getTitle());
 
@@ -369,11 +379,13 @@ public class ShowtimeApp extends AppHelper {
                                 // Update Movie File with updated showtime arraylist
                                 Serializer.serialize(root + "\\data\\movies\\" + selectedMovie.getMovieId() + ".dat", selectedMovie);
 
-                                System.out.println("\n------- SUCCESS: UPDATED SHOWTIME -------\n");
+                                System.out.println("\t\tSUCCESS: UPDATED SHOWTIME \t\t");
+                                System.out.println("==========================================================");
 
                                 runInterface();
                             } catch (IOException e) {
-                                System.out.println("\n------- ERROR: PLEASE TRY AGAIN -------\n");
+                                System.out.println("\t\t ERROR: PLEASE TRY AGAIN ");
+                                System.out.println("==========================================================");
                                 e.printStackTrace();
                             }
 
@@ -430,7 +442,8 @@ public class ShowtimeApp extends AppHelper {
                 runInterface();
             }
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("\n------- ERROR: PLEASE TRY AGAIN -------\n");
+            System.out.println("\t\t RROR: PLEASE TRY AGAIN ");
+            System.out.println("==========================================================");
             e.printStackTrace();
         }
     }
@@ -440,7 +453,9 @@ public class ShowtimeApp extends AppHelper {
      */
     //// (4) DELETE LISTING
     public void deleteShowtime() {
-        System.out.println("------- DELETE SHOWTIME LISTING -------\n");
+    	System.out.println("==========================================================");
+        System.out.println("\t\t DELETE SHOWTIME LISTING ");
+        System.out.println("==========================================================");
 
         try {
             // Select Movie
@@ -485,11 +500,13 @@ public class ShowtimeApp extends AppHelper {
                     // Update Movie File with updated showtime arraylist
                     Serializer.serialize(root + "\\data\\movies\\" + selectedMovie.getMovieId() + ".dat", selectedMovie);
 
-                    System.out.println("\n------- SUCCESS: CREATED SHOWTIME -------\n");
+                    System.out.println("\t\t SUCCESS: CREATED SHOWTIME ");
+                    System.out.println("==========================================================");
 
                     runInterface();
                 } catch (IOException e) {
-                    System.out.println("\n------- FAILED: PLEASE TRY AGAIN -------\n");
+                    System.out.println("\t\t FAILED: PLEASE TRY AGAIN ");
+                    System.out.println("==========================================================");
                     e.printStackTrace();
                 }
             } else {
@@ -500,7 +517,8 @@ public class ShowtimeApp extends AppHelper {
 
 
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("\n------- ERROR: PLEASE TRY AGAIN -------\n");
+            System.out.println("\t\t ERROR: PLEASE TRY AGAIN ");
+            System.out.println("==========================================================");
             e.printStackTrace();
         }
 

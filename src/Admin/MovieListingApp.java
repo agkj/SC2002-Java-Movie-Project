@@ -37,16 +37,16 @@ public class MovieListingApp extends AppHelper {
 
     @Override
     public void runInterface() {
-    	System.out.println("|--------------------------------------------------------|");
-        System.out.println("| \t\t MANAGE MOVIE LISTINGS \t\t\t |");
-        System.out.println("|--------------------------------------------------------|");
-        System.out.println("| 1) Create Movie Listing \t\t\t\t |");
-        System.out.println("| 2) View Movie Listings \t\t\t\t |");
-        System.out.println("| 3) Update Movie Listings \t\t\t\t |");
-        System.out.println("| 4) Remove Movie Listings \t\t\t\t |");
-        System.out.println("| 5) View Top Five Movies \t\t\t\t |");
-        System.out.println("| 0) Return to Previous Menu \t\t\t\t |");
-        System.out.println("|--------------------------------------------------------|");
+    	System.out.println("==========================================================");
+        System.out.println(" \t\t MANAGE MOVIE LISTINGS \t\t\t ");
+        System.out.println("==========================================================");
+        System.out.println(" 1) Create Movie Listing \t\t\t\t ");
+        System.out.println("2) View Movie Listings \t\t\t\t ");
+        System.out.println("3) Update Movie Listings \t\t\t\t ");
+        System.out.println("4) Remove Movie Listings \t\t\t\t ");
+        System.out.println("5) View Top Five Movies \t\t\t\t ");
+        System.out.println("0) Return to Previous Menu \t\t\t\t ");
+        System.out.println("==========================================================");
         //here try catch?TODO
         System.out.println("Select an option: ");
 
@@ -89,9 +89,9 @@ public class MovieListingApp extends AppHelper {
      */
     //// (1) CREATE LISTING
     public void createMovie() {
-    	System.out.println("|--------------------------------------------------------|");
-        System.out.println("| \t\t CREATE MOVIE LISTING \t\t\t |");
-        System.out.println("|--------------------------------------------------------|");
+    	System.out.println("==========================================================");
+        System.out.println("\t\t CREATE MOVIE LISTING \t\t\t ");
+        System.out.println("==========================================================");
 
         Movie newMovie = new Movie();
 
@@ -249,7 +249,8 @@ public class MovieListingApp extends AppHelper {
             // Reload Movies
             this.load();
 
-            System.out.println("\n------- SUCCESS: CREATED NEW MOVIE LISTING -------\n");
+            System.out.println("\t\t SUCCESS: CREATED NEW MOVIE LISTING");
+            System.out.println("==========================================================");
             //System.out.println(newMovie);
         } catch (IOException e) {
             e.printStackTrace();
@@ -263,9 +264,9 @@ public class MovieListingApp extends AppHelper {
      */
     //// (2) VIEW LISTINGS
     public void viewMovies() {
-    	System.out.println("|--------------------------------------------------------|");
-        System.out.println("| \t\t VIEW MOVIE LISTING \t\t\t |");
-        System.out.println("|--------------------------------------------------------|");
+    	System.out.println("==========================================================");
+        System.out.println("\t\t VIEW MOVIE LISTING \t\t\t ");
+        System.out.println("==========================================================");
 
         try {
             // Read all available Movies
@@ -273,28 +274,28 @@ public class MovieListingApp extends AppHelper {
                 for(int i=0; i < movieFiles.length; i++) {
                     Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
                     System.out.println((i+1) + ") " + curr.getTitle());
-                    System.out.println( "  Showing Status: " + curr.getShowingStatus());
+                    System.out.println("  Showing Status: " + curr.getShowingStatus());
                     System.out.println("  Synopsis: " + curr.getSynopsis());
                     System.out.println("  Director: " + curr.getDirector());
                     System.out.println("  Cast: " + curr.getCast());
                     if(curr.getReviews().size() > 1) {
-						System.out.printf("|  Overall Ratings: %.2f\n",curr.getOverallRating());
-						System.out.println("|  Past and Present Reviews: " + curr.getReviews());
+						System.out.printf("  Overall Ratings: %.2f\n",curr.getOverallRating());
+						System.out.println("  Past and Present Reviews: " + curr.getReviews());
 					}
 					
 				else {
 					System.out.println("|  Overall Ratings: NA");
 					System.out.println("|  Past and Present Reviews: NA");
 				}
-                    System.out.println("|--------------------------------------------------------|");
+                    System.out.println("==========================================================");
                 }
             }
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        System.out.println("| \t\t END OF MOVIE LISTING \t\t\t |");
-        System.out.println("|--------------------------------------------------------|");
+        System.out.println("| \t\t END OF MOVIE LISTING \t\t\t ");
+        System.out.println("==========================================================");
         runInterface();
 
     }
@@ -304,9 +305,9 @@ public class MovieListingApp extends AppHelper {
      */
     //// (3) UPDATE LISTING
     public void updateMovie() {
-    	System.out.println("|--------------------------------------------------------|");
-        System.out.println("| \t\t UPDATE MOVIE LISTING \t\t\t |");
-        System.out.println("|--------------------------------------------------------|");
+    	System.out.println("==========================================================");
+        System.out.println(" \t\t UPDATE MOVIE LISTING \t\t\t ");
+        System.out.println("==========================================================");
         try {
             for(int i=0; i < movieFiles.length; i++) {
                 Movie curr = (Movie) Serializer.deSerialize(path + "\\" + movieFiles[i].getName());
@@ -353,11 +354,11 @@ public class MovieListingApp extends AppHelper {
                             // Reload Movies
                             this.load();
 
-                            System.out.println("| \t\t SUCCESS: UPDATED MOVIE LISTING \t\t\t |");
-                            System.out.println("|--------------------------------------------------------|");
+                            System.out.println("\t\t SUCCESS: UPDATED MOVIE LISTING \t\t\t ");
+                            System.out.println("==========================================================");
                         } catch (IOException e) {
-                            System.out.println("|\t\t ERROR: PLEASE TRY AGAIN \t\t\t |");
-                            System.out.println("|--------------------------------------------------------|");
+                            System.out.println("\t\t ERROR: PLEASE TRY AGAIN \t\t\t ");
+                            System.out.println("==========================================================");
                             e.printStackTrace();
                         }
 
@@ -542,9 +543,9 @@ public class MovieListingApp extends AppHelper {
     //// (4) DELETE LISTING
     public void removeMovie() {
         //delete movie is changing the status to END OF SHOWING
-    	System.out.println("|--------------------------------------------------------|");
-        System.out.println("| \t\t DELETE MOVIE LISTING \t\t\t |");
-        System.out.println("|--------------------------------------------------------|");
+    	System.out.println("==========================================================");
+        System.out.println("\t\t DELETE MOVIE LISTING \t\t\t ");
+        System.out.println("==========================================================");
 
         // Delete from Listing (by index)
         try {
@@ -567,14 +568,16 @@ public class MovieListingApp extends AppHelper {
             try {
                 Serializer.serialize(path + "\\" + movieFiles[indexToUpdate].getName(), selectedMovie);
 
-                System.out.println("------- MOVIE SET TO END OF SHOWING -------\n");
+                System.out.println("\t\t MOVIE SET TO END OF SHOWING ");
+                System.out.println("==========================================================");
 
                 // Reload movies
                 this.load();
 
                 runInterface();
             } catch (IOException e) {
-                System.out.println("------- ERROR: PLEASE TRY AGAIN -------\n");
+                System.out.println("\t\t ERROR: PLEASE TRY AGAIN");
+                System.out.println("==========================================================");
                 e.printStackTrace();
             }
 
@@ -604,9 +607,9 @@ public class MovieListingApp extends AppHelper {
     //TicketSales (Display the movie title and total sales)
     //Overall reviewers' rating (Display the movie title and overall rating)
     public void viewTopFive() {
-    	System.out.println("|--------------------------------------------------------|");
-        System.out.println("| \t\t VIEW TOP 5 MOVIES \t\t\t |");
-        System.out.println("|--------------------------------------------------------|");
+    	System.out.println("==========================================================");
+        System.out.println("\t\t VIEW TOP 5 MOVIES \t\t\t ");
+        System.out.println("==========================================================");
         System.out.println("1) View by Ticket Sales");
         System.out.println("2) View by Overall Reviewers' Rating");
 

@@ -34,8 +34,9 @@ public class MovieGoerCheckBooking extends Booking {
 //		String userMobile= sc.nextLine();
 
 		int setter = 0;
-
-		System.out.println("|------------------Your bookings-----------------|");
+		System.out.println("==========================================================");
+		System.out.println("\t\t Your bookings:");
+		
 		try {
 			for (int i = 0; i <= movieBookings.length; i++) {
 				// System.out.println(movieBookings[i].getAbsolutePath());
@@ -52,18 +53,18 @@ public class MovieGoerCheckBooking extends Booking {
 			}
 
 		} catch (Exception e) {
-			System.out.println("");
+			System.out.print("");
 		}
 
 		if (setter == 0) {
-			System.out.println("|\t\t No bookings made.\t\t |");
+			System.out.println("\t    You have no bookings made.\t\t ");
 		} else if (setter == 1) {
-			System.out.println("|\t You have " + setter + " movie booking.\t\t |");
+			System.out.println("\t You have " + setter + " movie booking.\t\t");
 
 		} else {
-			System.out.println("|\t You have " + setter + " movie bookings.\t\t |");
+			System.out.println("\t You have " + setter + " movie bookings.\t\t ");
 		}
-		System.out.println("|------------------------------------------------|\n");
+		System.out.println("==========================================================");
 
 	}
 

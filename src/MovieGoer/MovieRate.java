@@ -36,8 +36,8 @@ public class MovieRate extends MovieListingApp implements Serializable {
 	public void movieRates() {
 		try {
 			// Read all available Movies
-
-			System.out.println("|---------------------------------RATE A MOVIE----------------------------------|");
+			System.out.println("==========================================================");
+			System.out.println("\t\t RATE A MOVIE");
 
 			ArrayList<Movie> filteredMovie = new ArrayList<Movie>();
 			for (int i = 0; i < movieFiles.length; i++) {
@@ -88,17 +88,22 @@ public class MovieRate extends MovieListingApp implements Serializable {
 
 				// Reload Movies
 				this.load();
-
-				System.out.println("\n------- SUCCESS: UPDATED REVIEW -------\n");
+				System.out.println("==========================================================");
+				System.out.println("\t\t SUCCESS: UPDATED REVIEW ");
+				System.out.println("==========================================================");
 
 			} catch (IOException e) {
-				System.out.println("\n------- ERROR: PLEASE TRY AGAIN -------\n");
-				e.printStackTrace();
+				System.out.println("==========================================================");
+				System.out.println("\t\t ERROR: PLEASE TRY AGAIN ");
+				System.out.println("==========================================================");
+				//e.printStackTrace();
 			}
 
 		} catch (Exception e) {
-			System.out.println("\n------- ERROR: MOVIE NOT IN RANGE -------\n");
-			e.printStackTrace();
+			System.out.println("==========================================================");
+			System.out.println("\t\t ERROR: MOVIE NOT IN RANGE ");
+			System.out.println("==========================================================");
+			//e.printStackTrace();
 		}
 		goBack().runInterface();
 

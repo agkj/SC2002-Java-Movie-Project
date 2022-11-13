@@ -25,13 +25,15 @@ public class HolidayApp extends AppHelper {
 
     @Override
     public void runInterface() {
-        System.out.println("-------- CONFIGURE HOLIDAY SETTING -------\n");
+    	System.out.println("==========================================================");
+        System.out.println("\t\t CONFIGURE HOLIDAY SETTING ");
+        System.out.println("==========================================================");
 
         System.out.println("1) Create New Holiday");
         System.out.println("2) Delete Holiday");
 
         System.out.println("\n0) Return to Previous Menu");
-        System.out.println("------------------------------------------");
+        System.out.println("==========================================================");
         System.out.println("Select an option: ");
         int input = sc.nextInt();
 
@@ -62,7 +64,9 @@ public class HolidayApp extends AppHelper {
      * Create new public holiday.
      */
     public void createHoliday() {
-        System.out.println("------- CREATE HOLIDAY -------\n");
+    	System.out.println("==========================================================");
+        System.out.println("\t\t CREATE HOLIDAY -------\n");
+        System.out.println("==========================================================");
 
         Holiday newHoliday = new Holiday();
 
@@ -102,7 +106,8 @@ public class HolidayApp extends AppHelper {
         FileReader.writeFile(root + "\\data\\holiday\\holidays.txt", newHoliday.getHolidayName(), false);
         FileReader.writeFile(root + "\\data\\holiday\\holidays.txt", newHoliday.getHolidayDate().toString(), true);
 
-        System.out.println("\n------- SUCCESS: CREATED NEW HOLIDAY -------\n");
+        System.out.println("\t\t SUCCESS: CREATED NEW HOLIDAY");
+        System.out.println("==========================================================");
 
         // Go back to holiday menu
         runInterface();
@@ -113,7 +118,9 @@ public class HolidayApp extends AppHelper {
      */
     //// (2) DELETE HOLIDAY
     public void deleteHoliday() {
-        System.out.println("------- DELETE HOLIDAY -------\n");
+    	System.out.println("==========================================================");
+        System.out.println("DELETE HOLIDAY ");
+        System.out.println("==========================================================");
 
         // Read and display existing holidays
         FileReader.readFile(root + "\\data\\holiday\\holidays.txt");
@@ -130,7 +137,8 @@ public class HolidayApp extends AppHelper {
 
         FileReader.deleteLine(root + "\\data\\holiday\\holidays.txt", holidayName, true);
 
-        System.out.println("\n------- SUCCESS: DELETE HOLIDAY -------\n");
+        System.out.println("\t\t SUCCESS: DELETE HOLIDAY ");
+        System.out.println("==========================================================");
 
         runInterface();
     }

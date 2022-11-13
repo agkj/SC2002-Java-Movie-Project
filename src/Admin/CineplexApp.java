@@ -40,7 +40,9 @@ public class CineplexApp extends AppHelper {
 
     @Override
     public void runInterface() {
-        System.out.println("------- CONFIGURE CINEPLEX OUTLETS -------\n");
+    	System.out.println("==========================================================");
+        System.out.println("\t\t CONFIGURE CINEPLEX OUTLETS");
+        System.out.println("==========================================================");
 
         System.out.println("1) Create New Outlet");
         System.out.println("2) Create Cinema");
@@ -48,7 +50,7 @@ public class CineplexApp extends AppHelper {
         System.out.println("4) Delete Cinema");
 
         System.out.println("\n0) Return to Previous Menu");
-        System.out.println("-------------------------------------------");
+        System.out.println("==========================================================");
         System.out.println("Select an option: ");
         while(!sc.hasNextInt())
             System.out.println("Please enter a valid input");
@@ -63,8 +65,9 @@ public class CineplexApp extends AppHelper {
                 break;
             case 1:
                 // Create new Outlet
-                System.out.println("------- CREATE NEW OUTLET -------\n");
-
+            	System.out.println("==========================================================");
+                System.out.println("\t\t CREATE NEW OUTLET ");
+                System.out.println("==========================================================");
                 Cineplex outlet = new Cineplex();
 
                 //// CINEPLEX ID
@@ -110,8 +113,9 @@ public class CineplexApp extends AppHelper {
                 try {
                     Serializer.serialize(root+"\\data\\cineplex\\"+outlet.getCineplexID()+".dat", outlet);
                     this.load();
-
-                    System.out.println("\n------- SUCCESS: CREATED NEW OUTLET -------\n");
+                    
+                    System.out.println("\t\t SUCCESS: CREATED NEW OUTLET\t\t ");
+                    System.out.println("==========================================================");
                     System.out.println(outlet);
 
                 } catch (IOException e) {
@@ -122,7 +126,9 @@ public class CineplexApp extends AppHelper {
                 break;
             case 2:
                 // Create new Cinema
-                System.out.println("------- CREATE NEW CINEMA -------\n");
+            	System.out.println("==========================================================");
+                System.out.println("\t\t CREATE NEW CINEMA ");
+                System.out.println("==========================================================");
 
                 try {
                     // Read all available Cineplex created
@@ -158,7 +164,9 @@ public class CineplexApp extends AppHelper {
                         newCinema.setCinemaID(cinemaID);
 
                         //// SET CINEMA CLASS
-                        System.out.print("\n------ CINEMA CLASS -----\n");
+                        System.out.println("==========================================================");
+                        System.out.println(" t\t CINEMA CLASS ");
+                        System.out.println("==========================================================");
                         for(int i = 0; i < CinemaClass.values().length; i++)
                             System.out.println(i+1 + ") " + CinemaClass.values()[i]);
                         System.out.print("");
@@ -173,7 +181,9 @@ public class CineplexApp extends AppHelper {
                         newCinema.setCinemaClass(CinemaClass.values()[cinemaClass-1]);
 
                         //// SET LAYOUT
-                        System.out.print("\n------ SET LAYOUT OF CINEMA -----\n");
+                        System.out.println("==========================================================");
+                        System.out.println("\t\t SET LAYOUT OF CINEMA");
+                        System.out.println("==========================================================");
                         System.out.print("Enter number of rows: ");
                         while(!sc.hasNextInt())
                             System.out.println("Please enter a valid number of rows.");
@@ -285,11 +295,13 @@ public class CineplexApp extends AppHelper {
 
                             // Create new Cinema data file
                             Serializer.serialize(root + "\\data\\cinema\\" + newCinema.getCinemaID() + ".dat", newCinema);
-
-                            System.out.println("\n------- SUCCESS: CREATED NEW CINEMA -------\n");
+                            
+                            System.out.println("\t\t SUCCESS: CREATED NEW CINEMA");
+                            System.out.println("==========================================================");
                             newCinema.showLayout();
                         } catch (IOException e) {
-                            System.out.println("\n------- ERROR: PLEASE TRY AGAIN -------\n");
+                            System.out.println("\t\t ERROR: PLEASE TRY AGAIN");
+                            System.out.println("==========================================================");
                             e.printStackTrace();
                         }
 
@@ -304,7 +316,9 @@ public class CineplexApp extends AppHelper {
                 break;
             case 3:
                 // View cinemas
-                System.out.println("------- VIEW CINEMA BY CINEPLEX -------\n");
+            	System.out.println("==========================================================");
+                System.out.println("\t\t VIEW CINEMA BY CINEPLEX");
+                System.out.println("==========================================================");
 
                 try {
                     // Read all available Cineplex created
@@ -339,7 +353,9 @@ public class CineplexApp extends AppHelper {
                 break;
             case 4:
                 // Delete Cinema
-                System.out.println("------- DELETE CINEMA FROM CINEPLEX -------\n");
+            	System.out.println("==========================================================");
+                System.out.println("\t\t DELETE CINEMA FROM CINEPLEX ");
+                System.out.println("==========================================================");
 
                 try {
                     // Read all available Cineplex created
@@ -386,18 +402,21 @@ public class CineplexApp extends AppHelper {
                                 // Update List of Cinemas for Cineplex
                                 Serializer.serialize(root + "\\data\\cineplex\\" + files[selected-1].getName(), selectedCineplex); // files[selected-1].getName() is the selected cineplex
 
-                                System.out.println("\n------- SUCCESSFULLY DELETED CINEMA -------\n");
+                                System.out.println("\t\t SUCCESSFULLY DELETED CINEMA \t\t");
+                                System.out.println("==========================================================");
 
                                 // Reload
                                 this.load();
                             } else {
-                                System.out.println("\n------- FAILED TO DELETE CINEMA -------\n");
+                                System.out.println("\t\t FAILED TO DELETE CINEMA ");
+                                System.out.println("==========================================================");
                             }
 
                             runInterface();
 
                         } catch (IOException e) {
-                            System.out.println("\n------- ERROR: PLEASE TRY AGAIN -------\n");
+                            System.out.println("\t\t ERROR: PLEASE TRY AGAIN -------\n");
+                            System.out.println("==========================================================");
                             runInterface();
 
                             e.printStackTrace();

@@ -22,14 +22,14 @@ public class MovieGoerMenu extends AppHelper {
 	public void runInterface() {
 		Scanner sc = new Scanner(System.in);
 		Boolean stay = true;
-		System.out.println("|------------------------------------------------|");
-		System.out.println("| \t Welcome to Customer Module \t\t |");
-		System.out.println("|------------------------------------------------|");
+		System.out.println("==========================================================");
+		System.out.println(" \t Welcome to Customer Module \t\t ");
+		System.out.println("==========================================================");
 
 		//call list movie functions
 
-		System.out.println("| 1) View movies \t\t\t\t |"); // ->select movies -> booking ->check seat availability
-		System.out.println("| 2) Rate movies \t\t\t\t |");
+		System.out.println("1) View movies \t\t\t\t"); // ->select movies -> booking ->check seat availability
+		System.out.println("2) Rate movies \t\t\t\t");
 
 		StringBuffer optionView = FileReader.copyFile(root + "\\data\\admin_control\\control.txt");
 		String[] optionStrings = optionView.toString().split("\n");
@@ -52,23 +52,23 @@ public class MovieGoerMenu extends AppHelper {
 		}
 		//look at the admin control
 		if(set_control_ticket == 0){
-			System.out.print("| 3) List top 5 movies by ticket sales (DISABLED)|");
+			System.out.print("3) List top 5 movies by ticket sales (DISABLED)");
 		}else {
-			System.out.print("| 3) List top 5 movies by ticket sales \t\t |");
+			System.out.print("3) List top 5 movies by ticket sales \t\t ");
 		}
 		System.out.println();
 		if(set_control_rating == 0){
-			System.out.print("| 4) List top 5 movies by ratings (DISABLED) \t |");
+			System.out.print("4) List top 5 movies by ratings (DISABLED) \t");
 		}else {
-			System.out.print("| 4) List top 5 movies by ratings  \t\t |");
+			System.out.print("4) List top 5 movies by ratings  \t\t");
 		}
 		System.out.println();
-		System.out.println("| 5) Make a booking \t\t\t\t |"); //based on booking id/movie code
-		System.out.println("| 6) View booking history \t\t\t |");
+		System.out.println("5) Make a booking \t\t\t\t"); //based on booking id/movie code
+		System.out.println("6) View booking history \t\t\t");
 
-		System.out.println("| \t\t\t\t\t\t |");
-		System.out.println("| 0) Return to main menu \t\t\t |");
-		System.out.println("|------------------------------------------------|");
+		System.out.println("\t\t\t\t\t\t ");
+		System.out.println("0) Return to main menu \t\t\t");
+		System.out.println("==========================================================");
 
 		System.out.println("Select an option :");
 

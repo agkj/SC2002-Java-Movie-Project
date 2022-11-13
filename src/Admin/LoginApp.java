@@ -26,6 +26,7 @@ public class LoginApp extends AppHelper {
         String inputUsername = sc.next();
         System.out.println("Enter Password: ");
         String inputPassword = sc.next();
+        
 
         boolean usernameFlag = false;
         boolean passwordFlag = false;

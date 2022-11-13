@@ -40,7 +40,7 @@ public class MovieListingApp extends AppHelper {
     	System.out.println("==========================================================");
         System.out.println(" \t\t MANAGE MOVIE LISTINGS \t\t\t ");
         System.out.println("==========================================================");
-        System.out.println(" 1) Create Movie Listing \t\t\t\t ");
+        System.out.println("1) Create Movie Listing \t\t\t\t ");
         System.out.println("2) View Movie Listings \t\t\t\t ");
         System.out.println("3) Update Movie Listings \t\t\t\t ");
         System.out.println("4) Remove Movie Listings \t\t\t\t ");

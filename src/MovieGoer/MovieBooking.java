@@ -106,6 +106,7 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 	public void movieBookings() {
 		System.out.println("==========================================================");
 		System.out.println(" \t\t Make a Booking");
+		System.out.println("==========================================================");
 
 		Booking newBooking = new Booking();
 
@@ -152,6 +153,7 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 			// Print all the available Movies
 			System.out.println("==========================================================");
 			System.out.println("\t\tList of Movies: \t\t ");
+			System.out.println("==========================================================");
 			// Read all available Movies if not End_of_Showing
 
 			ArrayList<Movie> filteredMovie = new ArrayList<Movie>();
@@ -163,7 +165,7 @@ public class MovieBooking extends MovieListingApp implements Serializable {
 					filteredMovie.add(curr);
 			}
 			for (int i = 0; i < filteredMovie.size(); i++) {
-				System.out.println("| " + (i + 1) + ") " + filteredMovie.get(i).getTitle() + "["
+				System.out.println( (i + 1) + ") " + filteredMovie.get(i).getTitle() + "["
 						+ filteredMovie.get(i).getContentRating().toString() + "] - "
 						+ (filteredMovie).get(i).getShowingStatus());
 			}

@@ -177,7 +177,7 @@ public class Booking implements Serializable {
 	        System.out.println("Cinema code:"+ cinemaCode+ "\t\t\t\t ");
 	        
 	        for(int i = 0; i < listOfTickets.size(); i++) {
-	        	System.out.print("===================Ticket " + (i+1) + " Details===================");
+	        	System.out.print("=====================Ticket " + (i+1) + " Details=====================");
 	        	listOfTickets.get(i).getTicketInfo();
 	        	
 	        }
